@@ -1,0 +1,4 @@
+v0.0.1 - initial release - 2016-02-25
+-------------------------------------
+* original release with simple paragraph class
+* bundle released on Maven Central and source in GitHub

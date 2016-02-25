@@ -1,0 +1,16 @@
+skb.module.version=0.0.1
+skb.module.alias=
+skb.module.name=ASCII Paragraph
+skb.module.url=https://github.com/vdmeer/asciiparagraph
+skb.module.description=A simple tool to format paragraphs with indentation, indentation character, alignment, padding (left, right, both), padding characters (left, right, both), and in-line whitespace characters.
+skb.module.inceptionYear=2016
+skb.module.properties.compiler.source=1.7
+skb.module.properties.compiler.target=1.7
+skb.module.properties.encoding=UTF-8
+skb.module.scm.developerConnection=scm:git:git@github.com:vdmeer/asciiparagraph.git
+skb.module.scm.connection=scm:git:git://github.com/vdmeer/asciiparagraph.git
+skb.module.scm.url=https://github.com/vdmeer/asciiparagraph
+skb.module.issueManagement.url=https://github.com/vdmeer/asciiparagraph/issues
+skb.module.issueManagement.system=github
+skb.module.internalDependencies=
+skb.module.packaging=
