@@ -7,7 +7,7 @@
 
 	<name>ASCII Paragraph</name>
 	<url>https://github.com/vdmeer/asciiparagraph</url>
-	<description>A simple tool to format paragraphs with indentation, alignment, and other features.</description>
+	<description>A simple tool to format paragraphs with indentation, indentation character, alignment, padding (left, right, both), padding characters (left, right, both), and in-line whitespace characters.</description>
 	<inceptionYear>2016</inceptionYear>
 
 	<properties>
@@ -58,12 +58,56 @@
 	</issueManagement>
 
 	<developers>
+		<developer>
+			<id>vdmeer.sven</id>
+			<name>Sven van der Meer</name>
+			<email>vdmeer.sven@mykolab.com</email>
+				<url>http://www.vandermeer.de</url>
+<!--
+				<organization>ACME</organization>
+				<organizationUrl>http://www.example.com</organizationUrl>
+-->
+				<roles>
+					<role>creator</role>
+					<role>developer</role>
+				</roles>
+				<timezone>Europe/Dublin</timezone>
+<!--
+				<properties>
+					<picUrl>http://www.example.com/jdoe/pic</picUrl>
+				</properties>
+-->
+		</developer>
 	</developers>
 
 	<contributors>
 	</contributors>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.sven-jacobs</groupId>
+			<artifactId>loremipsum</artifactId>
+			<version>1.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>ST4</artifactId>
+			<version>4.0.8</version>
+			<scope>test</scope>
+		</dependency>
+<!--
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -88,6 +132,7 @@
 			<version>4.0.8</version>
 			<scope>test</scope>
 		</dependency>
+-->
 	</dependencies>
 
 	<build>
