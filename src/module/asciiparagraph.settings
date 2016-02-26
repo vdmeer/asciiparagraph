@@ -13,4 +13,6 @@ skb.module.scm.url=https://github.com/vdmeer/asciiparagraph
 skb.module.issueManagement.url=https://github.com/vdmeer/asciiparagraph/issues
 skb.module.issueManagement.system=github
 skb.module.internalDependencies=
+skb.module.externalDependencies.compile=commons-lang3
+skb.module.externalDependencies.test=junit loremipsum st4
 skb.module.packaging=
