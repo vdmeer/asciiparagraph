@@ -1,3 +1,7 @@
+v0.0.2 - ### - 2016-##-##
+-------------------------------------
+* moved external dependencies from skb file into settings, using skb v2.1.0 modules script now
+
 v0.0.1 - initial release - 2016-02-25
 -------------------------------------
 * original release with simple paragraph class
