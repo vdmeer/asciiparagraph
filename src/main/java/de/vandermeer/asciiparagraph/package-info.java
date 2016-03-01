@@ -631,6 +631,6 @@ System.out.println(st);
  * 
  * 
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.1 build 160225 (25-Feb-16) for Java 1.7
+ * @version    v0.0.2-SNAPSHOT build 160301 (01-Mar-16) for Java 1.7
  */
 package de.vandermeer.asciiparagraph;
