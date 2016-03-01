@@ -251,7 +251,6 @@
         </plugins>
     </build>
 
-</project>
 
     <!-- Environment Settings -->
     <issueManagement>
@@ -279,3 +278,5 @@
 <pluginRepositories>...</pluginRepositories>
 <distributionManagement>...</distributionManagement>
 -->
+
+</project>
