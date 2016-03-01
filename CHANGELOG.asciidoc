@@ -1,6 +1,6 @@
 v0.0.2 - ### - 2016-##-##
 -------------------------------------
-* moved external dependencies from skb file into settings, using skb v2.1.0 modules script now
+* removed old module/ settings, added bundle/pm settings
 
 v0.0.1 - initial release - 2016-02-25
 -------------------------------------
