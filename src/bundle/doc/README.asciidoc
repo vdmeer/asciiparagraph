@@ -3,7 +3,7 @@ ASCII Paragraph
 A simple tool to format paragraphs with indentation, indentation character, alignment, padding (left, right, both), padding characters (left, right, both), and in-line whitespace characters.
 :toc:
 
-Current release is https://search.maven.org/#artifactdetails|de.vandermeer|asciiparagraph|0.0.1|jar[0.0.1].
+Current release is https://search.maven.org/#artifactdetails|de.vandermeer|asciiparagraph|0.0.2|jar[0.0.2].
 All releases are on https://search.maven.org/#search|gav|1|g%3A%22de.vandermeer%22%20AND%20a%3A%22asciiparagraph%22[Maven Central].
 
 This blog post explains how to get UTF-8 support in the whole tool chain http://vdmeer-sven.blogspot.ie/2014/06/utf-8-support-w-java-and-console.html[blog on UTF-8].
@@ -625,12 +625,12 @@ If it exists, the returned string will be added to the paragraph.
 The following example shows an inline StringTemplate object with some text.
 The example also uses the toString method on the ST to show the difference.
 ----------------------------------------------------------------------------------------
-		ST st = new ST("An object with a render method, which will be found and used to add text");
-		AsciiParagraph ap = new AsciiParagraph();
-		ap.addText(st);
-		System.out.println(ap.render());
+ST st = new ST("An object with a render method, which will be found and used to add text");
+AsciiParagraph ap = new AsciiParagraph();
+ap.addText(st);
+System.out.println(ap.render());
 
-		System.out.println(st);
+System.out.println(st);
 ----------------------------------------------------------------------------------------
 
 The output of the paragraph rendering is the text in the template

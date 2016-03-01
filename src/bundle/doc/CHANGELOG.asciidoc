@@ -1,3 +1,7 @@
+v0.0.2 - maintenance - 2016-03-01
+---------------------------------
+* removed old module/ settings, added bundle/pm settings
+
 v0.0.1 - initial release - 2016-02-25
 -------------------------------------
 * original release with simple paragraph class
