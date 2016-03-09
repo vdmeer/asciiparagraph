@@ -1,10 +1,19 @@
-v0.0.3 - ### - 2016-##-##
--------------------------
+v0.0.3 - feature add - 2016-03-##
+---------------------------------
+* changed/improved documentaion
+* refactoring
+  ** ParagraphContext -> AP_Context
+  ** TextAlign -> AP_Alignment
+* added a paragrap renderer +AP_Renderer+ interface
+  ** added set/get to AP_Context
+  ** created standard renderer class and moved existing render methods from AsciiParagraph there
+* sorted members in all classes
 
 
 v0.0.2 - maintenance - 2016-03-01
 ---------------------------------
 * removed old module/ settings, added bundle/pm settings
+
 
 v0.0.1 - initial release - 2016-02-25
 -------------------------------------

@@ -15,28 +15,24 @@
 
 package de.vandermeer.asciiparagraph;
 
+import org.apache.commons.lang3.text.StrBuilder;
+
 /**
- * Options for the alignment of an {@link AsciiParagraph} or other text.
+ * Abstract implementation of a paragraph renderer.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.3-SNAPSHOT build 160304 (04-Mar-16) for Java 1.7
- * @since      v0.0.1
+ * @version    v0.0.3-SNAPSHOT build 160306 (06-Mar-16) for Java 1.7
+ * @since      v0.0.3
  */
-public enum TextAlign {
+public abstract class Abstract_AP_Renderer implements AP_Renderer {
 
-	/** Option for a justified alignment, last line left bound. */
-	JUSTIFIED,
+	@Override
+	public String render(AsciiParagraph ap){
+		return new StrBuilder(100).appendWithSeparators(this.renderToList(ap), "\n").toString();
+	}
 
-	/** Option for a justified alignment, last line right bound. */
-	JUSTIFIED_RIGHT,
-
-	/** Option for paragraph alignment left. */
-	LEFT,
-
-	/** Option for paragraph alignment center. */
-	CENTER,
-
-	/** Option for paragraph alignment right. */
-	RIGHT,
-	;
+	@Override
+	public String[] renderToArray(AsciiParagraph ap){
+		return this.renderToList(ap).toArray(new String[]{});
+	}
 }

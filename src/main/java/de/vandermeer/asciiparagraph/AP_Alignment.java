@@ -15,27 +15,28 @@
 
 package de.vandermeer.asciiparagraph;
 
-import java.util.Collection;
-
 /**
- * Interface for objects that do provide a text representation.
+ * Options for the alignment of an {@link AsciiParagraph} or other text.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160306 (06-Mar-16) for Java 1.7
  * @since      v0.0.1
  */
-public interface HasText {
+public enum AP_Alignment {
 
-	/**
-	 * Returns text representation of an object.
-	 * @return text, should not be blank
-	 */
-	String getText();
+	/** Option for a justified alignment, last line left bound. */
+	JUSTIFIED,
 
-	/**
-	 * Returns text representation of an object.
-	 * @return collection view of text, should not be null and have no blank elements
-	 */
-	Collection<String> getTextCollection();
+	/** Option for a justified alignment, last line right bound. */
+	JUSTIFIED_RIGHT,
 
+	/** Option for paragraph alignment left. */
+	LEFT,
+
+	/** Option for paragraph alignment center. */
+	CENTER,
+
+	/** Option for paragraph alignment right. */
+	RIGHT,
+	;
 }

@@ -29,7 +29,7 @@ import de.svenjacobs.loremipsum.LoremIpsum;
  * Tests for ASCII Paragraph for code used in documentation.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.3-SNAPSHOT build 160304 (04-Mar-16) for Java 1.7
+ * @version    v0.0.3-SNAPSHOT build 160306 (06-Mar-16) for Java 1.7
  * @since      v0.0.2
  */
 public class Test_CodeForDocs {
@@ -72,7 +72,7 @@ public class Test_CodeForDocs {
 		ap.addText("word followed by " + StringUtils.CR + " followed by" + StringUtils.LF + " followed by \n");
 
 		ap.getContext().setWidth(60);
-		ap.getContext().setAlignment(TextAlign.LEFT);
+		ap.getContext().setAlignment(AP_Alignment.LEFT);
 		System.out.println(ap.render());
 
 		this.output();
@@ -84,7 +84,7 @@ public class Test_CodeForDocs {
 
 		AsciiParagraph ap = new AsciiParagraph();
 		ap.addText(new LoremIpsum().getParagraphs(1));
-		ap.getContext().setAlignment(TextAlign.LEFT);
+		ap.getContext().setAlignment(AP_Alignment.LEFT);
 
 		System.out.println(ap.render());
 
@@ -101,8 +101,8 @@ public class Test_CodeForDocs {
 	public void test_Indentation(){
 		this.output("indentation behavior");
 
-		ParagraphContext pc = new ParagraphContext();
-		pc.setAlignment(TextAlign.LEFT);
+		AP_Context pc = new AP_Context();
+		pc.setAlignment(AP_Alignment.LEFT);
 		pc.setWidth(60);
 
 		AsciiParagraph ap = new AsciiParagraph(pc);
@@ -124,8 +124,8 @@ public class Test_CodeForDocs {
 	public void test_LeftPadding(){
 		this.output("left padding behavior");
 
-		ParagraphContext pc = new ParagraphContext();
-		pc.setAlignment(TextAlign.LEFT);
+		AP_Context pc = new AP_Context();
+		pc.setAlignment(AP_Alignment.LEFT);
 		pc.setWidth(60);
 
 		AsciiParagraph ap = new AsciiParagraph(pc);
@@ -147,8 +147,8 @@ public class Test_CodeForDocs {
 	public void test_RightPadding(){
 		this.output("right padding behavior");
 
-		ParagraphContext pc = new ParagraphContext();
-		pc.setAlignment(TextAlign.JUSTIFIED);
+		AP_Context pc = new AP_Context();
+		pc.setAlignment(AP_Alignment.JUSTIFIED);
 		pc.setWidth(60);
 
 		AsciiParagraph ap = new AsciiParagraph(pc);
@@ -167,8 +167,8 @@ public class Test_CodeForDocs {
 	public void test_Alignment(){
 		this.output("alignment behavior");
 
-		ParagraphContext pc = new ParagraphContext();
-		pc.setAlignment(TextAlign.JUSTIFIED);
+		AP_Context pc = new AP_Context();
+		pc.setAlignment(AP_Alignment.JUSTIFIED);
 		pc.setWidth(39);
 
 		AsciiParagraph ap = new AsciiParagraph(pc);
@@ -176,16 +176,16 @@ public class Test_CodeForDocs {
 
 		System.out.println(ap.render());
 
-		pc.setAlignment(TextAlign.JUSTIFIED_RIGHT);
+		pc.setAlignment(AP_Alignment.JUSTIFIED_RIGHT);
 		System.out.println(ap.render());
 
-		pc.setAlignment(TextAlign.CENTER);
+		pc.setAlignment(AP_Alignment.CENTER);
 		System.out.println(ap.render());
 
-		pc.setAlignment(TextAlign.LEFT);
+		pc.setAlignment(AP_Alignment.LEFT);
 		System.out.println(ap.render());
 
-		pc.setAlignment(TextAlign.RIGHT);
+		pc.setAlignment(AP_Alignment.RIGHT);
 		System.out.println(ap.render());
 
 		this.output();
@@ -195,8 +195,8 @@ public class Test_CodeForDocs {
 	public void test_LineStartEnd(){
 		this.output("line start/end behavior");
 
-		ParagraphContext pc = new ParagraphContext();
-		pc.setAlignment(TextAlign.JUSTIFIED);
+		AP_Context pc = new AP_Context();
+		pc.setAlignment(AP_Alignment.JUSTIFIED);
 		pc.setWidth(50);
 
 		AsciiParagraph ap = new AsciiParagraph(pc);
@@ -217,8 +217,8 @@ public class Test_CodeForDocs {
 	public void test_InclusiveWidth(){
 		this.output("inclusive behavior");
 
-		ParagraphContext pc = new ParagraphContext();
-		pc.setAlignment(TextAlign.JUSTIFIED);
+		AP_Context pc = new AP_Context();
+		pc.setAlignment(AP_Alignment.JUSTIFIED);
 		pc.setWidth(50);
 
 		AsciiParagraph ap = new AsciiParagraph(pc);
@@ -266,7 +266,7 @@ public class Test_CodeForDocs {
 			}
 		};
 
-		ParagraphContext pc = new ParagraphContext();
+		AP_Context pc = new AP_Context();
 		pc.setWidth(50);
 
 		AsciiParagraph ap = new AsciiParagraph(pc);

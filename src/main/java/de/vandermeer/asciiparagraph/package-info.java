@@ -35,7 +35,7 @@
  * 
  * <br><h3>Concepts and Realization</h3>
  * <p>
- * 		The main concepts are: paragraph, paragraph context, and alignment.
+ * 		The main concepts are: paragraph and paragraph context.
  * </p>
  * 
  * <br><h4>Paragraph</h4>
@@ -72,17 +72,6 @@
  * 		<li>character used for in-line whitespaces</li>
  * 		<li>added empty lines after the paragraph text</li>
  * 		<li>paragraph alignment</li>
- * </ul>
- * 
- * 
- * <br><h4>Paragraph Alignment</h4>
- * A paragraph can be aligned in the following ways:
- * <ul>
- * 		<li>Justified - all text is justified, the last line left bound,</li>
- * 		<li>Justified right - all text is justified, the last line right bound,</li>
- * 		<li>Left - all text is left aligned</li>
- * 		<li>Right - all text is right aligned</li>
- * 		<li>Centered - all text is centered</li>
  * </ul>
  * 
  * 
@@ -159,7 +148,7 @@
 	ap.addText("word followed by " + StringUtils.CR + " followed by" + StringUtils.LF + " followed by \n");
 
 	ap.getContext().setWidth(60);
-	ap.getContext().setAlignment(ParagraphContextAlignment.LEFT);
+	ap.getContext().setAlignment(AP_Alignment.LEFT);
 	System.out.println(ap.render());
  * }</pre>
  * 
@@ -185,8 +174,8 @@
  * The following example shows all possible alignments for text.
  * It also shows how we can use create and use a paragraph context object, and use that to manipulate the paragraph rendering properties.
  * <pre>{@code
-	ParagraphContext pc = new ParagraphContext();
-	pc.setAlignment(TextAlign.JUSTIFIED);
+	AP_Context pc = new AP_Context();
+	pc.setAlignment(AP_Alignment.JUSTIFIED);
 	pc.setWidth(39);
 
 	AsciiParagraph ap = new AsciiParagraph(pc);
@@ -194,16 +183,16 @@
 
 	System.out.println(ap.render());
 
-	pc.setAlignment(TextAlign.JUSTIFIED_RIGHT);
+	pc.setAlignment(AP_Alignment.JUSTIFIED_RIGHT);
 	System.out.println(ap.render());
 
-	pc.setAlignment(TextAlign.CENTER);
+	pc.setAlignment(AP_Alignment.CENTER);
 	System.out.println(ap.render());
 
-	pc.setAlignment(TextAlign.LEFT);
+	pc.setAlignment(AP_Alignment.LEFT);
 	System.out.println(ap.render());
 
-	pc.setAlignment(TextAlign.RIGHT);
+	pc.setAlignment(AP_Alignment.RIGHT);
 	System.out.println(ap.render());
  * }</pre>
  * 
@@ -252,7 +241,7 @@
  * <pre>{@code
 	AsciiParagraph ap = new AsciiParagraph();
 	ap.addText(new LoremIpsum().getParagraphs(1));
-	ap.getContext().setAlignment(TextAlign.LEFT);
+	ap.getContext().setAlignment(AP_Alignment.LEFT);
 
 	System.out.println(ap.render());
 
@@ -299,8 +288,8 @@
  * The following example creates a paragraph, then changes its indentation, and finally changes the indentation character.
  * The example also shows how we can create a paragraph context first, and then set it for the paragraph.
  * <pre>{@code
-	ParagraphContext pc = new ParagraphContext();
-	pc.setAlignment(TextAlign.LEFT);
+	AP_Context pc = new AP_Context();
+	pc.setAlignment(AP_Alignment.LEFT);
 	pc.setWidth(60);
 
 	AsciiParagraph ap = new AsciiParagraph(pc);
@@ -347,8 +336,8 @@
  * The left padding character can be set separately.
  * The following example creates a paragraph, then changes its left padding, and finally changes the left padding character.
  * <pre>{@code
-	ParagraphContext pc = new ParagraphContext();
-	pc.setAlignment(TextAlign.LEFT);
+	AP_Context pc = new AP_Context();
+	pc.setAlignment(AP_Alignment.LEFT);
 	pc.setWidth(60);
 
 	AsciiParagraph ap = new AsciiParagraph(pc);
@@ -401,8 +390,8 @@
  * The following example creates a paragraph, then changes its right padding and the right padding character.
  * The paragraph is aligned justified to show the padding.
  * <pre>{@code
-	ParagraphContext pc = new ParagraphContext();
-	pc.setAlignment(TextAlign.JUSTIFIED);
+	AP_Context pc = new AP_Context();
+	pc.setAlignment(AP_Alignment.JUSTIFIED);
 	pc.setWidth(60);
 
 	AsciiParagraph ap = new AsciiParagraph(pc);
@@ -443,8 +432,8 @@
  * These strings have no impact on the text width of the resulting lines of the paragraph, they are simply inserted (at the start for start line) or appended (at the end for line end).
  * The following example creates a paragraph and renders it, then first changes the line start and second the line end.
  * <pre>{@code
-	ParagraphContext pc = new ParagraphContext();
-	pc.setAlignment(TextAlign.JUSTIFIED);
+	AP_Context pc = new AP_Context();
+	pc.setAlignment(AP_Alignment.JUSTIFIED);
 	pc.setWidth(50);
 
 	AsciiParagraph ap = new AsciiParagraph(pc);
@@ -488,8 +477,8 @@
  * The following example shows how subsequently adding indentation, start string, and end string with re-calculated width changes the width of each line of the paragraph.
  * Note: the width needs to be reset before each change and re-calculation, otherwise a change will be used more than once.
  * <pre>{@code
-	ParagraphContext pc = new ParagraphContext();
-	pc.setAlignment(TextAlign.JUSTIFIED);
+	AP_Context pc = new AP_Context();
+	pc.setAlignment(AP_Alignment.JUSTIFIED);
 	pc.setWidth(50);
 
 	AsciiParagraph ap = new AsciiParagraph(pc);
@@ -575,7 +564,7 @@
 		}
 	};
 
-	ParagraphContext pc = new ParagraphContext();
+	AP_Context pc = new AP_Context();
 	pc.setWidth(50);
 
 	AsciiParagraph ap = new AsciiParagraph(pc);
@@ -631,6 +620,6 @@ System.out.println(st);
  * 
  * 
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.3-SNAPSHOT build 160304 (04-Mar-16) for Java 1.7
+ * @version    v0.0.3-SNAPSHOT build 160306 (06-Mar-16) for Java 1.7
  */
 package de.vandermeer.asciiparagraph;
