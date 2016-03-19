@@ -1,5 +1,5 @@
-ASCII Paragraph
-===============
+ASCII Paragraph (Java 7)
+========================
 A simple tool to format paragraphs with indentation, indentation character, alignment, padding (left, right, both), padding characters (left, right, both), and in-line whitespace characters.
 :toc:
 
