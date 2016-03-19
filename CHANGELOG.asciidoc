@@ -1,8 +1,13 @@
-#
+v1.0.0 - java 7 release - 2016-03-19
+------------------------------------
+* created branch for Java 7 legacy version
+* tagged in v1.0.0 and released on Maven Central
+
 
 v0.0.2 - maintenance - 2016-03-01
 ---------------------------------
 * removed old module/ settings, added bundle/pm settings
+
 
 v0.0.1 - initial release - 2016-02-25
 -------------------------------------

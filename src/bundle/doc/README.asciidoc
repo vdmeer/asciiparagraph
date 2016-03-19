@@ -1,10 +1,10 @@
-ASCII Paragraph
-===============
+ASCII Paragraph (Java 7 legacy)
+===============================
 A simple tool to format paragraphs with indentation, indentation character, alignment, padding (left, right, both), padding characters (left, right, both), and in-line whitespace characters.
 :toc:
 
-Current release is https://search.maven.org/#artifactdetails|de.vandermeer|asciiparagraph|0.0.2|jar[0.0.2].
-All releases are on https://search.maven.org/#search|gav|1|g%3A%22de.vandermeer%22%20AND%20a%3A%22asciiparagraph%22[Maven Central].
+Current release is https://search.maven.org/#artifactdetails|de.vandermeer|asciiparagraph-j7|1.0.0|jar[1.0.0].
+All releases are on https://search.maven.org/#search|gav|1|g%3A%22de.vandermeer%22%20AND%20a%3A%22asciiparagraph-j7%22[Maven Central].
 
 This blog post explains how to get UTF-8 support in the whole tool chain http://vdmeer-sven.blogspot.ie/2014/06/utf-8-support-w-java-and-console.html[blog on UTF-8].
 Updates will be at here https://github.com/vdmeer/skb/wiki/HowTo-UTF-8-Support-in-Java-and-Console[SKB Wiki on UTF-8].
