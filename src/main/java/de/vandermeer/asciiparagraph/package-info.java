@@ -536,7 +536,7 @@
  * However, we can let the paragraph take care of that automatically as well. There are basically two options.
  * 
  * 
- * <br><h5>Implementing the {@link de.vandermeer.asciiparagraph.HasText} interface</h5>
+ * <br><h5>Implementing the {@link de.vandermeer.skb.interfaces.categories.has.HasText} interface</h5>
  * An object can implement the HasText interface and return a string or a collection of strings as text.
  * The paragraph will automatically detect that, call the simple method first (returning a string).
  * If that returned null, it will call the method returning a collection of strings.
@@ -620,6 +620,6 @@ System.out.println(st);
  * 
  * 
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.3-SNAPSHOT build 160306 (06-Mar-16) for Java 1.7
+ * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  */
 package de.vandermeer.asciiparagraph;

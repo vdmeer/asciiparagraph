@@ -22,11 +22,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.text.StrBuilder;
 
+import de.vandermeer.skb.interfaces.categories.has.HasText;
+import de.vandermeer.skb.interfaces.categories.has.HasTextCluster;
+
 /**
  * Create and render a paragraph for text with ASCII and UTF-8 characters.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.3-SNAPSHOT build 160306 (06-Mar-16) for Java 1.7
+ * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.1
  */
 public class AsciiParagraph {
@@ -74,7 +77,7 @@ public class AsciiParagraph {
 	}
 
 	/**
-	 * Adds text to the paragraph provided by the input object
+	 * Adds text to the paragraph provided by the input object.
 	 * @param object an object providing text for the paragraph
 	 * @return self to allow chaining
 	 * throws NullPointerException if the argument was null or if the object did only provide null as text
@@ -88,7 +91,20 @@ public class AsciiParagraph {
 			return this.addText(text);
 		}
 
-		Collection<String> collection = object.getTextCollection();
+		throw new IllegalArgumentException("HasText provider did not provide any text");
+	}
+
+	/**
+	 * Adds text to the paragraph provided by the input object.
+	 * @param object an object providing text for the paragraph
+	 * @return self to allow chaining
+	 * throws NullPointerException if the argument was null or if the object did only provide null as text
+	 * throws IllegalArgumentException if any text provided was blank
+	 */
+	public AsciiParagraph addText(HasTextCluster object){
+		Validate.notNull(object);
+
+		Collection<String> collection = object.getTextAsCollection();
 		if(collection!=null){
 			for(String s : collection){
 				this.addText(s);

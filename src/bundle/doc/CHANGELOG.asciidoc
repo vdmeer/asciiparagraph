@@ -8,6 +8,7 @@ v0.0.3 - feature add - 2016-03-##
   ** added set/get to AP_Context
   ** created standard renderer class and moved existing render methods from AsciiParagraph there
 * sorted members in all classes
+* added skb-interfaces dependencies and moved hasText to skb-interfaces (plus further refactoring)
 
 
 v0.0.2 - maintenance - 2016-03-01
