@@ -44,7 +44,7 @@ public class Standard_AP_Renderer extends Abstract_AP_Renderer {
 		AP_Context ctx = ap.getContext();
 
 		int actualWidth = ctx.getActualWidth();
-		char tmpPaddingLeft = 'Ļ'; //arbitrary temporary left padding character, hopefully none really uses that in context
+		char tmpPaddingLeft = 'Ļ';  //arbitrary temporary left padding character, hopefully none really uses that in context
 		char tmpPaddingRight = 'Ɍ'; //arbitrary temporary right padding character, hopefully none really uses that in context
 
 		//split lines with the actual paragraph width

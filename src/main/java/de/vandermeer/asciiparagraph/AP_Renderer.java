@@ -48,7 +48,7 @@ public interface AP_Renderer {
 	 * The characters are:
 	 * 
 	 * - left padding - Ļ, Unicode U+013B
-	 *  - right padding - Ɍ, Unicode U+024C
+	 * - right padding - Ɍ, Unicode U+024C
 	 * 
 	 * @param ap the paragraph to render
 	 * @return list of lines for the rendered paragraph
