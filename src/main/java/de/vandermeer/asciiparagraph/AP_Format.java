@@ -16,30 +16,27 @@
 package de.vandermeer.asciiparagraph;
 
 /**
- * Options for the alignment of an {@link AsciiParagraph}.
+ * Options for the formats of an {@link AsciiParagraph}.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
- * @since      v0.0.1
+ * @since      v0.0.3
  */
-public enum AP_Alignment {
+public enum AP_Format {
 
-	/** Option for a justified alignment. */
-	JUSTIFIED,
+	/** No special formatting. */
+	NONE,
 
-	/** Option for a justified alignment, last line right aligned. */
-	JUSTIFIED_RIGHT,
+	/** Indentation of the first line of the paragraph. */
+	FIRST_LINE,
 
-	/** Option for a justified alignment, last line left left aligned. */
-	JUSTIFIED_LEFT,
+	/** A hanging paragraph, all but the first line with special indentation. */
+	HANGING,
 
-	/** Option for paragraph alignment left. */
-	LEFT,
+	/** USe a dropped capital letter at the start of the paragraph. */
+	DROPCAP,
 
-	/** Option for paragraph alignment center. */
-	CENTER,
-
-	/** Option for paragraph alignment right. */
-	RIGHT,
+	/** USe a dropped capital letter at the start of the paragraph with padding for all lines. */
+	DROPCAP_WITH_PADDING,
 	;
 }

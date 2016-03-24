@@ -1,0 +1,46 @@
+Concepts
+--------
+
+The main concepts are: paragraph and paragraph context.
+
+Paragraph
+~~~~~~~~~
+A paragraph is a collection of text strings.
+The strings are processed as follows:
+
+* add every string to the internal representation of all paragraph text, separated by a space
+* when rendering the paragraph, remove all extra white spaces
+  ** tabulators,
+  ** more than one consecutive space,
+  ** line feed,
+  ** carriage return, and
+  ** line feed and carriage return
+
+Paragraphs can be created and filled with text.
+Properties of paragraphs are set as paragraph context.
+Finally, paragraphs are rendered, i.e. a printable representation of the paragraph and all its text is created.
+
+
+Paragraph Context
+~~~~~~~~~~~~~~~~~
+Defines all possible properties of a paragraph:
+
+* overall with of the paragraph
+* left padding, left indentation
+* right padding, right indentation
+* left padding character, character used for left indentation
+* right padding character, character used for right indentation
+* character used for in-line white spaces
+* added empty lines after the paragraph text
+* paragraph alignment
+
+
+Paragraph Renderer
+~~~~~~~~~~~~~~~~~~
+
+The paragraph itself provides a number of render methods to render the content into various object.
+Supported are String, Iterables, Iterators, Collections, and arrays.
+
+If more render functionality is required, one can create special renderes that take a paragraph and render it to the requirements.
+The standard renderer for instance provides a number of additional render methods with specific behavior.
+

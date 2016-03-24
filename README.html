@@ -5,7 +5,6 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<meta name="author" content="A simple tool to format paragraphs with indentation, indentation character, alignment, padding (left, right, both), padding characters (left, right, both), and in-line whitespace characters.">
 <title>ASCII Paragraph</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -417,41 +416,131 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style>
+<style>
+/* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
+/*pre.CodeRay {background-color:#f7f7f8;}*/
+.CodeRay .line-numbers{border-right:1px solid #d8d8d8;padding:0 0.5em 0 .25em}
+.CodeRay span.line-numbers{display:inline-block;margin-right:.5em;color:rgba(0,0,0,.3)}
+.CodeRay .line-numbers strong{color:rgba(0,0,0,.4)}
+table.CodeRay{border-collapse:separate;border-spacing:0;margin-bottom:0;border:0;background:none}
+table.CodeRay td{vertical-align: top;line-height:1.45}
+table.CodeRay td.line-numbers{text-align:right}
+table.CodeRay td.line-numbers>pre{padding:0;color:rgba(0,0,0,.3)}
+table.CodeRay td.code{padding:0 0 0 .5em}
+table.CodeRay td.code>pre{padding:0}
+.CodeRay .debug{color:#fff !important;background:#000080 !important}
+.CodeRay .annotation{color:#007}
+.CodeRay .attribute-name{color:#000080}
+.CodeRay .attribute-value{color:#700}
+.CodeRay .binary{color:#509}
+.CodeRay .comment{color:#998;font-style:italic}
+.CodeRay .char{color:#04d}
+.CodeRay .char .content{color:#04d}
+.CodeRay .char .delimiter{color:#039}
+.CodeRay .class{color:#458;font-weight:bold}
+.CodeRay .complex{color:#a08}
+.CodeRay .constant,.CodeRay .predefined-constant{color:#008080}
+.CodeRay .color{color:#099}
+.CodeRay .class-variable{color:#369}
+.CodeRay .decorator{color:#b0b}
+.CodeRay .definition{color:#099}
+.CodeRay .delimiter{color:#000}
+.CodeRay .doc{color:#970}
+.CodeRay .doctype{color:#34b}
+.CodeRay .doc-string{color:#d42}
+.CodeRay .escape{color:#666}
+.CodeRay .entity{color:#800}
+.CodeRay .error{color:#808}
+.CodeRay .exception{color:inherit}
+.CodeRay .filename{color:#099}
+.CodeRay .function{color:#900;font-weight:bold}
+.CodeRay .global-variable{color:#008080}
+.CodeRay .hex{color:#058}
+.CodeRay .integer,.CodeRay .float{color:#099}
+.CodeRay .include{color:#555}
+.CodeRay .inline{color:#000}
+.CodeRay .inline .inline{background:#ccc}
+.CodeRay .inline .inline .inline{background:#bbb}
+.CodeRay .inline .inline-delimiter{color:#d14}
+.CodeRay .inline-delimiter{color:#d14}
+.CodeRay .important{color:#555;font-weight:bold}
+.CodeRay .interpreted{color:#b2b}
+.CodeRay .instance-variable{color:#008080}
+.CodeRay .label{color:#970}
+.CodeRay .local-variable{color:#963}
+.CodeRay .octal{color:#40e}
+.CodeRay .predefined{color:#369}
+.CodeRay .preprocessor{color:#579}
+.CodeRay .pseudo-class{color:#555}
+.CodeRay .directive{font-weight:bold}
+.CodeRay .type{font-weight:bold}
+.CodeRay .predefined-type{color:inherit}
+.CodeRay .reserved,.CodeRay .keyword {color:#000;font-weight:bold}
+.CodeRay .key{color:#808}
+.CodeRay .key .delimiter{color:#606}
+.CodeRay .key .char{color:#80f}
+.CodeRay .value{color:#088}
+.CodeRay .regexp .delimiter{color:#808}
+.CodeRay .regexp .content{color:#808}
+.CodeRay .regexp .modifier{color:#808}
+.CodeRay .regexp .char{color:#d14}
+.CodeRay .regexp .function{color:#404;font-weight:bold}
+.CodeRay .string{color:#d20}
+.CodeRay .string .string .string{background:#ffd0d0}
+.CodeRay .string .content{color:#d14}
+.CodeRay .string .char{color:#d14}
+.CodeRay .string .delimiter{color:#d14}
+.CodeRay .shell{color:#d14}
+.CodeRay .shell .delimiter{color:#d14}
+.CodeRay .symbol{color:#990073}
+.CodeRay .symbol .content{color:#a60}
+.CodeRay .symbol .delimiter{color:#630}
+.CodeRay .tag{color:#008080}
+.CodeRay .tag-special{color:#d70}
+.CodeRay .variable{color:#036}
+.CodeRay .insert{background:#afa}
+.CodeRay .delete{background:#faa}
+.CodeRay .change{color:#aaf;background:#007}
+.CodeRay .head{color:#f8f;background:#505}
+.CodeRay .insert .insert{color:#080}
+.CodeRay .delete .delete{color:#800}
+.CodeRay .change .change{color:#66f}
+.CodeRay .head .head{color:#f4f}
+</style>
 </head>
 <body class="article">
 <div id="header">
 <h1>ASCII Paragraph</h1>
-<div class="details">
-<span id="author" class="author">A simple tool to format paragraphs with indentation, indentation character, alignment, padding (left, right, both), padding characters (left, right, both), and in-line whitespace characters.</span><br>
-</div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#_resources">Resources</a></li>
+<li><a href="#_installation">Installation</a>
+<ul class="sectlevel2">
+<li><a href="#_maven">Maven</a></li>
+</ul>
+</li>
 <li><a href="#_features">Features</a></li>
-<li><a href="#_overview">Overview</a>
+<li><a href="#_concepts">Concepts</a>
 <ul class="sectlevel2">
-<li><a href="#_concepts_and_realization">Concepts and Realization</a></li>
+<li><a href="#_paragraph">Paragraph</a></li>
+<li><a href="#_paragraph_context">Paragraph Context</a></li>
+<li><a href="#_paragraph_renderer">Paragraph Renderer</a></li>
 </ul>
 </li>
-<li><a href="#_standard_usage_create_and_render_a_simple_paragraph">Standard usage - create and render a simple paragraph</a>
+<li><a href="#_getting_started">Getting Started</a></li>
+<li><a href="#_examples">Examples</a>
 <ul class="sectlevel2">
-<li><a href="#_create_a_paragraph">Create a paragraph</a></li>
-<li><a href="#_add_text">Add text</a></li>
-<li><a href="#_render_the_paragraph">Render the paragraph</a></li>
-<li><a href="#_print_the_list">Print the list</a></li>
-</ul>
-</li>
-<li><a href="#_set_of_examples_for_paragraph_features">Set of examples for paragraph features</a>
-<ul class="sectlevel2">
-<li><a href="#_paragraph_whitespace_handling">Paragraph whitespace handling</a></li>
-<li><a href="#_paragraph_text_alignment">Paragraph text alignment</a></li>
-<li><a href="#_paragraph_width">Paragraph width</a></li>
-<li><a href="#_paragraph_indentation_width_and_character">Paragraph indentation (width and character)</a></li>
-<li><a href="#_paragraph_left_padding_width_and_character">Paragraph left padding (width and character)</a></li>
-<li><a href="#_paragraph_right_padding_width_and_character">Paragraph right padding (width and character)</a></li>
-<li><a href="#_line_start_and_line_end_strings">Line start and line end strings</a></li>
-<li><a href="#_using_an_inclusive_width">Using an inclusive width</a></li>
-<li><a href="#_using_text_providing_objects">Using text providing objects</a></li>
+<li><a href="#_whitespace_handling">Whitespace handling</a></li>
+<li><a href="#_text_alignment">Text alignment</a></li>
+<li><a href="#_text_format">Text format</a></li>
+<li><a href="#_width">Width</a></li>
+<li><a href="#_indentation_width_and_character">Indentation (width and character)</a></li>
+<li><a href="#_left_padding_width_and_character">Left padding (width and character)</a></li>
+<li><a href="#_right_padding_width_and_character">Right padding (width and character)</a></li>
+<li><a href="#_extra_text_at_each_line_start_and_line_end">Extra text at each line start and line end</a></li>
+<li><a href="#_render_to_maximum_width_calculating_additional_padding_and_strings">Render to maximum width, calculating additional padding and strings</a></li>
+<li><a href="#_conditional_line_breaks">Conditional line breaks</a></li>
 </ul>
 </li>
 </ul>
@@ -461,12 +550,54 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Current release is <a href="https://search.maven.org/#artifactdetails|de.vandermeer|asciiparagraph|0.0.2|jar">0.0.2</a>.
-All releases are on <a href="https://search.maven.org/#search|gav|1|g%3A%22de.vandermeer%22%20AND%20a%3A%22asciiparagraph%22">Maven Central</a>.</p>
+<p>A simple tool to format paragraphs with indentation, indentation character, alignment, padding (left, right, both), padding characters (left, right, both), and in-line whitespace characters.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_resources">Resources</h2>
+<div class="sectionbody">
+<table class="tableblock frame-topbot grid-rows spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Releases on Maven Central</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://search.maven.org/#artifactdetails|de.vandermeer|asciiparagraph|0.0.3-SNAPSHOT|jar">current release 0.0.3-SNAPSHOT</a>,
+  <a href="https://search.maven.org/#search|gav|1|g%3A%22de.vandermeer%22%20AND%20a%3A%22asciiparagraph%22">all releases</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UTF-8 Howto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://vdmeer-sven.blogspot.ie/2014/06/utf-8-support-w-java-and-console.html">older blog</a>,
+  <a href="https://github.com/vdmeer/skb/wiki/HowTo-UTF-8-Support-in-Java-and-Console">updated SKB Wiki</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation">Installation</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_maven">Maven</h3>
+<div class="paragraph">
+<p>For Maven declare a dependency in the <code>&lt;dependencies&gt;</code> section of your POM file.</p>
+</div>
+<div class="listingblock">
+<div class="title">Dependency declaration in pom.xml</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>de.vandermeer<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>asciiparagraph<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>0.0.3-SNAPSHOT<span class="tag">&lt;/version&gt;</span>
+<span class="tag">&lt;/dependency&gt;</span></code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>This blog post explains how to get UTF-8 support in the whole tool chain <a href="http://vdmeer-sven.blogspot.ie/2014/06/utf-8-support-w-java-and-console.html">blog on UTF-8</a>.
-Updates will be at here <a href="https://github.com/vdmeer/skb/wiki/HowTo-UTF-8-Support-in-Java-and-Console">SKB Wiki on UTF-8</a>.</p>
+<p>For other build systems see <a href="https://search.maven.org/#artifactdetails\|de.vandermeer\|asciiparagraph\|0.0.3-SNAPSHOT\|jar">Maven Central</a></p>
+</div>
 </div>
 </div>
 </div>
@@ -513,15 +644,13 @@ Updates will be at here <a href="https://github.com/vdmeer/skb/wiki/HowTo-UTF-8-
 </div>
 </div>
 <div class="sect1">
-<h2 id="_overview">Overview</h2>
+<h2 id="_concepts">Concepts</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_concepts_and_realization">Concepts and Realization</h3>
 <div class="paragraph">
-<p>The main concepts are: paragraph, paragraph context, and alignment.</p>
+<p>The main concepts are: paragraph and paragraph context.</p>
 </div>
-<div class="sect3">
-<h4 id="_paragraph">Paragraph</h4>
+<div class="sect2">
+<h3 id="_paragraph">Paragraph</h3>
 <div class="paragraph">
 <p>A paragraph is a collection of text strings.
 The strings are processed as follows:</p>
@@ -532,7 +661,7 @@ The strings are processed as follows:</p>
 <p>add every string to the internal representation of all paragraph text, separated by a space</p>
 </li>
 <li>
-<p>when rendering the paragraph, remove all extra whitespaces</p>
+<p>when rendering the paragraph, remove all extra white spaces</p>
 <div class="ulist">
 <ul>
 <li>
@@ -561,8 +690,8 @@ Properties of paragraphs are set as paragraph context.
 Finally, paragraphs are rendered, i.e. a printable representation of the paragraph and all its text is created.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_paragraph_context">Paragraph Context</h4>
+<div class="sect2">
+<h3 id="_paragraph_context">Paragraph Context</h3>
 <div class="paragraph">
 <p>Defines all possible properties of a paragraph:</p>
 </div>
@@ -584,7 +713,7 @@ Finally, paragraphs are rendered, i.e. a printable representation of the paragra
 <p>right padding character, character used for right indentation</p>
 </li>
 <li>
-<p>character used for in-line whitespaces</p>
+<p>character used for in-line white spaces</p>
 </li>
 <li>
 <p>added empty lines after the paragraph text</p>
@@ -595,36 +724,21 @@ Finally, paragraphs are rendered, i.e. a printable representation of the paragra
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_paragraph_alignment">Paragraph Alignment</h4>
+<div class="sect2">
+<h3 id="_paragraph_renderer">Paragraph Renderer</h3>
 <div class="paragraph">
-<p>A paragraph can be aligned in the following ways:</p>
+<p>The paragraph itself provides a number of render methods to render the content into various object.
+Supported are String, Iterables, Iterators, Collections, and arrays.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Justified - all text is justified, the last line left bound,</p>
-</li>
-<li>
-<p>Justified right - all text is justified, the last line right bound,</p>
-</li>
-<li>
-<p>Left - all text is left aligned</p>
-</li>
-<li>
-<p>Right - all text is right aligned</p>
-</li>
-<li>
-<p>Centered - all text is centered</p>
-</li>
-</ul>
-</div>
+<div class="paragraph">
+<p>If more render functionality is required, one can create special renderes that take a paragraph and render it to the requirements.
+The standard renderer for instance provides a number of additional render methods with specific behavior.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_standard_usage_create_and_render_a_simple_paragraph">Standard usage - create and render a simple paragraph</h2>
+<h2 id="_getting_started">Getting Started</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The standard usage is:</p>
@@ -648,42 +762,45 @@ Finally, paragraphs are rendered, i.e. a printable representation of the paragra
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="_create_a_paragraph">Create a paragraph</h3>
+<div class="paragraph">
+<p>First, create a paragraph.</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre>AsciiParagraph ap = new AsciiParagraph();</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_add_text">Add text</h3>
-<div class="listingblock">
-<div class="content">
-<pre>ap.addText("line	1");
-ap.addText("2  2");
-ap.addText("more text with	tab and \n newline");
-ap.addText("some more text to get it over the 80 character default width");</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_render_the_paragraph">Render the paragraph</h3>
-<div class="listingblock">
-<div class="content">
-<pre>String rend = ap.render();</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_print_the_list">Print the list</h3>
-<div class="listingblock">
-<div class="content">
-<pre>System.out.println(rend);</pre>
+<pre class="CodeRay highlight"><code data-lang="java">AsciiParagraph ap = <span class="keyword">new</span> AsciiParagraph();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This will result in the following list:</p>
+<p>Next, add text.
+Any text can be added, the renderer will process the text (for instance remove excessive white spaces).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java">ap.addText(<span class="string"><span class="delimiter">&quot;</span><span class="content">line        1</span><span class="delimiter">&quot;</span></span>);
+ap.addText(<span class="string"><span class="delimiter">&quot;</span><span class="content">2  2</span><span class="delimiter">&quot;</span></span>);
+ap.addText(<span class="string"><span class="delimiter">&quot;</span><span class="content">more text with        tab and </span><span class="char">\n</span><span class="content"> newline</span><span class="delimiter">&quot;</span></span>);
+ap.addText(<span class="string"><span class="delimiter">&quot;</span><span class="content">some more text to get it over the 80 character default width</span><span class="delimiter">&quot;</span></span>);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next, render the paragraph.
+This will provide the text output using the default settings from the paragraph&#8217;s context.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">String</span> rend = ap.render();</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, print the paragraph to standard out.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="predefined-type">System</span>.out.println(rend);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output will be:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -693,171 +810,128 @@ character default width</pre>
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
-<h2 id="_set_of_examples_for_paragraph_features">Set of examples for paragraph features</h2>
+<h2 id="_examples">Examples</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The following examples are using the classic "Lorem Ipsum" text as content.</p>
 </div>
 <div class="sect2">
-<h3 id="_paragraph_whitespace_handling">Paragraph whitespace handling</h3>
+<h3 id="_whitespace_handling">Whitespace handling</h3>
 <div class="paragraph">
-<p>The paragraph will remove all additional whitespaces so that the resulting text has words separated by 1 space.
+<p>The paragraph will remove all additional white spaces so that the resulting text has words separated by 1 space.
 All tabulators, line feeds, and carriage returns will be removed.
-The following example fills a paragraph with all sorts of extra whitespaces and then renders it left aligned with a width of 60.</p>
+We can add for instance the following text fragments to a paragraph</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>AsciiParagraph ap = new AsciiParagraph();
+<pre>"c2  c2"        // string with 1 extra blank
+"c3   c3"       // string with 2 extra blanks
+"c4    c4"      // string with 3 extra blanks
 
-ap.addText("c2  c2");
-ap.addText("c3   c3");
-ap.addText("c4    c4");
-ap.addText("c5     c5");
-ap.addText("c6      c6");
-ap.addText("c7       c7");
+"t1	t1"                       // string with a tabulator
+"t2		t2"               // string with 2 tabulators
+"t3			t3"       // string with 3 tabulators
+"t4\t\t\t\tt4"                    // string with 4 escaped tabulators
 
-ap.addText("t2		t2");
-ap.addText("t3			t3");
-ap.addText("t4				t4");
-ap.addText("t5					t5");
-ap.addText("t6						t6");
-ap.addText("t7							t7");
-
-ap.addText("word followed by " + StringUtils.CR + " followed by" + StringUtils.LF + " followed by \n");
-
-ap.getContext().setWidth(60);
-ap.getContext().setAlignment(ParagraphContextAlignment.LEFT);
-System.out.println(ap.render());</pre>
+// a more complex construct using StringUtils to add CR and LF
+"word followed by " + StringUtils.CR + " followed by" + StringUtils.LF + " followed by \n"</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The result is text in two lines with all the extra whitespaces being removed:</p>
+<p>Using left alignment and a width of 60 the rendered output will be:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>c2 c2 c3 c3 c4 c4 c5 c5 c6 c6 c7 c7 t2 t2 t3 t3 t4 t4 t5 t5
-t6 t6 t7 t7 word followed by followed by followed by</pre>
+<pre>c2 c2 c3 c3 c4 c4 t1 t1 t2 t2 t3 t3 t4 t4 word followed by
+followed by followed by</pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_paragraph_text_alignment">Paragraph text alignment</h3>
+<h3 id="_text_alignment">Text alignment</h3>
 <div class="paragraph">
-<p>The text in the paragraph can be aligned in the following ways:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Justified - all text as block, last line left bound</p>
-</li>
-<li>
-<p>Justified right - all text as block, last line right bound</p>
-</li>
-<li>
-<p>Center - all text centered</p>
-</li>
-<li>
-<p>Left - text left bound, the right being open</p>
-</li>
-<li>
-<p>Right - text right bound, the left being open</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The following example shows all possible alignments for text.
-It also shows how we can use create and use a paragraph context object, and use that to manipulate the paragraph rendering properties.</p>
+<p>Text can be aligned left and right.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>ParagraphContext pc = new ParagraphContext();
-pc.setAlignment(TextAlign.JUSTIFIED);
-pc.setWidth(39);
-
-AsciiParagraph ap = new AsciiParagraph(pc);
-ap.addText(new LoremIpsum().getWords(29));
-
-System.out.println(ap.render());
-
-pc.setAlignment(TextAlign.JUSTIFIED_RIGHT);
-System.out.println(ap.render());
-
-pc.setAlignment(TextAlign.CENTER);
-System.out.println(ap.render());
-
-pc.setAlignment(TextAlign.LEFT);
-System.out.println(ap.render());
-
-pc.setAlignment(TextAlign.RIGHT);
-System.out.println(ap.render());</pre>
+<pre>Lorem ipsum dolor sit amet, consetetur        Lorem ipsum dolor sit amet, consetetur
+sadipscing elitr, sed diam nonumy                  sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et              eirmod tempor invidunt ut labore et
+dolore magna aliquyam erat, sed diam            dolore magna aliquyam erat, sed diam
+voluptua. At vero eos et accusam                    voluptua. At vero eos et accusam</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The result are five paragraphs with the alignment in this order: justified, justified right, centered, left, and finally right.</p>
+<p>Text can be aligned centered and justified.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>Lorem ipsum dolor sit amet,  consetetur
-sadipscing  elitr,  sed   diam   nonumy
-eirmod tempor  invidunt  ut  labore  et
-dolore magna aliquyam  erat,  sed  diam
-voluptua. At vero eos et accusam
-
-Lorem ipsum dolor sit amet,  consetetur
-sadipscing  elitr,  sed   diam   nonumy
-eirmod tempor  invidunt  ut  labore  et
-dolore magna aliquyam  erat,  sed  diam
-       voluptua. At vero eos et accusam
-
-Lorem ipsum dolor sit amet, consetetur
-   sadipscing elitr, sed diam nonumy
-  eirmod tempor invidunt ut labore et
- dolore magna aliquyam erat, sed diam
-   voluptua. At vero eos et accusam
-
-Lorem ipsum dolor sit amet, consetetur
-sadipscing elitr, sed diam nonumy
-eirmod tempor invidunt ut labore et
-dolore magna aliquyam erat, sed diam
-voluptua. At vero eos et accusam
-
- Lorem ipsum dolor sit amet, consetetur
-      sadipscing elitr, sed diam nonumy
-    eirmod tempor invidunt ut labore et
-   dolore magna aliquyam erat, sed diam
-       voluptua. At vero eos et accusam</pre>
+<pre>Lorem ipsum dolor sit amet, consetetur        Lorem ipsum dolor sit amet,  consetetur
+   sadipscing elitr, sed diam nonumy          sadipscing  elitr,  sed   diam   nonumy
+  eirmod tempor invidunt ut labore et         eirmod tempor  invidunt  ut  labore  et
+ dolore magna aliquyam erat, sed diam         dolore magna aliquyam  erat,  sed  diam
+   voluptua. At vero eos et accusam           voluptua.  At  vero  eos   et   accusam</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For justified text, the last line will also be justified.
+This can lead to rather ugly last lines.
+To mitigate this, there are two more formats for justified text: justified with last line left aligned and with last line right aligned.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Lorem ipsum dolor sit amet,  consetetur        Lorem ipsum dolor sit amet,  consetetur
+sadipscing  elitr,  sed   diam   nonumy        sadipscing  elitr,  sed   diam   nonumy
+eirmod tempor  invidunt  ut  labore  et        eirmod tempor  invidunt  ut  labore  et
+dolore magna aliquyam  erat,  sed  diam        dolore magna aliquyam  erat,  sed  diam
+voluptua. At vero eos et accusam                      voluptua. At vero eos et accusam</pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_paragraph_width">Paragraph width</h3>
+<h3 id="_text_format">Text format</h3>
+<div class="paragraph">
+<p>Paragraph text can have special formats for first line indentation and hanging paragraph.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>    Lorem  ipsum  dolor  sit  amet,        Lorem   ipsum   dolor   sit   amet,
+Lorem   ipsum   dolor   sit   amet,            Lorem  ipsum  dolor  sit  amet,
+consetetur  sadipscing  elitr,  sed            consetetur  sadipscing   elitr,
+diam nonumy eirmod tempor  invidunt            sed diam nonumy  eirmod  tempor
+ut labore et dolore magna  aliquyam            invidunt ut  labore  et  dolore
+erat, sed diam  voluptua.  At  vero            magna aliquyam erat,  sed  diam
+eos et accusam                                 voluptua.  At   vero   eos   et
+                                               accusam</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Dropped capital letters are also supported.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ooooo          orem ipsum dolor sit        #        orem ipsum dolor sit amet,
+`888'          amet,     consetetur        #        consetetur      sadipscing
+ 888           sadipscing    elitr,        #        elitr,  sed  diam   nonumy
+ 888           sed   diam    nonumy        #        eirmod tempor invidunt  ut
+ 888           eirmod        tempor        #        labore  et  dolore   magna
+ 888       o   invidunt  ut  labore        ######   aliquyam  erat,  sed  diam
+o888ooooood8   et   dolore    magna                 voluptua. At vero  eos  et
+               aliquyam  erat,  sed        accusam
+diam  voluptua.  At  vero  eos   et
+accusam</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_width">Width</h3>
 <div class="paragraph">
 <p>The width of the paragraph can be set in the paragraph context.
 The default width is 80.
-The width can be changed at any time.
-When the paragraph is rendered, the currently set width will be used.
+The width can be changed at any time, it is only applied for rendering.
 The width (minus the set padding) must allow for at least 3 characters per line.
-The following example changes the width of a paragraph multiple times and renders it each time:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>AsciiParagraph ap = new AsciiParagraph();
-ap.addText(new LoremIpsum().getParagraphs(1));
-ap.getContext().setAlignment(TextAlign.LEFT);
-
-System.out.println(ap.render());
-
-ap.getContext().setWidth(60);
-System.out.println(ap.render());
-
-ap.getContext().setWidth(30);
-System.out.println(ap.render());</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This will result in the following three rendered paragraphs, with width 80, 60, and finally 30:</p>
+The following example shows the same paragraph rendered for a width of 80, 60, and 30.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -887,35 +961,13 @@ sit amet.</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_paragraph_indentation_width_and_character">Paragraph indentation (width and character)</h3>
+<h3 id="_indentation_width_and_character">Indentation (width and character)</h3>
 <div class="paragraph">
 <p>A paragraph can have an indentation.
-This does not impact the width of the text in each paragraph line, it simply adds a number of characters in front of each line.
+For simple rendering, the indentation is added to the text width (as shown here).
 The indentation character can be set separately.
-The following example creates a paragraph, then changes its indentation, and finally changes the indentation character.
-The example also shows how we can create a paragraph context first, and then set it for the paragraph.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>ParagraphContext pc = new ParagraphContext();
-pc.setAlignment(TextAlign.LEFT);
-pc.setWidth(60);
-
-AsciiParagraph ap = new AsciiParagraph(pc);
-ap.addText(new LoremIpsum().getParagraphs(1));
-
-System.out.println(ap.render());
-
-pc.setIndentation(5);
-System.out.println(ap.render());
-
-pc.setIndentation(10);
-pc.setIndentationChar('˽');
-System.out.println(ap.render());</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This will result in the following three rendered paragraphs, with indentation 0 (default), indentation 5 (as set), and indentation 10 with indentation character being <em>˽</em>.</p>
+The following example shows a normal paragraph, a paragraph with indentation of 5 using blank, and an indentation of 10 using <code>'˽'</code>.
+The width is set to 60.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -938,39 +990,15 @@ sea takimata sanctus est Lorem ipsum dolor sit amet.
 ˽˽˽˽˽˽˽˽˽˽sea takimata sanctus est Lorem ipsum dolor sit amet.</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>As the example shows, the indentation has no impact on the overall width of the text in each paragraph line.</p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="_paragraph_left_padding_width_and_character">Paragraph left padding (width and character)</h3>
+<h3 id="_left_padding_width_and_character">Left padding (width and character)</h3>
 <div class="paragraph">
 <p>A paragraph can have a left padding (at the start of each line).
-This does impact the width of the text in each paragraph line, which is automatically reduced by the left padding number.
+For simple rendering, the padding is added to the text width (as shown here).
 The left padding character can be set separately.
-The following example creates a paragraph, then changes its left padding, and finally changes the left padding character.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>ParagraphContext pc = new ParagraphContext();
-pc.setAlignment(TextAlign.LEFT);
-pc.setWidth(60);
-
-AsciiParagraph ap = new AsciiParagraph(pc);
-ap.addText(new LoremIpsum().getParagraphs(1));
-
-System.out.println(ap.render());
-
-pc.setPaddingLeft(10);
-System.out.println(ap.render());
-
-pc.setPaddingLeft(20);
-pc.setLeftPaddingChar('-');
-System.out.println(ap.render());</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This will result in the following three rendered paragraphs, with left padding 0 (default), left padding 10 (as set), and left padding 20 with left padding character being <em>-</em>.</p>
+The following example shows a normal paragraph, a paragraph with left padding of 10 using blank, and a left padding of 10 using <code>'-'</code>.
+The width is set to 60.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -980,55 +1008,28 @@ aliquyam erat, sed diam voluptua. At vero eos et accusam et
 justo duo dolores et ea rebum. Stet clita kasd gubergren, no
 sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-          Lorem ipsum dolor sit amet, consetetur sadipscing
-          elitr, sed diam nonumy eirmod tempor invidunt ut
-          labore et dolore magna aliquyam erat, sed diam
-          voluptua. At vero eos et accusam et justo duo
-          dolores et ea rebum. Stet clita kasd gubergren, no
-          sea takimata sanctus est Lorem ipsum dolor sit
-          amet.
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+          diam nonumy eirmod tempor invidunt ut labore et dolore magna
+          aliquyam erat, sed diam voluptua. At vero eos et accusam et
+          justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+          sea takimata sanctus est Lorem ipsum dolor sit amet.
 
---------------------Lorem ipsum dolor sit amet, consetetur
---------------------sadipscing elitr, sed diam nonumy eirmod
---------------------tempor invidunt ut labore et dolore
---------------------magna aliquyam erat, sed diam voluptua.
---------------------At vero eos et accusam et justo duo
---------------------dolores et ea rebum. Stet clita kasd
---------------------gubergren, no sea takimata sanctus est
---------------------Lorem ipsum dolor sit amet.</pre>
+--------------------Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+--------------------diam nonumy eirmod tempor invidunt ut labore et dolore magna
+--------------------aliquyam erat, sed diam voluptua. At vero eos et accusam et
+--------------------justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+--------------------sea takimata sanctus est Lorem ipsum dolor sit amet.</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>As the example shows, the left padding impacts on the overall width of the text in each paragraph line.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_paragraph_right_padding_width_and_character">Paragraph right padding (width and character)</h3>
+<h3 id="_right_padding_width_and_character">Right padding (width and character)</h3>
 <div class="paragraph">
 <p>A paragraph can have a right padding (at the end of each line).
-This does impact the width of the text in each paragraph line, which is automatically reduced by the right padding number.
+For simple rendering, the padding is added to the text width (as shown here).
 The right padding character can be set separately.
-The following example creates a paragraph, then changes its right padding and the right padding character.
-The paragraph is aligned justified to show the padding.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>ParagraphContext pc = new ParagraphContext();
-pc.setAlignment(TextAlign.JUSTIFIED);
-pc.setWidth(60);
-
-AsciiParagraph ap = new AsciiParagraph(pc);
-ap.addText(new LoremIpsum().getParagraphs(1));
-
-System.out.println(ap.render());
-
-pc.setPaddingRight(20);
-pc.setRightPaddingChar('+');
-System.out.println(ap.render());</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This will result in the following two rendered paragraphs, with right padding 0 (default)and right padding 20 (as set) with right padding character being <em>+</em>.</p>
+The following example shows a justified paragraph and then the same paragraph with right padding of 20 using <code>'+'</code>.
+The width is set to 60.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1036,112 +1037,54 @@ System.out.println(ap.render());</pre>
 diam nonumy eirmod tempor invidunt ut labore et dolore magna
 aliquyam erat, sed diam voluptua. At vero eos et accusam  et
 justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-sea takimata sanctus est Lorem ipsum dolor sit amet.
+sea  takimata  sanctus  est  Lorem  ipsum  dolor  sit  amet.
 
-Lorem ipsum dolor sit  amet,  consetetur++++++++++++++++++++
-sadipscing elitr, sed diam nonumy eirmod++++++++++++++++++++
-tempor  invidunt  ut  labore  et  dolore++++++++++++++++++++
-magna aliquyam erat, sed diam  voluptua.++++++++++++++++++++
-At vero eos  et  accusam  et  justo  duo++++++++++++++++++++
-dolores et ea  rebum.  Stet  clita  kasd++++++++++++++++++++
-gubergren, no sea takimata  sanctus  est++++++++++++++++++++
-Lorem ipsum dolor sit amet.+++++++++++++++++++++++++++++++++</pre>
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed++++++++++++++++++++
+diam nonumy eirmod tempor invidunt ut labore et dolore magna++++++++++++++++++++
+aliquyam erat, sed diam voluptua. At vero eos et accusam  et++++++++++++++++++++
+justo duo dolores et ea rebum. Stet clita kasd gubergren, no++++++++++++++++++++
+sea  takimata  sanctus  est  Lorem  ipsum  dolor  sit  amet.++++++++++++++++++++</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>As the example shows, the right padding impacts on the overall width of the text in each paragraph line.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_line_start_and_line_end_strings">Line start and line end strings</h3>
+<h3 id="_extra_text_at_each_line_start_and_line_end">Extra text at each line start and line end</h3>
 <div class="paragraph">
 <p>Beside indentation and padding, each line of the resulting paragraph can also be started and/or terminated with a particular string.
 Those strings are called line start and line end.
-These strings have no impact on the text width of the resulting lines of the paragraph, they are simply inserted (at the start for start line) or appended (at the end for line end).
-The following example creates a paragraph and renders it, then first changes the line start and second the line end.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>ParagraphContext pc = new ParagraphContext();
-pc.setAlignment(TextAlign.JUSTIFIED);
-pc.setWidth(50);
-
-AsciiParagraph ap = new AsciiParagraph(pc);
-ap.addText(new LoremIpsum().getWords(29));
-
-System.out.println(ap.render());
-
-pc.setLineStart("// ");
-System.out.println(ap.render());
-
-pc.setLineEnd(" --&gt;");
-System.out.println(ap.render());</pre>
-</div>
+For simple rendering, these strings is added to the text width (as shown here).</p>
 </div>
 <div class="paragraph">
-<p>This will result in the following three rendered paragraphs, with no line string, a line start string, and a line start and line end string.</p>
+<p>The following example shows a justified paragraph, then same paragraph with start string <code>"// "</code>, then same paragraph with end string <code>" -&#8594;"</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>Lorem ipsum dolor sit amet, consetetur  sadipscing
 elitr, sed diam nonumy eirmod tempor  invidunt  ut
 labore et dolore magna  aliquyam  erat,  sed  diam
-voluptua. At vero eos et accusam
+voluptua.    At    vero     eos     et     accusam
 
 // Lorem ipsum dolor sit amet, consetetur  sadipscing
 // elitr, sed diam nonumy eirmod tempor  invidunt  ut
 // labore et dolore magna  aliquyam  erat,  sed  diam
-// voluptua. At vero eos et accusam
+// voluptua.    At    vero     eos     et     accusam
 
 // Lorem ipsum dolor sit amet, consetetur  sadipscing --&gt;
 // elitr, sed diam nonumy eirmod tempor  invidunt  ut --&gt;
 // labore et dolore magna  aliquyam  erat,  sed  diam --&gt;
-// voluptua. At vero eos et accusam                   --&gt;</pre>
+// voluptua.    At    vero     eos     et     accusam --&gt;</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>As the example shows, the line start/end strings do not impact on the overall width of the text in each paragraph line.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_using_an_inclusive_width">Using an inclusive width</h3>
+<h3 id="_render_to_maximum_width_calculating_additional_padding_and_strings">Render to maximum width, calculating additional padding and strings</h3>
 <div class="paragraph">
-<p>Setting an indentation and line start/end strings does not impact the width of the paragraph lines.
-However, sometimes it is useful to actually recalculate the width inclusive, using indentation and the length of the line start/end strings.
-This can be done via the paragraph context.</p>
-</div>
-<div class="paragraph">
-<p>The following example shows how subsequently adding indentation, start string, and end string with re-calculated width changes the width of each line of the paragraph.
-Note: the width needs to be reset before each change and re-calculation, otherwise a change will be used more than once.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>ParagraphContext pc = new ParagraphContext();
-pc.setAlignment(TextAlign.JUSTIFIED);
-pc.setWidth(50);
-
-AsciiParagraph ap = new AsciiParagraph(pc);
-ap.addText(new LoremIpsum().getWords(29));
-
-System.out.println(ap.render());
-
-pc.setLineStart("// ");
-pc.calculateWidthInclusive();
-System.out.println(ap.render());
-
-pc.setWidth(50);
-pc.setLineEnd(" --&gt;");
-pc.calculateWidthInclusive();
-System.out.println(ap.render());
-
-pc.setWidth(50);
-pc.setIndentation(10);
-pc.calculateWidthInclusive();
-System.out.println(ap.render());</pre>
-</div>
+<p>Setting an indentation and line start/end strings does not impact the width of the paragraph text.
+However, sometimes it is useful to actually render inclusive, using indentation and the length of the line start/end strings.
+This is proivded be the standard renderer.</p>
 </div>
 <div class="paragraph">
-<p>The following three paragraphs show how changes impact text width.</p>
+<p>The following example shows how subsequently adding indentation, start string, and end string changes the text width but maintains the overall line width.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1171,113 +1114,27 @@ voluptua. At vero eos et accusam
 </div>
 </div>
 <div class="sect2">
-<h3 id="_using_text_providing_objects">Using text providing objects</h3>
+<h3 id="_conditional_line_breaks">Conditional line breaks</h3>
 <div class="paragraph">
-<p>The standard mechanism to add text is to use the toString method of the input object (or collection of them).
-However, there are a few situations where the toString method does not return the text wanted in the paragraph.
-We can of course call an appropriate method before adding text.
-However, we can let the paragraph take care of that automatically as well. There are basically two options.</p>
-</div>
-<div class="sect4">
-<h5 id="_implementing_the_hastext_interface">Implementing the HasText interface</h5>
-<div class="paragraph">
-<p>An object can implement the HasText interface and return a string or a collection of strings as text.
-The paragraph will automatically detect that, call the simple method first (returning a string).
-If that returned null, it will call the method returning a collection of strings.
-Only if that returned null as well, an exception will be thrown.</p>
-</div>
-<div class="paragraph">
-<p>The following example shows how an anonymous object is created implementing the interface.
-This object maintains a map, and returns the map&#8217;s values as text for the paragraph.</p>
+<p>All excessive white space characters are removed.
+Conditional line breaks can be added using using the HTML entities <code>&lt;br&gt;</code> or <code>&lt;br/&gt;</code>.
+For instance, the text</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>HasText textProvider = new HasText() {
-	Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;(){
-		private static final long serialVersionUID = 1L;{
-			put("k1", new LoremIpsum().getWords(30));
-			put("k2", new LoremIpsum().getWords(30));
-			put("k3", new LoremIpsum().getWords(30));
-	}};
-
-	@Override
-	public Collection&lt;String&gt; getTextCollection() {
-		return this.map.values();
-	}
-
-	@Override
-	public String getText() {
-		return null;
-	}
-};
-
-ParagraphContext pc = new ParagraphContext();
-pc.setWidth(50);
-
-AsciiParagraph ap = new AsciiParagraph(pc);
-ap.addText(textProvider);
-
-System.out.println(ap.render());</pre>
+<pre>"line 1&lt;br&gt;"
+"line 2&lt;br/&gt;"
+"line three \n still line three"</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The output is a single paragraph with including all map values.</p>
+<p>will render to</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>Lorem ipsum dolor sit amet, consetetur  sadipscing
-elitr, sed diam nonumy eirmod tempor  invidunt  ut
-labore et dolore magna  aliquyam  erat,  sed  diam
-voluptua. At vero eos et accusam  et  Lorem  ipsum
-dolor sit amet, consetetur sadipscing  elitr,  sed
-diam nonumy eirmod tempor invidunt  ut  labore  et
-dolore magna aliquyam erat, sed diam voluptua.  At
-vero eos et accusam et Lorem ipsum dolor sit amet,
-consetetur  sadipscing  elitr,  sed  diam   nonumy
-eirmod tempor invidunt ut labore et  dolore  magna
-aliquyam erat, sed diam voluptua. At vero  eos  et
-accusam et</pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_object_with_a_render_method">Object with a render method</h5>
-<div class="paragraph">
-<p>The next option is to add an object that implements a method render, which takes no arguments and returns a string.
-For instance, the StringTemplate package has an object ST with a render method (see <a href="http://www.stringtemplate.org/" class="bare">http://www.stringtemplate.org/</a>).
-Other objects with render methods are the ASCII List (see <a href="https://github.com/vdmeer/asciilist" class="bare">https://github.com/vdmeer/asciilist</a>) and ASCII Table (see <a href="https://github.com/vdmeer/asciitable" class="bare">https://github.com/vdmeer/asciitable</a>) objects.</p>
-</div>
-<div class="paragraph">
-<p>If an object is added, then the paragraphs add method will use reflection to look for the described render method.
-If it exists, the returned string will be added to the paragraph.
-The following example shows an inline StringTemplate object with some text.
-The example also uses the toString method on the ST to show the difference.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>ST st = new ST("An object with a render method, which will be found and used to add text");
-AsciiParagraph ap = new AsciiParagraph();
-ap.addText(st);
-System.out.println(ap.render());
-
-System.out.println(st);</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The output of the paragraph rendering is the text in the template</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>An object with a render method, which will be found and used to add text</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The output of the template itself using toString is very different (some information about the template in fact).</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>anonymous()</pre>
-</div>
+<pre>line 1
+line 2
+line three still line three</pre>
 </div>
 </div>
 </div>
@@ -1286,7 +1143,7 @@ System.out.println(st);</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-03-01 02:57:27 GMT
+Last updated 2016-03-24 01:42:38 GMT
 </div>
 </div>
 </body>

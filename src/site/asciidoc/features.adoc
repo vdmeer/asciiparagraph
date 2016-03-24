@@ -1,0 +1,16 @@
+Features
+--------
+A paragraph offers some flexibility for rendering. Options are:
+
+* Add text as string, collection of strings, using an object implementing HasText, or an object providing a method render
+* Remove all additional whitespaces (tabulators, extra spaces, line feed, carriage return)
+* Set the paragraphs alignment: justified, justified right (last line right bound) centered, left, or right
+* Set width of text lines in the paragraph
+* Set left padding (number of characters to print) as well as a specific character for left padding
+* Set right padding (number of characters to print) as well as a specific character for right padding
+* Set an indentation for the paragraph
+* Set a string inserted at the beginning of each line
+* Set a string appended at the end of each line
+* Some extra methods to calculate paragraph width
+
+

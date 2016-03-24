@@ -17,6 +17,10 @@ package de.vandermeer.asciiparagraph;
 
 import org.apache.commons.lang3.Validate;
 
+import de.vandermeer.asciiparagraph.dropcaps.DropCaps;
+import de.vandermeer.asciiparagraph.dropcaps.FigletRoman;
+import de.vandermeer.skb.interfaces.categories.is.IsObjectContext;
+
 /**
  * Context for an {@link AsciiParagraph}.
  *
@@ -24,53 +28,66 @@ import org.apache.commons.lang3.Validate;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.1
  */
-public class AP_Context {
+public class AP_Context implements IsObjectContext {
 
-	/** Paragraph alignment. */
-	protected AP_Alignment alignment;
+	/** Paragraph alignment, default is {@link AP_Alignment#JUSTIFIED_LEFT}. */
+	protected AP_Alignment alignment = AP_Alignment.JUSTIFIED_LEFT;
 
-	/** Left padding, spaces for each line on the left side, changes width. */
-	protected int paddingLeft;
+	/** Paragraph format, default is {@link  = AP_Format#NONE}. */
+	protected AP_Format format = AP_Format.NONE;
 
-	/** Right padding, spaces for each line on the right side, changes width. */
-	protected int paddingRight;
+	/** Left padding, spaces for each line on the left side, changes width, default is `0`. */
+	protected int paddingLeft = 0;
 
-	/** Paragraph indentation, does not change the paragraph width. */
-	protected int indentation;
+	/** Right padding, spaces for each line on the right side, changes width, default is `0`. */
+	protected int paddingRight = 0;
 
-	/** Added empty lines at the end of the paragraph. */
-	protected int addLines;
+	/** Paragraph indentation, does not change the paragraph width, default is `0`. */
+	protected int indentation = 0;
 
-	/** The width of the paragraph, actual width depends on padding settings. */
-	protected int width;
+	/** Added empty lines at the end of the paragraph, default is `1`. */
+	protected int addLines = 1;
 
-	/** The character to be used for left padding. */
-	protected char leftPaddingChar;
+	/** The width of the paragraph, actual width depends on padding settings, default is `80`. */
+	protected int width = 80;
 
-	/** The character to be used for right padding. */
-	protected char rightPaddingChar;
+	/** The character to be used for left padding, default is simple blank. */
+	protected char leftPaddingChar = ' ';
 
-	/** The character to be used for indentation. */
-	protected char IndentationChar;
+	/** The character to be used for right padding, default is simple blank. */
+	protected char rightPaddingChar = ' ';
 
-	/** A string to be inserted at the start of each text line. */
-	protected String lineStart;
+	/** The character to be used for indentation, default is simple blank. */
+	protected char IndentationChar = ' ';
 
-	/** A string to be inserted at the end of each text line. */
-	protected String lineEnd;
+	/** A string to be inserted at the start of each text line, default is `null`. */
+	protected String lineStart = null;
 
-	/** The character to be used for in-line white spaces. */
-	protected char inlineWS;
+	/** A string to be inserted at the end of each text line, default is `null`. */
+	protected String lineEnd = null;
 
-	/** The renderer for this context, default is {@link AP_Renderer}. */
-	protected AP_Renderer renderer = AP_Renderer.create();
+	/** The character to be used for in-line white spaces, default is simple blank. */
+	protected char inlineWS = ' ';
+
+	/** The renderer for this context, default is {@link AP_Renderer#create()}. */
+	protected AP_Renderer renderer = AP_Renderer.create();;
+
+	/** Number of characters used for indentation of the first line, default is `4`. */
+	protected int firstLineIndent = 4;
+
+	/** Number of characters used for a hanging paragraph, default is `4`. */
+	protected int hangingIndent = 4;
+
+	/** A library of dropped capital letters, default is {@link FigletRoman}. */
+	protected DropCaps dropCapLib = new FigletRoman();
 
 	/**
 	 * Creates a new paragraph context with default settings.
 	 * The default values are as follows:
 	 * 
 	 * - Width: 80
-	 * - Alignment: justified
+	 * - Alignment: justified, last line left aligned
+	 * - Format: none
 	 * - Indentation: 0
 	 * - Indentation character: ' ' (space)
 	 * - Left padding: 0
@@ -81,52 +98,13 @@ public class AP_Context {
 	 * - In-line whitespace character: ' ' (space)
 	 * - Line start: null
 	 * - Line end: null
+	 * - First line indentation: 4
+	 * - Hanging paragraph indentation: 4
+	 * - Renderer: {@link AP_Renderer#create()}
+	 * - DropCap library: {@link FigletRoman}
 	 * 
 	 */
-	public AP_Context(){
-		this.alignment = AP_Alignment.JUSTIFIED;
-		this.paddingLeft = 0;
-		this.paddingRight = 0;
-		this.addLines = 1;
-		this.width = 80;
-		this.leftPaddingChar = ' ';
-		this.rightPaddingChar = ' ';
-		this.inlineWS = ' ';
-		this.indentation = 0;
-		this.IndentationChar = ' ';
-		this.lineStart = null;
-		this.lineEnd = null;
-	}
-
-	/**
-	 * Sets the width of the paragraph using all possible impacting settings.
-	 * Beside padding (which is already calculated against the width),
-	 * this includes the indentation (if larger than 0) and the length of start/end strings (if set).
-	 * @return this to allow chaining
-	 * @throws IllegalArgumentException if the resulting width does not allow for at least 3 characters of text per line
-	 */
-	public AP_Context calculateWidthInclusive(){
-		int minus = this.indentation;
-		if(this.lineStart!=null){
-			minus += this.lineStart.length();
-		}
-		if(this.lineEnd!=null){
-			minus += this.lineEnd.length();
-		}
-		int width = this.getActualWidth() - minus;
-		Validate.isTrue(width>=3, "calculating an inclusive width and the result is less than 3");
-		this.width = width;
-
-		return this;
-	}
-
-	/**
-	 * Returns the actual paragraph width, 
-	 * @return the actual paragraph width is the width minus left padding minus right padding
-	 */
-	public int getActualWidth(){
-		return this.width-this.paddingLeft-this.paddingRight;
-	}
+	public AP_Context(){}
 
 	/**
 	 * Returns the number of added empty lines.
@@ -142,6 +120,38 @@ public class AP_Context {
 	 */
 	public AP_Alignment getAlignment(){
 		return this.alignment;
+	}
+
+	/**
+	 * Returns the set dropped capital letter library.
+	 * @return dropped capital letter library, null if none set
+	 */
+	public DropCaps getDropCapLib() {
+		return dropCapLib;
+	}
+
+	/**
+	 * Returns the number of characters used for first line indentation.
+	 * @return number of characters
+	 */
+	public int getFirstLineIndent() {
+		return firstLineIndent;
+	}
+
+	/**
+	 * Returns the paragraph format.
+	 * @return paragraph format
+	 */
+	public AP_Format getFormat() {
+		return format;
+	}
+
+	/**
+	 * Returns the number of characters used for a hanging paragraph.
+	 * @return number of characters
+	 */
+	public int getHangingIndent() {
+		return hangingIndent;
 	}
 
 	/**
@@ -253,6 +263,54 @@ public class AP_Context {
 	public AP_Context setAlignment(AP_Alignment alignment){
 		Validate.notNull(alignment);
 		this.alignment = alignment;
+		return this;
+	}
+
+	/**
+	 * Sets the set dropped capital letter library.
+	 * @param dropCapLib capital letter library, only used if not null
+	 * @return this to allow chaining
+	 */
+	public AP_Context setDropCapLib(DropCaps dropCapLib) {
+		if(dropCapLib!=null){
+			this.dropCapLib = dropCapLib;
+		}
+		return this;
+	}
+
+	/**
+	 * Sets the number of characters used for first line indentation.
+	 * @param number of characters, only used if positive integer
+	 * @return this to allow chaining
+	 */
+	public AP_Context setFirstLineIndent(int firstLineIndent) {
+		if(firstLineIndent>0){
+			this.firstLineIndent = firstLineIndent;
+		}
+		return this;
+	}
+
+	/**
+	 * Sets the paragraph format.
+	 * @param paragraph format, ignored if null
+	 * @return this to allow chaining
+	 */
+	public AP_Context setFormat(AP_Format format) {
+		if(format!=null){
+			this.format = format;
+		}
+		return this;
+	}
+
+	/**
+	 * Sets the number of characters used for a hanging paragraph.
+	 * @param number of characters, only used if positive integer
+	 * @return this to allow chaining
+	 */
+	public AP_Context setHanging(int hanging) {
+		if(hanging>0){
+			this.hangingIndent = hanging;
+		}
 		return this;
 	}
 

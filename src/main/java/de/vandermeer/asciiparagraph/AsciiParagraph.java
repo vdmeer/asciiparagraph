@@ -15,16 +15,18 @@
 
 package de.vandermeer.asciiparagraph;
 
-import java.lang.reflect.Method;
 import java.util.Collection;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.text.StrBuilder;
+import org.stringtemplate.v4.ST;
 
 import de.vandermeer.skb.interfaces.ClusterElementTransformer;
 import de.vandermeer.skb.interfaces.categories.does.DoesRender;
+import de.vandermeer.skb.interfaces.categories.does.DoesRenderToWidth;
 import de.vandermeer.skb.interfaces.categories.does.RendersToCluster;
+import de.vandermeer.skb.interfaces.categories.does.RendersToClusterWidth;
 import de.vandermeer.skb.interfaces.categories.has.HasText;
 import de.vandermeer.skb.interfaces.categories.has.HasTextCluster;
 import de.vandermeer.skb.interfaces.categories.is.strategies.collections.list.ArrayListStrategy;
@@ -37,7 +39,7 @@ import de.vandermeer.skb.interfaces.categories.is.transformers.StrBuilder_To_Str
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.1
  */
-public class AsciiParagraph implements DoesRender, RendersToCluster {
+public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToCluster, RendersToClusterWidth {
 
 	/** The paragraph context with optional settings for the paragraph. */
 	protected AP_Context ctx;
@@ -106,6 +108,42 @@ public class AsciiParagraph implements DoesRender, RendersToCluster {
 	 * throws NullPointerException if the argument was null or if the object did only provide null as text
 	 * throws IllegalArgumentException if any text provided was blank
 	 */
+	public AsciiParagraph addText(DoesRender object){
+		Validate.notNull(object);
+
+		String text = object.render();
+		if(StringUtils.isNotBlank(text)){
+			return this.addText(text);
+		}
+
+		throw new IllegalArgumentException("DoesRender provider did not provide any text");
+	}
+
+	/**
+	 * Adds text to the paragraph provided by the input object.
+	 * @param object a string template providing text for the paragraph
+	 * @return this to allow chaining
+	 * throws NullPointerException if the argument was null or if the object did only provide null as text
+	 * throws IllegalArgumentException if any text provided was blank
+	 */
+	public AsciiParagraph addText(ST object){
+		Validate.notNull(object);
+
+		String text = object.render();
+		if(StringUtils.isNotBlank(text)){
+			return this.addText(text);
+		}
+
+		throw new IllegalArgumentException("ST provider did not provide any text");
+	}
+
+	/**
+	 * Adds text to the paragraph provided by the input object.
+	 * @param object an object providing text for the paragraph
+	 * @return this to allow chaining
+	 * throws NullPointerException if the argument was null or if the object did only provide null as text
+	 * throws IllegalArgumentException if any text provided was blank
+	 */
 	public AsciiParagraph addText(HasTextCluster object){
 		Validate.notNull(object);
 
@@ -121,10 +159,31 @@ public class AsciiParagraph implements DoesRender, RendersToCluster {
 	}
 
 	/**
+	 * Adds text to the paragraph provided by the input object.
+	 * @param object an object providing text for the paragraph
+	 * @return this to allow chaining
+	 * throws NullPointerException if the argument was null or if the object did only provide null as text
+	 * throws IllegalArgumentException if any text provided was blank
+	 */
+	public AsciiParagraph addText(RendersToCluster object){
+		Validate.notNull(object);
+
+		Collection<String> collection = object.renderAsCollection();
+		if(collection!=null){
+			for(String s : collection){
+				if(s!=null){
+					this.addText(s);
+				}
+			}
+			return this;
+		}
+
+		throw new IllegalArgumentException("RendersToCluster provider did not provide any text");
+	}
+
+	/**
 	 * Adds text to the paragraph.
-	 * The method uses reflection to look for a method render without any parameters.
-	 * If found, the result of this method will be used as text.
-	 * Otherwise the object's toString method is used. 
+	 * Uses the object `toString` method.
 	 * @param text text to be added to the paragraph
 	 * @return this to allow chaining
 	 * throws NullPointerException if the argument was null
@@ -136,20 +195,6 @@ public class AsciiParagraph implements DoesRender, RendersToCluster {
 		if(text instanceof String){
 			return this.addText((String)text);
 		}
-
-		try{
-			Class<? extends Object> clazz = text.getClass();
-			Method method = clazz.getMethod("render", new Class[0]);
-			Class<?> returnType = method.getReturnType();
-			if(returnType.isAssignableFrom(String.class)){
-				String append = (String)method.invoke(text);
-				return this.addText(append);
-			}
-		}
-		catch(Exception ignore){
-//			ignore.printStackTrace();
-		}
-
 		return this.addText(text.toString());
 	}
 
@@ -199,7 +244,7 @@ public class AsciiParagraph implements DoesRender, RendersToCluster {
 	@Override
 	public Collection<String> renderAsCollection() {
 		return ClusterElementTransformer.create().transform(
-				this.ctx.getRenderer().render(this),
+				this.ctx.getRenderer().renderToTextWidth(this),
 				StrBuilder_To_String.create(),
 				ArrayListStrategy.create()
 		);
@@ -207,6 +252,26 @@ public class AsciiParagraph implements DoesRender, RendersToCluster {
 
 	@Override
 	public String render() {
-		return new StrBuilder().appendWithSeparators(this.ctx.getRenderer().render(this), "\n").toString();
+		return new StrBuilder().appendWithSeparators(this.ctx.getRenderer().renderToTextWidth(this), "\n").toString();
+	}
+
+	/**
+	 * Renders to given width using {@link AP_Renderer#renderToAllInclusiveWidth(AsciiParagraph, int)}.
+	 * @param width the width to be used for rendering
+	 * @return rendered paragraph
+	 * 
+	 */
+	@Override
+	public String render(int width) {
+		return new StrBuilder().appendWithSeparators(this.ctx.getRenderer().renderToAllInclusiveWidth(this, width), "\n").toString();
+	}
+
+	@Override
+	public Collection<String> renderAsCollection(int width) {
+		return ClusterElementTransformer.create().transform(
+				this.ctx.getRenderer().renderToAllInclusiveWidth(this, width),
+				StrBuilder_To_String.create(),
+				ArrayListStrategy.create()
+		);
 	}
 }

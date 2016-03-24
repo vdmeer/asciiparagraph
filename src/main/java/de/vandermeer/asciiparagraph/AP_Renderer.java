@@ -26,6 +26,9 @@ import de.vandermeer.skb.interfaces.categories.is.transformers.arrays2d.Object_T
 import de.vandermeer.skb.interfaces.categories.is.transformers.stringformats.StringAr_To_Centered;
 import de.vandermeer.skb.interfaces.categories.is.transformers.stringformats.StringAr_To_Justified;
 import de.vandermeer.skb.interfaces.categories.is.transformers.stringformats.StringAr_To_LeftPadded;
+import de.vandermeer.skb.interfaces.categories.is.transformers.stringformats.StringAr_To_ParaDroppedCap;
+import de.vandermeer.skb.interfaces.categories.is.transformers.stringformats.StringAr_To_ParaFirstline;
+import de.vandermeer.skb.interfaces.categories.is.transformers.stringformats.StringAr_To_ParaHanging;
 import de.vandermeer.skb.interfaces.categories.is.transformers.stringformats.StringAr_To_RightPadded;
 
 /**
@@ -44,42 +47,204 @@ public interface AP_Renderer {
 	static char TMP_PADDING_RIGHT = 'Ɍ';
 
 	/**
-	 * Renders an {@link AsciiParagraph}.
+	 * Renders an {@link AsciiParagraph} using the width set in the context.
+	 * Each line will have text according to the width from the context.
+	 * Any indentation, padding (left or right), and start/end strings will add to the line width.
 	 * @param ap the paragraph to render
 	 * @return collection of lines, each as a {@link StrBuilder}
 	 */
-	default Collection<StrBuilder> render(AsciiParagraph ap) {
+	default Collection<StrBuilder> renderToTextWidth(AsciiParagraph ap){
+		return this.render(ap, ap.getContext().getWidth());
+	}
+
+	/**
+	 * Renders an {@link AsciiParagraph} using the given width.
+	 * Any indentation, padding (left or right), and start/end strings will add to the line width.
+	 * @param width the width of text in the paragraph
+	 * @param ap the paragraph to render
+	 * @return collection of lines, each as a {@link StrBuilder}
+	 */
+	default Collection<StrBuilder> renderToTextWidth(AsciiParagraph ap, int width){
+		return this.render(ap, width);
+	}
+
+	/**
+	 * Renders an {@link AsciiParagraph} using a calculated width based on context settings.
+	 * Each line will have text to the width minus any indentation minus any padding character (left and/or right of the text).
+	 * Any start/end strings will add to the line width.
+	 * @param ap the paragraph to render
+	 * @return collection of lines, each as a {@link StrBuilder}
+	 */
+	default Collection<StrBuilder> renderToPaddingWidth(AsciiParagraph ap){
+		int width = ap.getContext().getWidth() - ap.getContext().getIndentation();
+		width -= ap.getContext().getPaddingLeft() - ap.getContext().getPaddingRight();
+		return this.render(ap, width);
+	}
+
+	/**
+	 * Renders an {@link AsciiParagraph} using a calculated width based on context settings.
+	 * Each line will have text to the width minus any indentation minus any padding character (left and/or right of the text).
+	 * Any start/end strings will add to the line width.
+	 * @param ap the paragraph to render
+	 * @param width the width of text and padding in the paragraph
+	 * @return collection of lines, each as a {@link StrBuilder}
+	 */
+	default Collection<StrBuilder> renderToPaddingWidth(AsciiParagraph ap, int width){
+		int w = width - ap.getContext().getIndentation();
+		w -= ap.getContext().getPaddingLeft() - ap.getContext().getPaddingRight();
+		return this.render(ap, w);
+	}
+
+	/**
+	 * Renders an {@link AsciiParagraph} using a calculated width based on context settings.
+	 * Each line will have text to the width minus any indentation minus any padding character (left and/or right of the text) minus the start string length.
+	 * Any end strings will add to the line width.
+	 * @param ap the paragraph to render
+	 * @return collection of lines, each as a {@link StrBuilder}
+	 */
+	default Collection<StrBuilder> renderToStartStringWidth(AsciiParagraph ap){
+		int width = ap.getContext().getWidth() - ap.getContext().getIndentation();
+		width -= ap.getContext().getPaddingLeft() - ap.getContext().getPaddingRight();
+		width -= (ap.getContext().getLineStart()==null)?0:ap.getContext().getLineStart().length();
+		return this.render(ap, width);
+	}
+
+	/**
+	 * Renders an {@link AsciiParagraph} using a calculated width based on context settings.
+	 * Each line will have text to the width minus any indentation minus any padding character (left and/or right of the text) minus the start string length.
+	 * Any end strings will add to the line width.
+	 * @param width the width of text and padding in the paragraph and start string
+	 * @param ap the paragraph to render
+	 * @return collection of lines, each as a {@link StrBuilder}
+	 */
+	default Collection<StrBuilder> renderToStartStringWidth(AsciiParagraph ap, int width){
+		int w = width - ap.getContext().getIndentation();
+		w -= ap.getContext().getPaddingLeft() - ap.getContext().getPaddingRight();
+		w -= (ap.getContext().getLineStart()==null)?0:ap.getContext().getLineStart().length();
+		return this.render(ap, w);
+	}
+
+	/**
+	 * Renders an {@link AsciiParagraph} using a calculated width based on context settings.
+	 * Each line will have text to the width minus any indentation minus any padding character (left and/or right of the text) minus the end string length.
+	 * Any start strings will add to the line width.
+	 * @param ap the paragraph to render
+	 * @return collection of lines, each as a {@link StrBuilder}
+	 */
+	default Collection<StrBuilder> renderToEndStringWidth(AsciiParagraph ap){
+		int width = ap.getContext().getWidth() - ap.getContext().getIndentation();
+		width -= ap.getContext().getPaddingLeft() - ap.getContext().getPaddingRight();
+		width -= (ap.getContext().getLineEnd()==null)?0:ap.getContext().getLineEnd().length();
+		return this.render(ap, width);
+	}
+
+	/**
+	 * Renders an {@link AsciiParagraph} using a calculated width based on context settings.
+	 * Each line will have text to the width minus any indentation minus any padding character (left and/or right of the text) minus the end string length.
+	 * Any start strings will add to the line width.
+	 * @param width the width of text and padding in the paragraph and end string
+	 * @param ap the paragraph to render
+	 * @return collection of lines, each as a {@link StrBuilder}
+	 */
+	default Collection<StrBuilder> renderToEndStringWidth(AsciiParagraph ap, int width){
+		int w = width - ap.getContext().getIndentation();
+		w -= ap.getContext().getPaddingLeft() - ap.getContext().getPaddingRight();
+		w -= (ap.getContext().getLineEnd()==null)?0:ap.getContext().getLineEnd().length();
+		return this.render(ap, w);
+	}
+
+	/**
+	 * Renders an {@link AsciiParagraph} using a calculated width based on context settings.
+	 * Each line will have text to the width minus any indentation minus any padding character (left and/or right of the text) minus the start string length minus the end string length.
+	 * @param ap the paragraph to render
+	 * @return collection of lines, each as a {@link StrBuilder}
+	 */
+	default Collection<StrBuilder> renderToAllInclusiveWidth(AsciiParagraph ap){
+		int width = ap.getContext().getWidth() - ap.getContext().getIndentation();
+		width -= ap.getContext().getPaddingLeft() - ap.getContext().getPaddingRight();
+		width -= (ap.getContext().getLineStart()==null)?0:ap.getContext().getLineStart().length();
+		width -= (ap.getContext().getLineEnd()==null)?0:ap.getContext().getLineEnd().length();
+		return this.render(ap, width);
+	}
+
+	/**
+	 * Renders an {@link AsciiParagraph} using a calculated width based on context settings.
+	 * Each line will have text to the width minus any indentation minus any padding character (left and/or right of the text) minus the start string length minus the end string length.
+	 * @param width all inclusive width
+	 * @param ap the paragraph to render
+	 * @return collection of lines, each as a {@link StrBuilder}
+	 */
+	default Collection<StrBuilder> renderToAllInclusiveWidth(AsciiParagraph ap, int width){
+		int w = width - ap.getContext().getIndentation();
+		w -= ap.getContext().getPaddingLeft() - ap.getContext().getPaddingRight();
+		w -= (ap.getContext().getLineStart()==null)?0:ap.getContext().getLineStart().length();
+		w -= (ap.getContext().getLineEnd()==null)?0:ap.getContext().getLineEnd().length();
+		return this.render(ap, w);
+	}
+
+	/**
+	 * Renders an {@link AsciiParagraph}.
+	 * Each line will have text according to width.
+	 * Any padding (left or right) and start/end strings will add to the line width.
+	 * To use a calculated width for rendering use one of the other render methods.
+	 * @param ap the paragraph to render
+	 * @param width maximum line width, excluding any extra strings and paddings
+	 * @return collection of lines, each as a {@link StrBuilder}
+	 */
+	default Collection<StrBuilder> render(AsciiParagraph ap, int width) {
 		Validate.notNull(ap);
 
 		//remove all extra white spaces (more than one space, tabs, LF, CR, CR+LF
 		String text = ap.getText().toString().replaceAll("\\s+", " ");
 
 		AP_Context ctx = ap.getContext();
+		String[] textAr = Object_To_ColumnContentArray.convert(text, width);
 
-		int actualWidth = ctx.getActualWidth();
-
-		String[] textAr = Object_To_ColumnContentArray.convert(text, actualWidth);
+		switch(ctx.getFormat()){
+			case DROPCAP:
+				textAr = StringAr_To_ParaDroppedCap.convert(
+						textAr, width,
+						ctx.getDropCapLib().getDropCap(text.charAt(0)),
+						false, true, TMP_PADING_LEFT
+				);
+				break;
+			case DROPCAP_WITH_PADDING:
+				textAr = StringAr_To_ParaDroppedCap.convert(
+						textAr, width,
+						ctx.getDropCapLib().getDropCap(text.charAt(0)),
+						true, true, TMP_PADING_LEFT
+				);
+				break;
+			case FIRST_LINE:
+				textAr = StringAr_To_ParaFirstline.convert(textAr, width, ctx.getFirstLineIndent(), TMP_PADING_LEFT);
+				break;
+			case HANGING:
+				textAr = StringAr_To_ParaHanging.convert(textAr, width, ctx.getHangingIndent(), TMP_PADING_LEFT);
+				break;
+			case NONE:
+				break;
+		}
 
 		Collection<StrBuilder> ret = null;
 		IsCollectionStrategy<?, StrBuilder> collStrat = ArrayListStrategy.create();
 		switch(ctx.getAlignment()){
 			case CENTER:
-				ret = StringAr_To_Centered.convert(textAr, actualWidth, TMP_PADING_LEFT, TMP_PADDING_RIGHT, collStrat);
+				ret = StringAr_To_Centered.convert(textAr, width, TMP_PADING_LEFT, TMP_PADDING_RIGHT, collStrat);
 				break;
 			case LEFT:
-				ret = StringAr_To_LeftPadded.convert(textAr, actualWidth, TMP_PADDING_RIGHT, collStrat);
+				ret = StringAr_To_LeftPadded.convert(textAr, width, TMP_PADDING_RIGHT, collStrat);
 				break;
 			case RIGHT:
-				ret = StringAr_To_RightPadded.convert(textAr, actualWidth, TMP_PADING_LEFT, collStrat);
+				ret = StringAr_To_RightPadded.convert(textAr, width, TMP_PADING_LEFT, collStrat);
 				break;
 			case JUSTIFIED:
-				ret = StringAr_To_Justified.convert(textAr, actualWidth, collStrat);
+				ret = StringAr_To_Justified.convert(textAr, width, collStrat);
 				break;
 			case JUSTIFIED_RIGHT:
-				ret = StringAr_To_Justified.convertLastRight(textAr, actualWidth, TMP_PADING_LEFT, collStrat);
+				ret = StringAr_To_Justified.convertLastRight(textAr, width, TMP_PADING_LEFT, collStrat);
 				break;
 			case JUSTIFIED_LEFT:
-				ret = StringAr_To_Justified.convertLastLeft(textAr, actualWidth, TMP_PADDING_RIGHT, collStrat);
+				ret = StringAr_To_Justified.convertLastLeft(textAr, width, TMP_PADDING_RIGHT, collStrat);
 				break;
 		}
 
@@ -94,13 +259,8 @@ public interface AP_Renderer {
 			//now change all temporary right padding characters to the actual right padding character
 			int index = sb.size()-1;
 			while(sb.lastIndexOf(TMP_PADDING_RIGHT)==index){
-				sb.replace(index, sb.size(), new String() + ctx.getRightPaddingChar());
+				sb.replace(index, index+1, new String() + ctx.getRightPaddingChar());
 				index--;
-			}
-
-			//now adjust the length of the line to be width (i.e. show right padding)
-			while(sb.size()<ctx.getWidth()){
-				sb.append(ctx.getRightPaddingChar());
 			}
 
 			//now change all temporary left padding characters to the actual left padding character
@@ -108,6 +268,11 @@ public interface AP_Renderer {
 			while(sb.charAt(index)==TMP_PADING_LEFT){
 				sb.replace(index, index+1, new String() + ctx.getLeftPaddingChar());
 				index++;
+			}
+
+			// we changed drop cap blanks, so remove the temporary ws here as well
+			if(ctx.getFormat()==AP_Format.DROPCAP || ctx.getFormat()==AP_Format.DROPCAP_WITH_PADDING){
+				sb.replaceAll(TMP_PADING_LEFT, ' ');
 			}
 
 			//now add the indentation to the line

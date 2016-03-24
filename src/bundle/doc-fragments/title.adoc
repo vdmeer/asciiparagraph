@@ -1,0 +1,4 @@
+= ASCII Paragraph
+:page-layout: base
+:toc: preamble
+
