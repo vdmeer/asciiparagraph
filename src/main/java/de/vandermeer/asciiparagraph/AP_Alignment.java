@@ -24,11 +24,14 @@ package de.vandermeer.asciiparagraph;
  */
 public enum AP_Alignment {
 
-	/** Option for a justified alignment, last line left bound. */
+	/** Option for a justified alignment. */
 	JUSTIFIED,
 
-	/** Option for a justified alignment, last line right bound. */
+	/** Option for a justified alignment, last line right aligned. */
 	JUSTIFIED_RIGHT,
+
+	/** Option for a justified alignment, last line left left aligned. */
+	JUSTIFIED_LEFT,
 
 	/** Option for paragraph alignment left. */
 	LEFT,

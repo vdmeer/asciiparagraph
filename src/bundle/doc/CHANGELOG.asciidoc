@@ -1,14 +1,16 @@
-v0.0.3 - feature add - 2016-03-##
----------------------------------
-* changed/improved documentaion
-* refactoring
-  ** ParagraphContext -> AP_Context
-  ** TextAlign -> AP_Alignment
-* added a paragrap renderer +AP_Renderer+ interface
-  ** added set/get to AP_Context
-  ** created standard renderer class and moved existing render methods from AsciiParagraph there
-* sorted members in all classes
-* added skb-interfaces dependencies and moved hasText to skb-interfaces (plus further refactoring)
+v0.0.3 - major rewrite (existing code will break) - 2016-03-##
+--------------------------------------------------------------
+* changed code to use Java 8
+* interfaces now have default implementations, abstract classes removed
+* using `skb-interfaces` package, some functionality changed
+* added first line formatting
+* added hanging paragraph formatting
+* added dropped capital letter formatting
+* improved documentation, now using AsciiDoctor
+* changed test behavior - added examples using `skb-interfaces`
+* changed justified alignment behavior
+  ** justified now means all lines are justified
+  ** added justified left for last line being left aligned
 
 
 v0.0.2 - maintenance - 2016-03-01

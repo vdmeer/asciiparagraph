@@ -22,19 +22,24 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.text.StrBuilder;
 
+import de.vandermeer.skb.interfaces.ClusterElementTransformer;
+import de.vandermeer.skb.interfaces.categories.does.DoesRender;
+import de.vandermeer.skb.interfaces.categories.does.RendersToCluster;
 import de.vandermeer.skb.interfaces.categories.has.HasText;
 import de.vandermeer.skb.interfaces.categories.has.HasTextCluster;
+import de.vandermeer.skb.interfaces.categories.is.strategies.collections.list.ArrayListStrategy;
+import de.vandermeer.skb.interfaces.categories.is.transformers.StrBuilder_To_String;
 
 /**
- * Create and render a paragraph for text with ASCII and UTF-8 characters.
+ * An ASCII paragraph with some formatting options.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.1
  */
-public class AsciiParagraph {
+public class AsciiParagraph implements DoesRender, RendersToCluster {
 
-	/** The context with optional settings for the paragraph. */
+	/** The paragraph context with optional settings for the paragraph. */
 	protected AP_Context ctx;
 
 	/** The paragraph text. */
@@ -50,19 +55,19 @@ public class AsciiParagraph {
 	/**
 	 * Creates a new paragraph.
 	 * @param ctx context for the paragraph
-	 * @throws NullPointerException if the argument was null
+	 * @throws NullPointerException if the context was null
 	 */
 	public AsciiParagraph(AP_Context ctx){
+		Validate.notNull(ctx);
 		this.setContext(ctx);
 		this.text = new StrBuilder(100);
 	}
 
 	/**
-	 * Adds text to the paragraph from a collection of object.
+	 * Adds text to the paragraph from a collection of objects.
 	 * From each member of the collection, the toString method will be used to generate text.
-	 * Any newline in any text will be removed.
 	 * @param text collection of objects with text
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 * throws NullPointerException if the argument was null or had null elements
 	 * throws IllegalArgumentException if any text to be added was blank
 	 */
@@ -79,7 +84,7 @@ public class AsciiParagraph {
 	/**
 	 * Adds text to the paragraph provided by the input object.
 	 * @param object an object providing text for the paragraph
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 * throws NullPointerException if the argument was null or if the object did only provide null as text
 	 * throws IllegalArgumentException if any text provided was blank
 	 */
@@ -97,7 +102,7 @@ public class AsciiParagraph {
 	/**
 	 * Adds text to the paragraph provided by the input object.
 	 * @param object an object providing text for the paragraph
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 * throws NullPointerException if the argument was null or if the object did only provide null as text
 	 * throws IllegalArgumentException if any text provided was blank
 	 */
@@ -121,7 +126,7 @@ public class AsciiParagraph {
 	 * If found, the result of this method will be used as text.
 	 * Otherwise the object's toString method is used. 
 	 * @param text text to be added to the paragraph
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 * throws NullPointerException if the argument was null
 	 * throws IllegalArgumentException if the argument was blank
 	 */
@@ -153,7 +158,7 @@ public class AsciiParagraph {
 	 * If the paragraph already has text a space character will be used to separate existing and added text.
 	 * No further processing on the text is done, we let {@link #render()} deal with all extra whitespace handling.
 	 * @param text text to be added to the paragraph
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 * throws NullPointerException if the argument was null
 	 * throws IllegalArgumentException if the argument was blank
 	 */
@@ -180,23 +185,28 @@ public class AsciiParagraph {
 	}
 
 	/**
-	 * Renders the paragraph, generates a string representation of it using the renderer set in the context.
-	 * All extra white spaces (extra spaces, tabulators, line feed, carriage return, line feed with carriage return) will be removed before the paragraph is rendered.
-	 * @return rendered paragraph
-	 */
-	public String render(){
-		return this.ctx.getRenderer().render(this);
-	}
-
-	/**
 	 * Sets the paragraph context.
-	 * @param ctx context
-	 * @return self to allow chaining
-	 * @throws NullPointerException if the argument was null
+	 * @param ctx context, ignored if null
+	 * @return this to allow chaining
 	 */
 	public AsciiParagraph setContext(AP_Context ctx){
-		Validate.notNull(ctx);
-		this.ctx = ctx;
+		if(ctx!=null){
+			this.ctx = ctx;
+		}
 		return this;
+	}
+
+	@Override
+	public Collection<String> renderAsCollection() {
+		return ClusterElementTransformer.create().transform(
+				this.ctx.getRenderer().render(this),
+				StrBuilder_To_String.create(),
+				ArrayListStrategy.create()
+		);
+	}
+
+	@Override
+	public String render() {
+		return new StrBuilder().appendWithSeparators(this.ctx.getRenderer().render(this), "\n").toString();
 	}
 }

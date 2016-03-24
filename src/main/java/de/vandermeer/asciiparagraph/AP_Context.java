@@ -18,7 +18,7 @@ package de.vandermeer.asciiparagraph;
 import org.apache.commons.lang3.Validate;
 
 /**
- * Context for an {@link AsciiParagraph} with settings such as indentation and alignment.
+ * Context for an {@link AsciiParagraph}.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
@@ -62,26 +62,26 @@ public class AP_Context {
 	/** The character to be used for in-line white spaces. */
 	protected char inlineWS;
 
-	/** The renderer for this context, default is {@link Standard_AP_Renderer}. */
-	protected AP_Renderer renderer = new Standard_AP_Renderer();
+	/** The renderer for this context, default is {@link AP_Renderer}. */
+	protected AP_Renderer renderer = AP_Renderer.create();
 
 	/**
 	 * Creates a new paragraph context with default settings.
 	 * The default values are as follows:
-	 * <ul>
-	 * 		<li>Width: 80</li>
-	 * 		<li>Alignment: justified</li>
-	 * 		<li>Indentation: 0</li>
-	 * 		<li>Indentation character: ' ' (space)</li>
-	 * 		<li>Left padding: 0</li>
-	 * 		<li>Left padding character: ' ' (space)</li>
-	 * 		<li>Right padding: 0</li>
-	 * 		<li>Right padding character: ' ' (space)</li>
-	 * 		<li>Added empty lines: 1</li>
-	 * 		<li>In-line whitespace character: ' ' (space)</li>
-	 * 		<li>Line start: null</li>
-	 * 		<li>Line end: null</li>
-	 * </ul>
+	 * 
+	 * - Width: 80
+	 * - Alignment: justified
+	 * - Indentation: 0
+	 * - Indentation character: ' ' (space)
+	 * - Left padding: 0
+	 * - Left padding character: ' ' (space)
+	 * - Right padding: 0
+	 * - Right padding character: ' ' (space)
+	 * - Added empty lines: 1
+	 * - In-line whitespace character: ' ' (space)
+	 * - Line start: null
+	 * - Line end: null
+	 * 
 	 */
 	public AP_Context(){
 		this.alignment = AP_Alignment.JUSTIFIED;
@@ -100,8 +100,9 @@ public class AP_Context {
 
 	/**
 	 * Sets the width of the paragraph using all possible impacting settings.
-	 * Beside padding (which is already calculated against the width), this includes the indentation (if larger than 0) and the length of start/end strings (if set)
-	 * @return self to allow chaining
+	 * Beside padding (which is already calculated against the width),
+	 * this includes the indentation (if larger than 0) and the length of start/end strings (if set).
+	 * @return this to allow chaining
 	 * @throws IllegalArgumentException if the resulting width does not allow for at least 3 characters of text per line
 	 */
 	public AP_Context calculateWidthInclusive(){
@@ -234,7 +235,7 @@ public class AP_Context {
 	/**
 	 * Sets the number of empty lines that should be added to the paragraph.
 	 * @param addLines number of added lines, only added if 0 or positive
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 */
 	public AP_Context setAddLines(int addLines) {
 		if(addLines>=0){
@@ -247,7 +248,7 @@ public class AP_Context {
 	 * Sets the paragraph alignment.
 	 * @param alignment set alignment
 	 * @throws NullPointerException if the argument was null
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 */
 	public AP_Context setAlignment(AP_Alignment alignment){
 		Validate.notNull(alignment);
@@ -258,7 +259,7 @@ public class AP_Context {
 	/**
 	 * Sets the indentation.
 	 * @param indentation new indentation, must be 0 or positive
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 */
 	public AP_Context setIndentation(int indentation) {
 		if(indentation>=0){
@@ -270,7 +271,7 @@ public class AP_Context {
 	/**
 	 * Sets the indentation character.
 	 * @param indentationChar new indentation character
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 */
 	public AP_Context setIndentationChar(char indentationChar) {
 		IndentationChar = indentationChar;
@@ -280,7 +281,7 @@ public class AP_Context {
 	/**
 	 * Sets the in-line whitespace character.
 	 * @param inlineWS new inline whitespace character
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 */
 	public AP_Context setInlineWS(char inlineWS) {
 		this.inlineWS = inlineWS;
@@ -290,7 +291,7 @@ public class AP_Context {
 	/**
 	 * Sets the padding character for left padding.
 	 * @param leftPaddingChar left padding character
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 */
 	public AP_Context setLeftPaddingChar(char leftPaddingChar) {
 		this.leftPaddingChar = leftPaddingChar;
@@ -300,7 +301,7 @@ public class AP_Context {
 	/**
 	 * Sets the line end string.
 	 * @param lineEnd new line end string, should not be blank
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 * @throws NullPointerException if the argument was null
 	 * @throws IllegalArgumentException if the argument was blank
 	 */
@@ -313,7 +314,7 @@ public class AP_Context {
 	/**
 	 * Sets the line start string.
 	 * @param lineStart new line start string, should not be blank
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 * @throws NullPointerException if the argument was null
 	 * @throws IllegalArgumentException if the argument was blank
 	 */
@@ -326,7 +327,7 @@ public class AP_Context {
 	/**
 	 * Sets the left and right padding for the paragraph.
 	 * @param padding padding, only added if all paddings and width allow for at least 3 characters per line
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 */
 	public AP_Context setPadding(int padding){
 		if((this.width-padding-padding)>=3){
@@ -339,7 +340,7 @@ public class AP_Context {
 	/**
 	 * Sets the left and right padding character.
 	 * @param paddingChar left and right padding character
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 */
 	public AP_Context setPaddingChar(char paddingChar) {
 		this.leftPaddingChar = paddingChar;
@@ -350,7 +351,7 @@ public class AP_Context {
 	/**
 	 * Sets the left padding for the paragraph.
 	 * @param paddingLeft left padding, only added if all paddings and width allow for at least 3 characters per line
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 */
 	public AP_Context setPaddingLeft(int paddingLeft) {
 		if((this.width-paddingLeft-this.paddingRight)>=3){
@@ -362,7 +363,7 @@ public class AP_Context {
 	/**
 	 * Sets the right padding for the paragraph.
 	 * @param paddingRight right padding, only added if all paddings and width allow for at least 3 characters per line
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 */
 	public AP_Context setPaddingRight(int paddingRight) {
 		if((this.width-this.paddingLeft-paddingRight)>=3){
@@ -384,7 +385,7 @@ public class AP_Context {
 	/**
 	 * Sets the padding character for right padding.
 	 * @param rightPaddingChar right padding character
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 */
 	public AP_Context setRightPaddingChar(char rightPaddingChar) {
 		this.rightPaddingChar = rightPaddingChar;
@@ -394,7 +395,7 @@ public class AP_Context {
 	/**
 	 * Sets the paragraph width.
 	 * @param width new width, only added if all paddings and width allow for at least 3 characters per line
-	 * @return self to allow chaining
+	 * @return this to allow chaining
 	 */
 	public AP_Context setWidth(int width) {
 		if((width-this.paddingLeft-this.paddingRight)>=3){
