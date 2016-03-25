@@ -25,7 +25,7 @@ import org.junit.Test;
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.categories.has.HasTextCluster;
+import de.vandermeer.skb.interfaces.render.HasTextCluster;
 
 /**
  * Tests for ASCII Paragraph for code used in documentation.

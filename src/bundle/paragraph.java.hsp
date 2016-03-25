@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local-project language="java" version="4.1.5501" xml-version="3" flavor="j2se">
+  <property name="parse-archive-in-archive" value="false" />
+  <property name="include-injected-dependency" value="true" />
+  <property name="show-as-module" value="false" />
+  <property name="relative-to" value="const(THIS_FILE)" />
+  <property name="action-set-mod" value="1" />
+  <property name="detail-mode" value="true" />
+  <property name="hide-deprecated" value="false" />
+  <property name="project-excluded" />
+  <property name="show-needs-to-compile" value="false" />
+  <property name="project-type" value="maven" />
+  <property name="hide-externals" value="true" />
+  <classpath>
+    <classpathentry kind="lib" path="target/asciiparagraph-0.0.3-SNAPSHOT.jar" />
+    <classpathentry kind="lib" path="target/test-classes" />
+  </classpath>
+  <pom-root-files>
+    <pom path="pom.xml" />
+  </pom-root-files>
+  <excludes>
+    <exclude expression="*.Test*" active="true" />
+    <exclude expression="test-classes.*" active="true" />
+    <exclude expression="test-classes.de.vandermeer.asciiparagraph.examples.?" active="true" />
+  </excludes>
+  <transformations>
+    <transformation in="*" out="{jar}.*" />
+  </transformations>
+  <restructuring>
+    <set version="3" name="Model 1" hiview="Codemap" active="true" todo="false" list="0" />
+  </restructuring>
+  <sourcepaths>
+    <pathentry type="file" path="/mnt/shares/vdm/dev/github/skb-java/ascii/paragraph/src/main/java" />
+  </sourcepaths>
+  <grid-set sep="." version="4.1.5501">
+    <grid name="Diagram 1" enforce="true" locked="true" strict="false" excludes="">
+      <row>
+        <cell name="test-classes" pattern="test-classes.*" vexpanded="false" visibility="public" drill="true" />
+      </row>
+      <row>
+        <cell name="asciiparagraph" pattern="asciiparagraph.*" vexpanded="true" visibility="public" drill="true">
+          <grid>
+            <row>
+              <cell name="asciiparagraph" pattern="asciiparagraph.asciiparagraph-0_0_3-SNAPSHOT.de.vandermeer.asciiparagraph.?" vexpanded="true" visibility="public" drill="false">
+                <grid>
+                  <row>
+                    <cell name="AbstractRenderer" pattern="asciiparagraph.asciiparagraph-0_0_3-SNAPSHOT.de.vandermeer.asciiparagraph.AbstractRenderer" vexpanded="false" visibility="public" drill="false" />
+                  </row>
+                  <row>
+                    <cell name="AsciiParagraph" pattern="asciiparagraph.asciiparagraph-0_0_3-SNAPSHOT.de.vandermeer.asciiparagraph.AsciiParagraph" vexpanded="false" visibility="public" drill="false" />
+                  </row>
+                  <row>
+                    <cell name="AP_Renderer" pattern="asciiparagraph.asciiparagraph-0_0_3-SNAPSHOT.de.vandermeer.asciiparagraph.AP_Renderer" vexpanded="false" visibility="public" drill="false" />
+                  </row>
+                  <row>
+                    <cell name="AP_Context" pattern="asciiparagraph.asciiparagraph-0_0_3-SNAPSHOT.de.vandermeer.asciiparagraph.AP_Context" vexpanded="false" visibility="public" drill="false" />
+                  </row>
+                  <row>
+                    <cell name="AP_Alignment" pattern="asciiparagraph.asciiparagraph-0_0_3-SNAPSHOT.de.vandermeer.asciiparagraph.AP_Alignment" vexpanded="false" visibility="public" drill="false" />
+                    <cell name="AP_Format" pattern="asciiparagraph.asciiparagraph-0_0_3-SNAPSHOT.de.vandermeer.asciiparagraph.AP_Format" vexpanded="false" visibility="public" drill="false" />
+                  </row>
+                </grid>
+              </cell>
+            </row>
+            <row>
+              <cell name="dropcaps" pattern="asciiparagraph.asciiparagraph-0_0_3-SNAPSHOT.de.vandermeer.asciiparagraph.dropcaps.?" vexpanded="false" visibility="public" drill="false" />
+            </row>
+          </grid>
+        </cell>
+      </row>
+      <description>Generated from LSM "Model 1"</description>
+    </grid>
+  </grid-set>
+</local-project>
+

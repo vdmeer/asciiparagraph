@@ -22,15 +22,15 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.text.StrBuilder;
 import org.stringtemplate.v4.ST;
 
-import de.vandermeer.skb.interfaces.ClusterElementTransformer;
-import de.vandermeer.skb.interfaces.categories.does.DoesRender;
-import de.vandermeer.skb.interfaces.categories.does.DoesRenderToWidth;
-import de.vandermeer.skb.interfaces.categories.does.RendersToCluster;
-import de.vandermeer.skb.interfaces.categories.does.RendersToClusterWidth;
-import de.vandermeer.skb.interfaces.categories.has.HasText;
-import de.vandermeer.skb.interfaces.categories.has.HasTextCluster;
-import de.vandermeer.skb.interfaces.categories.is.strategies.collections.list.ArrayListStrategy;
-import de.vandermeer.skb.interfaces.categories.is.transformers.StrBuilder_To_String;
+import de.vandermeer.skb.interfaces.render.DoesRender;
+import de.vandermeer.skb.interfaces.render.DoesRenderToWidth;
+import de.vandermeer.skb.interfaces.render.HasText;
+import de.vandermeer.skb.interfaces.render.HasTextCluster;
+import de.vandermeer.skb.interfaces.render.RendersToCluster;
+import de.vandermeer.skb.interfaces.render.RendersToClusterWidth;
+import de.vandermeer.skb.interfaces.strategies.collections.list.ArrayListStrategy;
+import de.vandermeer.skb.interfaces.transformers.ClusterElementTransformer;
+import de.vandermeer.skb.interfaces.transformers.StrBuilder_To_String;
 
 /**
  * An ASCII paragraph with some formatting options.
@@ -63,6 +63,7 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 		Validate.notNull(ctx);
 		this.setContext(ctx);
 		this.text = new StrBuilder(100);
+//		this.ctx.setRenderer(new AbstractRenderer());
 	}
 
 	/**

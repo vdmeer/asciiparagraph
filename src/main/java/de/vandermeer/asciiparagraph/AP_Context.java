@@ -19,7 +19,7 @@ import org.apache.commons.lang3.Validate;
 
 import de.vandermeer.asciiparagraph.dropcaps.DropCaps;
 import de.vandermeer.asciiparagraph.dropcaps.FigletRoman;
-import de.vandermeer.skb.interfaces.categories.is.IsObjectContext;
+import de.vandermeer.skb.interfaces.objctxt.IsObjectContext;
 
 /**
  * Context for an {@link AsciiParagraph}.
@@ -69,8 +69,8 @@ public class AP_Context implements IsObjectContext {
 	/** The character to be used for in-line white spaces, default is simple blank. */
 	protected char inlineWS = ' ';
 
-	/** The renderer for this context, default is {@link AP_Renderer#create()}. */
-	protected AP_Renderer renderer = AP_Renderer.create();;
+	/** The renderer for this context, default is {@link AbstractRenderer}. */
+	protected AP_Renderer renderer = new AbstractRenderer();
 
 	/** Number of characters used for indentation of the first line, default is `4`. */
 	protected int firstLineIndent = 4;
@@ -100,7 +100,7 @@ public class AP_Context implements IsObjectContext {
 	 * - Line end: null
 	 * - First line indentation: 4
 	 * - Hanging paragraph indentation: 4
-	 * - Renderer: {@link AP_Renderer#create()}
+	 * - Renderer: {@link AbstractRenderer}
 	 * - DropCap library: {@link FigletRoman}
 	 * 
 	 */
