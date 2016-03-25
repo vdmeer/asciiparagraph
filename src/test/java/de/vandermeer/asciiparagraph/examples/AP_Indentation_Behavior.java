@@ -44,11 +44,11 @@ public class AP_Indentation_Behavior implements StandardExample {
 
 		System.out.println(ap.render());
 
-		pc.setIndentation(5);
-		System.out.println(ap.render());
-
-		pc.setIndentation(10);
-		pc.setIndentationChar('˽');
+//		pc.setIndentation(5);
+//		System.out.println(ap.render());
+//
+//		pc.setIndentation(10);
+//		pc.setIndentationChar('˽');
 		System.out.println(ap.render());
 		// end::example[]
 	}

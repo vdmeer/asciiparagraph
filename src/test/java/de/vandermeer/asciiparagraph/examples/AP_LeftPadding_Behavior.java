@@ -44,11 +44,11 @@ public class AP_LeftPadding_Behavior implements StandardExample {
 
 		System.out.println(ap.render());
 
-		pc.setPaddingLeft(10);
+		pc.getMargins().setTextLeft(10);
 		System.out.println(ap.render());
 
-		pc.setPaddingLeft(20);
-		pc.setLeftPaddingChar('-');
+		pc.getMargins().setTextLeft(20);
+		pc.getCharacters().setTextLeft('-');
 		System.out.println(ap.render());
 		// end::example[]
 	}

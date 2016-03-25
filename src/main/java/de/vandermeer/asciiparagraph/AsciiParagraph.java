@@ -63,7 +63,6 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 		Validate.notNull(ctx);
 		this.setContext(ctx);
 		this.text = new StrBuilder(100);
-//		this.ctx.setRenderer(new AbstractRenderer());
 	}
 
 	/**

@@ -518,12 +518,15 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_installation">Installation</a>
 <ul class="sectlevel2">
 <li><a href="#_maven">Maven</a></li>
+<li><a href="#_gradle_grails">Gradle / Grails</a></li>
 </ul>
 </li>
 <li><a href="#_features">Features</a></li>
 <li><a href="#_concepts">Concepts</a>
 <ul class="sectlevel2">
 <li><a href="#_paragraph">Paragraph</a></li>
+<li><a href="#_anatomy_of_a_paragraph">Anatomy of a paragraph</a></li>
+<li><a href="#_summary_of_configurable_characteristics">Summary of configurable  characteristics</a></li>
 <li><a href="#_paragraph_context">Paragraph Context</a></li>
 <li><a href="#_paragraph_renderer">Paragraph Renderer</a></li>
 </ul>
@@ -532,7 +535,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_examples">Examples</a>
 <ul class="sectlevel2">
 <li><a href="#_whitespace_handling">Whitespace handling</a></li>
-<li><a href="#_text_alignment">Text alignment</a></li>
+<li><a href="#_text_alignment_2">Text alignment</a></li>
 <li><a href="#_text_format">Text format</a></li>
 <li><a href="#_width">Width</a></li>
 <li><a href="#_indentation_width_and_character">Indentation (width and character)</a></li>
@@ -564,14 +567,36 @@ table.CodeRay td.code>pre{padding:0}
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Releases on Maven Central</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://search.maven.org/#artifactdetails|de.vandermeer|asciiparagraph|0.0.3-SNAPSHOT|jar">current release 0.0.3-SNAPSHOT</a>,
-  <a href="https://search.maven.org/#search|gav|1|g%3A%22de.vandermeer%22%20AND%20a%3A%22asciiparagraph%22">all releases</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Home page</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.vandermeer.de/project/dev/skb/asciiparagraph">site</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">UTF-8 Howto</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://vdmeer-sven.blogspot.ie/2014/06/utf-8-support-w-java-and-console.html">older blog</a>,
-  <a href="https://github.com/vdmeer/skb/wiki/HowTo-UTF-8-Support-in-Java-and-Console">updated SKB Wiki</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Source repository</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/vdmeer/asciiparagraph/tree/master">Github</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maven Central current release</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://search.maven.org/#artifactdetails|de.vandermeer|asciiparagraph|0.0.3-SNAPSHOT|jar">current release 0.0.3-SNAPSHOT</a>,</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maven Central all releases</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://search.maven.org/#search|gav|1|g%3A%22de.vandermeer%22%20AND%20a%3A%22asciiparagraph%22">all releases</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Java 7 legacy version source repository</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/vdmeer/asciiparagraph/tree/master-j7">GitHub</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Java 7 legacy version Maven releases</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://search.maven.org/#search|gav|1|g%3A%22de.vandermeer%22%20AND%20a%3A%22asciiparagraph-j%22">Maven Central</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UTF-8 Howto, older blog</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://vdmeer-sven.blogspot.ie/2014/06/utf-8-support-w-java-and-console.html">older blog</a>,</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UTF-8 Howto, older blog</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/vdmeer/skb/wiki/HowTo-UTF-8-Support-in-Java-and-Console">updated SKB Wiki</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -595,6 +620,14 @@ table.CodeRay td.code>pre{padding:0}
 <span class="tag">&lt;/dependency&gt;</span></code></pre>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_gradle_grails">Gradle / Grails</h3>
+<div class="listingblock">
+<div class="content">
+<pre>compile 'de.vandermeer:asciiparagraph:{release-version}'</pre>
+</div>
+</div>
 <div class="paragraph">
 <p>For other build systems see <a href="https://search.maven.org/#artifactdetails\|de.vandermeer\|asciiparagraph\|0.0.3-SNAPSHOT\|jar">Maven Central</a></p>
 </div>
@@ -605,39 +638,51 @@ table.CodeRay td.code>pre{padding:0}
 <h2 id="_features">Features</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A paragraph offers some flexibility for rendering. Options are:</p>
+<p>Text paragraph with some flexibility for alignment, format, padding, margins, frames, and additional strings per line:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Add text as string, collection of strings, using an object implementing HasText, or an object providing a method render</p>
+<p>add text, as often as required in many different formats (string, text provider, render provider, ST, clusters),</p>
 </li>
 <li>
-<p>Remove all additional whitespaces (tabulators, extra spaces, line feed, carriage return)</p>
+<p>removes all excessive white spaces (tabulators, extra blanks, combinations of carriage return and line feed),</p>
 </li>
 <li>
-<p>Set the paragraphs alignment: justified, justified right (last line right bound) centered, left, or right</p>
+<p>6 different alignments: left, right, centered, justified, justified last line left, justified last line right,</p>
 </li>
 <li>
-<p>Set width of text lines in the paragraph</p>
+<p>3 different formats: first line, hanging, dropped capital letter</p>
 </li>
 <li>
-<p>Set left padding (number of characters to print) as well as a specific character for left padding</p>
+<p>flexible width, set for text and calculated in many different ways for rendering</p>
 </li>
 <li>
-<p>Set right padding (number of characters to print) as well as a specific character for right padding</p>
+<p>padding characters for left and right padding (configurable separately)</p>
 </li>
 <li>
-<p>Set an indentation for the paragraph</p>
+<p>character for in-text white spaces</p>
 </li>
 <li>
-<p>Set a string inserted at the beginning of each line</p>
+<p>additional string at the start of each line</p>
 </li>
 <li>
-<p>Set a string appended at the end of each line</p>
+<p>additional string at the end of each line</p>
 </li>
 <li>
-<p>Some extra methods to calculate paragraph width</p>
+<p>a frame around the text</p>
+</li>
+<li>
+<p>flexible left/right margins configurable individually by length and character between frame, strings and text</p>
+</li>
+<li>
+<p>flexible top/bottom margins configurable individually by length between frame and text</p>
+</li>
+<li>
+<p>top/bottom/left/right margins outside a frame</p>
+</li>
+<li>
+<p>character conversion to generated text suitable for further process, e.g. for LaTeX and HTML</p>
 </li>
 </ul>
 </div>
@@ -658,14 +703,17 @@ The strings are processed as follows:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>add every string to the internal representation of all paragraph text, separated by a space</p>
+<p>add text to the paragraph, multiple times if required</p>
 </li>
 <li>
-<p>when rendering the paragraph, remove all extra white spaces</p>
+<p>the paragraph will separate each added text using a space</p>
+</li>
+<li>
+<p>for rendering a paragraph, all excessive white spaces will be removed</p>
 <div class="ulist">
 <ul>
 <li>
-<p>tabulators,</p>
+<p>tabulators (converted to spaces),</p>
 </li>
 <li>
 <p>more than one consecutive space,</p>
@@ -677,62 +725,327 @@ The strings are processed as follows:</p>
 <p>carriage return, and</p>
 </li>
 <li>
-<p>line feed and carriage return</p>
+<p>line feed and carriage return.</p>
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_format_of_a_paragraph">Format of a paragraph</h4>
+<div class="paragraph">
+<p>Paragraphs can be formatted using a number of special formats.
+Currently implemented are</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>First line - an indentation for the first line of the paragraph</p>
+</li>
+<li>
+<p>Hanging paragraph - an indentation for everything but the first line</p>
+</li>
+<li>
+<p>Dropped capital letter - a large capital letter for the first character of the first sentence spanning multiple lines</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_text_alignment">Text alignment</h4>
+<div class="paragraph">
+<p>Text in the paragraph can be aligned in multiple different ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>align left (open ended right site)</p>
+</li>
+<li>
+<p>align right (open ended left site)</p>
+</li>
+<li>
+<p>centered (all lines centered)</p>
+</li>
+<li>
+<p>justified (all line justified)</p>
+</li>
+<li>
+<p>justified with last line left aligned</p>
+</li>
+<li>
+<p>justified with last line right aligned</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_text_padding">Text padding</h4>
+<div class="paragraph">
+<p>All lines will use padding to create a paragraph with equal length of each line.
+The padding on the left and the right depends on the text alignment:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>align left: no padding left (all lines bound), padding on the right</p>
+</li>
+<li>
+<p>align right: no padding on the right (all lines bound), padding on the right</p>
+</li>
+<li>
+<p>centered: padding on both sides of each line</p>
+</li>
+<li>
+<p>justified: no padding at all, each line starts and finishes with a word (or single character)</p>
+</li>
+<li>
+<p>justified last line left align: padding only for the last line, on the right site</p>
+</li>
+<li>
+<p>justified last line right align: padding only for the last line, on the left site</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Paragraphs can be created and filled with text.
-Properties of paragraphs are set as paragraph context.
-Finally, paragraphs are rendered, i.e. a printable representation of the paragraph and all its text is created.</p>
+<p>The characters being used for padding can be set separately, so that each site of a line gets a different padding character.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_in_text_white_spaces">In-text white spaces</h4>
+<div class="paragraph">
+<p>With all excessive white spaces removed, each line only contains single blanks.
+The exception to this rule are all justified paragraphs (here extra white spaces are added to give the impression of a justified paragraph).</p>
+</div>
+<div class="paragraph">
+<p>The implementation allows to change the character used for in-text white spaces from the default (a blank) to any other character.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_start_and_end_strings">Start and end strings</h4>
+<div class="paragraph">
+<p>Each line of a paragraph can be started and terminated by a specific (different or identical) string.
+These strings are outside the text area, i.e. no special formatting is done on those strings.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_margins">Margins</h4>
+<div class="paragraph">
+<p>A paragraph has several margins for the left and right sides as well as for top and bottom.
+Each margin can be set - the width for let/right side margins and the height for top and bottom margins.
+Additionally, a character can be set for left/right margins (the same or different characters for each side).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_frame">Frame</h4>
+<div class="paragraph">
+<p>A paragraph can also be framed. A frame is</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a line above the paragraph,</p>
+</li>
+<li>
+<p>borders for each line of the paragraph (on the left and right side),</p>
+</li>
+<li>
+<p>and a line at the bottom of of the paragraph.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The frame is set as a frame theme.
+A number of those themes are provided in the <code>skb-interfaces</code> package.
+New themes can be created very easily, using ASCII and/or UTF-8 characters.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_anatomy_of_a_paragraph">Anatomy of a paragraph</h3>
+<div class="paragraph">
+<p>The figure below shows all spacing characteristics of a paragraph.
+The outer rectangle (using <code>+</code>, <code>-</code>, and <code>|</code> characters) marks the most outer part of a paragraph.
+This is followed by top, bottom, left, and right frame margins.</p>
+</div>
+<div class="paragraph">
+<p>The next rectangle (using the UTF-8 double line characters <code>╔</code>, <code>═</code>, <code>╗</code>, <code>╚</code>, <code>║</code>, and <code>╝</code>) shows an example frame.
+This is followed by top / bottom text margins and left / right string margins.</p>
+</div>
+<div class="paragraph">
+<p>Left and right we find the start and end strings that can be set. This is followed by the left / right text margins.</p>
+</div>
+<div class="paragraph">
+<p>The last rectangle (using the single line UTF-8 characters <code>┌</code>, <code>─</code>, <code>┐</code>, <code>└</code>, <code>─</code>, and <code>┘</code>) marks the actual paragraph.
+Here we have the text, plus optional padding and indentations.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>+------------------------------------------------------------------------------------------------+
+|                                                                                                |
+|                                       Top Frame Margin                                         |
+|                                                                                                |
+|--------╔══════════════════════════════════════════════════════════════════════════════╗--------|
+|        ║                                                                              ║        |
+|        ║                              Top Text Margin                                 ║        |
+|        ║                                                                              ║        |
+|        ║--------+--------+--------┌───────────────────────┐--------+--------+---------║        |
+|        ║        |        |        │                       │        |        |         ║        |
+|  F  M  ║  S  M  |  S  S  |  T  M  │                       │  T  M  |  E  S  |  S   M  ║  F  M  |
+|  r  a  ║  t  a  |  t  t  |  e  a  │       Paragraph       │  e  a  |  n  t  |  t   a  ║  r  a  |
+|  a  r  ║  r  r  |  a  r  |  x  r  │         text          │  x  r  |  d  r  |  r   r  ║  a  r  |
+|  m  g  ║  i  g  |  r  i  |  t  g  │         with          │  t  g  |     i  |  i   g  ║  m  g  |
+|  e  i  ║  n  i  |  t  g  |     i  │ padding / indentation │     i  |     g  |  n   i  ║  e  i  |
+|     n  ║  g  n  |        |     n  │                       │     n  |        |  g   n  ║     n  |
+|        ║        |        |        │                       │        |        |         ║        |
+|        ║--------+--------+--------└───────────────────────┘--------+--------+---------║        |
+|        ║                                                                              ║        |
+|        ║                             Bottom Text Margin                               ║        |
+|        ║                                                                              ║        |
+|--------╚══════════════════════════════════════════════════════════════════════════════╝--------|
+|                                                                                                |
+|                                      Bottom Frame Margin                                       |
+|                                                                                                |
++------------------------------------------------------------------------------------------------+</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_summary_of_configurable_characteristics">Summary of configurable  characteristics</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>text width (length of each text line)</p>
+</li>
+<li>
+<p>text alignment (for the whole paragraph): left, right, centered, justified (with additional options for last line)</p>
+</li>
+<li>
+<p>text format: first line, hanging, dropped capital letter</p>
+</li>
+<li>
+<p>frame: set a frame around the paragraph</p>
+</li>
+<li>
+<p>start / end string: define a start and/or end string for each line</p>
+</li>
+<li>
+<p>top and bottom margins above a frame (empty lines)</p>
+</li>
+<li>
+<p>margins on the left and right of a frame (number with character)</p>
+</li>
+<li>
+<p>margins between the frame and the start string (left) and end string and frame (right), using different length and character</p>
+</li>
+<li>
+<p>margins between start string and text (left), and text and end string (right), using different length and characters</p>
+</li>
+<li>
+<p>top and bottom margins for the text (including and string margin and string)</p>
+</li>
+<li>
+<p>character converters to convert characters before line generation, i.e. to generate text suitable for LaTeX or HTML</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_paragraph_context">Paragraph Context</h3>
 <div class="paragraph">
-<p>Defines all possible properties of a paragraph:</p>
+<p>While the paragraph only maintains the text, the paragraph context maintains all configurable characteristics of the paragraph (see above).
+The current implementation directly has</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>overall with of the paragraph</p>
+<p>paragraph alignment (default being justified, last line left)</p>
 </li>
 <li>
-<p>left padding, left indentation</p>
+<p>paragraph format (default being none)</p>
 </li>
 <li>
-<p>right padding, right indentation</p>
+<p>paragraph width (default being 80)</p>
 </li>
 <li>
-<p>left padding character, character used for left indentation</p>
+<p>an optional library for dropped capital letters (default being not set)</p>
 </li>
 <li>
-<p>right padding character, character used for right indentation</p>
-</li>
-<li>
-<p>character used for in-line white spaces</p>
-</li>
-<li>
-<p>added empty lines after the paragraph text</p>
-</li>
-<li>
-<p>paragraph alignment</p>
+<p>an optional theme for a frame (default being not set)</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>The following characteristics are handled by special objects (one for each), which the context provides access to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>indentations (for first line and hanging paragraph)</p>
+</li>
+<li>
+<p>all margins</p>
+</li>
+<li>
+<p>all characters</p>
+</li>
+<li>
+<p>all strings</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Additionally, the context provides a number of helper methods for rendering</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>different calculations for width, starting with simple text width and finishing with an all inclusive width</p>
+</li>
+<li>
+<p>convenience methods to jointly set margins and characters, for the same left/right or top/bottom pairs</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The paragraph can be initialized with a given context or plain, in which case it will create its own context object.
+Any future characteristics will be added to the paragraph context</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_paragraph_renderer">Paragraph Renderer</h3>
 <div class="paragraph">
-<p>The paragraph itself provides a number of render methods to render the content into various object.
-Supported are String, Iterables, Iterators, Collections, and arrays.</p>
+<p>The actual rendering of a paragraph is realized by special render objects (i.e. it&#8217;s not done in the paragraph or its context).
+A paragraph can be rendered in two different ways:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>call the provided render methods on the paragraph object itself</p>
+</li>
+<li>
+<p>use a specialized render object</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>If more render functionality is required, one can create special renderes that take a paragraph and render it to the requirements.
-The standard renderer for instance provides a number of additional render methods with specific behavior.</p>
+<p>No changes are made to the paragraph text or any context settings by any render operation.
+All required text being processed and calculations being made will happen inside the renderer.</p>
+</div>
+<div class="paragraph">
+<p>The render methods on the paragraph allow to render it (a) to the width set in the context or (b) to an overall required width.
+The first option is the most simple one: fill paragraph with text, set width on context, render.
+The second option can be used by other applications, for instance a table, to get a paragraph of required width.</p>
+</div>
+<div class="paragraph">
+<p>For any other render operations use the provided standard renderer or create your own render object.
+The default renderer does currently provide render methods to different width with calculations provided by the context.</p>
+</div>
+<div class="paragraph">
+<p>Note: coming soon:
+It also provides render methods that use their own context (i.e. ignore the context set in the paragraph).
+This allows for extremely flexibility in using the paragraph in many different scenarios.</p>
 </div>
 </div>
 </div>
@@ -849,7 +1162,7 @@ followed by followed by</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_text_alignment">Text alignment</h3>
+<h3 id="_text_alignment_2">Text alignment</h3>
 <div class="paragraph">
 <p>Text can be aligned left and right.</p>
 </div>
@@ -1143,7 +1456,7 @@ line three still line three</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-03-24 01:42:38 GMT
+Last updated 2016-03-25 10:43:57 GMT
 </div>
 </div>
 </body>

@@ -20,6 +20,7 @@ import org.apache.commons.lang3.Validate;
 import de.vandermeer.asciiparagraph.dropcaps.DropCaps;
 import de.vandermeer.asciiparagraph.dropcaps.FigletRoman;
 import de.vandermeer.skb.interfaces.objctxt.IsObjectContext;
+import de.vandermeer.skb.interfaces.textart.TA_FrameTheme;
 
 /**
  * Context for an {@link AsciiParagraph}.
@@ -30,56 +31,35 @@ import de.vandermeer.skb.interfaces.objctxt.IsObjectContext;
  */
 public class AP_Context implements IsObjectContext {
 
+	/** Paragraph margins. */
+	protected AP_CtxtMargins margins = new AP_CtxtMargins();
+
+	/** Paragraph characters. */
+	protected AP_CtxtCharacters characters = new AP_CtxtCharacters();
+
+	/** Paragraph indentations. */
+	protected AP_CtxtIndents indents = new AP_CtxtIndents();
+
+	/** Paragraph strings. */
+	protected AP_CtxtStrings strings = new AP_CtxtStrings();
+
 	/** Paragraph alignment, default is {@link AP_Alignment#JUSTIFIED_LEFT}. */
 	protected AP_Alignment alignment = AP_Alignment.JUSTIFIED_LEFT;
 
 	/** Paragraph format, default is {@link  = AP_Format#NONE}. */
 	protected AP_Format format = AP_Format.NONE;
 
-	/** Left padding, spaces for each line on the left side, changes width, default is `0`. */
-	protected int paddingLeft = 0;
-
-	/** Right padding, spaces for each line on the right side, changes width, default is `0`. */
-	protected int paddingRight = 0;
-
-	/** Paragraph indentation, does not change the paragraph width, default is `0`. */
-	protected int indentation = 0;
-
-	/** Added empty lines at the end of the paragraph, default is `1`. */
-	protected int addLines = 1;
-
 	/** The width of the paragraph, actual width depends on padding settings, default is `80`. */
 	protected int width = 80;
 
-	/** The character to be used for left padding, default is simple blank. */
-	protected char leftPaddingChar = ' ';
-
-	/** The character to be used for right padding, default is simple blank. */
-	protected char rightPaddingChar = ' ';
-
-	/** The character to be used for indentation, default is simple blank. */
-	protected char IndentationChar = ' ';
-
-	/** A string to be inserted at the start of each text line, default is `null`. */
-	protected String lineStart = null;
-
-	/** A string to be inserted at the end of each text line, default is `null`. */
-	protected String lineEnd = null;
-
-	/** The character to be used for in-line white spaces, default is simple blank. */
-	protected char inlineWS = ' ';
-
 	/** The renderer for this context, default is {@link AbstractRenderer}. */
-	protected AP_Renderer renderer = new AbstractRenderer();
-
-	/** Number of characters used for indentation of the first line, default is `4`. */
-	protected int firstLineIndent = 4;
-
-	/** Number of characters used for a hanging paragraph, default is `4`. */
-	protected int hangingIndent = 4;
+	protected AP_Renderer renderer = AP_Renderer.create();
 
 	/** A library of dropped capital letters, default is {@link FigletRoman}. */
 	protected DropCaps dropCapLib = new FigletRoman();
+
+	/** The theme for a frame. */
+	protected TA_FrameTheme frame = null;
 
 	/**
 	 * Creates a new paragraph context with default settings.
@@ -88,31 +68,15 @@ public class AP_Context implements IsObjectContext {
 	 * - Width: 80
 	 * - Alignment: justified, last line left aligned
 	 * - Format: none
-	 * - Indentation: 0
-	 * - Indentation character: ' ' (space)
-	 * - Left padding: 0
-	 * - Left padding character: ' ' (space)
-	 * - Right padding: 0
-	 * - Right padding character: ' ' (space)
-	 * - Added empty lines: 1
-	 * - In-line whitespace character: ' ' (space)
-	 * - Line start: null
-	 * - Line end: null
-	 * - First line indentation: 4
-	 * - Hanging paragraph indentation: 4
-	 * - Renderer: {@link AbstractRenderer}
+	 * - Renderer: {@link AP_Renderer}
 	 * - DropCap library: {@link FigletRoman}
+	 * - Margins from {@link AP_CtxtMargins}
+	 * - Characters from {@link AP_CtxtCharacters}
+	 * - Indentations from {@link AP_CtxtIndents}
+	 * - Strings from {@link AP_CtxtStrings}
 	 * 
 	 */
 	public AP_Context(){}
-
-	/**
-	 * Returns the number of added empty lines.
-	 * @return number of added empty lines
-	 */
-	public int getAddLines() {
-		return addLines;
-	}
 
 	/**
 	 * Returns the set alignment.
@@ -127,15 +91,7 @@ public class AP_Context implements IsObjectContext {
 	 * @return dropped capital letter library, null if none set
 	 */
 	public DropCaps getDropCapLib() {
-		return dropCapLib;
-	}
-
-	/**
-	 * Returns the number of characters used for first line indentation.
-	 * @return number of characters
-	 */
-	public int getFirstLineIndent() {
-		return firstLineIndent;
+		return this.dropCapLib;
 	}
 
 	/**
@@ -143,79 +99,7 @@ public class AP_Context implements IsObjectContext {
 	 * @return paragraph format
 	 */
 	public AP_Format getFormat() {
-		return format;
-	}
-
-	/**
-	 * Returns the number of characters used for a hanging paragraph.
-	 * @return number of characters
-	 */
-	public int getHangingIndent() {
-		return hangingIndent;
-	}
-
-	/**
-	 * Returns the indentation.
-	 * @return paragraph indentation
-	 */
-	public int getIndentation() {
-		return indentation;
-	}
-
-	/**
-	 * Returns the indentation character.
-	 * @return indentation character
-	 */
-	public char getIndentationChar() {
-		return IndentationChar;
-	}
-
-	/**
-	 * Returns the in-line whitespace character.
-	 * @return in-line whitespace character
-	 */
-	public char getInlineWS() {
-		return inlineWS;
-	}
-
-	/**
-	 * Returns the left padding character.
-	 * @return left padding character
-	 */
-	public char getLeftPaddingChar() {
-		return leftPaddingChar;
-	}
-
-	/**
-	 * Returns the line end string.
-	 * @return line end string, null if not set
-	 */
-	public String getLineEnd() {
-		return lineEnd;
-	}
-
-	/**
-	 * Returns the line start string.
-	 * @return line start string, null if not set
-	 */
-	public String getLineStart() {
-		return lineStart;
-	}
-
-	/**
-	 * Returns the left padding.
-	 * @return left padding
-	 */
-	public int getPaddingLeft() {
-		return paddingLeft;
-	}
-
-	/**
-	 * Returns the right padding.
-	 * @return right padding
-	 */
-	public int getPaddingRight() {
-		return paddingRight;
+		return this.format;
 	}
 
 	/**
@@ -227,31 +111,11 @@ public class AP_Context implements IsObjectContext {
 	}
 
 	/**
-	 * Returns the right padding character.
-	 * @return right padding character
-	 */
-	public char getRightPaddingChar() {
-		return rightPaddingChar;
-	}
-
-	/**
 	 * Returns the paragraph width.
 	 * @return paragraph width
 	 */
 	public int getWidth() {
-		return width;
-	}
-
-	/**
-	 * Sets the number of empty lines that should be added to the paragraph.
-	 * @param addLines number of added lines, only added if 0 or positive
-	 * @return this to allow chaining
-	 */
-	public AP_Context setAddLines(int addLines) {
-		if(addLines>=0){
-			this.addLines = addLines;
-		}
-		return this;
+		return this.width;
 	}
 
 	/**
@@ -272,21 +136,8 @@ public class AP_Context implements IsObjectContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setDropCapLib(DropCaps dropCapLib) {
-		if(dropCapLib!=null){
-			this.dropCapLib = dropCapLib;
-		}
-		return this;
-	}
-
-	/**
-	 * Sets the number of characters used for first line indentation.
-	 * @param number of characters, only used if positive integer
-	 * @return this to allow chaining
-	 */
-	public AP_Context setFirstLineIndent(int firstLineIndent) {
-		if(firstLineIndent>0){
-			this.firstLineIndent = firstLineIndent;
-		}
+		Validate.notNull(dropCapLib);
+		this.dropCapLib = dropCapLib;
 		return this;
 	}
 
@@ -296,137 +147,8 @@ public class AP_Context implements IsObjectContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFormat(AP_Format format) {
-		if(format!=null){
-			this.format = format;
-		}
-		return this;
-	}
-
-	/**
-	 * Sets the number of characters used for a hanging paragraph.
-	 * @param number of characters, only used if positive integer
-	 * @return this to allow chaining
-	 */
-	public AP_Context setHanging(int hanging) {
-		if(hanging>0){
-			this.hangingIndent = hanging;
-		}
-		return this;
-	}
-
-	/**
-	 * Sets the indentation.
-	 * @param indentation new indentation, must be 0 or positive
-	 * @return this to allow chaining
-	 */
-	public AP_Context setIndentation(int indentation) {
-		if(indentation>=0){
-			this.indentation = indentation;
-		}
-		return this;
-	}
-
-	/**
-	 * Sets the indentation character.
-	 * @param indentationChar new indentation character
-	 * @return this to allow chaining
-	 */
-	public AP_Context setIndentationChar(char indentationChar) {
-		IndentationChar = indentationChar;
-		return this;
-	}
-
-	/**
-	 * Sets the in-line whitespace character.
-	 * @param inlineWS new inline whitespace character
-	 * @return this to allow chaining
-	 */
-	public AP_Context setInlineWS(char inlineWS) {
-		this.inlineWS = inlineWS;
-		return this;
-	}
-
-	/**
-	 * Sets the padding character for left padding.
-	 * @param leftPaddingChar left padding character
-	 * @return this to allow chaining
-	 */
-	public AP_Context setLeftPaddingChar(char leftPaddingChar) {
-		this.leftPaddingChar = leftPaddingChar;
-		return this;
-	}
-
-	/**
-	 * Sets the line end string.
-	 * @param lineEnd new line end string, should not be blank
-	 * @return this to allow chaining
-	 * @throws NullPointerException if the argument was null
-	 * @throws IllegalArgumentException if the argument was blank
-	 */
-	public AP_Context setLineEnd(String lineEnd) {
-		Validate.notBlank(lineEnd);
-		this.lineEnd = lineEnd;
-		return this;
-	}
-
-	/**
-	 * Sets the line start string.
-	 * @param lineStart new line start string, should not be blank
-	 * @return this to allow chaining
-	 * @throws NullPointerException if the argument was null
-	 * @throws IllegalArgumentException if the argument was blank
-	 */
-	public AP_Context setLineStart(String lineStart) {
-		Validate.notBlank(lineStart);
-		this.lineStart = lineStart;
-		return this;
-	}
-
-	/**
-	 * Sets the left and right padding for the paragraph.
-	 * @param padding padding, only added if all paddings and width allow for at least 3 characters per line
-	 * @return this to allow chaining
-	 */
-	public AP_Context setPadding(int padding){
-		if((this.width-padding-padding)>=3){
-			this.paddingLeft = padding;
-			this.paddingRight = padding;
-		}
-		return this;
-	}
-
-	/**
-	 * Sets the left and right padding character.
-	 * @param paddingChar left and right padding character
-	 * @return this to allow chaining
-	 */
-	public AP_Context setPaddingChar(char paddingChar) {
-		this.leftPaddingChar = paddingChar;
-		this.rightPaddingChar = paddingChar;
-		return this;
-	}
-
-	/**
-	 * Sets the left padding for the paragraph.
-	 * @param paddingLeft left padding, only added if all paddings and width allow for at least 3 characters per line
-	 * @return this to allow chaining
-	 */
-	public AP_Context setPaddingLeft(int paddingLeft) {
-		if((this.width-paddingLeft-this.paddingRight)>=3){
-			this.paddingLeft = paddingLeft;
-		}
-		return this;
-	}
-
-	/**
-	 * Sets the right padding for the paragraph.
-	 * @param paddingRight right padding, only added if all paddings and width allow for at least 3 characters per line
-	 * @return this to allow chaining
-	 */
-	public AP_Context setPaddingRight(int paddingRight) {
-		if((this.width-this.paddingLeft-paddingRight)>=3){
-			this.paddingRight = paddingRight;
-		}
+		Validate.notNull(format);
+		this.format = format;
 		return this;
 	}
 
@@ -435,30 +157,132 @@ public class AP_Context implements IsObjectContext {
 	 * @param renderer new renderer, only set if not null
 	 */
 	public void setRenderer(AP_Renderer renderer){
-		if(renderer!=null){
-			this.renderer = renderer;
-		}
-	}
-
-	/**
-	 * Sets the padding character for right padding.
-	 * @param rightPaddingChar right padding character
-	 * @return this to allow chaining
-	 */
-	public AP_Context setRightPaddingChar(char rightPaddingChar) {
-		this.rightPaddingChar = rightPaddingChar;
-		return this;
+		Validate.notNull(renderer);
+		this.renderer = renderer;
 	}
 
 	/**
 	 * Sets the paragraph width.
-	 * @param width new width, only added if all paddings and width allow for at least 3 characters per line
+	 * @param width new width
 	 * @return this to allow chaining
 	 */
 	public AP_Context setWidth(int width) {
-		if((width-this.paddingLeft-this.paddingRight)>=3){
-			this.width = width;
-		}
+		this.width = width;
 		return this;
+	}
+
+	/**
+	 * Sets the paragraph frame.
+	 * @param frame new frame, null to reset
+	 * @return this to allow chaining
+	 */
+	public AP_Context setFrame(TA_FrameTheme frame) {
+		this.frame = frame;
+		return this;
+	}
+
+	/**
+	 * Returns the paragraph frame.
+	 * @return frame, null if not set
+	 */
+	public TA_FrameTheme getFrame() {
+		return this.frame;
+	}
+
+	/**
+	 * Returns the margin settings.
+	 * @return margin settings
+	 */
+	public AP_CtxtMargins getMargins() {
+		return margins;
+	}
+
+	/**
+	 * Returns the character settings.
+	 * @return character settings
+	 */
+	public AP_CtxtCharacters getCharacters() {
+		return characters;
+	}
+
+	/**
+	 * Returns the indentation settings.
+	 * @return indentation settings
+	 */
+	public AP_CtxtIndents getIndents() {
+		return indents;
+	}
+
+	/**
+	 * Returns the string settings. 
+	 * @return string settings
+	 */
+	public AP_CtxtStrings getStrings() {
+		return strings;
+	}
+
+	/**
+	 * Returns the width including text margins.
+	 * @return width
+	 */
+	public int getWidthIncTextMargins(){
+		return this.width-this.margins.getTextLeft()-this.margins.getTextRight();
+	}
+
+	/**
+	 * Returns the width including text margins based on requested width.
+	 * @param width the requested width
+	 * @return width
+	 */
+	public int getWidthIncTextMargins(int width){
+		return width-this.margins.getTextLeft()-this.margins.getTextRight();
+	}
+
+	/**
+	 * Returns the width including text and string margins.
+	 * @return width
+	 */
+	public int getWidthIncStringMargins(){
+		int width = this.getWidthIncTextMargins()-this.margins.getStringLeft()-this.margins.getStringRight();
+		if(this.getStrings().getStart()!=null){
+			width -= this.getStrings().getStart().length();
+		}
+		if(this.getStrings().getEnd()!=null){
+			width -= this.getStrings().getEnd().length();
+		}
+		return width;
+	}
+
+	/**
+	 * Returns the width including text and string margins based on requested width.
+	 * @param width requested width
+	 * @return width
+	 */
+	public int getWidthIncStringMargins(int width){
+		int w = this.getWidthIncTextMargins(width)-this.margins.getStringLeft()-this.margins.getStringRight();
+		if(this.getStrings().getStart()!=null){
+			w -= this.getStrings().getStart().length();
+		}
+		if(this.getStrings().getEnd()!=null){
+			w -= this.getStrings().getEnd().length();
+		}
+		return w;
+	}
+
+	/**
+	 * Returns the width including all margins.
+	 * @return width
+	 */
+	public int getWidthAllInclusive(){
+		return this.getWidthIncStringMargins()-this.margins.getFrameLeft()-this.margins.getFrameRight();
+	}
+
+	/**
+	 * Returns the width including all margins based on requested width.
+	 * @param width requested width
+	 * @return width
+	 */
+	public int getWidthAllInclusive(int width){
+		return this.getWidthIncStringMargins(width)-this.margins.getFrameLeft()-this.margins.getFrameRight();
 	}
 }

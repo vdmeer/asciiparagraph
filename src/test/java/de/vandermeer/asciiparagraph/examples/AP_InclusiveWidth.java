@@ -40,13 +40,13 @@ public class AP_InclusiveWidth implements StandardExample {
 
 		System.out.println(ap.render(50));
 
-		pc.setLineStart("// ");
+		pc.getStrings().setStart("// ");
 		System.out.println(ap.render(50));
 
-		pc.setLineEnd(" -->");
+		pc.getStrings().setEnd(" -->");
 		System.out.println(ap.render(50));
 
-		pc.setIndentation(10);
+		pc.getMargins().setTextLeft(10);
 		System.out.println(ap.render(50));
 		// end::example[]
 	}

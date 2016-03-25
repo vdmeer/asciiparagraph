@@ -44,8 +44,8 @@ public class AP_RightPadding_Behavior implements StandardExample {
 
 		System.out.println(ap.render());
 
-		pc.setPaddingRight(20);
-		pc.setRightPaddingChar('+');
+		pc.getMargins().setTextRight(20);
+		pc.getCharacters().setTextRight('+');
 		System.out.println(ap.render());
 		// end::example[]
 	}

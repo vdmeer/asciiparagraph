@@ -1,5 +1,4 @@
-Getting Started
----------------
+== Getting Started
 
 The standard usage is:
 
@@ -53,5 +52,4 @@ line 1 2 2 more text with tab and newline some more text to get it over  the  80
 character default width                                                         
 
 ----------------------------------------------------------------------------------------
-
 

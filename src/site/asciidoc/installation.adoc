@@ -14,5 +14,13 @@ For Maven declare a dependency in the `<dependencies>` section of your POM file.
 </dependency>
 ----
 
+
+=== Gradle / Grails
+
+----
+compile 'de.vandermeer:asciiparagraph:{release-version}'
+----
+
+
 For other build systems see https://search.maven.org/#artifactdetails\|de.vandermeer\|asciiparagraph\|{release-version}\|jar[Maven Central]
 

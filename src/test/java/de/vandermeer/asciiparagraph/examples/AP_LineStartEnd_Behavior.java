@@ -44,10 +44,10 @@ public class AP_LineStartEnd_Behavior implements StandardExample {
 
 		System.out.println(ap.render());
 
-		pc.setLineStart("// ");
+		pc.getStrings().setStart("// ");
 		System.out.println(ap.render());
 
-		pc.setLineEnd(" -->");
+		pc.getStrings().setEnd(" -->");
 		System.out.println(ap.render());
 		// end::example[]
 	}
