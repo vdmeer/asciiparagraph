@@ -534,16 +534,16 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_getting_started">Getting Started</a></li>
 <li><a href="#_examples">Examples</a>
 <ul class="sectlevel2">
+<li><a href="#_width">Width</a></li>
 <li><a href="#_whitespace_handling">Whitespace handling</a></li>
+<li><a href="#_conditional_line_breaks">Conditional line breaks</a></li>
+<li><a href="#_in_text_white_space_replacement">In-text white space replacement</a></li>
 <li><a href="#_text_alignment_2">Text alignment</a></li>
 <li><a href="#_text_format">Text format</a></li>
-<li><a href="#_width">Width</a></li>
-<li><a href="#_indentation_width_and_character">Indentation (width and character)</a></li>
-<li><a href="#_left_padding_width_and_character">Left padding (width and character)</a></li>
-<li><a href="#_right_padding_width_and_character">Right padding (width and character)</a></li>
+<li><a href="#_left_right_text_margin_width_and_character">Left/Right text margin (width and character)</a></li>
 <li><a href="#_extra_text_at_each_line_start_and_line_end">Extra text at each line start and line end</a></li>
 <li><a href="#_render_to_maximum_width_calculating_additional_padding_and_strings">Render to maximum width, calculating additional padding and strings</a></li>
-<li><a href="#_conditional_line_breaks">Conditional line breaks</a></li>
+<li><a href="#_frames">Frames</a></li>
 </ul>
 </li>
 </ul>
@@ -882,32 +882,32 @@ Here we have the text, plus optional padding and indentations.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>+------------------------------------------------------------------------------------------------+
-|                                                                                                |
-|                                       Top Frame Margin                                         |
-|                                                                                                |
-|--------╔══════════════════════════════════════════════════════════════════════════════╗--------|
-|        ║                                                                              ║        |
-|        ║                              Top Text Margin                                 ║        |
-|        ║                                                                              ║        |
-|        ║--------+--------+--------┌───────────────────────┐--------+--------+---------║        |
-|        ║        |        |        │                       │        |        |         ║        |
-|  F  M  ║  S  M  |  S  S  |  T  M  │                       │  T  M  |  E  S  |  S   M  ║  F  M  |
-|  r  a  ║  t  a  |  t  t  |  e  a  │       Paragraph       │  e  a  |  n  t  |  t   a  ║  r  a  |
-|  a  r  ║  r  r  |  a  r  |  x  r  │         text          │  x  r  |  d  r  |  r   r  ║  a  r  |
-|  m  g  ║  i  g  |  r  i  |  t  g  │         with          │  t  g  |     i  |  i   g  ║  m  g  |
-|  e  i  ║  n  i  |  t  g  |     i  │ padding / indentation │     i  |     g  |  n   i  ║  e  i  |
-|     n  ║  g  n  |        |     n  │                       │     n  |        |  g   n  ║     n  |
-|        ║        |        |        │                       │        |        |         ║        |
-|        ║--------+--------+--------└───────────────────────┘--------+--------+---------║        |
-|        ║                                                                              ║        |
-|        ║                             Bottom Text Margin                               ║        |
-|        ║                                                                              ║        |
-|--------╚══════════════════════════════════════════════════════════════════════════════╝--------|
-|                                                                                                |
-|                                      Bottom Frame Margin                                       |
-|                                                                                                |
-+------------------------------------------------------------------------------------------------+</pre>
+<pre>+----------------------------------------------------------------------------------------------+
+|                                                                                              |
+|                                      Top Frame Margin                                        |
+|                                                                                              |
+|--------╔════════════════════════════════════════════════════════════════════════════╗--------|
+|        ║                                                                            ║        |
+|        ║                             Top Text Margin                                ║        |
+|        ║                                                                            ║        |
+|        ║--------+--------+--------┌─────────────────────┐--------+--------+---------║        |
+|        ║        |        |        │                     │        |        |         ║        |
+|  F  M  ║  S  M  |  S  S  |  T  M  │      Paragraph      │  T  M  |  E  S  |  S   M  ║  F  M  |
+|  r  a  ║  t  a  |  t  t  |  e  a  │      text with      │  e  a  |  n  t  |  t   a  ║  r  a  |
+|  a  r  ║  r  r  |  a  r  |  x  r  │      padding &amp;      │  x  r  |  d  r  |  r   r  ║  a  r  |
+|  m  g  ║  i  g  |  r  i  |  t  g  │     indentation     │  t  g  |     i  |  i   g  ║  m  g  |
+|  e  i  ║  n  i  |  t  g  |     i  │                     │     i  |     g  |  n   i  ║  e  i  |
+|     n  ║  g  n  |        |     n  │                     │     n  |        |  g   n  ║     n  |
+|        ║        |        |        │                     │        |        |         ║        |
+|        ║--------+--------+--------└─────────────────────┘--------+--------+---------║        |
+|        ║                                                                            ║        |
+|        ║                            Bottom Text Margin                              ║        |
+|        ║                                                                            ║        |
+|--------╚════════════════════════════════════════════════════════════════════════════╝--------|
+|                                                                                              |
+|                                     Bottom Frame Margin                                      |
+|                                                                                              |
++----------------------------------------------------------------------------------------------+</pre>
 </div>
 </div>
 </div>
@@ -1130,11 +1130,34 @@ character default width</pre>
 <p>The following examples are using the classic "Lorem Ipsum" text as content.</p>
 </div>
 <div class="sect2">
+<h3 id="_width">Width</h3>
+<div class="paragraph">
+<p>Width of 50, 40, and 30 on the same text.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Lorem ipsum dolor sit amet, consetetur sadipscing
+elitr, sed diam nonumy eirmod tempor invidunt ut
+labore et dolore magna aliquyam
+
+Lorem ipsum dolor sit amet, consetetur
+sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore
+magna aliquyam
+
+Lorem ipsum dolor sit amet,
+consetetur sadipscing elitr,
+sed diam nonumy eirmod tempor
+invidunt ut labore et dolore
+magna aliquyam</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_whitespace_handling">Whitespace handling</h3>
 <div class="paragraph">
 <p>The paragraph will remove all additional white spaces so that the resulting text has words separated by 1 space.
-All tabulators, line feeds, and carriage returns will be removed.
-We can add for instance the following text fragments to a paragraph</p>
+All tabulators, line feeds, and carriage returns will be removed.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1162,9 +1185,46 @@ followed by followed by</pre>
 </div>
 </div>
 <div class="sect2">
+<h3 id="_conditional_line_breaks">Conditional line breaks</h3>
+<div class="paragraph">
+<p>Use HTML entities <code>&lt;br&gt;</code> and <code>&lt;br/&gt;</code> to render text</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>"line 1&lt;br&gt;"
+"line 2&lt;br/&gt;"
+"line three \n still line three"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>to</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>line 1
+line 2
+line three still line three</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_in_text_white_space_replacement">In-text white space replacement</h3>
+<div class="paragraph">
+<p>Remaining blanks in text can be automatically replaced by other characters</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Lorem˽ipsum˽dolor˽sit˽amet,                Lorem—ipsum—dolor—sit—amet,
+consetetur˽sadipscing˽elitr,˽sed           consetetur—sadipscing—elitr,—sed
+diam˽nonumy˽eirmod˽tempor˽invidunt         diam—nonumy—eirmod—tempor—invidunt
+ut˽labore˽et˽dolore˽magna˽aliquyam         ut—labore—et—dolore—magna—aliquyam</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_text_alignment_2">Text alignment</h3>
 <div class="paragraph">
-<p>Text can be aligned left and right.</p>
+<p>Left and right.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1176,7 +1236,7 @@ voluptua. At vero eos et accusam                    voluptua. At vero eos et acc
 </div>
 </div>
 <div class="paragraph">
-<p>Text can be aligned centered and justified.</p>
+<p>Centered and justified.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1188,9 +1248,7 @@ voluptua. At vero eos et accusam                    voluptua. At vero eos et acc
 </div>
 </div>
 <div class="paragraph">
-<p>For justified text, the last line will also be justified.
-This can lead to rather ugly last lines.
-To mitigate this, there are two more formats for justified text: justified with last line left aligned and with last line right aligned.</p>
+<p>Justified last line left and right.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1205,7 +1263,7 @@ voluptua. At vero eos et accusam                      voluptua. At vero eos et a
 <div class="sect2">
 <h3 id="_text_format">Text format</h3>
 <div class="paragraph">
-<p>Paragraph text can have special formats for first line indentation and hanging paragraph.</p>
+<p>First line indentation and hanging paragraph.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1220,7 +1278,7 @@ eos et accusam                                 voluptua.  At   vero   eos   et
 </div>
 </div>
 <div class="paragraph">
-<p>Dropped capital letters are also supported.</p>
+<p>Dropped capital letters.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1238,137 +1296,39 @@ accusam</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_width">Width</h3>
-<div class="paragraph">
-<p>The width of the paragraph can be set in the paragraph context.
-The default width is 80.
-The width can be changed at any time, it is only applied for rendering.
-The width (minus the set padding) must allow for at least 3 characters per line.
-The following example shows the same paragraph rendered for a width of 80, 60, and 30.</p>
-</div>
+<h3 id="_left_right_text_margin_width_and_character">Left/Right text margin (width and character)</h3>
 <div class="listingblock">
 <div class="content">
-<pre>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
-vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-no sea takimata sanctus est Lorem ipsum dolor sit amet.
+<pre>Lorem ipsum dolor sit amet,                                Lorem ipsum dolor sit amet,
+consetetur sadipscing elitr,                              consetetur sadipscing elitr,
+sed diam nonumy eirmod tempor                            sed diam nonumy eirmod tempor
+invidunt ut labore et dolore                              invidunt ut labore et dolore
+magna aliquyam erat, sed diam                            magna aliquyam erat, sed diam
+voluptua. At vero eos et                                      voluptua. At vero eos et
+accusam                                                                        accusam
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-diam nonumy eirmod tempor invidunt ut labore et dolore magna
-aliquyam erat, sed diam voluptua. At vero eos et accusam et
-justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-sea takimata sanctus est Lorem ipsum dolor sit amet.
+     Lorem ipsum dolor sit amet,                      Lorem ipsum dolor sit amet,
+     consetetur sadipscing elitr,                    consetetur sadipscing elitr,
+     sed diam nonumy eirmod tempor                  sed diam nonumy eirmod tempor
+     invidunt ut labore et dolore                    invidunt ut labore et dolore
+     magna aliquyam erat, sed diam                  magna aliquyam erat, sed diam
+     voluptua. At vero eos et                            voluptua. At vero eos et
+     accusam                                                              accusam
 
-Lorem ipsum dolor sit amet,
-consetetur sadipscing elitr,
-sed diam nonumy eirmod tempor
-invidunt ut labore et dolore
-magna aliquyam erat, sed diam
-voluptua. At vero eos et
-accusam et justo duo dolores
-et ea rebum. Stet clita kasd
-gubergren, no sea takimata
-sanctus est Lorem ipsum dolor
-sit amet.</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_indentation_width_and_character">Indentation (width and character)</h3>
-<div class="paragraph">
-<p>A paragraph can have an indentation.
-For simple rendering, the indentation is added to the text width (as shown here).
-The indentation character can be set separately.
-The following example shows a normal paragraph, a paragraph with indentation of 5 using blank, and an indentation of 10 using <code>'˽'</code>.
-The width is set to 60.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-diam nonumy eirmod tempor invidunt ut labore et dolore magna
-aliquyam erat, sed diam voluptua. At vero eos et accusam et
-justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-     diam nonumy eirmod tempor invidunt ut labore et dolore magna
-     aliquyam erat, sed diam voluptua. At vero eos et accusam et
-     justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-     sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-˽˽˽˽˽˽˽˽˽˽Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-˽˽˽˽˽˽˽˽˽˽diam nonumy eirmod tempor invidunt ut labore et dolore magna
-˽˽˽˽˽˽˽˽˽˽aliquyam erat, sed diam voluptua. At vero eos et accusam et
-˽˽˽˽˽˽˽˽˽˽justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-˽˽˽˽˽˽˽˽˽˽sea takimata sanctus est Lorem ipsum dolor sit amet.</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_left_padding_width_and_character">Left padding (width and character)</h3>
-<div class="paragraph">
-<p>A paragraph can have a left padding (at the start of each line).
-For simple rendering, the padding is added to the text width (as shown here).
-The left padding character can be set separately.
-The following example shows a normal paragraph, a paragraph with left padding of 10 using blank, and a left padding of 10 using <code>'-'</code>.
-The width is set to 60.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-diam nonumy eirmod tempor invidunt ut labore et dolore magna
-aliquyam erat, sed diam voluptua. At vero eos et accusam et
-justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-          diam nonumy eirmod tempor invidunt ut labore et dolore magna
-          aliquyam erat, sed diam voluptua. At vero eos et accusam et
-          justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-          sea takimata sanctus est Lorem ipsum dolor sit amet.
-
---------------------Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
---------------------diam nonumy eirmod tempor invidunt ut labore et dolore magna
---------------------aliquyam erat, sed diam voluptua. At vero eos et accusam et
---------------------justo duo dolores et ea rebum. Stet clita kasd gubergren, no
---------------------sea takimata sanctus est Lorem ipsum dolor sit amet.</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_right_padding_width_and_character">Right padding (width and character)</h3>
-<div class="paragraph">
-<p>A paragraph can have a right padding (at the end of each line).
-For simple rendering, the padding is added to the text width (as shown here).
-The right padding character can be set separately.
-The following example shows a justified paragraph and then the same paragraph with right padding of 20 using <code>'+'</code>.
-The width is set to 60.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-diam nonumy eirmod tempor invidunt ut labore et dolore magna
-aliquyam erat, sed diam voluptua. At vero eos et accusam  et
-justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-sea  takimata  sanctus  est  Lorem  ipsum  dolor  sit  amet.
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed++++++++++++++++++++
-diam nonumy eirmod tempor invidunt ut labore et dolore magna++++++++++++++++++++
-aliquyam erat, sed diam voluptua. At vero eos et accusam  et++++++++++++++++++++
-justo duo dolores et ea rebum. Stet clita kasd gubergren, no++++++++++++++++++++
-sea  takimata  sanctus  est  Lorem  ipsum  dolor  sit  amet.++++++++++++++++++++</pre>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;Lorem ipsum dolor sit amet,            Lorem ipsum dolor sit amet,&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;consetetur sadipscing elitr,          consetetur sadipscing elitr,&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;sed diam nonumy eirmod tempor        sed diam nonumy eirmod tempor&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;invidunt ut labore et dolore          invidunt ut labore et dolore&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;magna aliquyam erat, sed diam        magna aliquyam erat, sed diam&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;voluptua. At vero eos et                  voluptua. At vero eos et&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;accusam                                                    accusam&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_extra_text_at_each_line_start_and_line_end">Extra text at each line start and line end</h3>
 <div class="paragraph">
-<p>Beside indentation and padding, each line of the resulting paragraph can also be started and/or terminated with a particular string.
-Those strings are called line start and line end.
-For simple rendering, these strings is added to the text width (as shown here).</p>
-</div>
-<div class="paragraph">
-<p>The following example shows a justified paragraph, then same paragraph with start string <code>"// "</code>, then same paragraph with end string <code>" -&#8594;"</code></p>
+<p>Normal paragraph, added start string <code>"// "</code>, added end string <code>" -&#8594;"</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1392,12 +1352,7 @@ voluptua.    At    vero     eos     et     accusam
 <div class="sect2">
 <h3 id="_render_to_maximum_width_calculating_additional_padding_and_strings">Render to maximum width, calculating additional padding and strings</h3>
 <div class="paragraph">
-<p>Setting an indentation and line start/end strings does not impact the width of the paragraph text.
-However, sometimes it is useful to actually render inclusive, using indentation and the length of the line start/end strings.
-This is proivded be the standard renderer.</p>
-</div>
-<div class="paragraph">
-<p>The following example shows how subsequently adding indentation, start string, and end string changes the text width but maintains the overall line width.</p>
+<p>Render to text width, text - strings, text - strings - margin</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1427,27 +1382,23 @@ voluptua. At vero eos et accusam
 </div>
 </div>
 <div class="sect2">
-<h3 id="_conditional_line_breaks">Conditional line breaks</h3>
+<h3 id="_frames">Frames</h3>
 <div class="paragraph">
-<p>All excessive white space characters are removed.
-Conditional line breaks can be added using using the HTML entities <code>&lt;br&gt;</code> or <code>&lt;br/&gt;</code>.
-For instance, the text</p>
+<p>Add a frame with top/bottom margin 2 for frame and text, left/right 5 for text, theme UTF-8 border light</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>"line 1&lt;br&gt;"
-"line 2&lt;br/&gt;"
-"line three \n still line three"</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>will render to</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>line 1
-line 2
-line three still line three</pre>
+<pre>┌──────────────────────────────────────────────────┐
+│                                                  │
+│                                                  │
+│     Lorem ipsum dolor sit  amet,  consetetur     │
+│     sadipscing elitr, sed diam nonumy eirmod     │
+│     tempor  invidunt  ut  labore  et  dolore     │
+│     magna aliquyam erat, sed diam  voluptua.     │
+│     At vero eos et accusam                       │
+│                                                  │
+│                                                  │
+└──────────────────────────────────────────────────┘</pre>
 </div>
 </div>
 </div>
@@ -1456,7 +1407,7 @@ line three still line three</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-03-25 10:43:57 GMT
+Last updated 2016-03-25 13:46:21 GMT
 </div>
 </div>
 </body>

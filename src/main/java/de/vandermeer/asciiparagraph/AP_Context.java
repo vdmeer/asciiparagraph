@@ -46,13 +46,13 @@ public class AP_Context implements IsObjectContext {
 	/** Paragraph alignment, default is {@link AP_Alignment#JUSTIFIED_LEFT}. */
 	protected AP_Alignment alignment = AP_Alignment.JUSTIFIED_LEFT;
 
-	/** Paragraph format, default is {@link  = AP_Format#NONE}. */
+	/** Paragraph format, default is {@link AP_Format#NONE}. */
 	protected AP_Format format = AP_Format.NONE;
 
 	/** The width of the paragraph, actual width depends on padding settings, default is `80`. */
 	protected int width = 80;
 
-	/** The renderer for this context, default is {@link AbstractRenderer}. */
+	/** The renderer for this context, default is {@link AP_Renderer}. */
 	protected AP_Renderer renderer = AP_Renderer.create();
 
 	/** A library of dropped capital letters, default is {@link FigletRoman}. */
@@ -87,11 +87,35 @@ public class AP_Context implements IsObjectContext {
 	}
 
 	/**
+	 * Returns the character settings.
+	 * @return character settings
+	 */
+//	public AP_CtxtCharacters getCharacters() {
+//		return characters;
+//	}
+
+	/**
 	 * Returns the set dropped capital letter library.
 	 * @return dropped capital letter library, null if none set
 	 */
 	public DropCaps getDropCapLib() {
 		return this.dropCapLib;
+	}
+
+	/**
+	 * Returns the end string.
+	 * @return end string
+	 */
+	public final String getEndString() {
+		return this.strings.end;
+	}
+
+	/**
+	 * Returns the first line indentation.
+	 * @return first line indentation
+	 */
+	public int getFirstLineIndent() {
+		return this.indents.firstLine;
 	}
 
 	/**
@@ -103,6 +127,110 @@ public class AP_Context implements IsObjectContext {
 	}
 
 	/**
+	 * Returns the paragraph frame.
+	 * @return frame, null if not set
+	 */
+	public TA_FrameTheme getFrame() {
+		return this.frame;
+	}
+
+	/**
+	 * Returns the bottom frame margin.
+	 * @return bottom frame margin
+	 */
+	public int getFrameBottomMargin() {
+		return this.margins.frameBottom;
+	}
+
+	/**
+	 * Returns the left frame margin character.
+	 * @return left frame margin character
+	 */
+	public Character getFrameLeftChar() {
+		return this.characters.frameLeft;
+	}
+
+	/**
+	 * Returns the left frame margin.
+	 * @return left frame margin
+	 */
+	public int getFrameLeftMargin() {
+		return this.margins.frameLeft;
+	}
+
+	/**
+	 * Returns the right frame margin character.
+	 * @return right frame margin character
+	 */
+	public Character getFrameRightChar() {
+		return this.characters.frameRight;
+	}
+
+	/**
+	 * Returns the right frame margin.
+	 * @return right frame margin
+	 */
+	public int getFrameRightMargin() {
+		return this.margins.frameRight;
+	}
+
+	/**
+	 * Returns the top frame margin.
+	 * @return top frame margin
+	 */
+	public int getFrameTopMargin() {
+		return this.margins.frameTop;
+	}
+
+	/**
+	 * Returns the hanging paragraph indentation
+	 * @return hanging paragraph indentation
+	 */
+	public int getHangingParaIndent() {
+		return this.indents.hangingPara;
+	}
+
+	/**
+	 * Returns the indentation settings.
+	 * @return indentation settings
+	 */
+//	public AP_CtxtIndents getIndents() {
+//		return indents;
+//	}
+
+	/**
+	 * Returns the in-text white space character.
+	 * @return in-text white space character
+	 */
+	public Character getInnerWsChar() {
+		return this.characters.innerWs;
+	}
+
+	/**
+	 * Returns the margin settings.
+	 * @return margin settings
+	 */
+//	public AP_CtxtMargins getMargins() {
+//		return margins;
+//	}
+
+	/**
+	 * Returns the left padding character.
+	 * @return left padding character
+	 */
+	public Character getPaddingLeftChar() {
+		return this.characters.paddingLeft;
+	}
+
+	/**
+	 * Returns the right padding character.
+	 * @return right padding character
+	 */
+	public Character getPaddingRightChar() {
+		return this.characters.paddingRight;
+	}
+
+	/**
 	 * Returns the set renderer.
 	 * @return renderer
 	 */
@@ -111,11 +239,172 @@ public class AP_Context implements IsObjectContext {
 	}
 
 	/**
+	 * Returns the start string.
+	 * @return start string
+	 */
+	public final String getStartString() {
+		return this.strings.start;
+	}
+
+	/**
+	 * Returns the left string margin character.
+	 * @return left string margin character
+	 */
+	public Character getStringLeftChar() {
+		return this.characters.stringLeft;
+	}
+
+	/**
+	 * Returns the left string margin.
+	 * @return left string margin
+	 */
+	public int getStringLeftMargin() {
+		return this.margins.stringLeft;
+	}
+
+	/**
+	 * Returns the right string margin character.
+	 * @return right string margin character
+	 */
+	public Character getStringRightChar() {
+		return this.characters.stringRight;
+	}
+
+	/**
+	 * Returns the right string margin.
+	 * @return right string margin
+	 */
+	public int getStringRightMargin() {
+		return this.margins.stringRight;
+	}
+
+	/**
+	 * Returns the string settings. 
+	 * @return string settings
+	 */
+//	public AP_CtxtStrings getStrings() {
+//		return this.strings;
+//	}
+
+	/**
+	 * Returns the bottom text margin.
+	 * @return bottom text margin
+	 */
+	public int getTextBottomMargin() {
+		return this.margins.textBottom;
+	}
+
+	/**
+	 * Returns the left text margin character.
+	 * @return left text margin character
+	 */
+	public Character getTextLeftChar() {
+		return this.characters.textLeft;
+	}
+
+	/**
+	 * Returns the left text margin.
+	 * @return left text margin
+	 */
+	public int getTextLeftMargin() {
+		return this.margins.textLeft;
+	}
+
+	/**
+	 * Returns the right text margin character.
+	 * @return right text margin character
+	 */
+	public Character getTextRightChar() {
+		return this.characters.textRight;
+	}
+
+	/**
+	 * Returns the right text margin.
+	 * @return right text margin
+	 */
+	public int getTextRightMargin() {
+		return this.margins.textRight;
+	}
+
+	/**
+	 * Returns the top text margin.
+	 * @return top text margin
+	 */
+	public int getTextTopMargin() {
+		return this.margins.textTop;
+	}
+
+	/**
 	 * Returns the paragraph width.
 	 * @return paragraph width
 	 */
 	public int getWidth() {
 		return this.width;
+	}
+
+	/**
+	 * Returns the width including all margins.
+	 * @return width
+	 */
+	public int getWidthAllInclusive(){
+		return this.getWidthIncStringMargins()-this.margins.getFrameLeft()-this.margins.getFrameRight();
+	}
+
+	/**
+	 * Returns the width including all margins based on requested width.
+	 * @param width requested width
+	 * @return width
+	 */
+	public int getWidthAllInclusive(int width){
+		return this.getWidthIncStringMargins(width)-this.margins.getFrameLeft()-this.margins.getFrameRight();
+	}
+
+	/**
+	 * Returns the width including text and string margins.
+	 * @return width
+	 */
+	public int getWidthIncStringMargins(){
+		int width = this.getWidthIncTextMargins()-this.margins.getStringLeft()-this.margins.getStringRight();
+		if(this.strings.getStart()!=null){
+			width -= this.strings.getStart().length();
+		}
+		if(this.strings.getEnd()!=null){
+			width -= this.strings.getEnd().length();
+		}
+		return width;
+	}
+
+	/**
+	 * Returns the width including text and string margins based on requested width.
+	 * @param width requested width
+	 * @return width
+	 */
+	public int getWidthIncStringMargins(int width){
+		int w = this.getWidthIncTextMargins(width)-this.margins.getStringLeft()-this.margins.getStringRight();
+		if(this.strings.getStart()!=null){
+			w -= this.strings.getStart().length();
+		}
+		if(this.strings.getEnd()!=null){
+			w -= this.strings.getEnd().length();
+		}
+		return w;
+	}
+
+	/**
+	 * Returns the width including text margins.
+	 * @return width
+	 */
+	public int getWidthIncTextMargins(){
+		return this.width-this.margins.getTextLeft()-this.margins.getTextRight();
+	}
+
+	/**
+	 * Returns the width including text margins based on requested width.
+	 * @param width the requested width
+	 * @return width
+	 */
+	public int getWidthIncTextMargins(int width){
+		return width-this.margins.getTextLeft()-this.margins.getTextRight();
 	}
 
 	/**
@@ -142,32 +431,33 @@ public class AP_Context implements IsObjectContext {
 	}
 
 	/**
+	 * Sets the end string.
+	 * @param end string, can be null
+	 * @return this to allow chaining
+	 */
+	public final AP_Context setEndString(String end) {
+		this.strings.end = end;
+		return this;
+	}
+
+	/**
+	 * Sets the first line indentation
+	 * @param firstLine indentation
+	 * @return this to allow chaining
+	 */
+	public AP_Context setFirstLineIndent(int firstLine) {
+		this.indents.firstLine = firstLine;
+		return this;
+	}
+
+	/**
 	 * Sets the paragraph format.
-	 * @param paragraph format, ignored if null
+	 * @param format paragraph format, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFormat(AP_Format format) {
 		Validate.notNull(format);
 		this.format = format;
-		return this;
-	}
-
-	/**
-	 * Sets the renderer for the context.
-	 * @param renderer new renderer, only set if not null
-	 */
-	public void setRenderer(AP_Renderer renderer){
-		Validate.notNull(renderer);
-		this.renderer = renderer;
-	}
-
-	/**
-	 * Sets the paragraph width.
-	 * @param width new width
-	 * @return this to allow chaining
-	 */
-	public AP_Context setWidth(int width) {
-		this.width = width;
 		return this;
 	}
 
@@ -182,107 +472,472 @@ public class AP_Context implements IsObjectContext {
 	}
 
 	/**
-	 * Returns the paragraph frame.
-	 * @return frame, null if not set
+	 * Sets the bottom frame margin
+	 * @param frameBottom margin
+	 * @return this to allow chaining
 	 */
-	public TA_FrameTheme getFrame() {
-		return this.frame;
+	public AP_Context setFrameBottomMargin(int frameBottom) {
+		this.margins.frameBottom = frameBottom;
+		return this;
 	}
 
 	/**
-	 * Returns the margin settings.
-	 * @return margin settings
+	 * Sets the left frame margin character.
+	 * @param frameLeft character
+	 * @return this to allow chaining
 	 */
-	public AP_CtxtMargins getMargins() {
-		return margins;
+	public AP_Context setFrameLeftChar(Character frameLeft) {
+		Validate.notNull(frameLeft);
+		this.characters.frameLeft = frameLeft;
+		return this;
 	}
 
 	/**
-	 * Returns the character settings.
-	 * @return character settings
+	 * Sets the left frame margin
+	 * @param frameLeft margin
+	 * @return this to allow chaining
 	 */
-	public AP_CtxtCharacters getCharacters() {
-		return characters;
+	public AP_Context setFrameLeftMargin(int frameLeft) {
+		this.margins.frameLeft = frameLeft;
+		return this;
 	}
 
 	/**
-	 * Returns the indentation settings.
-	 * @return indentation settings
+	 * Sets the left and right frame margin character.
+	 * @param frameChar character
+	 * @return this to allow chaining
 	 */
-	public AP_CtxtIndents getIndents() {
-		return indents;
+	public AP_Context setFrameLeftRightChar(Character frameChar){
+		Validate.notNull(frameChar);
+		this.characters.frameLeft = frameChar;
+		this.characters.frameRight = frameChar;
+		return this;
 	}
 
 	/**
-	 * Returns the string settings. 
-	 * @return string settings
+	 * Sets the left and right frame margin character.
+	 * @param frameLeft character
+	 * @param frameRight character
+	 * @return this to allow chaining
 	 */
-	public AP_CtxtStrings getStrings() {
-		return strings;
+	public AP_Context setFrameLeftRightChar(Character frameLeft, Character frameRight){
+		Validate.notNull(frameLeft);
+		Validate.notNull(frameRight);
+		this.characters.frameLeft = frameLeft;
+		this.characters.frameRight = frameRight;
+		return this;
 	}
 
 	/**
-	 * Returns the width including text margins.
-	 * @return width
+	 * Sets the left and right frame margin.
+	 * @param frameMargin margin
+	 * @return this to allow chaining
 	 */
-	public int getWidthIncTextMargins(){
-		return this.width-this.margins.getTextLeft()-this.margins.getTextRight();
+	public AP_Context setFrameLeftRightMargin(int frameMargin){
+		this.margins.frameLeft = frameMargin;
+		this.margins.frameRight = frameMargin;
+		return this;
 	}
 
 	/**
-	 * Returns the width including text margins based on requested width.
-	 * @param width the requested width
-	 * @return width
+	 * Sets the left and right frame margin.
+	 * @param frameLeft margin
+	 * @param frameRight margin
+	 * @return this to allow chaining
 	 */
-	public int getWidthIncTextMargins(int width){
-		return width-this.margins.getTextLeft()-this.margins.getTextRight();
+	public AP_Context setFrameLeftRightMargin(int frameLeft, int frameRight){
+		this.margins.frameLeft = frameLeft;
+		this.margins.frameRight = frameRight;
+		return this;
 	}
 
 	/**
-	 * Returns the width including text and string margins.
-	 * @return width
+	 * Sets the right frame margin character.
+	 * @param frameRight character
+	 * @return this to allow chaining
 	 */
-	public int getWidthIncStringMargins(){
-		int width = this.getWidthIncTextMargins()-this.margins.getStringLeft()-this.margins.getStringRight();
-		if(this.getStrings().getStart()!=null){
-			width -= this.getStrings().getStart().length();
-		}
-		if(this.getStrings().getEnd()!=null){
-			width -= this.getStrings().getEnd().length();
-		}
-		return width;
+	public AP_Context setFrameRightChar(Character frameRight) {
+		Validate.notNull(frameRight);
+		this.characters.frameRight = frameRight;
+		return this;
 	}
 
 	/**
-	 * Returns the width including text and string margins based on requested width.
-	 * @param width requested width
-	 * @return width
+	 * Sets the right frame margin
+	 * @param frameRight margin
+	 * @return this to allow chaining
 	 */
-	public int getWidthIncStringMargins(int width){
-		int w = this.getWidthIncTextMargins(width)-this.margins.getStringLeft()-this.margins.getStringRight();
-		if(this.getStrings().getStart()!=null){
-			w -= this.getStrings().getStart().length();
-		}
-		if(this.getStrings().getEnd()!=null){
-			w -= this.getStrings().getEnd().length();
-		}
-		return w;
+	public AP_Context setFrameRightMargin(int frameRight) {
+		this.margins.frameRight = frameRight;
+		return this;
 	}
 
 	/**
-	 * Returns the width including all margins.
-	 * @return width
+	 * Sets the top and bottom frame margin.
+	 * @param frameMargin margin
+	 * @return this to allow chaining
 	 */
-	public int getWidthAllInclusive(){
-		return this.getWidthIncStringMargins()-this.margins.getFrameLeft()-this.margins.getFrameRight();
+	public AP_Context setFrameTopBottomMargin(int frameMargin){
+		this.margins.frameTop = frameMargin;
+		this.margins.frameBottom = frameMargin;
+		return this;
 	}
 
 	/**
-	 * Returns the width including all margins based on requested width.
-	 * @param width requested width
-	 * @return width
+	 * Sets the top and bottom frame margin.
+	 * @param frameTop margin
+	 * @param frameBottom margin
+	 * @return this to allow chaining
 	 */
-	public int getWidthAllInclusive(int width){
-		return this.getWidthIncStringMargins(width)-this.margins.getFrameLeft()-this.margins.getFrameRight();
+	public AP_Context setFrameTopBottomMargin(int frameTop, int frameBottom){
+		this.margins.frameTop = frameTop;
+		this.margins.frameBottom = frameBottom;
+		return this;
 	}
+
+	/**
+	 * Sets the top frame margin
+	 * @param frameTop margin
+	 * @return this to allow chaining
+	 */
+	public AP_Context setFrameTopMargin(int frameTop) {
+		this.margins.frameTop = frameTop;
+		return this;
+	}
+
+	/**
+	 * Sets the hanging paragraph indentation
+	 * @param hangingPara indentation
+	 * @return this to allow chaining
+	 */
+	public AP_Context setHangingParaIndent(int hangingPara) {
+		this.indents.hangingPara = hangingPara;
+		return this;
+	}
+
+	/**
+	 * Sets the in-text white space character
+	 * @param innerWs in-text white space character
+	 * @return this to allow chaining
+	 */
+	public AP_Context setInnerWsChar(Character innerWs) {
+		Validate.notNull(innerWs);
+		this.characters.innerWs = innerWs;
+		return this;
+	}
+
+	/**
+	 * Sets the left padding character.
+	 * @param paddingLeft character
+	 * @return this to allow chaining
+	 */
+	public AP_Context setPaddingLeftChar(Character paddingLeft) {
+		Validate.notNull(paddingLeft);
+		this.characters.paddingLeft = paddingLeft;
+		return this;
+	}
+
+	/**
+	 * Sets the left and right padding character.
+	 * @param paddingChar character
+	 * @return this to allow chaining
+	 */
+	public AP_Context setPaddingLeftRightChar(Character paddingChar){
+		Validate.notNull(paddingChar);
+		this.characters.paddingLeft = paddingChar;
+		this.characters.paddingRight = paddingChar;
+		return this;
+	}
+
+	/**
+	 * Sets the left and right padding character.
+	 * @param paddingLeft character
+	 * @param paddingRight character
+	 * @return this to allow chaining
+	 */
+	public AP_Context setPaddingLeftRightChar(Character paddingLeft, Character paddingRight){
+		Validate.notNull(paddingLeft);
+		Validate.notNull(paddingRight);
+		this.characters.paddingLeft = paddingLeft;
+		this.characters.paddingRight = paddingRight;
+		return this;
+	}
+
+	/**
+	 * Sets the right padding character.
+	 * @param paddingRight character
+	 * @return this to allow chaining
+	 */
+	public AP_Context setPaddingRightChar(Character paddingRight) {
+		Validate.notNull(paddingRight);
+		this.characters.paddingRight = paddingRight;
+		return this;
+	}
+
+	/**
+	 * Sets the renderer for the context.
+	 * @param renderer new renderer, only set if not null
+	 */
+	public void setRenderer(AP_Renderer renderer){
+		Validate.notNull(renderer);
+		this.renderer = renderer;
+	}
+
+	/**
+	 * Sets the start and end string to the same string.
+	 * @param start string, can be null
+	 * @param end string, can be null
+	 * @return this to allow chaining
+	 */
+	public final AP_Context setStartEndString(String start, String end) {
+		this.strings.start = start;
+		this.strings.end = end;
+		return this;
+	}
+
+	/**
+	 * Sets the start string.
+	 * @param start string, can be null
+	 * @return this to allow chaining
+	 */
+	public final AP_Context setStartString(String start) {
+		this.strings.start = start;
+		return this;
+	}
+
+	/**
+	 * Sets the left string margin character.
+	 * @param stringLeft character
+	 * @return this to allow chaining
+	 */
+	public AP_Context setStringLeftChar(Character stringLeft) {
+		Validate.notNull(stringLeft);
+		this.characters.stringLeft = stringLeft;
+		return this;
+	}
+
+	/**
+	 * Sets the left string margin
+	 * @param stringLeft margin
+	 * @return this to allow chaining
+	 */
+	public AP_Context setStringLeftMargin(int stringLeft) {
+		this.margins.stringLeft = stringLeft;
+		return this;
+	}
+
+	/**
+	 * Sets the left and right string margin character.
+	 * @param stringChar character
+	 * @return this to allow chaining
+	 */
+	public AP_Context setStringLeftRightChar(Character stringChar){
+		Validate.notNull(stringChar);
+		this.characters.stringLeft = stringChar;
+		this.characters.stringRight = stringChar;
+		return this;
+	}
+
+	/**
+	 * Sets the left and right string margin character.
+	 * @param stringLeft character
+	 * @param stringRight character
+	 * @return this to allow chaining
+	 */
+	public AP_Context setStringLeftRightChar(Character stringLeft, Character stringRight){
+		Validate.notNull(stringLeft);
+		Validate.notNull(stringRight);
+		this.characters.stringLeft = stringLeft;
+		this.characters.stringRight = stringRight;
+		return this;
+	}
+
+	/**
+	 * Sets the left and right string margin.
+	 * @param stringMargin margin
+	 * @return this to allow chaining
+	 */
+	public AP_Context setStringLeftRightMargin(int stringMargin){
+		this.margins.stringLeft = stringMargin;
+		this.margins.stringRight = stringMargin;
+		return this;
+	}
+
+	/**
+	 * Sets the left and right string margin.
+	 * @param stringLeft margin
+	 * @param stringRight margin
+	 * @return this to allow chaining
+	 */
+	public AP_Context setStringLeftRightMargin(int stringLeft, int stringRight){
+		this.margins.stringLeft = stringLeft;
+		this.margins.stringRight = stringRight;
+		return this;
+	}
+
+	/**
+	 * Sets the right string margin character.
+	 * @param stringRight character
+	 * @return this to allow chaining
+	 */
+	public AP_Context setStringRightChar(Character stringRight) {
+		Validate.notNull(stringRight);
+		this.characters.stringRight = stringRight;
+		return this;
+	}
+
+	/**
+	 * Sets the right string margin
+	 * @param stringRight margin
+	 * @return this to allow chaining
+	 */
+	public AP_Context setStringRightMargin(int stringRight) {
+		this.margins.stringRight = stringRight;
+		return this;
+	}
+
+	/**
+	 * Sets the bottom text margin
+	 * @param textBottom margin
+	 * @return this to allow chaining
+	 */
+	public AP_Context setTextBottomMargin(int textBottom) {
+		this.margins.textBottom = textBottom;
+		return this;
+	}
+
+	/**
+	 * Sets the left text margin character.
+	 * @param textLeft character
+	 * @return this to allow chaining
+	 */
+	public AP_Context setTextLeftChar(Character textLeft) {
+		Validate.notNull(textLeft);
+		this.characters.textLeft = textLeft;
+		return this;
+	}
+
+	/**
+	 * Sets the left text margin
+	 * @param textLeft margin
+	 * @return this to allow chaining
+	 */
+	public AP_Context setTextLeftMargin(int textLeft) {
+		this.margins.textLeft = textLeft;
+		return this;
+	}
+
+	/**
+	 * Sets the left and right text margin character.
+	 * @param textChar character
+	 * @return this to allow chaining
+	 */
+	public AP_Context setTextLeftRightChar(Character textChar){
+		Validate.notNull(textChar);
+		this.characters.textLeft = textChar;
+		this.characters.textRight = textChar;
+		return this;
+	}
+
+	/**
+	 * Sets the left and right text margin character.
+	 * @param textLeft character
+	 * @param textRight character
+	 * @return this to allow chaining
+	 */
+	public AP_Context setTextLeftRightChar(Character textLeft, Character textRight){
+		Validate.notNull(textLeft);
+		Validate.notNull(textRight);
+		this.characters.textLeft = textLeft;
+		this.characters.textRight = textRight;
+		return this;
+	}
+
+	/**
+	 * Sets the left and right text margin.
+	 * @param textMargin margin
+	 * @return this to allow chaining
+	 */
+	public AP_Context setTextLeftRightMargin(int textMargin){
+		this.margins.textLeft = textMargin;
+		this.margins.textRight = textMargin;
+		return this;
+	}
+
+	/**
+	 * Sets the left and right text margin.
+	 * @param textLeft margin
+	 * @param textRight margin
+	 * @return this to allow chaining
+	 */
+	public AP_Context setTextLeftRightMargin(int textLeft, int textRight){
+		this.margins.textLeft = textLeft;
+		this.margins.textRight = textRight;
+		return this;
+	}
+
+	/**
+	 * Sets the right text margin character.
+	 * @param textRight character
+	 * @return this to allow chaining
+	 */
+	public AP_Context setTextRightChar(Character textRight) {
+		Validate.notNull(textRight);
+		this.characters.textRight = textRight;
+		return this;
+	}
+
+	/**
+	 * Sets the right text margin
+	 * @param textRight margin
+	 * @return this to allow chaining
+	 */
+	public AP_Context setTextRightMargin(int textRight) {
+		this.margins.textRight = textRight;
+		return this;
+	}
+
+	/**
+	 * Sets the top and bottom text margin.
+	 * @param textMargin margin
+	 * @return this to allow chaining
+	 */
+	public AP_Context setTextTopBottomMargin(int textMargin){
+		this.margins.textTop = textMargin;
+		this.margins.textBottom = textMargin;
+		return this;
+	}
+
+	/**
+	 * Sets the top and bottom text margin.
+	 * @param textTop margin
+	 * @param textBottom margin
+	 * @return this to allow chaining
+	 */
+	public AP_Context setTextTopBottomMargin(int textTop, int textBottom){
+		this.margins.textTop = textTop;
+		this.margins.textBottom = textBottom;
+		return this;
+	}
+
+	/**
+	 * Sets the top text margin
+	 * @param textTop margin
+	 * @return this to allow chaining
+	 */
+	public AP_Context setTextTopMargin(int textTop) {
+		this.margins.textTop = textTop;
+		return this;
+	}
+
+	/**
+	 * Sets the paragraph width.
+	 * @param width new width
+	 * @return this to allow chaining
+	 */
+	public AP_Context setWidth(int width) {
+		this.width = width;
+		return this;
+	}
+
 }

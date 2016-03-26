@@ -24,28 +24,38 @@ import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
 
 /**
- * AsciiParagraph example demonstrating right padding behavior.
+ * AsciiParagraph example demonstrating alignment behavior.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_RightPadding_Behavior implements StandardExample {
+public class AP_02_Alignment_Behavior implements StandardExample {
 
 	@Override
 	public void showOutput(){
 		// tag::example[]
-		AP_Context pc = new AP_Context();
-		pc.setAlignment(AP_Alignment.JUSTIFIED);
-		pc.setWidth(60);
+		AP_Context ctx = new AP_Context().setWidth(39);
 
-		AsciiParagraph ap = new AsciiParagraph(pc);
-		ap.addText(new LoremIpsum().getParagraphs(1));
+		AsciiParagraph ap = new AsciiParagraph(ctx);
+		ap.addText(new LoremIpsum().getWords(29));
 
+		ctx.setAlignment(AP_Alignment.JUSTIFIED);
 		System.out.println(ap.render());
 
-		pc.getMargins().setTextRight(20);
-		pc.getCharacters().setTextRight('+');
+		ctx.setAlignment(AP_Alignment.JUSTIFIED_LEFT);
+		System.out.println(ap.render());
+
+		ctx.setAlignment(AP_Alignment.JUSTIFIED_RIGHT);
+		System.out.println(ap.render());
+
+		ctx.setAlignment(AP_Alignment.CENTER);
+		System.out.println(ap.render());
+
+		ctx.setAlignment(AP_Alignment.LEFT);
+		System.out.println(ap.render());
+
+		ctx.setAlignment(AP_Alignment.RIGHT);
 		System.out.println(ap.render());
 		// end::example[]
 	}
@@ -53,18 +63,28 @@ public class AP_RightPadding_Behavior implements StandardExample {
 	@Override
 	public StrBuilder getSource(){
 		String[] source = new String[]{
-				"AP_Context pc = new AP_Context();",
-				"pc.setAlignment(AP_Alignment.JUSTIFIED);",
-				"pc.setWidth(60);",
+				"AP_Context ctx = new AP_Context().setWidth(39);",
 				"",
-				"AsciiParagraph ap = new AsciiParagraph(pc);",
-				"ap.addText(new LoremIpsum().getParagraphs(1));",
+				"AsciiParagraph ap = new AsciiParagraph(ctx);",
+				"ap.addText(new LoremIpsum().getWords(29));",
 				"",
+				"ctx.setAlignment(AP_Alignment.JUSTIFIED);",
 				"System.out.println(ap.render());",
 				"",
-				"pc.setPaddingRight(20);",
-				"pc.setRightPaddingChar('+');",
-				"System.out.println(ap.render(60));",
+				"ctx.setAlignment(AP_Alignment.JUSTIFIED_LEFT);",
+				"System.out.println(ap.render());",
+				"",
+				"ctx.setAlignment(AP_Alignment.JUSTIFIED_RIGHT);",
+				"System.out.println(ap.render());",
+				"",
+				"ctx.setAlignment(AP_Alignment.CENTER);",
+				"System.out.println(ap.render());",
+				"",
+				"ctx.setAlignment(AP_Alignment.LEFT);",
+				"System.out.println(ap.render());",
+				"",
+				"ctx.setAlignment(AP_Alignment.RIGHT);",
+				"System.out.println(ap.render());",
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");
 	}

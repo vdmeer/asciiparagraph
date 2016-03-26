@@ -15,39 +15,36 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.StrBuilder;
 
+import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
 
 /**
- * AsciiParagraph example demonstrating simple white space behavior.
+ * AsciiParagraph example demonstrating width behavior.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_Ws_BehaviorSimple implements StandardExample {
+public class AP_00b_Width_Behavior implements StandardExample {
 
 	@Override
 	public void showOutput(){
 		// tag::example[]
 		AsciiParagraph ap = new AsciiParagraph();
+		ap.addText(new LoremIpsum().getWords(20));
+		ap.getContext().setAlignment(AP_Alignment.LEFT);
 
-		ap.addText("c2  c2");
-		ap.addText("c3   c3");
-		ap.addText("c4    c4");
+		ap.getContext().setWidth(50);
+		System.out.println(ap.render());
 
-		ap.addText("t1	t1");
-		ap.addText("t2		t2");
-		ap.addText("t3			t3");
-		ap.addText("t4\t\t\t\tt4");
+		ap.getContext().setWidth(40);
+		System.out.println(ap.render());
 
-		ap.addText("word followed by " + StringUtils.CR + " followed by" + StringUtils.LF + " followed by \n");
-
-		ap.getContext().setWidth(60).setAlignment(AP_Alignment.LEFT);
+		ap.getContext().setWidth(30);
 		System.out.println(ap.render());
 		// end::example[]
 	}
@@ -56,19 +53,16 @@ public class AP_Ws_BehaviorSimple implements StandardExample {
 	public StrBuilder getSource(){
 		String[] source = new String[]{
 				"AsciiParagraph ap = new AsciiParagraph();",
+				"ap.addText(new LoremIpsum().getWords(20));",
+				"ap.getContext().setAlignment(AP_Alignment.LEFT);",
 				"",
-				"ap.addText(\"c2  c2\");",
-				"ap.addText(\"c3   c3\");",
-				"ap.addText(\"c4    c4\");",
+				"ap.getContext().setWidth(50);",
+				"System.out.println(ap.render());",
 				"",
-				"ap.addText(\"t1	t1\");",
-				"ap.addText(\"t2		t2\");",
-				"ap.addText(\"t3			t3\");",
-				"ap.addText(\"t4\t\t\t\tt4\");",
+				"ap.getContext().setWidth(40);",
+				"System.out.println(ap.render());",
 				"",
-				"ap.addText(\"word followed by \" + StringUtils.CR + \" followed by\" + StringUtils.LF + \" followed by \\n\");",
-				"",
-				"ap.getContext().setWidth(60).setAlignment(AP_Alignment.LEFT);",
+				"ap.getContext().setWidth(30);",
 				"System.out.println(ap.render());"
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");

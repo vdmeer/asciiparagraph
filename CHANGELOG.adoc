@@ -11,6 +11,8 @@ v0.0.3 - major rewrite (existing code will break) - 2016-03-##
 * changed justified alignment behavior
   ** justified now means all lines are justified
   ** added justified left for last line being left aligned
+* added paragraph frames
+* rewrote padding/margin/character behavior and renderer
 
 
 v0.0.2 - maintenance - 2016-03-01

@@ -29,67 +29,72 @@ import de.vandermeer.skb.interfaces.StandardExampleRunner;
 public class Test_Examples implements StandardExampleRunner {
 
 	@Test
-	public void test_AlignmentBehavior(){
-		this.runExample(new AP_Alignment_Behavior());
+	public void test_00a_Getting_Started(){
+		this.runExample(new AP_00_Getting_Started());
 	}
 
 	@Test
-	public void test_Format(){
-		this.runExample(new AP_Format_Behavior());
+	public void test_00b_Width_Behavior(){
+		this.runExample(new AP_00b_Width_Behavior());
 	}
 
 	@Test
-	public void test_InclusiveWidth(){
-		this.runExample(new AP_InclusiveWidth());
+	public void test_00c_AddText_ST(){
+		this.runExample(new AP_00c_AddText_ST());
 	}
 
 	@Test
-	public void test_IndentationBehavior(){
-		this.runExample(new AP_Indentation_Behavior());
+	public void test_01a_WS_Behavior(){
+		this.runExample(new AP_01a_WS_Behavior());
 	}
 
 	@Test
-	public void test_LeftPaddingBehavior(){
-		this.runExample(new AP_LeftPadding_Behavior());
+	public void test_01b_WS_Behavior_Doc(){
+		this.runExample(new AP_01b_WS_Behavior_Doc());
 	}
 
 	@Test
-	public void test_LineStartEndBehavior(){
-		this.runExample(new AP_LineStartEnd_Behavior());
+	public void test_01c_ConditionalLineBreak(){
+		this.runExample(new AP_01c_ConditionalLineBreak());
 	}
 
 	@Test
-	public void test_RightPaddingBehavior(){
-		this.runExample(new AP_RightPadding_Behavior());
+	public void test_01d_Inner_WS(){
+		this.runExample(new AP_01d_Inner_WS());
 	}
 
 	@Test
-	public void test_SimpleParagraph(){
-		this.runExample(new AP_Simple_Paragraph());
+	public void test_02_AlignmentBehavior(){
+		this.runExample(new AP_02_Alignment_Behavior());
 	}
 
 	@Test
-	public void test_ConditionalLineBreak(){
-		this.runExample(new AP_ConditionalLineBreak());
+	public void test_03_Format(){
+		this.runExample(new AP_03_Format_Behavior());
 	}
 
 	@Test
-	public void test_StAddBehavior(){
-		this.runExample(new AP_StAdd_Behavior());
+	public void test_04_TextLeft(){
+		this.runExample(new AP_04_Left_Text_Margin());
 	}
 
 	@Test
-	public void test_WidthBehavior(){
-		this.runExample(new AP_Width_Behavior());
+	public void test_05_TextRight(){
+		this.runExample(new AP_05_Right_Text_Margin());
 	}
 
 	@Test
-	public void test_WsBehavior(){
-		this.runExample(new AP_Ws_Behavior());
+	public void test_06_LineStartEndBehavior(){
+		this.runExample(new AP_06_LineStartEnd_Behavior());
 	}
 
 	@Test
-	public void test_WsBehaviorSimple(){
-		this.runExample(new AP_Ws_BehaviorSimple());
+	public void test_07_InclusiveWidth(){
+		this.runExample(new AP_07_InclusiveWidth());
+	}
+
+	@Test
+	public void test_08_Frame(){
+		this.runExample(new AP_08_Frame());
 	}
 }

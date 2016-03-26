@@ -17,28 +17,32 @@ package de.vandermeer.asciiparagraph.examples;
 
 import org.apache.commons.lang3.text.StrBuilder;
 
+import de.svenjacobs.loremipsum.LoremIpsum;
+import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
 
 /**
- * AsciiParagraph example for a simple paragraph.
+ * AsciiParagraph example demonstrating inner white space behavior.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_Simple_Paragraph implements StandardExample {
+public class AP_01d_Inner_WS implements StandardExample {
 
 	@Override
 	public void showOutput(){
 		// tag::example[]
 		AsciiParagraph ap = new AsciiParagraph();
-		ap.addText("line	1");
-		ap.addText("2  2");
-		ap.addText("more text with	tab and \n newline");
-		ap.addText("some more text to get it over the 80 character default width");
-		String rend = ap.render();
-		System.out.println(rend);
+		ap.getContext().setAlignment(AP_Alignment.LEFT).setWidth(35);
+		ap.addText(new LoremIpsum().getWords(20));
+
+		ap.getContext().setInnerWsChar('˽');
+		System.out.println(ap.render());
+
+		ap.getContext().setInnerWsChar('—');
+		System.out.println(ap.render());
 		// end::example[]
 	}
 
@@ -46,12 +50,11 @@ public class AP_Simple_Paragraph implements StandardExample {
 	public StrBuilder getSource(){
 		String[] source = new String[]{
 				"AsciiParagraph ap = new AsciiParagraph();",
-				"ap.addText(\"line\t1\");",
-				"ap.addText(\"2  2\");",
-				"ap.addText(\"more text with\ttab and \\n newline\");",
-				"ap.addText(\"some more text to get it over the 80 character default width\");",
-				"String rend = ap.render();",
-				"System.out.println(rend);",
+				"ap.getContext().setAlignment(AP_Alignment.LEFT).setWidth(35);",
+				"ap.getContext().setInnerWsChar('˽');",
+				"",
+				"ap.addText(new LoremIpsum().getWords(20));",
+				"System.out.println(ap.render());",
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");
 	}

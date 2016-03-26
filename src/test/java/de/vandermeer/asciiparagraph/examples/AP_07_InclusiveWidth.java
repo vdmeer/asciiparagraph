@@ -18,73 +18,56 @@ package de.vandermeer.asciiparagraph.examples;
 import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
-import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
 
 /**
- * AsciiParagraph example demonstrating alignment behavior.
+ * AsciiParagraph example demonstrating inclusive width.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_Alignment_Behavior implements StandardExample {
+public class AP_07_InclusiveWidth implements StandardExample {
 
 	@Override
 	public void showOutput(){
 		// tag::example[]
-		AP_Context pc = new AP_Context().setWidth(39);
-
-		AsciiParagraph ap = new AsciiParagraph(pc);
+		AP_Context ctx = new AP_Context();
+		AsciiParagraph ap = new AsciiParagraph(ctx);
 		ap.addText(new LoremIpsum().getWords(29));
 
-		pc.setAlignment(AP_Alignment.JUSTIFIED);
-		System.out.println(ap.render());
+		System.out.println(ap.render(50));
 
-		pc.setAlignment(AP_Alignment.JUSTIFIED_LEFT);
-		System.out.println(ap.render());
+		ctx.setStartString("// ");
+		System.out.println(ap.render(50));
 
-		pc.setAlignment(AP_Alignment.JUSTIFIED_RIGHT);
-		System.out.println(ap.render());
+		ctx.setEndString(" -->");
+		System.out.println(ap.render(50));
 
-		pc.setAlignment(AP_Alignment.CENTER);
-		System.out.println(ap.render());
-
-		pc.setAlignment(AP_Alignment.LEFT);
-		System.out.println(ap.render());
-
-		pc.setAlignment(AP_Alignment.RIGHT);
-		System.out.println(ap.render());
+		ctx.setTextLeftMargin(10);
+		System.out.println(ap.render(50));
 		// end::example[]
 	}
 
 	@Override
 	public StrBuilder getSource(){
 		String[] source = new String[]{
-				"AP_Context pc = new AP_Context().setWidth(39);",
-				"",
-				"AsciiParagraph ap = new AsciiParagraph(pc);",
+				"AP_Context ctx = new AP_Context();",
+				"AsciiParagraph ap = new AsciiParagraph(ctx);",
 				"ap.addText(new LoremIpsum().getWords(29));",
 				"",
-				"pc.setAlignment(AP_Alignment.JUSTIFIED);",
-				"System.out.println(ap.render());",
+				"System.out.println(ap.render(50));",
 				"",
-				"pc.setAlignment(AP_Alignment.JUSTIFIED_LEFT);",
-				"System.out.println(ap.render());",
+				"ctx.getStrings().setStartString(\"// \");",
+				"System.out.println(ap.render(50));",
 				"",
-				"pc.setAlignment(AP_Alignment.JUSTIFIED_RIGHT);",
-				"System.out.println(ap.render());",
+				"ctx.getStrings().setEndString(\" -->\");",
+				"System.out.println(ap.render(50));",
 				"",
-				"pc.setAlignment(AP_Alignment.CENTER);",
-				"System.out.println(ap.render());",
-				"",
-				"pc.setAlignment(AP_Alignment.LEFT);",
-				"System.out.println(ap.render());",
-				"",
-				"pc.setAlignment(AP_Alignment.RIGHT);",
-				"System.out.println(ap.render());"
+				"ctx.getMargins().setTextLeftMargin(10);",
+				"System.out.println(ap.render(50));",
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");
 	}

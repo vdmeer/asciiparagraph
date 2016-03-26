@@ -62,67 +62,11 @@ public class AP_CtxtMargins {
 	}
 
 	/**
-	 * Returns the left text margin.
-	 * @return left text margin
+	 * Returns the bottom frame margin.
+	 * @return bottom frame margin
 	 */
-	public int getTextLeft() {
-		return this.textLeft;
-	}
-
-	/**
-	 * Sets the left text margin
-	 * @param textLeft margin
-	 */
-	public void setTextLeft(int textLeft) {
-		this.textLeft = textLeft;
-	}
-
-	/**
-	 * Returns the right text margin.
-	 * @return right text margin
-	 */
-	public int getTextRight() {
-		return this.textRight;
-	}
-
-	/**
-	 * Sets the right text margin
-	 * @param textRight margin
-	 */
-	public void setTextRight(int textRight) {
-		this.textRight = textRight;
-	}
-
-	/**
-	 * Returns the left string margin.
-	 * @return left string margin
-	 */
-	public int getStringLeft() {
-		return this.stringLeft;
-	}
-
-	/**
-	 * Sets the left string margin
-	 * @param stringLeft margin
-	 */
-	public void setStringLeft(int stringLeft) {
-		this.stringLeft = stringLeft;
-	}
-
-	/**
-	 * Returns the right string margin.
-	 * @return right string margin
-	 */
-	int getStringRight() {
-		return this.stringRight;
-	}
-
-	/**
-	 * Sets the right string margin
-	 * @param stringRight margin
-	 */
-	public void setStringRight(int stringRight) {
-		this.stringRight = stringRight;
+	public int getFrameBottom() {
+		return this.frameBottom;
 	}
 
 	/**
@@ -134,59 +78,11 @@ public class AP_CtxtMargins {
 	}
 
 	/**
-	 * Sets the left frame margin
-	 * @param frameLeft margin
-	 */
-	public void setFrameLeft(int frameLeft) {
-		this.frameLeft = frameLeft;
-	}
-
-	/**
 	 * Returns the right frame margin.
 	 * @return right frame margin
 	 */
 	public int getFrameRight() {
 		return this.frameRight;
-	}
-
-	/**
-	 * Sets the rigt frame margin
-	 * @param frameRight margin
-	 */
-	public void setFrameRight(int frameRight) {
-		this.frameRight = frameRight;
-	}
-
-	/**
-	 * Returns the top text margin.
-	 * @return top text margin
-	 */
-	public int getTextTop() {
-		return this.textTop;
-	}
-
-	/**
-	 * Sets the top text margin
-	 * @param textTop margin
-	 */
-	public void setTextTop(int textTop) {
-		this.textTop = textTop;
-	}
-
-	/**
-	 * Returns the bottom text margin.
-	 * @return bottom text margin
-	 */
-	public int getTextBottom() {
-		return this.textBottom;
-	}
-
-	/**
-	 * Sets the bottom text margin
-	 * @param textBottom margin
-	 */
-	public void setTextBottom(int textBottom) {
-		this.textBottom = textBottom;
 	}
 
 	/**
@@ -198,19 +94,51 @@ public class AP_CtxtMargins {
 	}
 
 	/**
-	 * Sets the top frame margin
-	 * @param frameTop margin
+	 * Returns the left string margin.
+	 * @return left string margin
 	 */
-	public void setFrameTop(int frameTop) {
-		this.frameTop = frameTop;
+	public int getStringLeft() {
+		return this.stringLeft;
 	}
 
 	/**
-	 * Returns the bottom frame margin.
-	 * @return bottom frame margin
+	 * Returns the right string margin.
+	 * @return right string margin
 	 */
-	public int getFrameBottom() {
-		return this.frameBottom;
+	public int getStringRight() {
+		return this.stringRight;
+	}
+
+	/**
+	 * Returns the bottom text margin.
+	 * @return bottom text margin
+	 */
+	public int getTextBottom() {
+		return this.textBottom;
+	}
+
+	/**
+	 * Returns the left text margin.
+	 * @return left text margin
+	 */
+	public int getTextLeft() {
+		return this.textLeft;
+	}
+
+	/**
+	 * Returns the right text margin.
+	 * @return right text margin
+	 */
+	public int getTextRight() {
+		return this.textRight;
+	}
+
+	/**
+	 * Returns the top text margin.
+	 * @return top text margin
+	 */
+	public int getTextTop() {
+		return this.textTop;
 	}
 
 	/**
@@ -219,5 +147,77 @@ public class AP_CtxtMargins {
 	 */
 	public void setFrameBottom(int frameBottom) {
 		this.frameBottom = frameBottom;
+	}
+
+	/**
+	 * Sets the left frame margin
+	 * @param frameLeft margin
+	 */
+	public void setFrameLeft(int frameLeft) {
+		this.frameLeft = frameLeft;
+	}
+
+	/**
+	 * Sets the right frame margin
+	 * @param frameRight margin
+	 */
+	public void setFrameRight(int frameRight) {
+		this.frameRight = frameRight;
+	}
+
+	/**
+	 * Sets the top frame margin
+	 * @param frameTop margin
+	 */
+	public void setFrameTop(int frameTop) {
+		this.frameTop = frameTop;
+	}
+
+	/**
+	 * Sets the left string margin
+	 * @param stringLeft margin
+	 */
+	public void setStringLeft(int stringLeft) {
+		this.stringLeft = stringLeft;
+	}
+
+	/**
+	 * Sets the right string margin
+	 * @param stringRight margin
+	 */
+	public void setStringRight(int stringRight) {
+		this.stringRight = stringRight;
+	}
+
+	/**
+	 * Sets the bottom text margin
+	 * @param textBottom margin
+	 */
+	public void setTextBottom(int textBottom) {
+		this.textBottom = textBottom;
+	}
+
+	/**
+	 * Sets the left text margin
+	 * @param textLeft margin
+	 */
+	public void setTextLeft(int textLeft) {
+		this.textLeft = textLeft;
+	}
+
+	/**
+	 * Sets the right text margin
+	 * @param textRight margin
+	 */
+	public void setTextRight(int textRight) {
+		this.textRight = textRight;
+	}
+
+	/**
+	 * Sets the top text margin
+	 * @param textTop margin
+	 */
+	public void setTextTop(int textTop) {
+		this.textTop = textTop;
 	}
 }

@@ -44,14 +44,6 @@ public class AP_CtxtIndents {
 	}
 
 	/**
-	 * Sets the first line indentation
-	 * @param firstLine indentation
-	 */
-	public void setFirstLine(int firstLine) {
-		this.firstLine = firstLine;
-	}
-
-	/**
 	 * Returns the hanging paragraph indentation
 	 * @return hanging paragraph indentation
 	 */
@@ -60,8 +52,16 @@ public class AP_CtxtIndents {
 	}
 
 	/**
+	 * Sets the first line indentation
+	 * @param firstLine indentation
+	 */
+	public void setFirstLine(int firstLine) {
+		this.firstLine = firstLine;
+	}
+
+	/**
 	 * Sets the hanging paragraph indentation
-	 * @param hangingPara  indentation
+	 * @param hangingPara indentation
 	 */
 	public void setHangingPara(int hangingPara) {
 		this.hangingPara = hangingPara;

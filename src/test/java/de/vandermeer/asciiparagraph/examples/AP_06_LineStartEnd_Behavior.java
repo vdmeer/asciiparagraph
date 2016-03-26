@@ -17,28 +17,37 @@ package de.vandermeer.asciiparagraph.examples;
 
 import org.apache.commons.lang3.text.StrBuilder;
 
+import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Alignment;
+import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
 
 /**
- * AsciiParagraph example demonstrating conditional line breaks.
+ * AsciiParagraph example demonstrating line start/end behavior.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_ConditionalLineBreak implements StandardExample {
+public class AP_06_LineStartEnd_Behavior implements StandardExample {
 
 	@Override
 	public void showOutput(){
 		// tag::example[]
-		AsciiParagraph ap = new AsciiParagraph();
-		ap.getContext().setAlignment(AP_Alignment.LEFT).setWidth(35);
+		AP_Context ctx = new AP_Context();
+		ctx.setAlignment(AP_Alignment.JUSTIFIED);
+		ctx.setWidth(50);
 
-		ap.addText("line 1<br>");
-		ap.addText("line 2<br/>");
-		ap.addText("line three \n still line three");
+		AsciiParagraph ap = new AsciiParagraph(ctx);
+		ap.addText(new LoremIpsum().getWords(29));
+
+		System.out.println(ap.render());
+
+		ctx.setStartString("// ");
+		System.out.println(ap.render());
+
+		ctx.setEndString(" -->");
 		System.out.println(ap.render());
 		// end::example[]
 	}
@@ -46,20 +55,20 @@ public class AP_ConditionalLineBreak implements StandardExample {
 	@Override
 	public StrBuilder getSource(){
 		String[] source = new String[]{
-				"AP_Context pc = new AP_Context();",
-				"AsciiParagraph ap = new AsciiParagraph(pc);",
+				"AP_Context ctx = new AP_Context();",
+				"ctx.setAlignment(AP_Alignment.JUSTIFIED);",
+				"ctx.setWidth(50);",
+				"",
+				"AsciiParagraph ap = new AsciiParagraph(ctx);",
 				"ap.addText(new LoremIpsum().getWords(29));",
 				"",
-				"System.out.println(ap.render(50));",
+				"System.out.println(ap.render());",
 				"",
-				"pc.setLineStart(\"// \");",
-				"System.out.println(ap.render(50));",
+				"ctx.setStartString(\"// \");",
+				"System.out.println(ap.render());",
 				"",
-				"pc.setLineEnd(\" -->\");",
-				"System.out.println(ap.render(50));",
-				"",
-				"pc.setIndentation(10);",
-				"System.out.println(ap.render(50));",
+				"ctx.setEndString(\" -->\");",
+				"System.out.println(ap.render());",
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");
 	}

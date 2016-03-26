@@ -163,10 +163,10 @@ public interface AP_Renderer {
 				);
 				break;
 			case FIRST_LINE:
-				textAr = StringAr_To_ParaFirstline.convert(textAr, width, ctx.getIndents().getFirstLine(), TMP_PADING);
+				textAr = StringAr_To_ParaFirstline.convert(textAr, width, ctx.getFirstLineIndent(), TMP_PADING);
 				break;
 			case HANGING:
-				textAr = StringAr_To_ParaHanging.convert(textAr, width, ctx.getIndents().getHangingPara(), TMP_PADING);
+				textAr = StringAr_To_ParaHanging.convert(textAr, width, ctx.getHangingParaIndent(), TMP_PADING);
 				break;
 			case NONE:
 				break;
@@ -176,47 +176,47 @@ public interface AP_Renderer {
 		IsCollectionStrategy<?, StrBuilder> collStrat = ArrayListStrategy.create();
 		switch(ctx.getAlignment()){
 			case CENTER:
-				ret = StringAr_To_Centered.convert(textAr, width, ctx.getCharacters().getPaddingLeft(), ctx.getCharacters().getPaddingRight(), ctx.getCharacters().getInnerWs(), collStrat);
+				ret = StringAr_To_Centered.convert(textAr, width, ctx.getPaddingLeftChar(), ctx.getPaddingRightChar(), ctx.getInnerWsChar(), collStrat);
 				break;
 			case LEFT:
-				ret = StringAr_To_LeftPadded.convert(textAr, width, ctx.getCharacters().getPaddingRight(), ctx.getCharacters().getInnerWs(), collStrat);
+				ret = StringAr_To_LeftPadded.convert(textAr, width, ctx.getPaddingRightChar(), ctx.getInnerWsChar(), collStrat);
 				break;
 			case RIGHT:
-				ret = StringAr_To_RightPadded.convert(textAr, width, ctx.getCharacters().getPaddingLeft(), ctx.getCharacters().getInnerWs(), collStrat);
+				ret = StringAr_To_RightPadded.convert(textAr, width, ctx.getPaddingLeftChar(), ctx.getInnerWsChar(), collStrat);
 				break;
 			case JUSTIFIED:
-				ret = StringAr_To_Justified.convert(textAr, width, ctx.getCharacters().getInnerWs(), collStrat);
+				ret = StringAr_To_Justified.convert(textAr, width, ctx.getInnerWsChar(), collStrat);
 				break;
 			case JUSTIFIED_RIGHT:
-				ret = StringAr_To_Justified.convertLastRight(textAr, width, ctx.getCharacters().getPaddingLeft(), ctx.getCharacters().getInnerWs(), collStrat);
+				ret = StringAr_To_Justified.convertLastRight(textAr, width, ctx.getPaddingLeftChar(), ctx.getInnerWsChar(), collStrat);
 				break;
 			case JUSTIFIED_LEFT:
-				ret = StringAr_To_Justified.convertLastLeft(textAr, width, ctx.getCharacters().getPaddingRight(), ctx.getCharacters().getInnerWs(), collStrat);
+				ret = StringAr_To_Justified.convertLastLeft(textAr, width, ctx.getPaddingRightChar(), ctx.getInnerWsChar(), collStrat);
 				break;
 		}
 
 		int calcW = 0;
 		for(StrBuilder sb : ret){
 			//add text margins left and right
-			sb.insert(0, new StrBuilder().appendPadding(ctx.getMargins().getTextLeft(), ctx.getCharacters().getTextLeft()));
-			sb.appendPadding(ctx.getMargins().getTextRight(), ctx.getCharacters().getTextRight());
+			sb.insert(0, new StrBuilder().appendPadding(ctx.getTextLeftMargin(), ctx.getTextLeftChar()));
+			sb.appendPadding(ctx.getTextRightMargin(), ctx.getTextRightChar());
 
 			// we changed drop cap blanks, so remove the temporary ws here as well
 			if(ctx.getFormat()!=AP_Format.NONE){
-				sb.replaceAll(TMP_PADING, ctx.getCharacters().getPaddingLeft());
+				sb.replaceAll(TMP_PADING, ctx.getPaddingLeftChar());
 			}
 
 			//now add a line start if set and margins
-			if(ctx.getStrings().getStart()!=null){
-				sb.insert(0, ctx.getStrings().getStart());
+			if(ctx.getStartString()!=null){
+				sb.insert(0, ctx.getStartString());
 			}
-			sb.insert(0, new StrBuilder().appendPadding(ctx.getMargins().getStringLeft(), ctx.getCharacters().getStringLeft()));
+			sb.insert(0, new StrBuilder().appendPadding(ctx.getStringLeftMargin(), ctx.getStringLeftChar()));
 
 			//now add a line end if set  and margins
-			if(ctx.getStrings().getEnd()!=null){
-				sb.append(ctx.getStrings().getEnd());
+			if(ctx.getEndString()!=null){
+				sb.append(ctx.getEndString());
 			}
-			sb.appendPadding(ctx.getMargins().getStringRight(), ctx.getCharacters().getStringRight());
+			sb.appendPadding(ctx.getStringRightMargin(), ctx.getStringRightChar());
 
 			//add the frame borders
 			if(ctx.getFrame()!=null){
@@ -224,14 +224,14 @@ public interface AP_Renderer {
 			}
 
 			//add the frame margins
-			sb.insert(0, new StrBuilder().appendPadding(ctx.getMargins().getFrameLeft(), ctx.getCharacters().getFrameLeft()));
-			sb.appendPadding(ctx.getMargins().getFrameRight(), ctx.getCharacters().getFrameRight());
+			sb.insert(0, new StrBuilder().appendPadding(ctx.getFrameLeftMargin(), ctx.getFrameLeftChar()));
+			sb.appendPadding(ctx.getFrameRightMargin(), ctx.getFrameRightChar());
 
 			calcW = sb.length();
 		}
 
 		//finally add text bottom margin
-		for(int i=0; i<ctx.getMargins().getTextBottom(); i++){
+		for(int i=0; i<ctx.getTextBottomMargin(); i++){
 			if(ctx.getFrame()==null){
 				ret.add(new StrBuilder().append(""));
 			}
@@ -246,12 +246,12 @@ public interface AP_Renderer {
 		}
 
 		//add bottom frame margins
-		for(int i=0; i<ctx.getMargins().getFrameBottom(); i++){
+		for(int i=0; i<ctx.getFrameBottomMargin(); i++){
 			ret.add(new StrBuilder().append(""));
 		}
 
 		//add top text margins
-		for(int i=0; i<ctx.getMargins().getTextTop(); i++){
+		for(int i=0; i<ctx.getTextTopMargin(); i++){
 			if(ctx.getFrame()==null){
 				((ArrayList<StrBuilder>)ret).add(0, new StrBuilder().append(""));
 			}
@@ -266,7 +266,7 @@ public interface AP_Renderer {
 		}
 
 		//add top frame margins
-		for(int i=0; i<ctx.getMargins().getFrameTop(); i++){
+		for(int i=0; i<ctx.getFrameTopMargin(); i++){
 			((ArrayList<StrBuilder>)ret).add(0, new StrBuilder().append(""));
 		}
 

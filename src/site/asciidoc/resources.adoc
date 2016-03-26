@@ -25,7 +25,7 @@
 | UTF-8 Howto, older blog
 | http://vdmeer-sven.blogspot.ie/2014/06/utf-8-support-w-java-and-console.html[older blog], 
 
-| UTF-8 Howto, older blog
+| UTF-8 Howto, updated Wiki
 | https://github.com/vdmeer/skb/wiki/HowTo-UTF-8-Support-in-Java-and-Console[updated SKB Wiki]
 
 |===

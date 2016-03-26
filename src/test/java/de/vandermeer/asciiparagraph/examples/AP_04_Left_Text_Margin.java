@@ -19,31 +19,36 @@ import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Alignment;
+import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
 
 /**
- * AsciiParagraph example demonstrating width behavior.
+ * AsciiParagraph example demonstrating left text behavior.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_Width_Behavior implements StandardExample {
+public class AP_04_Left_Text_Margin implements StandardExample {
 
 	@Override
 	public void showOutput(){
 		// tag::example[]
-		AsciiParagraph ap = new AsciiParagraph();
-		ap.addText(new LoremIpsum().getParagraphs(1));
-		ap.getContext().setAlignment(AP_Alignment.LEFT);
+		AP_Context ctx = new AP_Context();
+		ctx.setAlignment(AP_Alignment.LEFT);
+		ctx.setWidth(29);
+
+		AsciiParagraph ap = new AsciiParagraph(ctx);
+		ap.addText(new LoremIpsum().getWords(29));
 
 		System.out.println(ap.render());
 
-		ap.getContext().setWidth(60);
+		ctx.setTextLeftMargin(5);
 		System.out.println(ap.render());
 
-		ap.getContext().setWidth(30);
+		ctx.setTextLeftMargin(10);
+		ctx.setTextLeftChar('>');
 		System.out.println(ap.render());
 		// end::example[]
 	}
@@ -51,17 +56,21 @@ public class AP_Width_Behavior implements StandardExample {
 	@Override
 	public StrBuilder getSource(){
 		String[] source = new String[]{
-				"AsciiParagraph ap = new AsciiParagraph();",
-				"ap.addText(new LoremIpsum().getParagraphs(1));",
-				"ap.getContext().setAlignment(AP_Alignment.LEFT);",
+				"AP_Context ctx = new AP_Context();",
+				"ctx.setAlignment(AP_Alignment.LEFT);",
+				"ctx.setWidth(60);",
+				"",
+				"AsciiParagraph ap = new AsciiParagraph(ctx);",
+				"ap.addText(new LoremIpsum().getWords(29));",
 				"",
 				"System.out.println(ap.render());",
 				"",
-				"ap.getContext().setWidth(60);",
+				"ctx.setTextLeftMargin(5);",
 				"System.out.println(ap.render());",
 				"",
-				"ap.getContext().setWidth(30);",
-				"System.out.println(ap.render());"
+				"ctx.setTextLeftMargin(10);",
+				"ctx.setTextLeftChar('>');",
+				"System.out.println(ap.render());",
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");
 	}

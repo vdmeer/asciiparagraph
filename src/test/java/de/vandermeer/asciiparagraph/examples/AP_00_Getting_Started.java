@@ -17,57 +17,41 @@ package de.vandermeer.asciiparagraph.examples;
 
 import org.apache.commons.lang3.text.StrBuilder;
 
-import de.svenjacobs.loremipsum.LoremIpsum;
-import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
 
 /**
- * AsciiParagraph example demonstrating inclusive width.
+ * AsciiParagraph example for a simple paragraph as getting started example.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_InclusiveWidth implements StandardExample {
+public class AP_00_Getting_Started implements StandardExample {
 
 	@Override
 	public void showOutput(){
 		// tag::example[]
-		AP_Context pc = new AP_Context();
-		AsciiParagraph ap = new AsciiParagraph(pc);
-		ap.addText(new LoremIpsum().getWords(29));
-
-		System.out.println(ap.render(50));
-
-		pc.getStrings().setStart("// ");
-		System.out.println(ap.render(50));
-
-		pc.getStrings().setEnd(" -->");
-		System.out.println(ap.render(50));
-
-		pc.getMargins().setTextLeft(10);
-		System.out.println(ap.render(50));
+		AsciiParagraph ap = new AsciiParagraph();
+		ap.addText("line	1");
+		ap.addText("2  2");
+		ap.addText("more text with	tab and \n newline");
+		ap.addText("some more text to get it over the 80 character default width");
+		String rend = ap.render();
+		System.out.println(rend);
 		// end::example[]
 	}
 
 	@Override
 	public StrBuilder getSource(){
 		String[] source = new String[]{
-				"AP_Context pc = new AP_Context();",
-				"AsciiParagraph ap = new AsciiParagraph(pc);",
-				"ap.addText(new LoremIpsum().getWords(29));",
-				"",
-				"System.out.println(ap.render(50));",
-				"",
-				"pc.setLineStart(\"// \");",
-				"System.out.println(ap.render(50));",
-				"",
-				"pc.setLineEnd(\" -->\");",
-				"System.out.println(ap.render(50));",
-				"",
-				"pc.setIndentation(10);",
-				"System.out.println(ap.render(50));",
+				"AsciiParagraph ap = new AsciiParagraph();",
+				"ap.addText(\"line\t1\");",
+				"ap.addText(\"2  2\");",
+				"ap.addText(\"more text with\ttab and \\n newline\");",
+				"ap.addText(\"some more text to get it over the 80 character default width\");",
+				"String rend = ap.render();",
+				"System.out.println(rend);",
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");
 	}

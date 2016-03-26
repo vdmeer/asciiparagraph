@@ -59,37 +59,19 @@ public class AP_CtxtCharacters {
 	public AP_CtxtCharacters(){}
 
 	/**
-	 * Returns the left padding character.
-	 * @return left padding character
+	 * Returns the left frame margin character.
+	 * @return left frame margin character
 	 */
-	public Character getPaddingLeft() {
-		return this.paddingLeft;
+	public Character getFrameLeft() {
+		return this.frameLeft;
 	}
 
 	/**
-	 * Sets the left padding character.
-	 * @param paddingLeft character
+	 * Returns the right frame margin character.
+	 * @return right frame margin character
 	 */
-	public void setPaddingLeft(Character paddingLeft) {
-		Validate.notNull(paddingLeft);
-		this.paddingLeft = paddingLeft;
-	}
-
-	/**
-	 * Returns the right padding character.
-	 * @return right padding character
-	 */
-	public Character getPaddingRight() {
-		return this.paddingRight;
-	}
-
-	/**
-	 * Sets the right padding character.
-	 * @param paddingRight character
-	 */
-	public void setPaddingRight(Character paddingRight) {
-		Validate.notNull(paddingRight);
-		this.paddingRight = paddingRight;
+	public Character getFrameRight() {
+		return this.frameRight;
 	}
 
 	/**
@@ -101,46 +83,19 @@ public class AP_CtxtCharacters {
 	}
 
 	/**
-	 * Sets the in-text white space character
-	 * @param innerWs in-text white space character
+	 * Returns the left padding character.
+	 * @return left padding character
 	 */
-	public void setInnerWs(Character innerWs) {
-		Validate.notNull(innerWs);
-		this.innerWs = innerWs;
+	public Character getPaddingLeft() {
+		return this.paddingLeft;
 	}
 
 	/**
-	 * Returns the left text margin character.
-	 * @return left text margin character
+	 * Returns the right padding character.
+	 * @return right padding character
 	 */
-	public Character getTextLeft() {
-		return this.textLeft;
-	}
-
-	/**
-	 * Sets the left text margin character.
-	 * @param textLeft character
-	 */
-	public void setTextLeft(Character textLeft) {
-		Validate.notNull(textLeft);
-		this.textLeft = textLeft;
-	}
-
-	/**
-	 * Returns the right text margin character.
-	 * @return right text margin character
-	 */
-	public Character getTextRight() {
-		return this.textRight;
-	}
-
-	/**
-	 * Sets the right text margin character.
-	 * @param textRight character
-	 */
-	public void setTextRight(Character textRight) {
-		Validate.notNull(textRight);
-		this.textRight = textRight;
+	public Character getPaddingRight() {
+		return this.paddingRight;
 	}
 
 	/**
@@ -152,15 +107,6 @@ public class AP_CtxtCharacters {
 	}
 
 	/**
-	 * Sets the left string margin character.
-	 * @param stringLeft character
-	 */
-	public void setStringLeft(Character stringLeft) {
-		Validate.notNull(stringLeft);
-		this.stringLeft = stringLeft;
-	}
-
-	/**
 	 * Returns the right string margin character.
 	 * @return right string margin character
 	 */
@@ -169,20 +115,19 @@ public class AP_CtxtCharacters {
 	}
 
 	/**
-	 * Sets the right string margin character.
-	 * @param stringRight character
+	 * Returns the left text margin character.
+	 * @return left text margin character
 	 */
-	public void setStringRight(Character stringRight) {
-		Validate.notNull(stringRight);
-		this.stringRight = stringRight;
+	public Character getTextLeft() {
+		return this.textLeft;
 	}
 
 	/**
-	 * Returns the left frame margin character.
-	 * @return left frame margin character
+	 * Returns the right text margin character.
+	 * @return right text margin character
 	 */
-	public Character getFrameLeft() {
-		return this.frameLeft;
+	public Character getTextRight() {
+		return this.textRight;
 	}
 
 	/**
@@ -195,19 +140,74 @@ public class AP_CtxtCharacters {
 	}
 
 	/**
-	 * Returns the right frame margin character.
-	 * @return right frame margin character
-	 */
-	public Character getFrameRight() {
-		return this.frameRight;
-	}
-
-	/**
 	 * Sets the right frame margin character.
 	 * @param frameRight character
 	 */
 	public void setFrameRight(Character frameRight) {
 		Validate.notNull(frameRight);
 		this.frameRight = frameRight;
+	}
+
+	/**
+	 * Sets the in-text white space character
+	 * @param innerWs in-text white space character
+	 */
+	public void setInnerWs(Character innerWs) {
+		Validate.notNull(innerWs);
+		this.innerWs = innerWs;
+	}
+
+	/**
+	 * Sets the left padding character.
+	 * @param paddingLeft character
+	 */
+	public void setPaddingLeft(Character paddingLeft) {
+		Validate.notNull(paddingLeft);
+		this.paddingLeft = paddingLeft;
+	}
+
+	/**
+	 * Sets the right padding character.
+	 * @param paddingRight character
+	 */
+	public void setPaddingRight(Character paddingRight) {
+		Validate.notNull(paddingRight);
+		this.paddingRight = paddingRight;
+	}
+
+	/**
+	 * Sets the left string margin character.
+	 * @param stringLeft character
+	 */
+	public void setStringLeft(Character stringLeft) {
+		Validate.notNull(stringLeft);
+		this.stringLeft = stringLeft;
+	}
+
+	/**
+	 * Sets the right string margin character.
+	 * @param stringRight character
+	 */
+	public void setStringRight(Character stringRight) {
+		Validate.notNull(stringRight);
+		this.stringRight = stringRight;
+	}
+
+	/**
+	 * Sets the left text margin character.
+	 * @param textLeft character
+	 */
+	public void setTextLeft(Character textLeft) {
+		Validate.notNull(textLeft);
+		this.textLeft = textLeft;
+	}
+
+	/**
+	 * Sets the right text margin character.
+	 * @param textRight character
+	 */
+	public void setTextRight(Character textRight) {
+		Validate.notNull(textRight);
+		this.textRight = textRight;
 	}
 }

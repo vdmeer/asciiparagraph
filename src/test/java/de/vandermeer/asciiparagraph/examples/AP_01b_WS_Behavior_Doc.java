@@ -15,40 +15,39 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.StrBuilder;
 
-import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Alignment;
-import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
 
 /**
- * AsciiParagraph example demonstrating left padding behavior.
+ * AsciiParagraph example demonstrating white space behavior used in readme.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_LeftPadding_Behavior implements StandardExample {
+public class AP_01b_WS_Behavior_Doc implements StandardExample {
 
 	@Override
 	public void showOutput(){
 		// tag::example[]
-		AP_Context pc = new AP_Context();
-		pc.setAlignment(AP_Alignment.LEFT);
-		pc.setWidth(60);
+		AsciiParagraph ap = new AsciiParagraph();
 
-		AsciiParagraph ap = new AsciiParagraph(pc);
-		ap.addText(new LoremIpsum().getParagraphs(1));
+		ap.addText("c2  c2");
+		ap.addText("c3   c3");
+		ap.addText("c4    c4");
 
-		System.out.println(ap.render());
+		ap.addText("t1	t1");
+		ap.addText("t2		t2");
+		ap.addText("t3			t3");
+		ap.addText("t4\t\t\t\tt4");
 
-		pc.getMargins().setTextLeft(10);
-		System.out.println(ap.render());
+		ap.addText("word followed by " + StringUtils.CR + " followed by" + StringUtils.LF + " followed by \n");
 
-		pc.getMargins().setTextLeft(20);
-		pc.getCharacters().setTextLeft('-');
+		ap.getContext().setWidth(60).setAlignment(AP_Alignment.LEFT);
 		System.out.println(ap.render());
 		// end::example[]
 	}
@@ -56,20 +55,20 @@ public class AP_LeftPadding_Behavior implements StandardExample {
 	@Override
 	public StrBuilder getSource(){
 		String[] source = new String[]{
-				"AP_Context pc = new AP_Context();",
-				"pc.setAlignment(AP_Alignment.LEFT);",
-				"pc.setWidth(60);",
+				"AsciiParagraph ap = new AsciiParagraph();",
 				"",
-				"AsciiParagraph ap = new AsciiParagraph(pc);",
-				"ap.addText(new LoremIpsum().getParagraphs(1));",
+				"ap.addText(\"c2  c2\");",
+				"ap.addText(\"c3   c3\");",
+				"ap.addText(\"c4    c4\");",
 				"",
-				"System.out.println(ap.render());",
+				"ap.addText(\"t1	t1\");",
+				"ap.addText(\"t2		t2\");",
+				"ap.addText(\"t3			t3\");",
+				"ap.addText(\"t4\t\t\t\tt4\");",
 				"",
-				"pc.setPaddingLeft(10);",
-				"System.out.println(ap.render());",
+				"ap.addText(\"word followed by \" + StringUtils.CR + \" followed by\" + StringUtils.LF + \" followed by \\n\");",
 				"",
-				"pc.setPaddingLeft(20);",
-				"pc.setLeftPaddingChar('-');",
+				"ap.getContext().setWidth(60).setAlignment(AP_Alignment.LEFT);",
 				"System.out.println(ap.render());"
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");

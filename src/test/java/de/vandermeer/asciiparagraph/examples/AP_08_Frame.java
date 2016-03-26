@@ -18,59 +18,48 @@ package de.vandermeer.asciiparagraph.examples;
 import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
-import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.textart.UTF_FrameThemes;
 
 /**
- * AsciiParagraph example demonstrating indentation behavior.
+ * AsciiParagraph example demonstrating frames.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_Indentation_Behavior implements StandardExample {
+public class AP_08_Frame implements StandardExample {
 
 	@Override
 	public void showOutput(){
 		// tag::example[]
-		AP_Context pc = new AP_Context();
-		pc.setAlignment(AP_Alignment.LEFT);
-		pc.setWidth(60);
+		AP_Context ctx = new AP_Context();
+		ctx.setFrame(UTF_FrameThemes.borderLight());
+		ctx.setFrameTopBottomMargin(2);
+		ctx.setTextTopBottomMargin(2);
+		ctx.setTextLeftRightMargin(5);
 
-		AsciiParagraph ap = new AsciiParagraph(pc);
-		ap.addText(new LoremIpsum().getParagraphs(1));
+		AsciiParagraph ap = new AsciiParagraph(ctx);
+		ap.addText(new LoremIpsum().getWords(29));
 
-		System.out.println(ap.render());
-
-//		pc.setIndentation(5);
-//		System.out.println(ap.render());
-//
-//		pc.setIndentation(10);
-//		pc.setIndentationChar('˽');
-		System.out.println(ap.render());
-		// end::example[]
+		System.out.println(ap.render(50));
 	}
 
 	@Override
 	public StrBuilder getSource(){
 		String[] source = new String[]{
-				"AP_Context pc = new AP_Context();",
-				"pc.setAlignment(AP_Alignment.LEFT);",
-				"pc.setWidth(60);",
+				"AP_Context ctx = new AP_Context();",
+				"ctx.setFrame(UTF_FrameThemes.borderLight());",
+				"ctx.setFrameTopBottomMargin(2);",
+				"ctx.setTextTopBottomMargin(2);",
+				"ctx.setTextLeftRightMargin(5);",
 				"",
-				"AsciiParagraph ap = new AsciiParagraph(pc);",
-				"ap.addText(new LoremIpsum().getParagraphs(1));",
+				"AsciiParagraph ap = new AsciiParagraph(ctx);",
+				"ap.addText(new LoremIpsum().getWords(29));",
 				"",
-				"System.out.println(ap.render());",
-				"",
-				"pc.setIndentation(5);",
-				"System.out.println(ap.render());",
-				"",
-				"pc.setIndentation(10);",
-				"pc.setIndentationChar('˽');",
-				"System.out.println(ap.render());"
+				"System.out.println(ap.render(50));",
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");
 	}

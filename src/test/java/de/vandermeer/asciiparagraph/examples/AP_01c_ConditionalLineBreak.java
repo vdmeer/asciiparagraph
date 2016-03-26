@@ -17,37 +17,28 @@ package de.vandermeer.asciiparagraph.examples;
 
 import org.apache.commons.lang3.text.StrBuilder;
 
-import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Alignment;
-import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
 
 /**
- * AsciiParagraph example demonstrating line start/end behavior.
+ * AsciiParagraph example demonstrating conditional line breaks.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_LineStartEnd_Behavior implements StandardExample {
+public class AP_01c_ConditionalLineBreak implements StandardExample {
 
 	@Override
 	public void showOutput(){
 		// tag::example[]
-		AP_Context pc = new AP_Context();
-		pc.setAlignment(AP_Alignment.JUSTIFIED);
-		pc.setWidth(50);
+		AsciiParagraph ap = new AsciiParagraph();
+		ap.getContext().setAlignment(AP_Alignment.LEFT).setWidth(35);
 
-		AsciiParagraph ap = new AsciiParagraph(pc);
-		ap.addText(new LoremIpsum().getWords(29));
-
-		System.out.println(ap.render());
-
-		pc.getStrings().setStart("// ");
-		System.out.println(ap.render());
-
-		pc.getStrings().setEnd(" -->");
+		ap.addText("line 1<br>");
+		ap.addText("line 2<br/>");
+		ap.addText("line three \n still line three");
 		System.out.println(ap.render());
 		// end::example[]
 	}
@@ -55,19 +46,12 @@ public class AP_LineStartEnd_Behavior implements StandardExample {
 	@Override
 	public StrBuilder getSource(){
 		String[] source = new String[]{
-				"AP_Context pc = new AP_Context();",
-				"pc.setAlignment(AP_Alignment.JUSTIFIED);",
-				"pc.setWidth(50);",
+				"AsciiParagraph ap = new AsciiParagraph();",
+				"ap.getContext().setAlignment(AP_Alignment.LEFT).setWidth(35);",
 				"",
-				"AsciiParagraph ap = new AsciiParagraph(pc);",
-				"ap.addText(new LoremIpsum().getWords(29));",
-				"",
-				"System.out.println(ap.render());",
-				"",
-				"pc.setLineStart(\"// \");",
-				"System.out.println(ap.render());",
-				"",
-				"pc.setLineEnd(\" -->\");",
+				"ap.addText(\"line 1<br>\");",
+				"ap.addText(\"line 2<br/>\");",
+				"ap.addText(\"line three \n still line three\");",
 				"System.out.println(ap.render());",
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");

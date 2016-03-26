@@ -18,7 +18,7 @@ package de.vandermeer.asciiparagraph.dropcaps;
 /**
  * A library of dropped capital letters.
  * 
- * @author     Sven van der Meer <vdmeer.sven@mykolab.com>
+ * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.1 build 160319 (19-Mar-16) for Java 1.8
  * @since      v0.0.3
  */

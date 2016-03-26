@@ -31,27 +31,27 @@ import de.vandermeer.skb.interfaces.StandardExample;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_Format_Behavior implements StandardExample {
+public class AP_03_Format_Behavior implements StandardExample {
 
 	@Override
 	public void showOutput(){
 		// tag::example[]
-		AP_Context pc = new AP_Context();
-		AsciiParagraph ap = new AsciiParagraph(pc);
+		AP_Context ctx = new AP_Context();
+		AsciiParagraph ap = new AsciiParagraph(ctx);
 		ap.addText(new LoremIpsum().getWords(29));
 
 		System.out.println(ap.render(35));
 
-		pc.setFormat(AP_Format.FIRST_LINE);
+		ctx.setFormat(AP_Format.FIRST_LINE);
 		System.out.println(ap.render(35));
 
-		pc.setFormat(AP_Format.HANGING);
+		ctx.setFormat(AP_Format.HANGING);
 		System.out.println(ap.render(35));
 
-		pc.setFormat(AP_Format.DROPCAP);
+		ctx.setFormat(AP_Format.DROPCAP);
 		System.out.println(ap.render(35));
 
-		pc.setDropCapLib(new FigletOldBanner_6L());
+		ctx.setDropCapLib(new FigletOldBanner_6L());
 		System.out.println(ap.render(35));
 		// end::example[]
 	}
@@ -59,23 +59,23 @@ public class AP_Format_Behavior implements StandardExample {
 	@Override
 	public StrBuilder getSource(){
 		String[] source = new String[]{
-				"AP_Context pc = new AP_Context();",
-				"AsciiParagraph ap = new AsciiParagraph(pc);",
+				"AP_Context ctx = new AP_Context();",
+				"AsciiParagraph ap = new AsciiParagraph(ctx);",
 				"ap.addText(new LoremIpsum().getWords(29));",
 				"",
 				"System.out.println(ap.render(35));",
 				"",
-				"pc.setFormat(AP_Format.FIRST_LINE);",
+				"ctx.setFormat(AP_Format.FIRST_LINE);",
 				"System.out.println(ap.render(35));",
 				"",
-				"pc.setFormat(AP_Format.HANGING);",
+				"ctx.setFormat(AP_Format.HANGING);",
 				"System.out.println(ap.render(35));",
 				"",
-				"pc.setFormat(AP_Format.DROPCAP);",
+				"ctx.setFormat(AP_Format.DROPCAP);",
 				"System.out.println(ap.render(35));",
 				"",
-				"pc.setDropCapLib(new FigletOldBanner_6L());",
-				"System.out.println(ap.render(35));"
+				"ctx.setDropCapLib(new FigletOldBanner_6L());",
+				"System.out.println(ap.render(35));",
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");
 	}
