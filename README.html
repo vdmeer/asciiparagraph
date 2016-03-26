@@ -524,8 +524,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_features">Features</a></li>
 <li><a href="#_concepts">Concepts</a>
 <ul class="sectlevel2">
-<li><a href="#_paragraph">Paragraph</a></li>
 <li><a href="#_anatomy_of_a_paragraph">Anatomy of a paragraph</a></li>
+<li><a href="#_paragraph_details">Paragraph details</a></li>
 <li><a href="#_summary_of_configurable_characteristics">Summary of configurable  characteristics</a></li>
 <li><a href="#_paragraph_context">Paragraph Context</a></li>
 <li><a href="#_paragraph_renderer">Paragraph Renderer</a></li>
@@ -544,6 +544,8 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_extra_text_at_each_line_start_and_line_end">Extra text at each line start and line end</a></li>
 <li><a href="#_render_to_maximum_width_calculating_additional_padding_and_strings">Render to maximum width, calculating additional padding and strings</a></li>
 <li><a href="#_frames">Frames</a></li>
+<li><a href="#_target_translator_for_latex_character_conversion">Target translator for LaTeX character conversion</a></li>
+<li><a href="#_target_translator_for_html_character_conversion">Target translator for HTML character conversion</a></li>
 </ul>
 </li>
 </ul>
@@ -595,7 +597,7 @@ table.CodeRay td.code>pre{padding:0}
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://vdmeer-sven.blogspot.ie/2014/06/utf-8-support-w-java-and-console.html">older blog</a>,</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">UTF-8 Howto, older blog</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UTF-8 Howto, updated Wiki</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/vdmeer/skb/wiki/HowTo-UTF-8-Support-in-Java-and-Console">updated SKB Wiki</a></p></td>
 </tr>
 </tbody>
@@ -692,10 +694,59 @@ table.CodeRay td.code>pre{padding:0}
 <h2 id="_concepts">Concepts</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The main concepts are: paragraph and paragraph context.</p>
+<p>The main concepts are: paragraph, paragraph context, and paragraph renderer.</p>
 </div>
 <div class="sect2">
-<h3 id="_paragraph">Paragraph</h3>
+<h3 id="_anatomy_of_a_paragraph">Anatomy of a paragraph</h3>
+<div class="paragraph">
+<p>The figure below shows all spacing characteristics of a paragraph.
+The outer rectangle (using <code>+</code>, <code>-</code>, and <code>|</code> characters) marks the most outer part of a paragraph.
+This is followed by top, bottom, left, and right frame margins.</p>
+</div>
+<div class="paragraph">
+<p>The next rectangle (using the UTF-8 double line characters <code>╔</code>, <code>═</code>, <code>╗</code>, <code>╚</code>, <code>║</code>, and <code>╝</code>) shows an example frame.
+This is followed by top / bottom text margins and left / right string margins.</p>
+</div>
+<div class="paragraph">
+<p>Left and right we find the start and end strings that can be set. This is followed by the left / right text margins.</p>
+</div>
+<div class="paragraph">
+<p>The last rectangle (using the single line UTF-8 characters <code>┌</code>, <code>─</code>, <code>┐</code>, <code>└</code>, <code>─</code>, and <code>┘</code>) marks the actual paragraph.
+Here we have the text, plus optional padding and indentations.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>+----------------------------------------------------------------------------------------------+
+|                                                                                              |
+|                                      Top Frame Margin                                        |
+|                                                                                              |
+|--------╔════════════════════════════════════════════════════════════════════════════╗--------|
+|        ║                                                                            ║        |
+|        ║                             Top Text Margin                                ║        |
+|        ║                                                                            ║        |
+|        ║--------+--------+--------┌─────────────────────┐--------+--------+---------║        |
+|        ║        |        |        │                     │        |        |         ║        |
+|  F  M  ║  S  M  |  S  S  |  T  M  │      Paragraph      │  T  M  |  E  S  |  S   M  ║  F  M  |
+|  r  a  ║  t  a  |  t  t  |  e  a  │      text with      │  e  a  |  n  t  |  t   a  ║  r  a  |
+|  a  r  ║  r  r  |  a  r  |  x  r  │      padding &amp;      │  x  r  |  d  r  |  r   r  ║  a  r  |
+|  m  g  ║  i  g  |  r  i  |  t  g  │     indentation     │  t  g  |     i  |  i   g  ║  m  g  |
+|  e  i  ║  n  i  |  t  g  |     i  │                     │     i  |     g  |  n   i  ║  e  i  |
+|     n  ║  g  n  |        |     n  │                     │     n  |        |  g   n  ║     n  |
+|        ║        |        |        │                     │        |        |         ║        |
+|        ║--------+--------+--------└─────────────────────┘--------+--------+---------║        |
+|        ║                                                                            ║        |
+|        ║                            Bottom Text Margin                              ║        |
+|        ║                                                                            ║        |
+|--------╚════════════════════════════════════════════════════════════════════════════╝--------|
+|                                                                                              |
+|                                     Bottom Frame Margin                                      |
+|                                                                                              |
++----------------------------------------------------------------------------------------------+</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_paragraph_details">Paragraph details</h3>
 <div class="paragraph">
 <p>A paragraph is a collection of text strings.
 The strings are processed as follows:</p>
@@ -863,55 +914,6 @@ New themes can be created very easily, using ASCII and/or UTF-8 characters.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_anatomy_of_a_paragraph">Anatomy of a paragraph</h3>
-<div class="paragraph">
-<p>The figure below shows all spacing characteristics of a paragraph.
-The outer rectangle (using <code>+</code>, <code>-</code>, and <code>|</code> characters) marks the most outer part of a paragraph.
-This is followed by top, bottom, left, and right frame margins.</p>
-</div>
-<div class="paragraph">
-<p>The next rectangle (using the UTF-8 double line characters <code>╔</code>, <code>═</code>, <code>╗</code>, <code>╚</code>, <code>║</code>, and <code>╝</code>) shows an example frame.
-This is followed by top / bottom text margins and left / right string margins.</p>
-</div>
-<div class="paragraph">
-<p>Left and right we find the start and end strings that can be set. This is followed by the left / right text margins.</p>
-</div>
-<div class="paragraph">
-<p>The last rectangle (using the single line UTF-8 characters <code>┌</code>, <code>─</code>, <code>┐</code>, <code>└</code>, <code>─</code>, and <code>┘</code>) marks the actual paragraph.
-Here we have the text, plus optional padding and indentations.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>+----------------------------------------------------------------------------------------------+
-|                                                                                              |
-|                                      Top Frame Margin                                        |
-|                                                                                              |
-|--------╔════════════════════════════════════════════════════════════════════════════╗--------|
-|        ║                                                                            ║        |
-|        ║                             Top Text Margin                                ║        |
-|        ║                                                                            ║        |
-|        ║--------+--------+--------┌─────────────────────┐--------+--------+---------║        |
-|        ║        |        |        │                     │        |        |         ║        |
-|  F  M  ║  S  M  |  S  S  |  T  M  │      Paragraph      │  T  M  |  E  S  |  S   M  ║  F  M  |
-|  r  a  ║  t  a  |  t  t  |  e  a  │      text with      │  e  a  |  n  t  |  t   a  ║  r  a  |
-|  a  r  ║  r  r  |  a  r  |  x  r  │      padding &amp;      │  x  r  |  d  r  |  r   r  ║  a  r  |
-|  m  g  ║  i  g  |  r  i  |  t  g  │     indentation     │  t  g  |     i  |  i   g  ║  m  g  |
-|  e  i  ║  n  i  |  t  g  |     i  │                     │     i  |     g  |  n   i  ║  e  i  |
-|     n  ║  g  n  |        |     n  │                     │     n  |        |  g   n  ║     n  |
-|        ║        |        |        │                     │        |        |         ║        |
-|        ║--------+--------+--------└─────────────────────┘--------+--------+---------║        |
-|        ║                                                                            ║        |
-|        ║                            Bottom Text Margin                              ║        |
-|        ║                                                                            ║        |
-|--------╚════════════════════════════════════════════════════════════════════════════╝--------|
-|                                                                                              |
-|                                     Bottom Frame Margin                                      |
-|                                                                                              |
-+----------------------------------------------------------------------------------------------+</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
 <h3 id="_summary_of_configurable_characteristics">Summary of configurable  characteristics</h3>
 <div class="ulist">
 <ul>
@@ -992,6 +994,9 @@ The current implementation directly has</p>
 </li>
 <li>
 <p>all strings</p>
+</li>
+<li>
+<p>all character (and target) translators</p>
 </li>
 </ul>
 </div>
@@ -1402,12 +1407,52 @@ voluptua. At vero eos et accusam
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_target_translator_for_latex_character_conversion">Target translator for LaTeX character conversion</h3>
+<div class="paragraph">
+<p>Left side w/o and right side with LaTeX target converter</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>A sentence with some normal text,          A sentence with some normal text,
+not specific to LaTeX. Now for some        not specific to LaTeX. Now for some
+characters that require conversion:        characters that require conversion:
+# % &amp;. And some more: © § ¤. And           \# \% \&amp;. And some more:
+even more: È É Ê Ë. And some arrows        {\copyright} {\S} \currency. And
+as well: ← ↑ → ↓ ↔                         even more: \`{E} \'{E} \^{E} \"{E}.
+                                           And some arrows as well:
+                                           \(\leftarrow{}\) \(\uparrow\)
+                                           \(\rightarrow{}\) \(\downarrow{}\)
+                                           \(\leftrightarrow{}\)</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_target_translator_for_html_character_conversion">Target translator for HTML character conversion</h3>
+<div class="paragraph">
+<p>Left side w/o and right side with HTML target converter</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>A sentence with some normal text,           A sentence with some normal text,
+not specific to HTML. Now for some          not specific to HTML. Now for some
+characters that require conversion:         characters that require conversion:
+# % &amp; &lt; &gt;. And some more: © § ¤. And        &amp;#803; &amp;#37; &amp;amp; &amp;lt; &amp;gt;. And
+even more: Ē ē Ĕ ĕ Ė ė Ę ę Ě ě. And         some more: &amp;copy; &amp;sect; &amp;curren;.
+some arrows as well: ← ↑ → ↓ ↔ ↕            And even more: &amp;#274; &amp;#275; &amp;#276;
+                                            &amp;#277; &amp;#278; &amp;#279; &amp;#280; &amp;#281;
+                                            &amp;#282; &amp;#283;. And some arrows as
+                                            well: &amp;larr; &amp;uarr; &amp;rarr; &amp;darr;
+                                            &amp;harr; &amp;#8597;</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-03-25 13:46:21 GMT
+Last updated 2016-03-26 02:27:39 GMT
 </div>
 </div>
 </body>

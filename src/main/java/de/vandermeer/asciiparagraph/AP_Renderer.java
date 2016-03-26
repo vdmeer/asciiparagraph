@@ -140,11 +140,24 @@ public interface AP_Renderer {
 	 */
 	default Collection<StrBuilder> render(AsciiParagraph ap, int width){
 		Validate.notNull(ap);
+		AP_Context ctx = ap.getContext();
 
 		//remove all extra white spaces (more than one space, tabs, LF, CR, CR+LF
 		String text = ap.getText().toString().replaceAll("\\s+", " ");
+		//check for translators, use what is available
+		if(ctx.getTargetTranslator()!=null){
+			if(ctx.getTargetTranslator().getCombinedTranslator()!=null){
+				text = ctx.getTargetTranslator().getCombinedTranslator().translate(text);
+			}
+		}
+		else if(ctx.getHtmlElementTranslator()!=null){
+			text = ctx.getHtmlElementTranslator().translateHtmlElements(text);
+		}
+		else if(ctx.getCharTranslator()!=null){
+			text = ctx.getCharTranslator().translateCharacters(text);
+		}
 
-		AP_Context ctx = ap.getContext();
+		//create the text array with wrapped lines
 		String[] textAr = Object_To_ColumnContentArray.convert(text, width);
 
 		switch(ctx.getFormat()){

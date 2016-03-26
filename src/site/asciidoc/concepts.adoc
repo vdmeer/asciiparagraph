@@ -1,9 +1,54 @@
 == Concepts
 
 
-The main concepts are: paragraph and paragraph context.
+The main concepts are: paragraph, paragraph context, and paragraph renderer.
 
-=== Paragraph
+
+=== Anatomy of a paragraph
+
+The figure below shows all spacing characteristics of a paragraph.
+The outer rectangle (using `+`, `-`, and `|` characters) marks the most outer part of a paragraph.
+This is followed by top, bottom, left, and right frame margins.
+
+The next rectangle (using the UTF-8 double line characters `╔`, `═`, `╗`, `╚`, `║`, and `╝`) shows an example frame.
+This is followed by top / bottom text margins and left / right string margins.
+
+Left and right we find the start and end strings that can be set. This is followed by the left / right text margins.
+
+The last rectangle (using the single line UTF-8 characters `┌`, `─`, `┐`, `└`, `─`, and `┘`) marks the actual paragraph.
+Here we have the text, plus optional padding and indentations.
+
+----
++----------------------------------------------------------------------------------------------+
+|                                                                                              |
+|                                      Top Frame Margin                                        |
+|                                                                                              |
+|--------╔════════════════════════════════════════════════════════════════════════════╗--------|
+|        ║                                                                            ║        |
+|        ║                             Top Text Margin                                ║        |
+|        ║                                                                            ║        |
+|        ║--------+--------+--------┌─────────────────────┐--------+--------+---------║        |
+|        ║        |        |        │                     │        |        |         ║        |
+|  F  M  ║  S  M  |  S  S  |  T  M  │      Paragraph      │  T  M  |  E  S  |  S   M  ║  F  M  |
+|  r  a  ║  t  a  |  t  t  |  e  a  │      text with      │  e  a  |  n  t  |  t   a  ║  r  a  |
+|  a  r  ║  r  r  |  a  r  |  x  r  │      padding &      │  x  r  |  d  r  |  r   r  ║  a  r  |
+|  m  g  ║  i  g  |  r  i  |  t  g  │     indentation     │  t  g  |     i  |  i   g  ║  m  g  |
+|  e  i  ║  n  i  |  t  g  |     i  │                     │     i  |     g  |  n   i  ║  e  i  |
+|     n  ║  g  n  |        |     n  │                     │     n  |        |  g   n  ║     n  |
+|        ║        |        |        │                     │        |        |         ║        |
+|        ║--------+--------+--------└─────────────────────┘--------+--------+---------║        |
+|        ║                                                                            ║        |
+|        ║                            Bottom Text Margin                              ║        |
+|        ║                                                                            ║        |
+|--------╚════════════════════════════════════════════════════════════════════════════╝--------|
+|                                                                                              |
+|                                     Bottom Frame Margin                                      |
+|                                                                                              |
++----------------------------------------------------------------------------------------------+
+----
+
+
+=== Paragraph details
 
 A paragraph is a collection of text strings.
 The strings are processed as follows:
@@ -88,50 +133,6 @@ A number of those themes are provided in the `skb-interfaces` package.
 New themes can be created very easily, using ASCII and/or UTF-8 characters.
 
 
-=== Anatomy of a paragraph
-
-The figure below shows all spacing characteristics of a paragraph.
-The outer rectangle (using `+`, `-`, and `|` characters) marks the most outer part of a paragraph.
-This is followed by top, bottom, left, and right frame margins.
-
-The next rectangle (using the UTF-8 double line characters `╔`, `═`, `╗`, `╚`, `║`, and `╝`) shows an example frame.
-This is followed by top / bottom text margins and left / right string margins.
-
-Left and right we find the start and end strings that can be set. This is followed by the left / right text margins.
-
-The last rectangle (using the single line UTF-8 characters `┌`, `─`, `┐`, `└`, `─`, and `┘`) marks the actual paragraph.
-Here we have the text, plus optional padding and indentations.
-
-----
-+----------------------------------------------------------------------------------------------+
-|                                                                                              |
-|                                      Top Frame Margin                                        |
-|                                                                                              |
-|--------╔════════════════════════════════════════════════════════════════════════════╗--------|
-|        ║                                                                            ║        |
-|        ║                             Top Text Margin                                ║        |
-|        ║                                                                            ║        |
-|        ║--------+--------+--------┌─────────────────────┐--------+--------+---------║        |
-|        ║        |        |        │                     │        |        |         ║        |
-|  F  M  ║  S  M  |  S  S  |  T  M  │      Paragraph      │  T  M  |  E  S  |  S   M  ║  F  M  |
-|  r  a  ║  t  a  |  t  t  |  e  a  │      text with      │  e  a  |  n  t  |  t   a  ║  r  a  |
-|  a  r  ║  r  r  |  a  r  |  x  r  │      padding &      │  x  r  |  d  r  |  r   r  ║  a  r  |
-|  m  g  ║  i  g  |  r  i  |  t  g  │     indentation     │  t  g  |     i  |  i   g  ║  m  g  |
-|  e  i  ║  n  i  |  t  g  |     i  │                     │     i  |     g  |  n   i  ║  e  i  |
-|     n  ║  g  n  |        |     n  │                     │     n  |        |  g   n  ║     n  |
-|        ║        |        |        │                     │        |        |         ║        |
-|        ║--------+--------+--------└─────────────────────┘--------+--------+---------║        |
-|        ║                                                                            ║        |
-|        ║                            Bottom Text Margin                              ║        |
-|        ║                                                                            ║        |
-|--------╚════════════════════════════════════════════════════════════════════════════╝--------|
-|                                                                                              |
-|                                     Bottom Frame Margin                                      |
-|                                                                                              |
-+----------------------------------------------------------------------------------------------+
-----
-
-
 === Summary of configurable  characteristics
 
 - text width (length of each text line)
@@ -164,6 +165,7 @@ The following characteristics are handled by special objects (one for each), whi
 * all margins
 * all characters
 * all strings
+* all character (and target) translators
 
 Additionally, the context provides a number of helper methods for rendering
 

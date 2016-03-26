@@ -99,6 +99,12 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>de.vandermeer</groupId>
+            <artifactId>char-translation</artifactId>
+            <version>0.0.1</version>
+            <scope>text</scope>
+        </dependency>
+        <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>ST4</artifactId>
             <version>4.0.8</version>

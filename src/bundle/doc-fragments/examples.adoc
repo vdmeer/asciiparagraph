@@ -244,3 +244,36 @@ Add a frame with top/bottom margin 2 for frame and text, left/right 5 for text, 
 
 ----------------------------------------------------------------------------------------
 
+
+=== Target translator for LaTeX character conversion
+
+Left side w/o and right side with LaTeX target converter
+----------------------------------------------------------------------------------------
+A sentence with some normal text,          A sentence with some normal text,  
+not specific to LaTeX. Now for some        not specific to LaTeX. Now for some
+characters that require conversion:        characters that require conversion:
+# % &. And some more: © § ¤. And           \# \% \&. And some more:           
+even more: È É Ê Ë. And some arrows        {\copyright} {\S} \currency. And   
+as well: ← ↑ → ↓ ↔                         even more: \`{E} \'{E} \^{E} \"{E}.
+                                           And some arrows as well:           
+                                           \(\leftarrow{}\) \(\uparrow\)      
+                                           \(\rightarrow{}\) \(\downarrow{}\) 
+                                           \(\leftrightarrow{}\)              
+----------------------------------------------------------------------------------------
+
+
+=== Target translator for HTML character conversion
+
+Left side w/o and right side with HTML target converter
+----------------------------------------------------------------------------------------
+A sentence with some normal text,           A sentence with some normal text,   
+not specific to HTML. Now for some          not specific to HTML. Now for some  
+characters that require conversion:         characters that require conversion: 
+# % & < >. And some more: © § ¤. And        &#803; &#37; &amp; &lt; &gt;. And   
+even more: Ē ē Ĕ ĕ Ė ė Ę ę Ě ě. And         some more: &copy; &sect; &curren;.  
+some arrows as well: ← ↑ → ↓ ↔ ↕            And even more: &#274; &#275; &#276; 
+                                            &#277; &#278; &#279; &#280; &#281;  
+                                            &#282; &#283;. And some arrows as   
+                                            well: &larr; &uarr; &rarr; &darr;   
+                                            &harr; &#8597;                      
+----------------------------------------------------------------------------------------

@@ -97,4 +97,14 @@ public class Test_Examples implements StandardExampleRunner {
 	public void test_08_Frame(){
 		this.runExample(new AP_08_Frame());
 	}
+
+	@Test
+	public void test_09a_TargetTranslation_LaTeX(){
+		this.runExample(new AP_09a_TargetTranslators_LaTeX());
+	}
+
+	@Test
+	public void test_09b_TargetTranslation_HTML(){
+		this.runExample(new AP_09b_TargetTranslators_HTML());
+	}
 }

@@ -21,6 +21,9 @@ import de.vandermeer.asciiparagraph.dropcaps.DropCaps;
 import de.vandermeer.asciiparagraph.dropcaps.FigletRoman;
 import de.vandermeer.skb.interfaces.objctxt.IsObjectContext;
 import de.vandermeer.skb.interfaces.textart.TA_FrameTheme;
+import de.vandermeer.skb.interfaces.translators.CharacterTranslator;
+import de.vandermeer.skb.interfaces.translators.HtmlElementTranslator;
+import de.vandermeer.skb.interfaces.translators.TargetTranslator;
 
 /**
  * Context for an {@link AsciiParagraph}.
@@ -42,6 +45,9 @@ public class AP_Context implements IsObjectContext {
 
 	/** Paragraph strings. */
 	protected AP_CtxtStrings strings = new AP_CtxtStrings();
+
+	/** Paragraph converters. */
+	protected AP_CtxtConverters converters = new AP_CtxtConverters();
 
 	/** Paragraph alignment, default is {@link AP_Alignment#JUSTIFIED_LEFT}. */
 	protected AP_Alignment alignment = AP_Alignment.JUSTIFIED_LEFT;
@@ -74,6 +80,7 @@ public class AP_Context implements IsObjectContext {
 	 * - Characters from {@link AP_CtxtCharacters}
 	 * - Indentations from {@link AP_CtxtIndents}
 	 * - Strings from {@link AP_CtxtStrings}
+	 * - Converters from {@link AP_CtxtConverters}
 	 * 
 	 */
 	public AP_Context(){}
@@ -85,14 +92,6 @@ public class AP_Context implements IsObjectContext {
 	public AP_Alignment getAlignment(){
 		return this.alignment;
 	}
-
-	/**
-	 * Returns the character settings.
-	 * @return character settings
-	 */
-//	public AP_CtxtCharacters getCharacters() {
-//		return characters;
-//	}
 
 	/**
 	 * Returns the set dropped capital letter library.
@@ -191,28 +190,12 @@ public class AP_Context implements IsObjectContext {
 	}
 
 	/**
-	 * Returns the indentation settings.
-	 * @return indentation settings
-	 */
-//	public AP_CtxtIndents getIndents() {
-//		return indents;
-//	}
-
-	/**
 	 * Returns the in-text white space character.
 	 * @return in-text white space character
 	 */
 	public Character getInnerWsChar() {
 		return this.characters.innerWs;
 	}
-
-	/**
-	 * Returns the margin settings.
-	 * @return margin settings
-	 */
-//	public AP_CtxtMargins getMargins() {
-//		return margins;
-//	}
 
 	/**
 	 * Returns the left padding character.
@@ -940,4 +923,57 @@ public class AP_Context implements IsObjectContext {
 		return this;
 	}
 
+	/**
+	 * Sets the character translator.
+	 * It will also remove any other translator set.
+	 * Nothing will happen if the argument is null.
+	 * @param charTranslator translator
+	 */
+	public void setCharTranslator(CharacterTranslator charTranslator) {
+		this.converters.setCharTranslator(charTranslator);
+	}
+
+	/**
+	 * Sets the HTML entity translator.
+	 * It will also remove any other translator set.
+	 * Nothing will happen if the argument is null.
+	 * @param htmlElementTranslator translator
+	 */
+	public void setHtmlElementTranslator(HtmlElementTranslator htmlElementTranslator) {
+		this.converters.setHtmlElementTranslator(htmlElementTranslator);
+	}
+
+	/**
+	 * Sets the target translator.
+	 * It will also remove any other translator set.
+	 * Nothing will happen if the argument is null.
+	 * @param targetTranslator translator
+	 */
+	public void setTargetTranslator(TargetTranslator targetTranslator) {
+		this.converters.setTargetTranslator(targetTranslator);
+	}
+
+	/**
+	 * Returns the target translator.
+	 * @return target translator, null if not set
+	 */
+	public TargetTranslator getTargetTranslator() {
+		return this.converters.targetTranslator;
+	}
+
+	/**
+	 * Returns the HTML entity translator.
+	 * @return HTML entity
+	 */
+	public HtmlElementTranslator getHtmlElementTranslator() {
+		return this.converters.htmlElementTranslator;
+	}
+
+	/**
+	 * Returns the character translator
+	 * @return character translator
+	 */
+	public CharacterTranslator getCharTranslator() {
+		return this.converters.charTranslator;
+	}
 }
