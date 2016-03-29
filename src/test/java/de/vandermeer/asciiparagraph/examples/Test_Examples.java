@@ -44,6 +44,36 @@ public class Test_Examples implements StandardExampleRunner {
 	}
 
 	@Test
+	public void test_00d_AddText_HasText(){
+		this.runExample(new AP_00d_AddText_HasText());
+	}
+
+	@Test
+	public void test_00e_AddText_HasTextCluster(){
+		this.runExample(new AP_00e_AddText_HasTextCluster());
+	}
+
+	@Test
+	public void test_00f_AddText_DoesRender(){
+		this.runExample(new AP_00f_AddText_DoesRender());
+	}
+
+	@Test
+	public void test_00g_AddText_DoesRenderToWidth(){
+		this.runExample(new AP_00g_AddText_DoesRenderToWidth());
+	}
+
+	@Test
+	public void test_00h_AddText_RendersToCluster(){
+		this.runExample(new AP_00h_AddText_RendersToCluster());
+	}
+
+	@Test
+	public void test_00i_AddText_RendersToClusterWidth(){
+		this.runExample(new AP_00i_AddText_RendersToClusterWidth());
+	}
+
+	@Test
 	public void test_01a_WS_Behavior(){
 		this.runExample(new AP_01a_WS_Behavior());
 	}

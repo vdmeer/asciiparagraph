@@ -20,8 +20,8 @@ import org.apache.commons.lang3.text.StrBuilder;
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
+import de.vandermeer.asciithemes.UTF_Frames;
 import de.vandermeer.skb.interfaces.StandardExample;
-import de.vandermeer.skb.interfaces.textart.UTF_FrameThemes;
 
 /**
  * AsciiParagraph example demonstrating frames.
@@ -36,7 +36,7 @@ public class AP_08_Frame implements StandardExample {
 	public void showOutput(){
 		// tag::example[]
 		AP_Context ctx = new AP_Context();
-		ctx.setFrame(UTF_FrameThemes.borderLight());
+		ctx.setFrame(UTF_Frames.borderLight());
 		ctx.setFrameTopBottomMargin(2);
 		ctx.setTextTopBottomMargin(2);
 		ctx.setTextLeftRightMargin(5);

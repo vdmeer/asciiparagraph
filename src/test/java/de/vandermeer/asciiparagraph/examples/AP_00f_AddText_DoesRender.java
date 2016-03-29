@@ -21,6 +21,7 @@ import org.stringtemplate.v4.ST;
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.render.DoesRender;
 
 /**
  * AsciiParagraph example demonstrating that {@link ST} objects are automatically added as text.
@@ -29,14 +30,20 @@ import de.vandermeer.skb.interfaces.StandardExample;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_00c_AddText_ST implements StandardExample {
+public class AP_00f_AddText_DoesRender implements StandardExample {
 
 	@Override
 	public void showOutput(){
 		// tag::example[]
-		ST st = new ST(new LoremIpsum().getWords(10));
 		AsciiParagraph ap = new AsciiParagraph();
-		ap.addText(st);
+		class ObjectDoesRender implements DoesRender{
+			@Override
+			public String render() {
+				return new LoremIpsum().getWords(10);
+			}
+		}
+
+		ap.addText(new ObjectDoesRender());
 		System.out.println(ap.render());
 		// end::example[]
 	}
@@ -44,10 +51,16 @@ public class AP_00c_AddText_ST implements StandardExample {
 	@Override
 	public StrBuilder getSource(){
 		String[] source = new String[]{
-				"ST st = new ST(new LoremIpsum().getWords(10));",
 				"AsciiParagraph ap = new AsciiParagraph();",
-				"ap.addText(st);",
-				"System.out.println(ap.render());"
+				"class ObjectHasText implements HasText{",
+				"	@Override",
+				"	public String getText() {",
+				"		return new LoremIpsum().getWords(10);",
+				"	}",
+				"}",
+				"",
+				"ap.addText(new ObjectHasText());",
+				"System.out.println(ap.render());",
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");
 	}

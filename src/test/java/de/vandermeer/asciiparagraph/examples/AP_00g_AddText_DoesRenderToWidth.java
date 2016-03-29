@@ -21,6 +21,7 @@ import org.stringtemplate.v4.ST;
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.render.DoesRenderToWidth;
 
 /**
  * AsciiParagraph example demonstrating that {@link ST} objects are automatically added as text.
@@ -29,14 +30,17 @@ import de.vandermeer.skb.interfaces.StandardExample;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_00c_AddText_ST implements StandardExample {
+public class AP_00g_AddText_DoesRenderToWidth implements StandardExample {
 
 	@Override
 	public void showOutput(){
 		// tag::example[]
-		ST st = new ST(new LoremIpsum().getWords(10));
+		AsciiParagraph renderToWidth = new AsciiParagraph();
+		renderToWidth.addText(new LoremIpsum().getWords(30));
+
 		AsciiParagraph ap = new AsciiParagraph();
-		ap.addText(st);
+		ap.getContext().setWidth(40);
+		ap.addText((DoesRenderToWidth)renderToWidth);
 		System.out.println(ap.render());
 		// end::example[]
 	}
@@ -44,10 +48,13 @@ public class AP_00c_AddText_ST implements StandardExample {
 	@Override
 	public StrBuilder getSource(){
 		String[] source = new String[]{
-				"ST st = new ST(new LoremIpsum().getWords(10));",
+				"AsciiParagraph renderToWidth = new AsciiParagraph();",
+				"renderToWidth.addText(new LoremIpsum().getWords(30));",
+				"",
 				"AsciiParagraph ap = new AsciiParagraph();",
-				"ap.addText(st);",
-				"System.out.println(ap.render());"
+				"ap.getContext().setWidth(40);",
+				"ap.addText((DoesRenderToWidth)renderToWidth);",
+				"System.out.println(ap.render());",
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");
 	}

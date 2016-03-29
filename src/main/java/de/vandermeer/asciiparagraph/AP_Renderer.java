@@ -225,62 +225,39 @@ public interface AP_Renderer {
 			}
 			sb.insert(0, new StrBuilder().appendPadding(ctx.getStringLeftMargin(), ctx.getStringLeftChar()));
 
-			//now add a line end if set  and margins
+			//now add a line end if set and margins
 			if(ctx.getEndString()!=null){
 				sb.append(ctx.getEndString());
 			}
 			sb.appendPadding(ctx.getStringRightMargin(), ctx.getStringRightChar());
-
-			//add the frame borders
-			if(ctx.getFrame()!=null){
-				sb = ctx.getFrame().addBorder(sb);
-			}
-
-			//add the frame margins
-			sb.insert(0, new StrBuilder().appendPadding(ctx.getFrameLeftMargin(), ctx.getFrameLeftChar()));
-			sb.appendPadding(ctx.getFrameRightMargin(), ctx.getFrameRightChar());
-
 			calcW = sb.length();
 		}
 
-		//finally add text bottom margin
+		//add text margins margin
+		for(int i=0; i<ctx.getTextTopMargin(); i++){
+			((ArrayList<StrBuilder>)ret).add(0, new StrBuilder().appendPadding(calcW, ' '));
+		}
 		for(int i=0; i<ctx.getTextBottomMargin(); i++){
-			if(ctx.getFrame()==null){
-				ret.add(new StrBuilder().append(""));
-			}
-			else{
-				ret.add(ctx.getFrame().addBorder(new StrBuilder().appendPadding(calcW-2, ' ')));
-			}
+			ret.add(new StrBuilder().appendPadding(calcW, ' '));
 		}
 
-		//add bottom frame if required
+		//add frame
 		if(ctx.getFrame()!=null){
-			ret.add(ctx.getFrame().getBottomline(calcW));
+			ctx.getFrame().addFrame(ret, ctx.getFrameMode());
 		}
 
-		//add bottom frame margins
+		//add frame margins
+		for(int i=0; i<ctx.getFrameTopMargin(); i++){
+			((ArrayList<StrBuilder>)ret).add(0, new StrBuilder().append(""));
+		}
 		for(int i=0; i<ctx.getFrameBottomMargin(); i++){
 			ret.add(new StrBuilder().append(""));
 		}
 
-		//add top text margins
-		for(int i=0; i<ctx.getTextTopMargin(); i++){
-			if(ctx.getFrame()==null){
-				((ArrayList<StrBuilder>)ret).add(0, new StrBuilder().append(""));
-			}
-			else{
-				((ArrayList<StrBuilder>)ret).add(0, ctx.getFrame().addBorder(new StrBuilder().appendPadding(calcW-2, ' ')));
-			}
-		}
-
-		//add top frame
-		if(ctx.getFrame()!=null){
-			((ArrayList<StrBuilder>)ret).add(0, ctx.getFrame().getTopline(calcW));
-		}
-
-		//add top frame margins
-		for(int i=0; i<ctx.getFrameTopMargin(); i++){
-			((ArrayList<StrBuilder>)ret).add(0, new StrBuilder().append(""));
+		//finally, add horizontal frame margins
+		for(StrBuilder sb : ret){
+			sb.insert(0, new StrBuilder().appendPadding(ctx.getFrameLeftMargin(), ctx.getFrameLeftChar()));
+			sb.appendPadding(ctx.getFrameRightMargin(), ctx.getFrameRightChar());
 		}
 
 		return ret;

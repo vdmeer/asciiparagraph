@@ -11,7 +11,7 @@
 | https://github.com/vdmeer/asciiparagraph/tree/master[Github]
 
 | Maven Central current release
-| https://search.maven.org/#artifactdetails\|de.vandermeer\|asciiparagraph\|{release-version}\|jar[current release {release-version}], 
+| https://search.maven.org/#artifactdetails\|de.vandermeer\|asciiparagraph\|{release-version}\|jar[current release {release-version}]
 
 | Maven Central all releases
 | https://search.maven.org/#search\|gav\|1\|g%3A%22de.vandermeer%22%20AND%20a%3A%22asciiparagraph%22[all releases]
@@ -23,7 +23,7 @@
 | https://search.maven.org/#search\|gav\|1\|g%3A%22de.vandermeer%22%20AND%20a%3A%22asciiparagraph-j%22[Maven Central]
 
 | UTF-8 Howto, older blog
-| http://vdmeer-sven.blogspot.ie/2014/06/utf-8-support-w-java-and-console.html[older blog], 
+| http://vdmeer-sven.blogspot.ie/2014/06/utf-8-support-w-java-and-console.html[older blog]
 
 | UTF-8 Howto, updated Wiki
 | https://github.com/vdmeer/skb/wiki/HowTo-UTF-8-Support-in-Java-and-Console[updated SKB Wiki]

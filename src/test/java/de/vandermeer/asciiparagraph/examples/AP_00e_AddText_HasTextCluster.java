@@ -15,12 +15,16 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.apache.commons.lang3.text.StrBuilder;
 import org.stringtemplate.v4.ST;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.render.HasTextCluster;
 
 /**
  * AsciiParagraph example demonstrating that {@link ST} objects are automatically added as text.
@@ -29,14 +33,24 @@ import de.vandermeer.skb.interfaces.StandardExample;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_00c_AddText_ST implements StandardExample {
+public class AP_00e_AddText_HasTextCluster implements StandardExample {
 
 	@Override
 	public void showOutput(){
 		// tag::example[]
-		ST st = new ST(new LoremIpsum().getWords(10));
 		AsciiParagraph ap = new AsciiParagraph();
-		ap.addText(st);
+		class ObjectHasTextCluster implements HasTextCluster{
+			@Override
+			public Collection<String> getTextAsCollection() {
+				ArrayList<String> text = new ArrayList<>();
+				text.add(new LoremIpsum().getWords(10));
+				text.add(new LoremIpsum().getWords(10));
+				text.add(new LoremIpsum().getWords(10));
+				return text;
+			}
+		}
+
+		ap.addText(new ObjectHasTextCluster());
 		System.out.println(ap.render());
 		// end::example[]
 	}
@@ -44,10 +58,20 @@ public class AP_00c_AddText_ST implements StandardExample {
 	@Override
 	public StrBuilder getSource(){
 		String[] source = new String[]{
-				"ST st = new ST(new LoremIpsum().getWords(10));",
 				"AsciiParagraph ap = new AsciiParagraph();",
-				"ap.addText(st);",
-				"System.out.println(ap.render());"
+				"class ObjectHasTextCluster implements HasTextCluster{",
+				"	@Override",
+				"	public Collection<String> getTextAsCollection() {",
+						"ArrayList<String> text = new ArrayList<>();",
+						"text.add(new LoremIpsum().getWords(10));",
+						"text.add(new LoremIpsum().getWords(10));",
+						"text.add(new LoremIpsum().getWords(10));",
+						"return text;",
+				"	}",
+				"}",
+				"",
+				"ap.addText(new ObjectHasTextCluster());",
+				"System.out.println(ap.render());",
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");
 	}

@@ -19,8 +19,8 @@ import org.apache.commons.lang3.Validate;
 
 import de.vandermeer.asciiparagraph.dropcaps.DropCaps;
 import de.vandermeer.asciiparagraph.dropcaps.FigletRoman;
+import de.vandermeer.asciithemes.TA_Frame;
 import de.vandermeer.skb.interfaces.objctxt.IsObjectContext;
-import de.vandermeer.skb.interfaces.textart.TA_FrameTheme;
 import de.vandermeer.skb.interfaces.translators.CharacterTranslator;
 import de.vandermeer.skb.interfaces.translators.HtmlElementTranslator;
 import de.vandermeer.skb.interfaces.translators.TargetTranslator;
@@ -65,7 +65,10 @@ public class AP_Context implements IsObjectContext {
 	protected DropCaps dropCapLib = new FigletRoman();
 
 	/** The theme for a frame. */
-	protected TA_FrameTheme frame = null;
+	protected TA_Frame frame = null;
+
+	/** The mode for a frame. */
+	protected int frameMode = TA_Frame.THEME_FULL_FRAME;
 
 	/**
 	 * Creates a new paragraph context with default settings.
@@ -81,6 +84,8 @@ public class AP_Context implements IsObjectContext {
 	 * - Indentations from {@link AP_CtxtIndents}
 	 * - Strings from {@link AP_CtxtStrings}
 	 * - Converters from {@link AP_CtxtConverters}
+	 * - Frame: null
+	 * - Frame mode: {@link TA_Frame#THEME_FULL_FRAME}
 	 * 
 	 */
 	public AP_Context(){}
@@ -129,7 +134,7 @@ public class AP_Context implements IsObjectContext {
 	 * Returns the paragraph frame.
 	 * @return frame, null if not set
 	 */
-	public TA_FrameTheme getFrame() {
+	public TA_Frame getFrame() {
 		return this.frame;
 	}
 
@@ -449,7 +454,7 @@ public class AP_Context implements IsObjectContext {
 	 * @param frame new frame, null to reset
 	 * @return this to allow chaining
 	 */
-	public AP_Context setFrame(TA_FrameTheme frame) {
+	public AP_Context setFrame(TA_Frame frame) {
 		this.frame = frame;
 		return this;
 	}
@@ -976,4 +981,26 @@ public class AP_Context implements IsObjectContext {
 	public CharacterTranslator getCharTranslator() {
 		return this.converters.charTranslator;
 	}
+
+	/**
+	 * Returns the set frame mode.
+	 * @return frame mode
+	 */
+	public int getFrameMode() {
+		return frameMode;
+	}
+
+	/**
+	 * Sets the frame mode.
+	 * @param frameMode new frame mode, only used if 0 or positive integer
+	 * @return this to allow chaining
+	 */
+	public AP_Context setFrameMode(int frameMode) {
+		if(frameMode>=0){
+			this.frameMode = frameMode;
+		}
+		return this;
+	}
+
+	
 }
