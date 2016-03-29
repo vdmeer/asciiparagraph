@@ -16,7 +16,6 @@
 package de.vandermeer.asciiparagraph.examples;
 
 import org.apache.commons.lang3.text.StrBuilder;
-import org.stringtemplate.v4.ST;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
@@ -24,7 +23,7 @@ import de.vandermeer.skb.interfaces.StandardExample;
 import de.vandermeer.skb.interfaces.render.DoesRenderToWidth;
 
 /**
- * AsciiParagraph example demonstrating that {@link ST} objects are automatically added as text.
+ * AsciiParagraph example demonstrating that {@link DoesRenderToWidth} objects are automatically added as text.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7

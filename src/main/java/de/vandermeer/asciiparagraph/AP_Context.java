@@ -99,6 +99,14 @@ public class AP_Context implements IsObjectContext {
 	}
 
 	/**
+	 * Returns the character translator
+	 * @return character translator
+	 */
+	public CharacterTranslator getCharTranslator() {
+		return this.converters.charTranslator;
+	}
+
+	/**
 	 * Returns the set dropped capital letter library.
 	 * @return dropped capital letter library, null if none set
 	 */
@@ -163,6 +171,14 @@ public class AP_Context implements IsObjectContext {
 	}
 
 	/**
+	 * Returns the set frame mode.
+	 * @return frame mode
+	 */
+	public int getFrameMode() {
+		return frameMode;
+	}
+
+	/**
 	 * Returns the right frame margin character.
 	 * @return right frame margin character
 	 */
@@ -192,6 +208,14 @@ public class AP_Context implements IsObjectContext {
 	 */
 	public int getHangingParaIndent() {
 		return this.indents.hangingPara;
+	}
+
+	/**
+	 * Returns the HTML entity translator.
+	 * @return HTML entity
+	 */
+	public HtmlElementTranslator getHtmlElementTranslator() {
+		return this.converters.htmlElementTranslator;
 	}
 
 	/**
@@ -243,6 +267,14 @@ public class AP_Context implements IsObjectContext {
 	}
 
 	/**
+	 * Returns the string settings. 
+	 * @return string settings
+	 */
+//	public AP_CtxtStrings getStrings() {
+//		return this.strings;
+//	}
+
+	/**
 	 * Returns the left string margin.
 	 * @return left string margin
 	 */
@@ -267,12 +299,12 @@ public class AP_Context implements IsObjectContext {
 	}
 
 	/**
-	 * Returns the string settings. 
-	 * @return string settings
+	 * Returns the target translator.
+	 * @return target translator, null if not set
 	 */
-//	public AP_CtxtStrings getStrings() {
-//		return this.strings;
-//	}
+	public TargetTranslator getTargetTranslator() {
+		return this.converters.targetTranslator;
+	}
 
 	/**
 	 * Returns the bottom text margin.
@@ -408,6 +440,16 @@ public class AP_Context implements IsObjectContext {
 	}
 
 	/**
+	 * Sets the character translator.
+	 * It will also remove any other translator set.
+	 * Nothing will happen if the argument is null.
+	 * @param charTranslator translator
+	 */
+	public void setCharTranslator(CharacterTranslator charTranslator) {
+		this.converters.setCharTranslator(charTranslator);
+	}
+
+	/**
 	 * Sets the set dropped capital letter library.
 	 * @param dropCapLib capital letter library, only used if not null
 	 * @return this to allow chaining
@@ -540,6 +582,18 @@ public class AP_Context implements IsObjectContext {
 	}
 
 	/**
+	 * Sets the frame mode.
+	 * @param frameMode new frame mode, only used if 0 or positive integer
+	 * @return this to allow chaining
+	 */
+	public AP_Context setFrameMode(int frameMode) {
+		if(frameMode>=0){
+			this.frameMode = frameMode;
+		}
+		return this;
+	}
+
+	/**
 	 * Sets the right frame margin character.
 	 * @param frameRight character
 	 * @return this to allow chaining
@@ -601,6 +655,16 @@ public class AP_Context implements IsObjectContext {
 	public AP_Context setHangingParaIndent(int hangingPara) {
 		this.indents.hangingPara = hangingPara;
 		return this;
+	}
+
+	/**
+	 * Sets the HTML entity translator.
+	 * It will also remove any other translator set.
+	 * Nothing will happen if the argument is null.
+	 * @param htmlElementTranslator translator
+	 */
+	public void setHtmlElementTranslator(HtmlElementTranslator htmlElementTranslator) {
+		this.converters.setHtmlElementTranslator(htmlElementTranslator);
 	}
 
 	/**
@@ -785,6 +849,16 @@ public class AP_Context implements IsObjectContext {
 	}
 
 	/**
+	 * Sets the target translator.
+	 * It will also remove any other translator set.
+	 * Nothing will happen if the argument is null.
+	 * @param targetTranslator translator
+	 */
+	public void setTargetTranslator(TargetTranslator targetTranslator) {
+		this.converters.setTargetTranslator(targetTranslator);
+	}
+
+	/**
 	 * Sets the bottom text margin
 	 * @param textBottom margin
 	 * @return this to allow chaining
@@ -925,80 +999,6 @@ public class AP_Context implements IsObjectContext {
 	 */
 	public AP_Context setWidth(int width) {
 		this.width = width;
-		return this;
-	}
-
-	/**
-	 * Sets the character translator.
-	 * It will also remove any other translator set.
-	 * Nothing will happen if the argument is null.
-	 * @param charTranslator translator
-	 */
-	public void setCharTranslator(CharacterTranslator charTranslator) {
-		this.converters.setCharTranslator(charTranslator);
-	}
-
-	/**
-	 * Sets the HTML entity translator.
-	 * It will also remove any other translator set.
-	 * Nothing will happen if the argument is null.
-	 * @param htmlElementTranslator translator
-	 */
-	public void setHtmlElementTranslator(HtmlElementTranslator htmlElementTranslator) {
-		this.converters.setHtmlElementTranslator(htmlElementTranslator);
-	}
-
-	/**
-	 * Sets the target translator.
-	 * It will also remove any other translator set.
-	 * Nothing will happen if the argument is null.
-	 * @param targetTranslator translator
-	 */
-	public void setTargetTranslator(TargetTranslator targetTranslator) {
-		this.converters.setTargetTranslator(targetTranslator);
-	}
-
-	/**
-	 * Returns the target translator.
-	 * @return target translator, null if not set
-	 */
-	public TargetTranslator getTargetTranslator() {
-		return this.converters.targetTranslator;
-	}
-
-	/**
-	 * Returns the HTML entity translator.
-	 * @return HTML entity
-	 */
-	public HtmlElementTranslator getHtmlElementTranslator() {
-		return this.converters.htmlElementTranslator;
-	}
-
-	/**
-	 * Returns the character translator
-	 * @return character translator
-	 */
-	public CharacterTranslator getCharTranslator() {
-		return this.converters.charTranslator;
-	}
-
-	/**
-	 * Returns the set frame mode.
-	 * @return frame mode
-	 */
-	public int getFrameMode() {
-		return frameMode;
-	}
-
-	/**
-	 * Sets the frame mode.
-	 * @param frameMode new frame mode, only used if 0 or positive integer
-	 * @return this to allow chaining
-	 */
-	public AP_Context setFrameMode(int frameMode) {
-		if(frameMode>=0){
-			this.frameMode = frameMode;
-		}
 		return this;
 	}
 

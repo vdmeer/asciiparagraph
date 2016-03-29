@@ -243,7 +243,7 @@ public interface AP_Renderer {
 
 		//add frame
 		if(ctx.getFrame()!=null){
-			ctx.getFrame().addFrame(ret, ctx.getFrameMode());
+			ret = ctx.getFrame().addFrame(ret, ctx.getFrameMode());
 		}
 
 		//add frame margins
