@@ -17,7 +17,7 @@ The following code creates a paragraph context and then a paragraph with some de
 To demonstrate the text alignment, we then set the alignment in the context to justified, justified left, justified right, centered, left, and right
 and print the rendered text.
 
-[source, java]
+[source, java, linenums]
 ----------------------------------------------------------------------------------------
 include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_02_Alignment_Behavior.java[tags=example,indent=0]
 ----------------------------------------------------------------------------------------

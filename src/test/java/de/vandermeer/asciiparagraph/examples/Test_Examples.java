@@ -124,8 +124,13 @@ public class Test_Examples implements StandardExampleRunner {
 	}
 
 	@Test
-	public void test_08_Frame(){
-		this.runExample(new AP_08_Frame());
+	public void test_08a_Frames(){
+		this.runExample(new AP_08a_Frames());
+	}
+
+	@Test
+	public void test_08b_Frames_Doc(){
+		this.runExample(new AP_08b_Frames_Doc());
 	}
 
 	@Test

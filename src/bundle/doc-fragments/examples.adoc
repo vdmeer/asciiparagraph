@@ -225,7 +225,7 @@ voluptua. At vero eos et accusam
 
 === Frames
 
-Examples of a few frames with different frame modes.
+Examples of a few frames with different frame modes:
 ----------------------------------------------------------------------------------------
 ┌─────────────────────────┐        ┌                         ┐        ─────────────────────────
 │                         │           Lorem ipsum dolor sit             Lorem ipsum dolor sit  
@@ -237,9 +237,45 @@ Examples of a few frames with different frame modes.
 ----------------------------------------------------------------------------------------
 
 
+=== Code documentation (using frames)
+
+
+Standard single line, multi-line, and doc comments using frames:
+----------------------------------------------------------------------------------------
+//                             /*                             /**                    
+// Lorem ipsum dolor            * Lorem ipsum dolor            * Lorem ipsum dolor   
+// sit amet, consetetur         * sit amet, consetetur         * sit amet, consetetur
+// sadipscing elitr,            * sadipscing elitr,            * sadipscing elitr,   
+// sed                          * sed                          * sed                 
+//                              */                             */                    
+----------------------------------------------------------------------------------------
+
+Comments for bash scripts, normal and with a double-hashmark variation
+----------------------------------------------------------------------------------------
+#                         ##                     
+# Lorem ipsum dolor       ## Lorem ipsum dolor   
+# sit amet, consetetur    ## sit amet, consetetur
+# sadipscing elitr,       ## sadipscing elitr,   
+# sed                     ## sed                 
+#                         ##                     
+----------------------------------------------------------------------------------------
+
+
+Comments for LaTeX and HTML
+----------------------------------------------------------------------------------------
+%                         <!--                      -->
+% Lorem ipsum dolor       <!-- Lorem ipsum dolor    -->
+% sit amet, consetetur    <!-- sit amet, consetetur -->
+% sadipscing elitr,       <!-- sadipscing elitr,    -->
+% sed                     <!-- sed                  -->
+%                         <!--                      -->
+----------------------------------------------------------------------------------------
+
+
+
 === Target translator for LaTeX character conversion
 
-Left side w/o and right side with LaTeX target converter
+Left side w/o and right side with LaTeX target converter:
 ----------------------------------------------------------------------------------------
 A sentence with some normal text,          A sentence with some normal text,  
 not specific to LaTeX. Now for some        not specific to LaTeX. Now for some

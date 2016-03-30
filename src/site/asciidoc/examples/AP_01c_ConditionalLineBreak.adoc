@@ -10,7 +10,7 @@ The lines 1 and 2 add a conditional line break as `<br>` and `<br />` respective
 They appear as individual lines.
 The third line has an excessive line break, which will be removed, resulting in a single line.
 
-[source, java]
+[source, java, linenums]
 ----------------------------------------------------------------------------------------
 include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_01c_ConditionalLineBreak.java[tags=example,indent=0]
 ----------------------------------------------------------------------------------------

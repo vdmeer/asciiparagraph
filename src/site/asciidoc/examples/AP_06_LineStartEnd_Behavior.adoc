@@ -14,7 +14,7 @@ This is followed by setting the start string to "// ", printing the output.
 This is followed by setting the end string to " -->", printing the output.
 This is followed by setting the start string to `null`, which effectively removes the start string, printing the output.
 
-[source, java]
+[source, java, linenums]
 ----------------------------------------------------------------------------------------
 include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_06_LineStartEnd_Behavior.java[tags=example,indent=0]
 ----------------------------------------------------------------------------------------

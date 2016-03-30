@@ -21,7 +21,13 @@
     <body>
         <menu name="Ascii Table">
             <item href="features.html" name="Features" />
-            <item href="concepts.html" name="Concepts" />
+            <item href="concepts.html" name="Concepts">
+                <item href="concepts/01-anatomy.html" name="Anatomy of a paragraph" />
+                <item href="concepts/02-paragraph.html" name="Paragraph" />
+                <item href="concepts/03-config-features.html" name="Configurable features" />
+                <item href="concepts/04-context.html" name="Paragraph context" />
+                <item href="concepts/05-renderer.html" name="Paragraph renderer" />
+            </item>
             <item href="installation.html" name="Installation" />
             <item href="getting-started.html" name="Getting Started" />
 <!--
@@ -40,11 +46,12 @@
                 <item href="examples/AP_05_Right_Text_Margin.html" name="Text margin - right" />
                 <item href="examples/AP_06_LineStartEnd_Behavior.html" name="Line start/end strings" />
                 <item href="examples/AP_07_InclusiveWidth.html" name="Render with inclusive width" />
-                <item href="examples/AP_08_Frame.html" name="Adding frames" />
+                <item href="examples/AP_08a_Frames.html" name="Adding frames" />
+                <item href="examples/AP_08b_Frames_Doc.html" name="Code docs (Bash, HTML, LaTeX, Java)" />
                 <item href="examples/AP_09_TargetTranslators.html" name="Translate (LaTeX, HTML)" />
             </item>
             <item href="resources.html" name="Resources" />
-            <item href="javadocs/api-release/index.html" name="API Doc (Current Release)" />
+            <item href="apidocs/index.html" name="JAVA API Doc" />
             <item href="changelog.html" name="Change Log" />
         </menu>
         <menu ref="reports" inherit="top"/>

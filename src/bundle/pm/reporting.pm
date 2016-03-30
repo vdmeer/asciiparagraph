@@ -3,7 +3,6 @@
 		<groupId>org.apache.maven.plugins</groupId>
 		<artifactId>maven-javadoc-plugin</artifactId>
 		<version>${pm.version.maven-javadoc-plugin}</version>
-
 		<reportSets>
 			<reportSet>
 				<id>default</id>
@@ -13,9 +12,6 @@
 			</reportSet>
 		</reportSets>
 		<configuration>
-
-			<destDir>javadocs/api-release</destDir>
-
 			<source>${maven.compiler.target}</source>
 			<doclet>org.asciidoctor.Asciidoclet</doclet>
 			<docletArtifact>
@@ -28,9 +24,8 @@
 				--base-dir ${project.basedir}/src
 				--attribute "name=${project.name}"
 				--attribute "release-version=${project.version}"
-				--attribute "title-link=http://example.com[${project.name} ${project.version}]"
+				--attribute "title-link=${mp.project.url}/[${project.name} ${project.version}]"
 			</additionalparam>
-
 			<encoding>${project.resources.sourceEncoding}</encoding>
 			<docencoding>${project.resources.sourceEncoding}</docencoding>
 			<charset>${project.resources.sourceEncoding}</charset>
@@ -44,7 +39,6 @@
 			<detectJavaApiLink>true</detectJavaApiLink>
 			<javadocDirectory>${basedir}/src/main/javadoc</javadocDirectory>
 			<docfilessubdirs>true</docfilessubdirs>
-
 		</configuration>
 	</plugin>
 </plugins>

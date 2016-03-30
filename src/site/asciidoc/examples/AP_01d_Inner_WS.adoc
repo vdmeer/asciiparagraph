@@ -7,7 +7,7 @@ It can be changed to any other character.
 
 The example below sets the in-text white space (called inner white space) to the UTF-8 character `˽` and then to the UTF-8 character `—`.
 
-[source, java]
+[source, java, linenums]
 ----------------------------------------------------------------------------------------
 include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_01d_Inner_WS.java[tags=example,indent=0]
 ----------------------------------------------------------------------------------------

@@ -12,7 +12,7 @@ The following code creates a paragraph context and then a paragraph with some de
 To demonstrate the text format, we then set the format in the context to none, first line, and hanging (paragraph).
 To show different dropped capital letters we first show the render with the default library and then change the library and render the paragraph again.
 
-[source, java]
+[source, java, linenums]
 ----------------------------------------------------------------------------------------
 include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_03_Format_Behavior.java[tags=example,indent=0]
 ----------------------------------------------------------------------------------------

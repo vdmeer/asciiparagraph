@@ -14,7 +14,7 @@ To demonstrate the actual margin added, the paragraph is using a right border ma
 The right text is visibule between the right end of the text and the border in each line.
 
 
-[source, java]
+[source, java, linenums]
 ----------------------------------------------------------------------------------------
 include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_05_Right_Text_Margin.java[tags=example,indent=0]
 ----------------------------------------------------------------------------------------

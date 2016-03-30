@@ -8,6 +8,11 @@ files="
 	src/site/asciidoc/installation.adoc
 	src/site/asciidoc/features.adoc
 	src/site/asciidoc/concepts.adoc
+	src/site/asciidoc/concepts/01-anatomy.adoc
+	src/site/asciidoc/concepts/02-paragraph.adoc
+	src/site/asciidoc/concepts/03-config-features.adoc
+	src/site/asciidoc/concepts/04-context.adoc
+	src/site/asciidoc/concepts/05-renderer.adoc
 	src/site/asciidoc/getting-started.adoc
 	src/bundle/doc-fragments/examples.adoc
 "
@@ -15,8 +20,8 @@ files="
 output_file=src/bundle/doc/README.adoc
 
 echo > ${output_file}
-cat src/bundle/doc-fragments/title.adoc >>${output_file}
 echo ":release-version: ${version}" >> ${output_file}
+cat src/bundle/doc-fragments/title.adoc >>${output_file}
 echo "" >> ${output_file}
 
 for file in ${files}

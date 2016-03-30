@@ -6,14 +6,17 @@ Frame borders will be added to the left and right of each line.
 Top and bottom lines will be added to the top and the bottom of the paragraph.
 Additional margins can be set to separate the frame from any text (string margins) and to add margins around the frame.
 
+
+==== Some frame examples
+
 The following code creates a paragraph and then adds frames to it.
 The first setting uses a frame constructed of UTF-8 light border characters, with frame and text margins set to `1`.
 The second setting removes all added margins and uses the same frame in a different mode.
 The third setting uses the frame in yet another mode.
 
-[source, java]
+[source, java, linenums]
 ----------------------------------------------------------------------------------------
-include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_08_Frame.java[tags=example,indent=0]
+include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_08a_Frames.java[tags=example,indent=0]
 ----------------------------------------------------------------------------------------
 
 

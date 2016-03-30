@@ -3,9 +3,9 @@
 
 The width of a paragraph can be set via its context.
 The following example creates a paragraph and then sets the width and shows the output.
-The first width is 50, the second 40, and the third 30 characters.
+The first width is 50 (line 5), the second 40 (line 8), and the third 30 characters (line 11).
 
-[source, java]
+[source, java, linenums]
 ----------------------------------------------------------------------------------------
 include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_00b_Width_Behavior.java[tags=example,indent=0]
 ----------------------------------------------------------------------------------------

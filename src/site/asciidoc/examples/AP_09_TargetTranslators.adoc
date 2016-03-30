@@ -14,7 +14,7 @@ This means that all characters in the text that require special translation for 
 The code below creates a paragraph with some text that is not suitable to be used in LaTeX documents.
 It then prints the default output (no translation), followed by setting the LaTeX target translator, printing the output again.
 
-[source, java]
+[source, java, linenums]
 ----------------------------------------------------------------------------------------
 include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_09a_TargetTranslators_LaTeX.java[tags=example,indent=0]
 ----------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ This means that all characters in the text that require special translation for 
 The code below creates a paragraph with some text that is not suitable to be used in LaTeX documents.
 It then prints the default output (no translation), followed by setting the HTML target translator, printing the output again.
 
-[source, java]
+[source, java, linenums]
 ----------------------------------------------------------------------------------------
 include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_09b_TargetTranslators_HTML.java[tags=example,indent=0]
 ----------------------------------------------------------------------------------------

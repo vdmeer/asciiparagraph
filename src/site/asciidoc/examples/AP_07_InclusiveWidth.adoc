@@ -12,7 +12,7 @@ The output is then printed for each step.
 
 Since the length to which the paragraph is rendered does not change (we are using 50 for each render call), the text width is continuously shrinking.
 
-[source, java]
+[source, java, linenums]
 ----------------------------------------------------------------------------------------
 include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_07_InclusiveWidth.java[tags=example,indent=0]
 ----------------------------------------------------------------------------------------

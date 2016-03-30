@@ -21,41 +21,48 @@ import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.asciithemes.TA_Frame;
-import de.vandermeer.asciithemes.u8.U8_Frames;
+import de.vandermeer.asciithemes.a7.A7_Frames_Doc;
 import de.vandermeer.skb.interfaces.StandardExample;
 
 /**
- * AsciiParagraph example demonstrating frames.
+ * AsciiParagraph example demonstrating frames resembling code documentation.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_08_Frame implements StandardExample {
+public class AP_08b_Frames_Doc implements StandardExample {
 
 	@Override
 	public void showOutput(){
 		// tag::example[]
 		AP_Context ctx = new AP_Context();
-		ctx.setAlignment(AP_Alignment.CENTER);
-		ctx.setFrame(U8_Frames.borderLight());
+		ctx.setAlignment(AP_Alignment.LEFT);
 		ctx.setFrameTopBottomMargin(1);
-		ctx.setTextTopBottomMargin(1);
-		ctx.setTextLeftRightMargin(1);
-
+		ctx.setTextTopBottomMargin(0);
 		AsciiParagraph ap = new AsciiParagraph(ctx);
 		ap.addText(new LoremIpsum().getWords(9));
-		System.out.println(ap.render(25));
 
-		ctx.setFrameMode(TA_Frame.THEME_CORNERS_ONLY);
-		ctx.setFrameTopBottomMargin(0);
-		ctx.setTextTopBottomMargin(0);
-		ctx.setTextLeftRightMargin(0);
-		System.out.println(ap.render(25));
+		ctx.setFrame(A7_Frames_Doc.latexTB());
+		System.out.println(ap.render(20));
 
-		ctx.setFrameMode(TA_Frame.THEME_LINE_TOPBOTTOM);
-		System.out.println(ap.render(25));
+		ctx.setFrame(A7_Frames_Doc.htmlTB());
+		System.out.println(ap.render(20));
+
+		ctx.setFrame(A7_Frames_Doc.bashTB());
+		System.out.println(ap.render(20));
+
+		ctx.setFrame(A7_Frames_Doc.bashStart2HashTB());
+		System.out.println(ap.render(20));
+
+		ctx.setFrame(A7_Frames_Doc.singleLine());
+		System.out.println(ap.render(20));
+
+		ctx.setFrame(A7_Frames_Doc.multiLine());
+		System.out.println(ap.render(20));
+
+		ctx.setFrame(A7_Frames_Doc.multiLineJavaDoc());
+		System.out.println(ap.render(20));
 		// end::example[]
 	}
 
@@ -63,24 +70,32 @@ public class AP_08_Frame implements StandardExample {
 	public StrBuilder getSource(){
 		String[] source = new String[]{
 				"AP_Context ctx = new AP_Context();",
-				"ctx.setAlignment(AP_Alignment.CENTER);",
-				"ctx.setFrame(UTF_Frames.borderLight());",
+				"ctx.setAlignment(AP_Alignment.LEFT);",
 				"ctx.setFrameTopBottomMargin(1);",
-				"ctx.setTextTopBottomMargin(1);",
-				"ctx.setTextLeftRightMargin(1);",
-				"",
+				"ctx.setTextTopBottomMargin(0);",
 				"AsciiParagraph ap = new AsciiParagraph(ctx);",
 				"ap.addText(new LoremIpsum().getWords(9));",
-				"System.out.println(ap.render(25));",
 				"",
-				"ctx.setFrameMode(TA_Frame.THEME_CORNERS_ONLY);",
-				"ctx.setFrameTopBottomMargin(0);",
-				"ctx.setTextTopBottomMargin(0);",
-				"ctx.setTextLeftRightMargin(0);",
-				"System.out.println(ap.render(25));",
+				"ctx.setFrame(A7_Frames_Doc.latexTB());",
+				"System.out.println(ap.render(20));",
 				"",
-				"ctx.setFrameMode(TA_Frame.THEME_LINE_TOPBOTTOM);",
-				"System.out.println(ap.render(25));",
+				"ctx.setFrame(A7_Frames_Doc.htmlTB());",
+				"System.out.println(ap.render(20));",
+				"",
+				"ctx.setFrame(A7_Frames_Doc.bashTB());",
+				"System.out.println(ap.render(20));",
+				"",
+				"ctx.setFrame(A7_Frames_Doc.bashStart2HashTB());",
+				"System.out.println(ap.render(20));",
+				"",
+				"ctx.setFrame(A7_Frames_Doc.singleLine());",
+				"System.out.println(ap.render(20));",
+				"",
+				"ctx.setFrame(A7_Frames_Doc.multiLine());",
+				"System.out.println(ap.render(20));",
+				"",
+				"ctx.setFrame(A7_Frames_Doc.multiLineJavaDoc());",
+				"System.out.println(ap.render(20));",
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");
 	}
