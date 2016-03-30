@@ -48,6 +48,7 @@ public class AP_09b_TargetTranslators_HTML implements StandardExample {
 
 		ctx.setTargetTranslator(new Text2Html());
 		System.out.println(ap.render(36));
+		// end::example[]
 	}
 
 	@Override

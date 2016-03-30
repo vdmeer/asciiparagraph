@@ -49,6 +49,9 @@ public class AP_06_LineStartEnd_Behavior implements StandardExample {
 
 		ctx.setEndString(" -->");
 		System.out.println(ap.render());
+
+		ctx.setStartString(null);
+		System.out.println(ap.render());
 		// end::example[]
 	}
 

@@ -29,7 +29,7 @@ import de.vandermeer.skb.interfaces.StandardExample;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.3
  */
-public class AP_01b_WS_Behavior_Doc implements StandardExample {
+public class AP_01a_WS_Behavior_Simple implements StandardExample {
 
 	@Override
 	public void showOutput(){

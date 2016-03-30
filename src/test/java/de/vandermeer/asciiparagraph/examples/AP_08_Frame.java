@@ -22,7 +22,7 @@ import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.asciithemes.TA_Frame;
-import de.vandermeer.asciithemes.UTF_Frames;
+import de.vandermeer.asciithemes.u8.U8_Frames;
 import de.vandermeer.skb.interfaces.StandardExample;
 
 /**
@@ -39,7 +39,7 @@ public class AP_08_Frame implements StandardExample {
 		// tag::example[]
 		AP_Context ctx = new AP_Context();
 		ctx.setAlignment(AP_Alignment.CENTER);
-		ctx.setFrame(UTF_Frames.borderLight());
+		ctx.setFrame(U8_Frames.borderLight());
 		ctx.setFrameTopBottomMargin(1);
 		ctx.setTextTopBottomMargin(1);
 		ctx.setTextLeftRightMargin(1);
@@ -56,6 +56,7 @@ public class AP_08_Frame implements StandardExample {
 
 		ctx.setFrameMode(TA_Frame.THEME_LINE_TOPBOTTOM);
 		System.out.println(ap.render(25));
+		// end::example[]
 	}
 
 	@Override

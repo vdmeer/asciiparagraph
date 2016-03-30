@@ -74,13 +74,13 @@ public class Test_Examples implements StandardExampleRunner {
 	}
 
 	@Test
-	public void test_01a_WS_Behavior(){
-		this.runExample(new AP_01a_WS_Behavior());
+	public void test_01a_WS_Behavior_Simple(){
+		this.runExample(new AP_01a_WS_Behavior_Simple());
 	}
 
 	@Test
-	public void test_01b_WS_Behavior_Doc(){
-		this.runExample(new AP_01b_WS_Behavior_Doc());
+	public void test_01b_WS_Behavior_More(){
+		this.runExample(new AP_01b_WS_Behavior_More());
 	}
 
 	@Test

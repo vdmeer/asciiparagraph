@@ -48,6 +48,7 @@ public class AP_09a_TargetTranslators_LaTeX implements StandardExample {
 
 		ctx.setTargetTranslator(new Text2Latex());
 		System.out.println(ap.render(35));
+		// end::example[]
 	}
 
 	@Override

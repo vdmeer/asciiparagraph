@@ -1,2 +1,14 @@
-include::{basedir}/main/asciidoc/overview-start.adoc[]
+include::main/asciidoc/overview-start.adoc[]
+
+include::site/asciidoc/features.adoc[]
+
+include::site/asciidoc/concepts.adoc[]
+
+include::site/asciidoc/getting-started.adoc[]
+
+== User Guide and Examples
+
+A user guide and examples can be found at the project's home page: http://www.vandermeer.de/projects/skb/java/asciiparagraph
+
+include::site/asciidoc/resources.adoc[]
 

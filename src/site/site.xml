@@ -24,13 +24,24 @@
             <item href="concepts.html" name="Concepts" />
             <item href="installation.html" name="Installation" />
             <item href="getting-started.html" name="Getting Started" />
+<!--
             <item name="User Guide" />
-            <item name="Examples">
-                <item href="examples/check-lists.html" name="Checklists" />
-                <item href="examples/enumerate-index.html" name="Enumerate List" />
-                <item href="examples/nested-lists.html" name="Nested Lists" />
-                <item href="examples/render-behavior.html" name="Render Behavior" />
-                <item href="examples/width-line-wrapping.html" name="Width and Line Wrapping" />
+ -->
+            <item href="examples.html" name="Examples">
+                <item href="examples/AP_00_Getting_Started.html" name="Simple Paragraph" />
+                <item href="examples/AP_00b_Width_Behavior.html" name="Paragraph Width" />
+                <item href="examples/AP_00c_AddText_Objects.html" name="Objects as added text" />
+                <item href="examples/AP_01_WS_Behavior.html" name="Whitespace behavior" />
+                <item href="examples/AP_01c_ConditionalLineBreak.html" name="Conditional linebreaks" />
+                <item href="examples/AP_01d_Inner_WS.html" name="In-text whitespaces" />
+                <item href="examples/AP_02_Alignment_Behavior.html" name="Text alignment" />
+                <item href="examples/AP_03_Format_Behavior.html" name="Text format" />
+                <item href="examples/AP_04_Left_Text_Margin.html" name="Text margin - left" />
+                <item href="examples/AP_05_Right_Text_Margin.html" name="Text margin - right" />
+                <item href="examples/AP_06_LineStartEnd_Behavior.html" name="Line start/end strings" />
+                <item href="examples/AP_07_InclusiveWidth.html" name="Render with inclusive width" />
+                <item href="examples/AP_08_Frame.html" name="Adding frames" />
+                <item href="examples/AP_09_TargetTranslators.html" name="Translate (LaTeX, HTML)" />
             </item>
             <item href="resources.html" name="Resources" />
             <item href="javadocs/api-release/index.html" name="API Doc (Current Release)" />

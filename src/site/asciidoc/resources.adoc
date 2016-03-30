@@ -5,7 +5,7 @@
 |===
 
 | Home page
-| https://www.vandermeer.de/project/dev/skb/asciiparagraph[site]
+| http://www.vandermeer.de/projects/skb/java/asciiparagraph[site]
 
 | Source repository
 | https://github.com/vdmeer/asciiparagraph/tree/master[Github]
