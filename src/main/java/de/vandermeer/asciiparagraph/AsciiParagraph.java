@@ -16,12 +16,14 @@
 package de.vandermeer.asciiparagraph;
 
 import java.util.Collection;
+import java.util.Iterator;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.text.StrBuilder;
 import org.stringtemplate.v4.ST;
 
+import de.vandermeer.skb.interfaces.document.IsDocumentElement;
+import de.vandermeer.skb.interfaces.document.IsParagraph;
 import de.vandermeer.skb.interfaces.render.DoesRender;
 import de.vandermeer.skb.interfaces.render.DoesRenderToWidth;
 import de.vandermeer.skb.interfaces.render.HasText;
@@ -39,7 +41,7 @@ import de.vandermeer.skb.interfaces.transformers.StrBuilder_To_String;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.1
  */
-public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToCluster, RendersToClusterWidth {
+public class AsciiParagraph implements IsParagraph {
 
 	/** The paragraph context with optional settings for the paragraph. */
 	protected AP_Context ctx;
@@ -66,195 +68,283 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 	}
 
 	/**
-	 * Adds text to the paragraph from a collection of objects.
-	 * From each member of the collection, the toString method will be used to generate text.
-	 * @param text collection of objects with text
-	 * @return this to allow chaining
-	 * @throws NullPointerException if the argument was null or had null elements
-	 * @throws IllegalArgumentException if any text to be added was blank
-	 */
-	public AsciiParagraph addText(Collection<Object> text){
-		Validate.notNull(text);
-		Validate.noNullElements(text);
-
-		for(Object o : text){
-			this.addText(o);
-		}
-		return this;
-	}
-
-	/**
-	 * Adds text to the paragraph provided by the input object.
-	 * @param object an object providing text for the paragraph
-	 * @return this to allow chaining
-	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
-	 * @throws IllegalArgumentException if any text provided was blank
-	 */
-	public AsciiParagraph addText(DoesRender object){
-		Validate.notNull(object);
-
-		String text = object.render();
-		if(StringUtils.isNotBlank(text)){
-			return this.addText(text);
-		}
-
-		throw new IllegalArgumentException("DoesRender provider did not provide any text");
-	}
-
-	/**
-	 * Adds text to the paragraph provided by the input object.
-	 * @param object an object providing text for the paragraph
-	 * @return this to allow chaining
-	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
-	 * @throws IllegalArgumentException if any text provided was blank
-	 */
-	public AsciiParagraph addText(DoesRenderToWidth object){
-		Validate.notNull(object);
-
-		String text = object.render(this.ctx.getWidth());
-		if(StringUtils.isNotBlank(text)){
-			return this.addText(text);
-		}
-
-		throw new IllegalArgumentException("DoesRender provider did not provide any text");
-	}
-
-	/**
-	 * Adds text to the paragraph provided by the input object.
-	 * @param object an object providing text for the paragraph
-	 * @return this to allow chaining
-	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
-	 * @throws IllegalArgumentException if any text provided was blank
-	 */
-	public AsciiParagraph addText(HasText object){
-		Validate.notNull(object);
-
-		String text = object.getText();
-		if(StringUtils.isNotBlank(text)){
-			return this.addText(text);
-		}
-
-		throw new IllegalArgumentException("HasText provider did not provide any text");
-	}
-
-	/**
-	 * Adds text to the paragraph provided by the input object.
-	 * @param object an object providing text for the paragraph
-	 * @return this to allow chaining
-	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
-	 * @throws IllegalArgumentException if any text provided was blank
-	 */
-	public AsciiParagraph addText(HasTextCluster object){
-		Validate.notNull(object);
-
-		Collection<String> collection = object.getTextAsCollection();
-		if(collection!=null){
-			for(String s : collection){
-				if(!StringUtils.isBlank(s)){
-					this.addText(s);
-				}
-			}
-			return this;
-		}
-
-		throw new IllegalArgumentException("HasText provider did not provide any text");
-	}
-
-	/**
 	 * Adds text to the paragraph.
-	 * Uses the object `toString` method.
-	 * @param text text to be added to the paragraph
+	 * The method works as follows:
+	 * 
+	 * - test object for being null, throw null pointer exception if that's the case
+	 * - test object for being a {@link IsDocumentElement} other than a paragraph, throw illegal argument exception if that's the case
+	 * - test if object is another {@link AsciiParagraph}, take the text if that's the case
+	 * - test if object implements {@link HasText}, take the text
+	 * - test if object implements {@link HasTextCluster}, take the cluster and add each element to the text
+	 * - test if object is an {@link ST}, render and take rendered text
+	 * - test if object implements {@link DoesRender}, take the rendered text
+	 * - test if object implements {@link DoesRenderToWidth}, take the rendered text
+	 * - test if object implements {@link RendersToCluster}, take the rendered cluster and add as text
+	 * - test if object implements {@link RendersToClusterWidth}, take the rendered cluster and add as text
+	 * - test if object is an {@link Iterator}, iterate and call this method for each member
+	 * - test if object is an {@link Iterable}, iterate and call this method for each member
+	 * - test if object is an array of something, iterate the array and call this method for each member
+	 * - use the object as is (which will take a string if it is a string, use the `toString()` method otherwise).
+	 * 
+	 * Null objects in clusters are silently ignored.
+	 * Blank strings are processed like any other string (they do not impact the text anyway).
+	 * 
+	 * The method is recursive for iterators, iterables, and arrays.
+	 * Care needs to be taken that the provided clusters do not lead to endless loops.
+	 * 
+	 * @param obj object with text for the paragraph
 	 * @return this to allow chaining
 	 * @throws NullPointerException if the argument was null
 	 * @throws IllegalArgumentException if the argument was blank
 	 */
-	public AsciiParagraph addText(Object text){
-		Validate.notNull(text);
-
-		if(text instanceof String){
-			return this.addText((String)text);
+	public AsciiParagraph addText(Object obj){
+		Validate.notNull(obj);
+		if((obj instanceof IsDocumentElement) && !(obj instanceof IsParagraph)){
+			throw new IllegalArgumentException("cannot add " + obj.getClass().getSimpleName() + " as text to a paragraph");
 		}
-		return this.addText(text.toString());
-	}
-
-	/**
-	 * Adds text to the paragraph provided by the input object.
-	 * @param object an object providing text for the paragraph
-	 * @return this to allow chaining
-	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
-	 * @throws IllegalArgumentException if any text provided was blank
-	 */
-	public AsciiParagraph addText(RendersToCluster object){
-		Validate.notNull(object);
-
-		Collection<String> collection = object.renderAsCollection();
-		if(collection!=null){
-			for(String s : collection){
-				if(!StringUtils.isBlank(s)){
-					this.addText(s);
+		if(obj instanceof AsciiParagraph){
+			this.text.appendSeparator(' ').append(((AsciiParagraph)obj).text);
+		}
+		else if(obj instanceof HasText){
+			this.text.appendSeparator(' ').append(((HasText)obj).getText());
+		}
+		else if(obj instanceof HasTextCluster){
+			Collection<String> collection = ((HasTextCluster)obj).getTextAsCollection();
+			if(collection!=null){
+				for(String s : collection){
+					this.text.appendSeparator(' ').append(s);
 				}
 			}
-			return this;
 		}
-
-		throw new IllegalArgumentException("RendersToCluster provider did not provide any text");
-	}
-
-	/**
-	 * Adds text to the paragraph provided by the input object.
-	 * @param object an object providing text for the paragraph
-	 * @return this to allow chaining
-	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
-	 * @throws IllegalArgumentException if any text provided was blank
-	 */
-	public AsciiParagraph addText(RendersToClusterWidth object){
-		Validate.notNull(object);
-
-		Collection<String> collection = object.renderAsCollection(this.ctx.getWidth());
-		if(collection!=null){
-			for(String s : collection){
-				if(!StringUtils.isBlank(s)){
-					this.addText(s);
+		else if (obj instanceof ST){
+			this.text.appendSeparator(' ').append(((ST)obj).render());
+		}
+		else if(obj instanceof DoesRender){
+			this.text.appendSeparator(' ').append(((DoesRender)obj).render());
+		}
+		else if(obj instanceof DoesRenderToWidth){
+			this.text.appendSeparator(' ').append(((DoesRenderToWidth)obj).render(80));
+		}
+		else if(obj instanceof RendersToCluster){
+			Collection<String> collection = ((RendersToCluster)obj).renderAsCollection();
+			if(collection!=null){
+				for(String s : collection){
+					this.text.appendSeparator(' ').append(s);
 				}
 			}
-			return this;
+		}
+		else if(obj instanceof RendersToClusterWidth){
+			Collection<String> collection = ((RendersToClusterWidth)obj).renderAsCollection(this.ctx.getWidth());
+			if(collection!=null){
+				for(String s : collection){
+					this.text.appendSeparator(' ').append(s);
+				}
+			}
+		}
+		else if(obj instanceof Iterator<?>){
+			Iterator<?> it = (Iterator<?>)obj;
+			while(it.hasNext()){
+				Object o = it.next();
+				if(o!=null){
+					this.addText(o);
+				}
+			}
+		}
+		else if(obj instanceof Iterable<?>){
+			for(Object o : (Iterable<?>)obj){
+				if(o!=null){
+					this.addText(o);
+				}
+			}
+		}
+		else if(obj.getClass().isInstance(new Object[]{})){
+			Object[] oa = (Object[])obj;
+			for(Object o : oa){
+				if(o!=null){
+					this.addText(o);
+				}
+			}
+		}
+		else{
+			this.text.appendSeparator(' ').append(obj);
 		}
 
-		throw new IllegalArgumentException("RendersToCluster provider did not provide any text");
-	}
-
-	/**
-	 * Adds text to the paragraph provided by the input object.
-	 * @param object a string template providing text for the paragraph
-	 * @return this to allow chaining
-	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
-	 * @throws IllegalArgumentException if any text provided was blank
-	 */
-	public AsciiParagraph addText(ST object){
-		Validate.notNull(object);
-
-		String text = object.render();
-		if(StringUtils.isNotBlank(text)){
-			return this.addText(text);
-		}
-
-		throw new IllegalArgumentException("ST provider did not provide any text");
-	}
-
-	/**
-	 * Adds text to the paragraph.
-	 * If the paragraph already has text a space character will be used to separate existing and added text.
-	 * No further processing on the text is done, we let {@link #render()} deal with all extra whitespace handling.
-	 * @param text text to be added to the paragraph
-	 * @return this to allow chaining
-	 * @throws NullPointerException if the argument was null
-	 * @throws IllegalArgumentException if the argument was blank
-	 */
-	public AsciiParagraph addText(String text){
-		Validate.notBlank(text);
-		this.text.appendSeparator(' ').append(text);
 		return this;
 	}
+
+//	/**
+//	 * Adds text to the paragraph from a collection of objects.
+//	 * From each member of the collection, the toString method will be used to generate text.
+//	 * @param text collection of objects with text
+//	 * @return this to allow chaining
+//	 * @throws NullPointerException if the argument was null or had null elements
+//	 * @throws IllegalArgumentException if any text to be added was blank
+//	 */
+//	public AsciiParagraph addText(Collection<Object> text){
+//		Validate.notNull(text);
+//		Validate.noNullElements(text);
+//
+//		for(Object o : text){
+//			this.addText(o);
+//		}
+//		return this;
+//	}
+
+//	/**
+//	 * Adds text to the paragraph provided by the input object.
+//	 * @param object an object providing text for the paragraph
+//	 * @return this to allow chaining
+//	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
+//	 * @throws IllegalArgumentException if any text provided was blank
+//	 */
+//	public AsciiParagraph addText(DoesRender object){
+//		Validate.notNull(object);
+//
+//		String text = object.render();
+//		if(StringUtils.isNotBlank(text)){
+//			return this.addText(text);
+//		}
+//
+//		throw new IllegalArgumentException("DoesRender provider did not provide any text");
+//	}
+
+//	/**
+//	 * Adds text to the paragraph provided by the input object.
+//	 * @param object an object providing text for the paragraph
+//	 * @return this to allow chaining
+//	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
+//	 * @throws IllegalArgumentException if any text provided was blank
+//	 */
+//	public AsciiParagraph addText(DoesRenderToWidth object){
+//		Validate.notNull(object);
+//
+//		String text = object.render(this.ctx.getWidth());
+//		if(StringUtils.isNotBlank(text)){
+//			return this.addText(text);
+//		}
+//
+//		throw new IllegalArgumentException("DoesRender provider did not provide any text");
+//	}
+
+//	/**
+//	 * Adds text to the paragraph provided by the input object.
+//	 * @param object an object providing text for the paragraph
+//	 * @return this to allow chaining
+//	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
+//	 * @throws IllegalArgumentException if any text provided was blank
+//	 */
+//	public AsciiParagraph addText(HasText object){
+//		Validate.notNull(object);
+//
+//		String text = object.getText();
+//		if(StringUtils.isNotBlank(text)){
+//			return this.addText(text);
+//		}
+//
+//		throw new IllegalArgumentException("HasText provider did not provide any text");
+//	}
+
+//	/**
+//	 * Adds text to the paragraph provided by the input object.
+//	 * @param object an object providing text for the paragraph
+//	 * @return this to allow chaining
+//	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
+//	 * @throws IllegalArgumentException if any text provided was blank
+//	 */
+//	public AsciiParagraph addText(HasTextCluster object){
+//		Validate.notNull(object);
+//
+//		Collection<String> collection = object.getTextAsCollection();
+//		if(collection!=null){
+//			for(String s : collection){
+//				if(!StringUtils.isBlank(s)){
+//					this.addText(s);
+//				}
+//			}
+//			return this;
+//		}
+//
+//		throw new IllegalArgumentException("HasText provider did not provide any text");
+//	}
+
+//	/**
+//	 * Adds text to the paragraph provided by the input object.
+//	 * @param object an object providing text for the paragraph
+//	 * @return this to allow chaining
+//	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
+//	 * @throws IllegalArgumentException if any text provided was blank
+//	 */
+//	public AsciiParagraph addText(RendersToCluster object){
+//		Validate.notNull(object);
+//
+//		Collection<String> collection = object.renderAsCollection();
+//		if(collection!=null){
+//			for(String s : collection){
+//				if(!StringUtils.isBlank(s)){
+//					this.addText(s);
+//				}
+//			}
+//			return this;
+//		}
+//
+//		throw new IllegalArgumentException("RendersToCluster provider did not provide any text");
+//	}
+
+//	/**
+//	 * Adds text to the paragraph provided by the input object.
+//	 * @param object an object providing text for the paragraph
+//	 * @return this to allow chaining
+//	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
+//	 * @throws IllegalArgumentException if any text provided was blank
+//	 */
+//	public AsciiParagraph addText(RendersToClusterWidth object){
+//		Validate.notNull(object);
+//
+//		Collection<String> collection = object.renderAsCollection(this.ctx.getWidth());
+//		if(collection!=null){
+//			for(String s : collection){
+//				if(!StringUtils.isBlank(s)){
+//					this.addText(s);
+//				}
+//			}
+//			return this;
+//		}
+//
+//		throw new IllegalArgumentException("RendersToCluster provider did not provide any text");
+//	}
+
+//	/**
+//	 * Adds text to the paragraph provided by the input object.
+//	 * @param object a string template providing text for the paragraph
+//	 * @return this to allow chaining
+//	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
+//	 * @throws IllegalArgumentException if any text provided was blank
+//	 */
+//	public AsciiParagraph addText(ST object){
+//		Validate.notNull(object);
+//
+//		String text = object.render();
+//		if(StringUtils.isNotBlank(text)){
+//			return this.addText(text);
+//		}
+//
+//		throw new IllegalArgumentException("ST provider did not provide any text");
+//	}
+
+//	/**
+//	 * Adds text to the paragraph.
+//	 * If the paragraph already has text a space character will be used to separate existing and added text.
+//	 * No further processing on the text is done, we let {@link #render()} deal with all extra whitespace handling.
+//	 * @param text text to be added to the paragraph
+//	 * @return this to allow chaining
+//	 * @throws NullPointerException if the argument was null
+//	 * @throws IllegalArgumentException if the argument was blank
+//	 */
+//	public AsciiParagraph addText(String text){
+//		Validate.notBlank(text);
+//		this.text.appendSeparator(' ').append(text);
+//		return this;
+//	}
 
 	/**
 	 * Returns the paragraph context.
@@ -274,7 +364,7 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 
 	@Override
 	public String render() {
-		return new StrBuilder().appendWithSeparators(this.ctx.getRenderer().renderToTextWidth(this), "\n").toString();
+		return new StrBuilder().appendWithSeparators(this.ctx.getRenderer().render(this.text, this.ctx), "\n").toString();
 	}
 
 	/**
@@ -285,13 +375,13 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 	 */
 	@Override
 	public String render(int width) {
-		return new StrBuilder().appendWithSeparators(this.ctx.getRenderer().renderToAllInclusiveWidth(this, width), "\n").toString();
+		return new StrBuilder().appendWithSeparators(this.ctx.getRenderer().render(this.text, this.ctx, this.ctx.getTextWidth(width)), "\n").toString();
 	}
 
 	@Override
 	public Collection<String> renderAsCollection() {
 		return ClusterElementTransformer.create().transform(
-				this.ctx.getRenderer().renderToTextWidth(this),
+				this.ctx.getRenderer().render(this.text, this.ctx),
 				StrBuilder_To_String.create(),
 				ArrayListStrategy.create()
 		);
@@ -300,7 +390,7 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 	@Override
 	public Collection<String> renderAsCollection(int width) {
 		return ClusterElementTransformer.create().transform(
-				this.ctx.getRenderer().renderToAllInclusiveWidth(this, width),
+				this.ctx.getRenderer().render(this.text, this.ctx, this.ctx.getTextWidth(width)),
 				StrBuilder_To_String.create(),
 				ArrayListStrategy.create()
 		);
@@ -317,4 +407,11 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 		}
 		return this;
 	}
+
+	@Override
+	public int getLongestLineLength() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

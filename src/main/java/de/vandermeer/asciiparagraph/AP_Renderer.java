@@ -21,6 +21,7 @@ import java.util.Collection;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.text.StrBuilder;
 
+import de.vandermeer.skb.interfaces.document.IsParagraphRenderer;
 import de.vandermeer.skb.interfaces.strategies.IsCollectionStrategy;
 import de.vandermeer.skb.interfaces.strategies.collections.list.ArrayListStrategy;
 import de.vandermeer.skb.interfaces.transformers.Object_To_ColumnContentArray;
@@ -33,100 +34,29 @@ import de.vandermeer.skb.interfaces.transformers.stringformats.StringAr_To_ParaH
 import de.vandermeer.skb.interfaces.transformers.stringformats.StringAr_To_RightPadded;
 
 /**
- * Paragraph renderer interface.
+ * Standard renderer for {@link AsciiParagraph}.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.1.0
  */
-public interface AP_Renderer {
+public interface AP_Renderer extends IsParagraphRenderer {
 
 	/** Temporary padding character required for some special formats, might cause problems if found in text, set to 'Ļ'. */
 	static char TMP_PADING = 'Ļ';
 
 	/**
-	 * Renders an {@link AsciiParagraph} using the width set in the context.
-	 * Each line will have text according to the width from the context.
-	 * Any indentation, padding (left or right), and start/end strings will add to the line width.
+	 * Renders an {@link AsciiParagraph}.
+	 * Each line will have text according to width.
+	 * Any padding (left or right) and start/end strings will add to the line width.
+	 * To use a calculated width for rendering use one of the other render methods.
 	 * @param ap the paragraph to render
 	 * @return collection of lines, each as a {@link StrBuilder}
 	 */
-	default Collection<StrBuilder> renderToTextWidth(AsciiParagraph ap){
-		return this.render(ap, ap.getContext().getWidth());
-	}
-
-	/**
-	 * Renders an {@link AsciiParagraph} using the given width.
-	 * Any indentation, padding (left or right), and start/end strings will add to the line width.
-	 * @param width the width of text in the paragraph
-	 * @param ap the paragraph to render
-	 * @return collection of lines, each as a {@link StrBuilder}
-	 */
-	default Collection<StrBuilder> renderToTextWidth(AsciiParagraph ap, int width){
-		return this.render(ap, width);
-	}
-
-	/**
-	 * Renders an {@link AsciiParagraph} using a calculated width based on context settings.
-	 * The width used is calculated by {@link AP_Context#getWidthIncTextMargins()}.
-	 * @param ap the paragraph to render
-	 * @return collection of lines, each as a {@link StrBuilder}
-	 */
-	default Collection<StrBuilder> renderToTextMarginWidth(AsciiParagraph ap){
-		return this.render(ap, ap.getContext().getWidthIncTextMargins());
-	}
-
-	/**
-	 * Renders an {@link AsciiParagraph} using a calculated width based on context settings.
-	 * The width used is calculated by {@link AP_Context#getWidthIncTextMargins(int)}.
-	 * @param ap the paragraph to render
-	 * @param width the width of text and padding in the paragraph
-	 * @return collection of lines, each as a {@link StrBuilder}
-	 */
-	default Collection<StrBuilder> renderToTextMarginWidth(AsciiParagraph ap, int width){
-		return this.render(ap, ap.getContext().getWidthIncTextMargins(width));
-	}
-
-	/**
-	 * Renders an {@link AsciiParagraph} using a calculated width based on context settings.
-	 * The width used is calculated by {@link AP_Context#getWidthIncStringMargins()}.
-	 * @param ap the paragraph to render
-	 * @return collection of lines, each as a {@link StrBuilder}
-	 */
-	default Collection<StrBuilder> renderToStartStringMarginWidth(AsciiParagraph ap){
-		return this.render(ap, ap.getContext().getWidthIncStringMargins());
-	}
-
-	/**
-	 * Renders an {@link AsciiParagraph} using a calculated width based on context settings.
-	 * The width used is calculated by {@link AP_Context#getWidthIncStringMargins(int)}.
-	 * @param width the width of text and padding in the paragraph and start string
-	 * @param ap the paragraph to render
-	 * @return collection of lines, each as a {@link StrBuilder}
-	 */
-	default Collection<StrBuilder> renderToStartStringMarginWidth(AsciiParagraph ap, int width){
-		return this.render(ap, ap.getContext().getWidthIncStringMargins(width));
-	}
-
-	/**
-	 * Renders an {@link AsciiParagraph} using a calculated width based on context settings.
-	 * The width used is calculated by {@link AP_Context#getWidthAllInclusive()}.
-	 * @param ap the paragraph to render
-	 * @return collection of lines, each as a {@link StrBuilder}
-	 */
-	default Collection<StrBuilder> renderToAllInclusiveWidth(AsciiParagraph ap){
-		return this.render(ap, ap.getContext().getWidthAllInclusive());
-	}
-
-	/**
-	 * Renders an {@link AsciiParagraph} using a calculated width based on context settings.
-	 * The width used is calculated by {@link AP_Context#getWidthAllInclusive(int)}.
-	 * @param width all inclusive width
-	 * @param ap the paragraph to render
-	 * @return collection of lines, each as a {@link StrBuilder}
-	 */
-	default Collection<StrBuilder> renderToAllInclusiveWidth(AsciiParagraph ap, int width){
-		return this.render(ap, ap.getContext().getWidthAllInclusive(width));
+	default Collection<StrBuilder> render(StrBuilder paragraphText, AP_Context ctx){
+		Validate.notNull(paragraphText);
+		Validate.notNull(ctx);
+		return this.render(paragraphText, ctx, ctx.getWidth());
 	}
 
 	/**
@@ -138,12 +68,12 @@ public interface AP_Renderer {
 	 * @param width maximum line width, excluding any extra strings and paddings
 	 * @return collection of lines, each as a {@link StrBuilder}
 	 */
-	default Collection<StrBuilder> render(AsciiParagraph ap, int width){
-		Validate.notNull(ap);
-		AP_Context ctx = ap.getContext();
+	default Collection<StrBuilder> render(StrBuilder paragraphText, AP_Context ctx, int width){
+		Validate.notNull(paragraphText);
+		Validate.notNull(ctx);
 
 		//remove all extra white spaces (more than one space, tabs, LF, CR, CR+LF
-		String text = ap.getText().toString().replaceAll("\\s+", " ");
+		String text = paragraphText.toString().replaceAll("\\s+", " ");
 		//check for translators, use what is available
 		if(ctx.getTargetTranslator()!=null){
 			if(ctx.getTargetTranslator().getCombinedTranslator()!=null){

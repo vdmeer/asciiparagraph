@@ -20,7 +20,7 @@ import org.apache.commons.lang3.Validate;
 import de.vandermeer.asciiparagraph.dropcaps.DropCaps;
 import de.vandermeer.asciiparagraph.dropcaps.FigletRoman;
 import de.vandermeer.asciithemes.TA_Frame;
-import de.vandermeer.skb.interfaces.objctxt.IsObjectContext;
+import de.vandermeer.skb.interfaces.document.IsParagraphContext;
 import de.vandermeer.skb.interfaces.translators.CharacterTranslator;
 import de.vandermeer.skb.interfaces.translators.HtmlElementTranslator;
 import de.vandermeer.skb.interfaces.translators.TargetTranslator;
@@ -32,7 +32,7 @@ import de.vandermeer.skb.interfaces.translators.TargetTranslator;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.0.1
  */
-public class AP_Context implements IsObjectContext {
+public class AP_Context implements IsParagraphContext {
 
 	/** Paragraph margins. */
 	protected AP_CtxtMargins margins = new AP_CtxtMargins();
@@ -242,10 +242,7 @@ public class AP_Context implements IsObjectContext {
 		return this.characters.paddingRight;
 	}
 
-	/**
-	 * Returns the set renderer.
-	 * @return renderer
-	 */
+	@Override
 	public AP_Renderer getRenderer(){
 		return this.renderer;
 	}
@@ -265,14 +262,6 @@ public class AP_Context implements IsObjectContext {
 	public Character getStringLeftChar() {
 		return this.characters.stringLeft;
 	}
-
-	/**
-	 * Returns the string settings. 
-	 * @return string settings
-	 */
-//	public AP_CtxtStrings getStrings() {
-//		return this.strings;
-//	}
 
 	/**
 	 * Returns the left string margin.
@@ -354,77 +343,23 @@ public class AP_Context implements IsObjectContext {
 		return this.margins.textTop;
 	}
 
-	/**
-	 * Returns the paragraph width.
-	 * @return paragraph width
-	 */
+	@Override
 	public int getWidth() {
 		return this.width;
 	}
 
-	/**
-	 * Returns the width including all margins.
-	 * @return width
-	 */
-	public int getWidthAllInclusive(){
-		return this.getWidthIncStringMargins()-this.margins.getFrameLeft()-this.margins.getFrameRight();
-	}
-
-	/**
-	 * Returns the width including all margins based on requested width.
-	 * @param width requested width
-	 * @return width
-	 */
-	public int getWidthAllInclusive(int width){
-		return this.getWidthIncStringMargins(width)-this.margins.getFrameLeft()-this.margins.getFrameRight();
-	}
-
-	/**
-	 * Returns the width including text and string margins.
-	 * @return width
-	 */
-	public int getWidthIncStringMargins(){
-		int width = this.getWidthIncTextMargins()-this.margins.getStringLeft()-this.margins.getStringRight();
+	@Override
+	public int getTextWidth(int width) {
+		int ret = width - this.margins.getTextLeft() - this.margins.getTextRight();
+		ret = ret - this.margins.getStringLeft() - this.margins.getStringRight();
 		if(this.strings.getStart()!=null){
-			width -= this.strings.getStart().length();
+			ret -= this.strings.getStart().length();
 		}
 		if(this.strings.getEnd()!=null){
-			width -= this.strings.getEnd().length();
+			ret -= this.strings.getEnd().length();
 		}
-		return width;
-	}
-
-	/**
-	 * Returns the width including text and string margins based on requested width.
-	 * @param width requested width
-	 * @return width
-	 */
-	public int getWidthIncStringMargins(int width){
-		int w = this.getWidthIncTextMargins(width)-this.margins.getStringLeft()-this.margins.getStringRight();
-		if(this.strings.getStart()!=null){
-			w -= this.strings.getStart().length();
-		}
-		if(this.strings.getEnd()!=null){
-			w -= this.strings.getEnd().length();
-		}
-		return w;
-	}
-
-	/**
-	 * Returns the width including text margins.
-	 * @return width
-	 */
-	public int getWidthIncTextMargins(){
-		return this.width-this.margins.getTextLeft()-this.margins.getTextRight();
-	}
-
-	/**
-	 * Returns the width including text margins based on requested width.
-	 * @param width the requested width
-	 * @return width
-	 */
-	public int getWidthIncTextMargins(int width){
-		return width-this.margins.getTextLeft()-this.margins.getTextRight();
+		ret = ret - this.margins.getFrameLeft() - this.margins.getFrameRight();
+		return ret;
 	}
 
 	/**
@@ -1002,5 +937,4 @@ public class AP_Context implements IsObjectContext {
 		return this;
 	}
 
-	
 }
