@@ -21,8 +21,8 @@
       More project information
       -->
     <name>ASCII Paragraph</name>
-    <description>A simple tool to format paragraphs with indentation, indentation character, alignment, padding (left, right, both), padding characters (left, right, both), and in-line whitespace characters.</description>
-    <url>https://github.com/vdmeer/asciiparagraph</url>
+    <description>A simple tool to format paragraphs with multi vertical/horizontal margins, different text alignment, text formatting, in-text whitespace manipulation, frames, and target converters for characters.</description>
+    <url>http://www.vandermeer.de/projects/skb/java/asciiparagraph</url>
     <inceptionYear>2016</inceptionYear>
 
     <!--
@@ -63,7 +63,7 @@
 		<pm.version.maven-javadoc-plugin>2.10.3</pm.version.maven-javadoc-plugin>
 		<pm.version.doxia-site-renderer>1.7</pm.version.doxia-site-renderer>
 		<pm.version.maven-resources-plugin>2.4.3</pm.version.maven-resources-plugin>
-		<mp.project.url>https://github.com/vdmeer/asciiparagraph</mp.project.url>
+		<mp.project.url>http://www.vandermeer.de/projects/skb/java/asciiparagraph</mp.project.url>
     </properties>
 
     <!--

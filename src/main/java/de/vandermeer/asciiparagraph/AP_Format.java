@@ -20,7 +20,7 @@ package de.vandermeer.asciiparagraph;
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
- * @since      v0.0.3
+ * @since      v0.1.0
  */
 public enum AP_Format {
 

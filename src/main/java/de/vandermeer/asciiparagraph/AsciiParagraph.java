@@ -70,8 +70,8 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 	 * From each member of the collection, the toString method will be used to generate text.
 	 * @param text collection of objects with text
 	 * @return this to allow chaining
-	 * throws NullPointerException if the argument was null or had null elements
-	 * throws IllegalArgumentException if any text to be added was blank
+	 * @throws NullPointerException if the argument was null or had null elements
+	 * @throws IllegalArgumentException if any text to be added was blank
 	 */
 	public AsciiParagraph addText(Collection<Object> text){
 		Validate.notNull(text);
@@ -87,8 +87,8 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 	 * Adds text to the paragraph provided by the input object.
 	 * @param object an object providing text for the paragraph
 	 * @return this to allow chaining
-	 * throws NullPointerException if the argument was null or if the object did only provide null as text
-	 * throws IllegalArgumentException if any text provided was blank
+	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
+	 * @throws IllegalArgumentException if any text provided was blank
 	 */
 	public AsciiParagraph addText(DoesRender object){
 		Validate.notNull(object);
@@ -105,8 +105,8 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 	 * Adds text to the paragraph provided by the input object.
 	 * @param object an object providing text for the paragraph
 	 * @return this to allow chaining
-	 * throws NullPointerException if the argument was null or if the object did only provide null as text
-	 * throws IllegalArgumentException if any text provided was blank
+	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
+	 * @throws IllegalArgumentException if any text provided was blank
 	 */
 	public AsciiParagraph addText(DoesRenderToWidth object){
 		Validate.notNull(object);
@@ -123,8 +123,8 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 	 * Adds text to the paragraph provided by the input object.
 	 * @param object an object providing text for the paragraph
 	 * @return this to allow chaining
-	 * throws NullPointerException if the argument was null or if the object did only provide null as text
-	 * throws IllegalArgumentException if any text provided was blank
+	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
+	 * @throws IllegalArgumentException if any text provided was blank
 	 */
 	public AsciiParagraph addText(HasText object){
 		Validate.notNull(object);
@@ -141,8 +141,8 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 	 * Adds text to the paragraph provided by the input object.
 	 * @param object an object providing text for the paragraph
 	 * @return this to allow chaining
-	 * throws NullPointerException if the argument was null or if the object did only provide null as text
-	 * throws IllegalArgumentException if any text provided was blank
+	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
+	 * @throws IllegalArgumentException if any text provided was blank
 	 */
 	public AsciiParagraph addText(HasTextCluster object){
 		Validate.notNull(object);
@@ -165,8 +165,8 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 	 * Uses the object `toString` method.
 	 * @param text text to be added to the paragraph
 	 * @return this to allow chaining
-	 * throws NullPointerException if the argument was null
-	 * throws IllegalArgumentException if the argument was blank
+	 * @throws NullPointerException if the argument was null
+	 * @throws IllegalArgumentException if the argument was blank
 	 */
 	public AsciiParagraph addText(Object text){
 		Validate.notNull(text);
@@ -181,8 +181,8 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 	 * Adds text to the paragraph provided by the input object.
 	 * @param object an object providing text for the paragraph
 	 * @return this to allow chaining
-	 * throws NullPointerException if the argument was null or if the object did only provide null as text
-	 * throws IllegalArgumentException if any text provided was blank
+	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
+	 * @throws IllegalArgumentException if any text provided was blank
 	 */
 	public AsciiParagraph addText(RendersToCluster object){
 		Validate.notNull(object);
@@ -204,8 +204,8 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 	 * Adds text to the paragraph provided by the input object.
 	 * @param object an object providing text for the paragraph
 	 * @return this to allow chaining
-	 * throws NullPointerException if the argument was null or if the object did only provide null as text
-	 * throws IllegalArgumentException if any text provided was blank
+	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
+	 * @throws IllegalArgumentException if any text provided was blank
 	 */
 	public AsciiParagraph addText(RendersToClusterWidth object){
 		Validate.notNull(object);
@@ -227,8 +227,8 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 	 * Adds text to the paragraph provided by the input object.
 	 * @param object a string template providing text for the paragraph
 	 * @return this to allow chaining
-	 * throws NullPointerException if the argument was null or if the object did only provide null as text
-	 * throws IllegalArgumentException if any text provided was blank
+	 * @throws NullPointerException if the argument was null or if the object did only provide null as text
+	 * @throws IllegalArgumentException if any text provided was blank
 	 */
 	public AsciiParagraph addText(ST object){
 		Validate.notNull(object);
@@ -247,8 +247,8 @@ public class AsciiParagraph implements DoesRender, DoesRenderToWidth, RendersToC
 	 * No further processing on the text is done, we let {@link #render()} deal with all extra whitespace handling.
 	 * @param text text to be added to the paragraph
 	 * @return this to allow chaining
-	 * throws NullPointerException if the argument was null
-	 * throws IllegalArgumentException if the argument was blank
+	 * @throws NullPointerException if the argument was null
+	 * @throws IllegalArgumentException if the argument was blank
 	 */
 	public AsciiParagraph addText(String text){
 		Validate.notBlank(text);

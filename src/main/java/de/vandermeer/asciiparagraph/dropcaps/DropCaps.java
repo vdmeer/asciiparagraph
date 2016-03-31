@@ -20,7 +20,7 @@ package de.vandermeer.asciiparagraph.dropcaps;
  * 
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.0.1 build 160319 (19-Mar-16) for Java 1.8
- * @since      v0.0.3
+ * @since      v0.1.0
  */
 public interface DropCaps {
 
