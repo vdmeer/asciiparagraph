@@ -58,9 +58,6 @@ public class AP_Context implements IsParagraphContext {
 	/** The width of the paragraph, actual width depends on padding settings, default is `80`. */
 	protected int width = 80;
 
-	/** The renderer for this context, default is {@link AP_Renderer}. */
-	protected AP_Renderer renderer = AP_Renderer.create();
-
 	/** A library of dropped capital letters, default is {@link FigletRoman}. */
 	protected DropCaps dropCapLib = new FigletRoman();
 
@@ -240,11 +237,6 @@ public class AP_Context implements IsParagraphContext {
 	 */
 	public Character getPaddingRightChar() {
 		return this.characters.paddingRight;
-	}
-
-	@Override
-	public AP_Renderer getRenderer(){
-		return this.renderer;
 	}
 
 	/**
@@ -659,15 +651,6 @@ public class AP_Context implements IsParagraphContext {
 		Validate.notNull(paddingRight);
 		this.characters.paddingRight = paddingRight;
 		return this;
-	}
-
-	/**
-	 * Sets the renderer for the context.
-	 * @param renderer new renderer, only set if not null
-	 */
-	public void setRenderer(AP_Renderer renderer){
-		Validate.notNull(renderer);
-		this.renderer = renderer;
 	}
 
 	/**

@@ -50,13 +50,13 @@ public interface AP_Renderer extends IsParagraphRenderer {
 	 * Each line will have text according to width.
 	 * Any padding (left or right) and start/end strings will add to the line width.
 	 * To use a calculated width for rendering use one of the other render methods.
-	 * @param ap the paragraph to render
+	 * @param text the text to render
 	 * @return collection of lines, each as a {@link StrBuilder}
 	 */
-	default Collection<StrBuilder> render(StrBuilder paragraphText, AP_Context ctx){
-		Validate.notNull(paragraphText);
+	default Collection<StrBuilder> render(String text, AP_Context ctx){
+		Validate.notNull(text);
 		Validate.notNull(ctx);
-		return this.render(paragraphText, ctx, ctx.getWidth());
+		return this.render(text, ctx, ctx.getWidth());
 	}
 
 	/**
@@ -64,16 +64,14 @@ public interface AP_Renderer extends IsParagraphRenderer {
 	 * Each line will have text according to width.
 	 * Any padding (left or right) and start/end strings will add to the line width.
 	 * To use a calculated width for rendering use one of the other render methods.
-	 * @param ap the paragraph to render
+	 * @param text the text to render
 	 * @param width maximum line width, excluding any extra strings and paddings
 	 * @return collection of lines, each as a {@link StrBuilder}
 	 */
-	default Collection<StrBuilder> render(StrBuilder paragraphText, AP_Context ctx, int width){
-		Validate.notNull(paragraphText);
+	default Collection<StrBuilder> render(String text, AP_Context ctx, int width){
+		Validate.notNull(text);
 		Validate.notNull(ctx);
 
-		//remove all extra white spaces (more than one space, tabs, LF, CR, CR+LF
-		String text = paragraphText.toString().replaceAll("\\s+", " ");
 		//check for translators, use what is available
 		if(ctx.getTargetTranslator()!=null){
 			if(ctx.getTargetTranslator().getCombinedTranslator()!=null){

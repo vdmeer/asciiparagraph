@@ -33,7 +33,6 @@ eos et accusam
 The output for the second format, first line, is:
 ----------------------------------------------------------------------------------------
     Lorem  ipsum  dolor  sit  amet,
-Lorem   ipsum   dolor   sit   amet,
 consetetur  sadipscing  elitr,  sed
 diam nonumy eirmod tempor  invidunt
 ut labore et dolore magna  aliquyam
@@ -46,7 +45,6 @@ eos et accusam
 The output for the third format, hanging (paragraph), is:
 ----------------------------------------------------------------------------------------
 Lorem   ipsum   dolor   sit   amet,
-    Lorem  ipsum  dolor  sit  amet,
     consetetur  sadipscing   elitr,
     sed diam nonumy  eirmod  tempor
     invidunt ut  labore  et  dolore
