@@ -21,7 +21,7 @@ import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AP_Format;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.asciiparagraph.dropcaps.FigletOldBanner_6L;
+import de.vandermeer.asciithemes.a7.dropcaps.FigletOldBanner_6L;
 import de.vandermeer.skb.interfaces.StandardExample;
 
 /**
@@ -51,8 +51,12 @@ public class AP_03_Format_Behavior implements StandardExample {
 		ctx.setFormat(AP_Format.DROPCAP);
 		System.out.println(ap.render(35));
 
+		ctx.setFormat(AP_Format.DROPCAP_WITH_PADDING);
 		ctx.setDropCapLib(new FigletOldBanner_6L());
 		System.out.println(ap.render(35));
+
+//		ctx.setDropCapLib(new FigletOldBanner_6L());
+//		System.out.println(ap.render(35));
 		// end::example[]
 	}
 

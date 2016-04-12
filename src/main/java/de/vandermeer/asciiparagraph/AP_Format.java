@@ -15,6 +15,8 @@
 
 package de.vandermeer.asciiparagraph;
 
+import de.vandermeer.skb.interfaces.transformers.textformat.Text_To_FormattedText;
+
 /**
  * Options for the formats of an {@link AsciiParagraph}.
  *
@@ -25,18 +27,37 @@ package de.vandermeer.asciiparagraph;
 public enum AP_Format {
 
 	/** No special formatting. */
-	NONE,
+	NONE (Text_To_FormattedText.FORMAT_NONE),
 
 	/** Indentation of the first line of the paragraph. */
-	FIRST_LINE,
+	FIRST_LINE (Text_To_FormattedText.FORMAT_FIRST_LINE),
 
 	/** A hanging paragraph, all but the first line with special indentation. */
-	HANGING,
+	HANGING (Text_To_FormattedText.FORMAT_HANGING_PARAGRAPH),
 
 	/** USe a dropped capital letter at the start of the paragraph. */
-	DROPCAP,
+	DROPCAP (Text_To_FormattedText.FORMAT_DROPCAP),
 
 	/** USe a dropped capital letter at the start of the paragraph with padding for all lines. */
-	DROPCAP_WITH_PADDING,
+	DROPCAP_WITH_PADDING (Text_To_FormattedText.FORMAT_DROPCAP_WITH_PADDING),
 	;
+
+	/** A mapping to the alignment options in {@link Text_To_FormattedText}. */
+	protected int mappingToTransformer;
+
+	/**
+	 * Creates a new format.
+	 * @param mappingToTransformer mapping to transformer options
+	 */
+	AP_Format(int mappingToTransformer){
+		this.mappingToTransformer = mappingToTransformer;
+	}
+
+	/**
+	 * Returns a mapping to the alignment options defined in {@link Text_To_FormattedText}.
+	 * @return mapping
+	 */
+	public int getMappingToTransformer(){
+		return this.mappingToTransformer;
+	}
 }

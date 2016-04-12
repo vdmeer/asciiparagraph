@@ -17,9 +17,9 @@ package de.vandermeer.asciiparagraph;
 
 import org.apache.commons.lang3.Validate;
 
-import de.vandermeer.asciiparagraph.dropcaps.DropCaps;
-import de.vandermeer.asciiparagraph.dropcaps.FigletRoman;
+import de.vandermeer.asciithemes.TA_DropCaps;
 import de.vandermeer.asciithemes.TA_Frame;
+import de.vandermeer.asciithemes.a7.dropcaps.FigletRoman;
 import de.vandermeer.skb.interfaces.document.IsParagraphContext;
 import de.vandermeer.skb.interfaces.translators.CharacterTranslator;
 import de.vandermeer.skb.interfaces.translators.HtmlElementTranslator;
@@ -59,7 +59,7 @@ public class AP_Context implements IsParagraphContext {
 	protected int width = 80;
 
 	/** A library of dropped capital letters, default is {@link FigletRoman}. */
-	protected DropCaps dropCapLib = new FigletRoman();
+	protected TA_DropCaps dropCapLib = new FigletRoman();
 
 	/** The theme for a frame. */
 	protected TA_Frame frame = null;
@@ -107,7 +107,7 @@ public class AP_Context implements IsParagraphContext {
 	 * Returns the set dropped capital letter library.
 	 * @return dropped capital letter library, null if none set
 	 */
-	public DropCaps getDropCapLib() {
+	public TA_DropCaps getDropCapLib() {
 		return this.dropCapLib;
 	}
 
@@ -381,7 +381,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @param dropCapLib capital letter library, only used if not null
 	 * @return this to allow chaining
 	 */
-	public AP_Context setDropCapLib(DropCaps dropCapLib) {
+	public AP_Context setDropCapLib(TA_DropCaps dropCapLib) {
 		Validate.notNull(dropCapLib);
 		this.dropCapLib = dropCapLib;
 		return this;

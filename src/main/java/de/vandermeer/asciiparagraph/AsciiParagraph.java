@@ -24,7 +24,7 @@ import de.vandermeer.skb.interfaces.document.IsDocumentElement;
 import de.vandermeer.skb.interfaces.document.IsParagraph;
 import de.vandermeer.skb.interfaces.strategies.collections.list.ArrayListStrategy;
 import de.vandermeer.skb.interfaces.transformers.ClusterElementTransformer;
-import de.vandermeer.skb.interfaces.transformers.ObjectToStrBuilder;
+import de.vandermeer.skb.interfaces.transformers.Object_To_StrBuilder;
 import de.vandermeer.skb.interfaces.transformers.StrBuilder_To_String;
 
 /**
@@ -64,12 +64,12 @@ public class AsciiParagraph implements IsParagraph {
 	}
 
 	/**
-	 * Adds text to the paragraph using {@link ObjectToStrBuilder}.
+	 * Adds text to the paragraph using {@link Object_To_StrBuilder}.
 	 * The method works as follows:
 	 * 
 	 * - test object for being a {@link IsDocumentElement} other than a paragraph, throw illegal argument exception if that's the case,
 	 * - test if object is another {@link AsciiParagraph}, take the text if that's the case,
-	 * - otherwise use {@link ObjectToStrBuilder}.
+	 * - otherwise use {@link Object_To_StrBuilder}.
 	 * 
 	 * Null objects in clusters are silently ignored.
 	 * Blank strings are processed like any other string (they do not impact the text anyway).
@@ -92,7 +92,7 @@ public class AsciiParagraph implements IsParagraph {
 			this.text.appendSeparator(' ').append(((AsciiParagraph)obj).text);
 		}
 		else {
-			this.text.appendSeparator(' ').append(ObjectToStrBuilder.convert(obj));
+			this.text.appendSeparator(' ').append(Object_To_StrBuilder.convert(obj));
 		}
 
 		return this;
@@ -184,6 +184,18 @@ public class AsciiParagraph implements IsParagraph {
 			.appendNewLine()
 		;
 		return ret;
+	}
+
+	/**
+	 * Applies the theme by setting parameters in the given context.
+	 * @param theme the theme to apply
+	 * @return this to allow chaining
+	 */
+	public AsciiParagraph applyTheme(AsciiParagraphTheme theme) {
+		if(theme!=null){
+			theme.apply(this.ctx);
+		}
+		return this;
 	}
 
 }

@@ -13,21 +13,20 @@
  * limitations under the License.
  */
 
-package de.vandermeer.asciiparagraph.dropcaps;
+package de.vandermeer.asciiparagraph;
 
 /**
- * A library of dropped capital letters.
- * 
+ * A theme for an {@link AsciiParagraph}.
+ *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.1 build 160319 (19-Mar-16) for Java 1.8
+ * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
  * @since      v0.1.0
  */
-public interface DropCaps {
+public interface AsciiParagraphTheme {
 
 	/**
-	 * Returns the dropped capital letter version of the given letter.
-	 * @param letter the requested letter
-	 * @return dropped capital letter version, null if none found
+	 * Applies the theme by setting parameters in the given context.
+	 * @param ctx the context of the paragraph, should not be null
 	 */
-	String[] getDropCap(char letter);
+	void apply(AP_Context ctx);
 }

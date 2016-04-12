@@ -15,6 +15,8 @@
 
 package de.vandermeer.asciiparagraph;
 
+import de.vandermeer.skb.interfaces.transformers.textformat.Text_To_FormattedText;
+
 /**
  * Options for the alignment of an {@link AsciiParagraph}.
  *
@@ -25,21 +27,40 @@ package de.vandermeer.asciiparagraph;
 public enum AP_Alignment {
 
 	/** Option for a justified alignment. */
-	JUSTIFIED,
+	JUSTIFIED (Text_To_FormattedText.ALIGN_JUSTIFIED),
 
 	/** Option for a justified alignment, last line right aligned. */
-	JUSTIFIED_RIGHT,
+	JUSTIFIED_RIGHT (Text_To_FormattedText.ALIGN_JUSTIFIED_RIGHT),
 
 	/** Option for a justified alignment, last line left left aligned. */
-	JUSTIFIED_LEFT,
+	JUSTIFIED_LEFT (Text_To_FormattedText.ALIGN_JUSTIFIED_LEFT),
 
 	/** Option for paragraph alignment left. */
-	LEFT,
+	LEFT (Text_To_FormattedText.ALIGN_LEFT),
 
 	/** Option for paragraph alignment center. */
-	CENTER,
+	CENTER (Text_To_FormattedText.ALIGN_CENTER),
 
 	/** Option for paragraph alignment right. */
-	RIGHT,
+	RIGHT (Text_To_FormattedText.ALIGN_RIGHT),
 	;
+
+	/** A mapping to the alignment options in {@link Text_To_FormattedText}. */
+	protected int mappingToTransformer;
+
+	/**
+	 * Creates a new alignment.
+	 * @param mappingToTransformer mapping to transformer options
+	 */
+	AP_Alignment(int mappingToTransformer){
+		this.mappingToTransformer = mappingToTransformer;
+	}
+
+	/**
+	 * Returns a mapping to the alignment options defined in {@link Text_To_FormattedText}.
+	 * @return mapping
+	 */
+	public int getMappingToTransformer(){
+		return this.mappingToTransformer;
+	}
 }
