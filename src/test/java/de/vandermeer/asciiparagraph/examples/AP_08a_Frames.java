@@ -21,7 +21,7 @@ import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.asciithemes.TA_Frame;
+import de.vandermeer.asciithemes.TA_FrameOptions;
 import de.vandermeer.asciithemes.u8.U8_Frames;
 import de.vandermeer.skb.interfaces.StandardExample;
 
@@ -48,13 +48,13 @@ public class AP_08a_Frames implements StandardExample {
 		ap.addText(new LoremIpsum().getWords(9));
 		System.out.println(ap.render(25));
 
-		ctx.setFrameMode(TA_Frame.THEME_CORNERS_ONLY);
+		ctx.setFrameMode(TA_FrameOptions.THEME_CORNERS_ONLY);
 		ctx.setFrameTopBottomMargin(0);
 		ctx.setTextTopBottomMargin(0);
 		ctx.setTextLeftRightMargin(0);
 		System.out.println(ap.render(25));
 
-		ctx.setFrameMode(TA_Frame.THEME_LINE_TOPBOTTOM);
+		ctx.setFrameMode(TA_FrameOptions.THEME_LINE_TOPBOTTOM);
 		System.out.println(ap.render(25));
 		// end::example[]
 	}
@@ -73,13 +73,13 @@ public class AP_08a_Frames implements StandardExample {
 				"ap.addText(new LoremIpsum().getWords(9));",
 				"System.out.println(ap.render(25));",
 				"",
-				"ctx.setFrameMode(TA_Frame.THEME_CORNERS_ONLY);",
+				"ctx.setFrameMode(TA_FrameOptions.THEME_CORNERS_ONLY);",
 				"ctx.setFrameTopBottomMargin(0);",
 				"ctx.setTextTopBottomMargin(0);",
 				"ctx.setTextLeftRightMargin(0);",
 				"System.out.println(ap.render(25));",
 				"",
-				"ctx.setFrameMode(TA_Frame.THEME_LINE_TOPBOTTOM);",
+				"ctx.setFrameMode(TA_FrameOptions.THEME_LINE_TOPBOTTOM);",
 				"System.out.println(ap.render(25));",
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");

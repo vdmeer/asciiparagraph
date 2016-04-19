@@ -19,6 +19,7 @@ import org.apache.commons.lang3.Validate;
 
 import de.vandermeer.asciithemes.TA_DropCaps;
 import de.vandermeer.asciithemes.TA_Frame;
+import de.vandermeer.asciithemes.TA_FrameOptions;
 import de.vandermeer.asciithemes.a7.dropcaps.FigletRoman;
 import de.vandermeer.skb.interfaces.document.IsParagraphContext;
 import de.vandermeer.skb.interfaces.translators.CharacterTranslator;
@@ -65,7 +66,7 @@ public class AP_Context implements IsParagraphContext {
 	protected TA_Frame frame = null;
 
 	/** The mode for a frame. */
-	protected int frameMode = TA_Frame.THEME_FULL_FRAME;
+	protected int frameMode = TA_FrameOptions.THEME_FULL_FRAME;
 
 	/**
 	 * Creates a new paragraph context with default settings.
@@ -82,7 +83,7 @@ public class AP_Context implements IsParagraphContext {
 	 * - Strings from {@link AP_CtxtStrings}
 	 * - Converters from {@link AP_CtxtConverters}
 	 * - Frame: null
-	 * - Frame mode: {@link TA_Frame#THEME_FULL_FRAME}
+	 * - Frame mode: {@link TA_FrameOptions#THEME_FULL_FRAME}
 	 * 
 	 */
 	public AP_Context(){}
