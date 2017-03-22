@@ -18,10 +18,10 @@ package de.vandermeer.asciiparagraph.examples;
 import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
-import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
  * AsciiParagraph example demonstrating line start/end behavior.
@@ -36,7 +36,7 @@ public class AP_06_LineStartEnd_Behavior implements StandardExample {
 	public void showOutput(){
 		// tag::example[]
 		AP_Context ctx = new AP_Context();
-		ctx.setAlignment(AP_Alignment.JUSTIFIED);
+		ctx.setAlignment(TextAlignment.JUSTIFIED);
 		ctx.setWidth(50);
 
 		AsciiParagraph ap = new AsciiParagraph(ctx);

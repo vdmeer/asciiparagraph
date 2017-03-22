@@ -16,6 +16,7 @@
 package de.vandermeer.asciiparagraph;
 
 import de.vandermeer.asciithemes.a7.A7_Frames_Doc;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 import de.vandermeer.translation.targets.Text2Html;
 import de.vandermeer.translation.targets.Text2Latex;
 
@@ -63,7 +64,7 @@ public interface AP_Themes {
 		return new AsciiParagraphTheme() {
 			@Override
 			public void apply(AP_Context ctx) {
-				ctx.setAlignment(AP_Alignment.LEFT);
+				ctx.setAlignment(TextAlignment.LEFT);
 				ctx.setFrameTopBottomMargin(1);
 				ctx.setTextTopBottomMargin(0);
 				ctx.setFrame(A7_Frames_Doc.singleLine());
@@ -79,7 +80,7 @@ public interface AP_Themes {
 		return new AsciiParagraphTheme() {
 			@Override
 			public void apply(AP_Context ctx) {
-				ctx.setAlignment(AP_Alignment.LEFT);
+				ctx.setAlignment(TextAlignment.LEFT);
 				ctx.setFrameTopBottomMargin(1);
 				ctx.setTextTopBottomMargin(0);
 				ctx.setFrame(A7_Frames_Doc.multiLine());
@@ -95,7 +96,7 @@ public interface AP_Themes {
 		return new AsciiParagraphTheme() {
 			@Override
 			public void apply(AP_Context ctx) {
-				ctx.setAlignment(AP_Alignment.LEFT);
+				ctx.setAlignment(TextAlignment.LEFT);
 				ctx.setFrameTopBottomMargin(1);
 				ctx.setTextTopBottomMargin(0);
 				ctx.setFrame(A7_Frames_Doc.multiLineJavaDoc());

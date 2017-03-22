@@ -17,9 +17,9 @@ package de.vandermeer.asciiparagraph.examples;
 
 import org.apache.commons.lang3.text.StrBuilder;
 
-import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
  * AsciiParagraph example demonstrating conditional line breaks.
@@ -34,7 +34,7 @@ public class AP_01c_ConditionalLineBreak implements StandardExample {
 	public void showOutput(){
 		// tag::example[]
 		AsciiParagraph ap = new AsciiParagraph();
-		ap.getContext().setAlignment(AP_Alignment.LEFT).setWidth(35);
+		ap.getContext().setAlignment(TextAlignment.LEFT).setWidth(35);
 
 		ap.addText("line 1<br>");
 		ap.addText("line 2<br/>");

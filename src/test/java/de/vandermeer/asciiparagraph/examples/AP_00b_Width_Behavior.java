@@ -18,9 +18,9 @@ package de.vandermeer.asciiparagraph.examples;
 import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
-import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
  * AsciiParagraph example demonstrating width behavior.
@@ -36,7 +36,7 @@ public class AP_00b_Width_Behavior implements StandardExample {
 		// tag::example[]
 		AsciiParagraph ap = new AsciiParagraph();
 		ap.addText(new LoremIpsum().getWords(20));
-		ap.getContext().setAlignment(AP_Alignment.LEFT);
+		ap.getContext().setAlignment(TextAlignment.LEFT);
 
 		ap.getContext().setWidth(50);
 		System.out.println(ap.render());

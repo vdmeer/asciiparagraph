@@ -18,10 +18,10 @@ package de.vandermeer.asciiparagraph.examples;
 import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
-import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
  * AsciiParagraph example demonstrating right text behavior.
@@ -36,7 +36,7 @@ public class AP_05_Right_Text_Margin implements StandardExample {
 	public void showOutput(){
 		// tag::example[]
 		AP_Context ctx = new AP_Context();
-		ctx.setAlignment(AP_Alignment.RIGHT);
+		ctx.setAlignment(TextAlignment.RIGHT);
 		ctx.setWidth(29);
 		ctx.setEndString("|");
 

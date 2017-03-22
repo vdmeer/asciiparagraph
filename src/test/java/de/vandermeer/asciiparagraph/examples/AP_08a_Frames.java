@@ -18,12 +18,12 @@ package de.vandermeer.asciiparagraph.examples;
 import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
-import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.asciithemes.TA_FrameOptions;
 import de.vandermeer.asciithemes.u8.U8_Frames;
 import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
  * AsciiParagraph example demonstrating frames.
@@ -38,7 +38,7 @@ public class AP_08a_Frames implements StandardExample {
 	public void showOutput(){
 		// tag::example[]
 		AP_Context ctx = new AP_Context();
-		ctx.setAlignment(AP_Alignment.CENTER);
+		ctx.setAlignment(TextAlignment.CENTER);
 		ctx.setFrame(U8_Frames.borderLight());
 		ctx.setFrameTopBottomMargin(1);
 		ctx.setTextTopBottomMargin(1);

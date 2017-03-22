@@ -22,6 +22,7 @@ import de.vandermeer.asciithemes.TA_Frame;
 import de.vandermeer.asciithemes.TA_FrameOptions;
 import de.vandermeer.asciithemes.a7.dropcaps.FigletRoman;
 import de.vandermeer.skb.interfaces.document.IsParagraphContext;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 import de.vandermeer.skb.interfaces.translators.CharacterTranslator;
 import de.vandermeer.skb.interfaces.translators.HtmlElementTranslator;
 import de.vandermeer.skb.interfaces.translators.TargetTranslator;
@@ -114,7 +115,7 @@ public class AP_Context implements IsParagraphContext {
 	protected String endString = null;
 
 	/** Paragraph alignment, default is {@link AP_Alignment#JUSTIFIED_LEFT}. */
-	protected AP_Alignment alignment = AP_Alignment.JUSTIFIED_LEFT;
+	protected TextAlignment alignment = TextAlignment.JUSTIFIED_LEFT;
 
 	/** Paragraph format, default is {@link AP_Format#NONE}. */
 	protected AP_Format format = AP_Format.NONE;
@@ -155,7 +156,7 @@ public class AP_Context implements IsParagraphContext {
 	 * Returns the set alignment.
 	 * @return paragraph alignment
 	 */
-	public AP_Alignment getAlignment(){
+	public TextAlignment getAlignment(){
 		return this.alignment;
 	}
 
@@ -424,7 +425,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @throws NullPointerException if the argument was null
 	 * @return this to allow chaining
 	 */
-	public AP_Context setAlignment(AP_Alignment alignment){
+	public AP_Context setAlignment(TextAlignment alignment){
 		Validate.notNull(alignment);
 		this.alignment = alignment;
 		return this;

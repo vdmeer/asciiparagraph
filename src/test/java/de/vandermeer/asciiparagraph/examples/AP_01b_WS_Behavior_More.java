@@ -18,9 +18,9 @@ package de.vandermeer.asciiparagraph.examples;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.StrBuilder;
 
-import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
  * AsciiParagraph example demonstrating white space behavior.
@@ -53,7 +53,7 @@ public class AP_01b_WS_Behavior_More implements StandardExample {
 		ap.addText("word followed by " + StringUtils.CR + " followed by" + StringUtils.LF + " followed by \n");
 
 		ap.getContext().setWidth(60);
-		ap.getContext().setAlignment(AP_Alignment.LEFT);
+		ap.getContext().setAlignment(TextAlignment.LEFT);
 		System.out.println(ap.render());
 		// end::example[]
 	}

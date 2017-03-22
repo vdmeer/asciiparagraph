@@ -18,9 +18,9 @@ package de.vandermeer.asciiparagraph.examples;
 import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
-import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
  * AsciiParagraph example demonstrating inner white space behavior.
@@ -35,7 +35,7 @@ public class AP_01d_Inner_WS implements StandardExample {
 	public void showOutput(){
 		// tag::example[]
 		AsciiParagraph ap = new AsciiParagraph();
-		ap.getContext().setAlignment(AP_Alignment.LEFT).setWidth(35);
+		ap.getContext().setAlignment(TextAlignment.LEFT).setWidth(35);
 		ap.addText(new LoremIpsum().getWords(20));
 
 		ap.getContext().setInnerWsChar('˽');

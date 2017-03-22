@@ -17,10 +17,10 @@ package de.vandermeer.asciiparagraph.examples;
 
 import org.apache.commons.lang3.text.StrBuilder;
 
-import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 import de.vandermeer.translation.targets.Text2Latex;
 
 /**
@@ -36,7 +36,7 @@ public class AP_09a_TargetTranslators_LaTeX implements StandardExample {
 	public void showOutput(){
 		// tag::example[]
 		AP_Context ctx = new AP_Context();
-		ctx.setAlignment(AP_Alignment.LEFT);
+		ctx.setAlignment(TextAlignment.LEFT);
 
 		AsciiParagraph ap = new AsciiParagraph(ctx);
 		ap.addText("A sentence with some normal text, not specific to LaTeX.");

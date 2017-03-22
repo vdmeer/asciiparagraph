@@ -18,11 +18,11 @@ package de.vandermeer.asciiparagraph.examples;
 import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
-import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.asciithemes.a7.A7_Frames_Doc;
 import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
  * AsciiParagraph example demonstrating frames resembling code documentation.
@@ -37,7 +37,7 @@ public class AP_08b_Frames_Doc implements StandardExample {
 	public void showOutput(){
 		// tag::example[]
 		AP_Context ctx = new AP_Context();
-		ctx.setAlignment(AP_Alignment.LEFT);
+		ctx.setAlignment(TextAlignment.LEFT);
 		ctx.setFrameTopBottomMargin(1);
 		ctx.setTextTopBottomMargin(0);
 		AsciiParagraph ap = new AsciiParagraph(ctx);

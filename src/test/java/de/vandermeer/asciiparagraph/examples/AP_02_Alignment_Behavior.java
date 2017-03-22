@@ -18,10 +18,10 @@ package de.vandermeer.asciiparagraph.examples;
 import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
-import de.vandermeer.asciiparagraph.AP_Alignment;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
  * AsciiParagraph example demonstrating alignment behavior.
@@ -40,22 +40,22 @@ public class AP_02_Alignment_Behavior implements StandardExample {
 		AsciiParagraph ap = new AsciiParagraph(ctx);
 		ap.addText(new LoremIpsum().getWords(29));
 
-		ctx.setAlignment(AP_Alignment.JUSTIFIED);
+		ctx.setAlignment(TextAlignment.JUSTIFIED);
 		System.out.println(ap.render());
 
-		ctx.setAlignment(AP_Alignment.JUSTIFIED_LEFT);
+		ctx.setAlignment(TextAlignment.JUSTIFIED_LEFT);
 		System.out.println(ap.render());
 
-		ctx.setAlignment(AP_Alignment.JUSTIFIED_RIGHT);
+		ctx.setAlignment(TextAlignment.JUSTIFIED_RIGHT);
 		System.out.println(ap.render());
 
-		ctx.setAlignment(AP_Alignment.CENTER);
+		ctx.setAlignment(TextAlignment.CENTER);
 		System.out.println(ap.render());
 
-		ctx.setAlignment(AP_Alignment.LEFT);
+		ctx.setAlignment(TextAlignment.LEFT);
 		System.out.println(ap.render());
 
-		ctx.setAlignment(AP_Alignment.RIGHT);
+		ctx.setAlignment(TextAlignment.RIGHT);
 		System.out.println(ap.render());
 		// end::example[]
 	}
