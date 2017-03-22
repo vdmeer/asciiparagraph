@@ -35,20 +35,83 @@ import de.vandermeer.skb.interfaces.translators.TargetTranslator;
  */
 public class AP_Context implements IsParagraphContext {
 
-	/** Paragraph margins. */
-	protected AP_CtxtMargins margins = new AP_CtxtMargins();
+	/** A simple character translator. */
+	protected CharacterTranslator charTranslator;
 
-	/** Paragraph characters. */
-	protected AP_CtxtCharacters characters = new AP_CtxtCharacters();
+	/** A translator for HTML elements. */
+	protected HtmlElementTranslator htmlElementTranslator;
 
-	/** Paragraph indentations. */
-	protected AP_CtxtIndents indents = new AP_CtxtIndents();
+	/** A translator for a particular target. */
+	protected TargetTranslator targetTranslator;
 
-	/** Paragraph strings. */
-	protected AP_CtxtStrings strings = new AP_CtxtStrings();
+	/** The padding character for left side of a text line if not justified. */
+	protected Character paddingLeftChar = ' ';
 
-	/** Paragraph converters. */
-	protected AP_CtxtConverters converters = new AP_CtxtConverters();
+	/** The padding character for right side of a text line if not justified. */
+	protected Character paddingRightChar = ' ';
+
+	/** The character to be used for white spaces in text. */
+	protected Character innerWsChar = ' ';
+
+	/** The character for left text margin. */
+	protected Character textLeftChar = ' ';
+
+	/** The character for right text margin. */
+	protected Character textRightChar = ' ';
+
+	/** The character for left string margin. */
+	protected Character stringLeftChar = ' ';
+
+	/** The character for right string margin. */
+	protected Character stringRightChar = ' ';
+
+	/** The character for left frame margin. */
+	protected Character frameLeftChar = ' ';
+
+	/** The character for right frame margin. */
+	protected Character frameRightChar = ' ';
+
+	/** Margin between text and start string. */
+	protected int textLeftMargin = 0;
+
+	/** Margin between text and end string. */
+	protected int textRightMargin = 0;
+
+	/** Margin between start string and frame border. */
+	protected int stringLeftMargin = 0;
+
+	/** Margin between end string and frame border. */
+	protected int stringRightMargin = 0;
+
+	/** Margin outside the left frame border. */
+	protected int frameLeftMargin = 0;
+
+	/** Margin outside the right frame border. */
+	protected int frameRightMargin = 0;
+
+	/** Margin between text and top frame. */
+	protected int textTopMargin = 0;
+
+	/** Margin between text and bottom frame. */
+	protected int textBottomMargin = 1;
+
+	/** Margin outside top frame. */
+	protected int frameTopMargin = 0;
+
+	/** Margin outside bottom frame. */
+	protected int frameBottomMargin = 0;
+
+	/** Indentation for a first line. */
+	protected int firstLineIndent = 4;
+
+	/** Indentation for a hanging paragraph. */
+	protected int hangingParaIndent = 4;
+
+	/** Start string for each line of a paragraph. */
+	protected String startString = null;
+
+	/** End string for each line of a paragraph. */
+	protected String endString = null;
 
 	/** Paragraph alignment, default is {@link AP_Alignment#JUSTIFIED_LEFT}. */
 	protected AP_Alignment alignment = AP_Alignment.JUSTIFIED_LEFT;
@@ -77,11 +140,11 @@ public class AP_Context implements IsParagraphContext {
 	 * - Format: none
 	 * - Renderer: {@link AP_Renderer}
 	 * - DropCap library: {@link FigletRoman}
-	 * - Margins from {@link AP_CtxtMargins}
-	 * - Characters from {@link AP_CtxtCharacters}
-	 * - Indentations from {@link AP_CtxtIndents}
-	 * - Strings from {@link AP_CtxtStrings}
-	 * - Converters from {@link AP_CtxtConverters}
+	 * - Margins: all margins are set to 0, except text bottom is 1
+	 * - Characters: all characters set to `' '`
+	 * - Indentations: all indentations set to 4
+	 * - Strings: all strings set to null
+	 * - Converters: all converters set to null
 	 * - Frame: null
 	 * - Frame mode: {@link TA_FrameOptions#THEME_FULL_FRAME}
 	 * 
@@ -101,7 +164,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return character translator
 	 */
 	public CharacterTranslator getCharTranslator() {
-		return this.converters.charTranslator;
+		return this.charTranslator;
 	}
 
 	/**
@@ -117,7 +180,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return end string
 	 */
 	public final String getEndString() {
-		return this.strings.end;
+		return this.endString;
 	}
 
 	/**
@@ -125,7 +188,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return first line indentation
 	 */
 	public int getFirstLineIndent() {
-		return this.indents.firstLine;
+		return this.firstLineIndent;
 	}
 
 	/**
@@ -149,7 +212,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return bottom frame margin
 	 */
 	public int getFrameBottomMargin() {
-		return this.margins.frameBottom;
+		return this.frameBottomMargin;
 	}
 
 	/**
@@ -157,7 +220,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return left frame margin character
 	 */
 	public Character getFrameLeftChar() {
-		return this.characters.frameLeft;
+		return this.frameLeftChar;
 	}
 
 	/**
@@ -165,7 +228,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return left frame margin
 	 */
 	public int getFrameLeftMargin() {
-		return this.margins.frameLeft;
+		return this.frameLeftMargin;
 	}
 
 	/**
@@ -181,7 +244,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return right frame margin character
 	 */
 	public Character getFrameRightChar() {
-		return this.characters.frameRight;
+		return this.frameRightChar;
 	}
 
 	/**
@@ -189,7 +252,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return right frame margin
 	 */
 	public int getFrameRightMargin() {
-		return this.margins.frameRight;
+		return this.frameRightMargin;
 	}
 
 	/**
@@ -197,7 +260,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return top frame margin
 	 */
 	public int getFrameTopMargin() {
-		return this.margins.frameTop;
+		return this.frameTopMargin;
 	}
 
 	/**
@@ -205,7 +268,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return hanging paragraph indentation
 	 */
 	public int getHangingParaIndent() {
-		return this.indents.hangingPara;
+		return this.hangingParaIndent;
 	}
 
 	/**
@@ -213,7 +276,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return HTML entity
 	 */
 	public HtmlElementTranslator getHtmlElementTranslator() {
-		return this.converters.htmlElementTranslator;
+		return this.htmlElementTranslator;
 	}
 
 	/**
@@ -221,7 +284,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return in-text white space character
 	 */
 	public Character getInnerWsChar() {
-		return this.characters.innerWs;
+		return this.innerWsChar;
 	}
 
 	/**
@@ -229,7 +292,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return left padding character
 	 */
 	public Character getPaddingLeftChar() {
-		return this.characters.paddingLeft;
+		return this.paddingLeftChar;
 	}
 
 	/**
@@ -237,7 +300,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return right padding character
 	 */
 	public Character getPaddingRightChar() {
-		return this.characters.paddingRight;
+		return this.paddingRightChar;
 	}
 
 	/**
@@ -245,7 +308,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return start string
 	 */
 	public final String getStartString() {
-		return this.strings.start;
+		return this.startString;
 	}
 
 	/**
@@ -253,7 +316,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return left string margin character
 	 */
 	public Character getStringLeftChar() {
-		return this.characters.stringLeft;
+		return this.stringLeftChar;
 	}
 
 	/**
@@ -261,7 +324,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return left string margin
 	 */
 	public int getStringLeftMargin() {
-		return this.margins.stringLeft;
+		return this.stringLeftMargin;
 	}
 
 	/**
@@ -269,7 +332,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return right string margin character
 	 */
 	public Character getStringRightChar() {
-		return this.characters.stringRight;
+		return this.stringRightChar;
 	}
 
 	/**
@@ -277,7 +340,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return right string margin
 	 */
 	public int getStringRightMargin() {
-		return this.margins.stringRight;
+		return this.stringRightMargin;
 	}
 
 	/**
@@ -285,7 +348,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return target translator, null if not set
 	 */
 	public TargetTranslator getTargetTranslator() {
-		return this.converters.targetTranslator;
+		return this.targetTranslator;
 	}
 
 	/**
@@ -293,7 +356,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return bottom text margin
 	 */
 	public int getTextBottomMargin() {
-		return this.margins.textBottom;
+		return this.textBottomMargin;
 	}
 
 	/**
@@ -301,7 +364,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return left text margin character
 	 */
 	public Character getTextLeftChar() {
-		return this.characters.textLeft;
+		return this.textLeftChar;
 	}
 
 	/**
@@ -309,7 +372,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return left text margin
 	 */
 	public int getTextLeftMargin() {
-		return this.margins.textLeft;
+		return this.textLeftMargin;
 	}
 
 	/**
@@ -317,7 +380,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return right text margin character
 	 */
 	public Character getTextRightChar() {
-		return this.characters.textRight;
+		return this.textRightChar;
 	}
 
 	/**
@@ -325,7 +388,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return right text margin
 	 */
 	public int getTextRightMargin() {
-		return this.margins.textRight;
+		return this.textRightMargin;
 	}
 
 	/**
@@ -333,7 +396,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return top text margin
 	 */
 	public int getTextTopMargin() {
-		return this.margins.textTop;
+		return this.textTopMargin;
 	}
 
 	@Override
@@ -343,15 +406,15 @@ public class AP_Context implements IsParagraphContext {
 
 	@Override
 	public int getTextWidth(int width) {
-		int ret = width - this.margins.getTextLeft() - this.margins.getTextRight();
-		ret = ret - this.margins.getStringLeft() - this.margins.getStringRight();
-		if(this.strings.getStart()!=null){
-			ret -= this.strings.getStart().length();
+		int ret = width - this.getTextLeftMargin() - this.getTextRightMargin();
+		ret = ret - this.getStringLeftMargin() - this.getStringRightMargin();
+		if(this.getStartString()!=null){
+			ret -= this.getStartString().length();
 		}
-		if(this.strings.getEnd()!=null){
-			ret -= this.strings.getEnd().length();
+		if(this.getEndString()!=null){
+			ret -= this.getEndString().length();
 		}
-		ret = ret - this.margins.getFrameLeft() - this.margins.getFrameRight();
+		ret = ret - this.getFrameLeftMargin() - this.getFrameRightMargin();
 		return ret;
 	}
 
@@ -374,7 +437,11 @@ public class AP_Context implements IsParagraphContext {
 	 * @param charTranslator translator
 	 */
 	public void setCharTranslator(CharacterTranslator charTranslator) {
-		this.converters.setCharTranslator(charTranslator);
+		if(charTranslator!=null){
+			this.charTranslator = charTranslator;
+			this.htmlElementTranslator = null;
+			this.targetTranslator = null;
+		}
 	}
 
 	/**
@@ -394,7 +461,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public final AP_Context setEndString(String end) {
-		this.strings.end = end;
+		this.endString = end;
 		return this;
 	}
 
@@ -404,7 +471,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFirstLineIndent(int firstLine) {
-		this.indents.firstLine = firstLine;
+		if(firstLine>-1){
+			this.firstLineIndent = firstLine;
+		}
 		return this;
 	}
 
@@ -435,7 +504,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameBottomMargin(int frameBottom) {
-		this.margins.frameBottom = frameBottom;
+		if(frameBottom>-1){
+			this.frameBottomMargin = frameBottom;
+		}
 		return this;
 	}
 
@@ -445,8 +516,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameLeftChar(Character frameLeft) {
-		Validate.notNull(frameLeft);
-		this.characters.frameLeft = frameLeft;
+		if(frameLeft!=null){
+			this.frameLeftChar = frameLeft;
+		}
 		return this;
 	}
 
@@ -456,7 +528,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameLeftMargin(int frameLeft) {
-		this.margins.frameLeft = frameLeft;
+		if(frameLeft>-1){
+			this.frameLeftMargin = frameLeft;
+		}
 		return this;
 	}
 
@@ -466,9 +540,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameLeftRightChar(Character frameChar){
-		Validate.notNull(frameChar);
-		this.characters.frameLeft = frameChar;
-		this.characters.frameRight = frameChar;
+		if(frameChar!=null){
+			this.frameLeftChar = frameChar;
+			this.frameRightChar = frameChar;
+		}
 		return this;
 	}
 
@@ -479,10 +554,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameLeftRightChar(Character frameLeft, Character frameRight){
-		Validate.notNull(frameLeft);
-		Validate.notNull(frameRight);
-		this.characters.frameLeft = frameLeft;
-		this.characters.frameRight = frameRight;
+		if(frameLeft!=null && frameRight!=null){
+			this.frameLeftChar = frameLeft;
+			this.frameRightChar = frameRight;
+		}
 		return this;
 	}
 
@@ -492,8 +567,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameLeftRightMargin(int frameMargin){
-		this.margins.frameLeft = frameMargin;
-		this.margins.frameRight = frameMargin;
+		if(frameMargin>-1){
+			this.frameLeftMargin = frameMargin;
+			this.frameRightMargin = frameMargin;
+		}
 		return this;
 	}
 
@@ -504,8 +581,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameLeftRightMargin(int frameLeft, int frameRight){
-		this.margins.frameLeft = frameLeft;
-		this.margins.frameRight = frameRight;
+		if(frameRight>-1 && frameLeft>-1){
+			this.frameLeftMargin = frameLeft;
+			this.frameRightMargin = frameRight;
+		}
 		return this;
 	}
 
@@ -527,8 +606,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameRightChar(Character frameRight) {
-		Validate.notNull(frameRight);
-		this.characters.frameRight = frameRight;
+		if(frameRight!=null){
+			this.frameRightChar = frameRight;
+		}
 		return this;
 	}
 
@@ -538,7 +618,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameRightMargin(int frameRight) {
-		this.margins.frameRight = frameRight;
+		if(frameRight>-1){
+			this.frameRightMargin = frameRight;
+		}
 		return this;
 	}
 
@@ -548,8 +630,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameTopBottomMargin(int frameMargin){
-		this.margins.frameTop = frameMargin;
-		this.margins.frameBottom = frameMargin;
+		if(frameMargin>-1){
+			this.frameTopMargin = frameMargin;
+			this.frameBottomMargin = frameMargin;
+		}
 		return this;
 	}
 
@@ -560,8 +644,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameTopBottomMargin(int frameTop, int frameBottom){
-		this.margins.frameTop = frameTop;
-		this.margins.frameBottom = frameBottom;
+		if(frameTop>-1 && frameBottom>-1){
+			this.frameTopMargin = frameTop;
+			this.frameBottomMargin = frameBottom;
+		}
 		return this;
 	}
 
@@ -571,7 +657,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameTopMargin(int frameTop) {
-		this.margins.frameTop = frameTop;
+		if(frameTop>-1){
+			this.frameTopMargin = frameTop;
+		}
 		return this;
 	}
 
@@ -581,7 +669,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setHangingParaIndent(int hangingPara) {
-		this.indents.hangingPara = hangingPara;
+		if(hangingPara>-1){
+			this.hangingParaIndent = hangingPara;
+		}
 		return this;
 	}
 
@@ -592,7 +682,11 @@ public class AP_Context implements IsParagraphContext {
 	 * @param htmlElementTranslator translator
 	 */
 	public void setHtmlElementTranslator(HtmlElementTranslator htmlElementTranslator) {
-		this.converters.setHtmlElementTranslator(htmlElementTranslator);
+		if(htmlElementTranslator!=null){
+			this.htmlElementTranslator = htmlElementTranslator;
+			this.charTranslator = null;
+			this.targetTranslator = null;
+		}
 	}
 
 	/**
@@ -601,8 +695,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setInnerWsChar(Character innerWs) {
-		Validate.notNull(innerWs);
-		this.characters.innerWs = innerWs;
+		if(innerWs!=null){
+			this.innerWsChar = innerWs;
+		}
 		return this;
 	}
 
@@ -612,8 +707,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setPaddingLeftChar(Character paddingLeft) {
-		Validate.notNull(paddingLeft);
-		this.characters.paddingLeft = paddingLeft;
+		if(paddingLeft!=null){
+			this.paddingLeftChar = paddingLeft;
+		}
 		return this;
 	}
 
@@ -623,9 +719,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setPaddingLeftRightChar(Character paddingChar){
-		Validate.notNull(paddingChar);
-		this.characters.paddingLeft = paddingChar;
-		this.characters.paddingRight = paddingChar;
+		if(paddingChar!=null){
+			this.paddingLeftChar = paddingChar;
+			this.paddingRightChar = paddingChar;
+		}
 		return this;
 	}
 
@@ -636,10 +733,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setPaddingLeftRightChar(Character paddingLeft, Character paddingRight){
-		Validate.notNull(paddingLeft);
-		Validate.notNull(paddingRight);
-		this.characters.paddingLeft = paddingLeft;
-		this.characters.paddingRight = paddingRight;
+		if(paddingLeft!=null && paddingRight!=null){
+			this.paddingLeftChar = paddingLeft;
+			this.paddingRightChar = paddingRight;
+		}
 		return this;
 	}
 
@@ -649,8 +746,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setPaddingRightChar(Character paddingRight) {
-		Validate.notNull(paddingRight);
-		this.characters.paddingRight = paddingRight;
+		if(paddingRight!=null){
+			this.paddingRightChar = paddingRight;
+		}
 		return this;
 	}
 
@@ -661,8 +759,8 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public final AP_Context setStartEndString(String start, String end) {
-		this.strings.start = start;
-		this.strings.end = end;
+		this.startString = start;
+		this.endString = end;
 		return this;
 	}
 
@@ -672,7 +770,7 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public final AP_Context setStartString(String start) {
-		this.strings.start = start;
+		this.startString = start;
 		return this;
 	}
 
@@ -682,8 +780,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringLeftChar(Character stringLeft) {
-		Validate.notNull(stringLeft);
-		this.characters.stringLeft = stringLeft;
+		if(stringLeft!=null){
+			this.stringLeftChar = stringLeft;
+		}
 		return this;
 	}
 
@@ -693,7 +792,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringLeftMargin(int stringLeft) {
-		this.margins.stringLeft = stringLeft;
+		if(stringLeft>-1){
+			this.stringLeftMargin = stringLeft;
+		}
 		return this;
 	}
 
@@ -703,9 +804,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringLeftRightChar(Character stringChar){
-		Validate.notNull(stringChar);
-		this.characters.stringLeft = stringChar;
-		this.characters.stringRight = stringChar;
+		if(stringChar!=null){
+			this.stringLeftChar = stringChar;
+			this.stringRightChar = stringChar;
+		}
 		return this;
 	}
 
@@ -716,10 +818,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringLeftRightChar(Character stringLeft, Character stringRight){
-		Validate.notNull(stringLeft);
-		Validate.notNull(stringRight);
-		this.characters.stringLeft = stringLeft;
-		this.characters.stringRight = stringRight;
+		if(stringLeft!=null && stringRight!=null){
+			this.stringLeftChar = stringLeft;
+			this.stringRightChar = stringRight;
+		}
 		return this;
 	}
 
@@ -729,8 +831,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringLeftRightMargin(int stringMargin){
-		this.margins.stringLeft = stringMargin;
-		this.margins.stringRight = stringMargin;
+		if(stringMargin>-1){
+			this.stringLeftMargin = stringMargin;
+			this.stringRightMargin = stringMargin;
+		}
 		return this;
 	}
 
@@ -741,8 +845,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringLeftRightMargin(int stringLeft, int stringRight){
-		this.margins.stringLeft = stringLeft;
-		this.margins.stringRight = stringRight;
+		if(stringLeft>-1 && stringRight>-1){
+			this.stringLeftMargin = stringLeft;
+			this.stringRightMargin = stringRight;
+		}
 		return this;
 	}
 
@@ -752,8 +858,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringRightChar(Character stringRight) {
-		Validate.notNull(stringRight);
-		this.characters.stringRight = stringRight;
+		if(stringRight!=null){
+			this.stringRightChar = stringRight;
+		}
 		return this;
 	}
 
@@ -763,7 +870,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringRightMargin(int stringRight) {
-		this.margins.stringRight = stringRight;
+		if(stringRight>-1){
+			this.stringRightMargin = stringRight;
+		}
 		return this;
 	}
 
@@ -774,7 +883,11 @@ public class AP_Context implements IsParagraphContext {
 	 * @param targetTranslator translator
 	 */
 	public void setTargetTranslator(TargetTranslator targetTranslator) {
-		this.converters.setTargetTranslator(targetTranslator);
+		if(targetTranslator!=null){
+			this.targetTranslator = targetTranslator;
+			this.charTranslator = null;
+			this.htmlElementTranslator = null;
+		}
 	}
 
 	/**
@@ -783,7 +896,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextBottomMargin(int textBottom) {
-		this.margins.textBottom = textBottom;
+		if(textBottom>-1){
+			this.textBottomMargin = textBottom;
+		}
 		return this;
 	}
 
@@ -793,8 +908,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextLeftChar(Character textLeft) {
-		Validate.notNull(textLeft);
-		this.characters.textLeft = textLeft;
+		if(textLeft!=null){
+			this.textLeftChar = textLeft;
+		}
 		return this;
 	}
 
@@ -804,7 +920,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextLeftMargin(int textLeft) {
-		this.margins.textLeft = textLeft;
+		if(textLeft>-1){
+			this.textLeftMargin = textLeft;
+		}
 		return this;
 	}
 
@@ -814,9 +932,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextLeftRightChar(Character textChar){
-		Validate.notNull(textChar);
-		this.characters.textLeft = textChar;
-		this.characters.textRight = textChar;
+		if(textChar!=null){
+			this.textLeftChar = textChar;
+			this.textRightChar = textChar;
+		}
 		return this;
 	}
 
@@ -827,10 +946,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextLeftRightChar(Character textLeft, Character textRight){
-		Validate.notNull(textLeft);
-		Validate.notNull(textRight);
-		this.characters.textLeft = textLeft;
-		this.characters.textRight = textRight;
+		if(textLeft!=null && textRight!=null){
+			this.textLeftChar = textLeft;
+			this.textRightChar = textRight;
+		}
 		return this;
 	}
 
@@ -840,8 +959,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextLeftRightMargin(int textMargin){
-		this.margins.textLeft = textMargin;
-		this.margins.textRight = textMargin;
+		if(textMargin>-1){
+			this.textLeftMargin = textMargin;
+			this.textRightMargin = textMargin;
+		}
 		return this;
 	}
 
@@ -852,8 +973,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextLeftRightMargin(int textLeft, int textRight){
-		this.margins.textLeft = textLeft;
-		this.margins.textRight = textRight;
+		if(textLeft>-1 && textRight>-1){
+			this.textLeftMargin = textLeft;
+			this.textRightMargin = textRight;
+		}
 		return this;
 	}
 
@@ -863,8 +986,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextRightChar(Character textRight) {
-		Validate.notNull(textRight);
-		this.characters.textRight = textRight;
+		if(textRight!=null){
+			this.textRightChar = textRight;
+		}
 		return this;
 	}
 
@@ -874,7 +998,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextRightMargin(int textRight) {
-		this.margins.textRight = textRight;
+		if(textRight>-1){
+			this.textRightMargin = textRight;
+		}
 		return this;
 	}
 
@@ -884,8 +1010,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextTopBottomMargin(int textMargin){
-		this.margins.textTop = textMargin;
-		this.margins.textBottom = textMargin;
+		if(textMargin>-1){
+			this.textTopMargin = textMargin;
+			this.textBottomMargin = textMargin;
+		}
 		return this;
 	}
 
@@ -896,8 +1024,10 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextTopBottomMargin(int textTop, int textBottom){
-		this.margins.textTop = textTop;
-		this.margins.textBottom = textBottom;
+		if(textTop>-1 && textBottom>-1){
+			this.textTopMargin = textTop;
+			this.textBottomMargin = textBottom;
+		}
 		return this;
 	}
 
@@ -907,7 +1037,9 @@ public class AP_Context implements IsParagraphContext {
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextTopMargin(int textTop) {
-		this.margins.textTop = textTop;
+		if(textTop>-1){
+			this.textTopMargin = textTop;
+		}
 		return this;
 	}
 

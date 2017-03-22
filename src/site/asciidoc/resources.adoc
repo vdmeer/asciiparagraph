@@ -29,4 +29,3 @@
 | https://github.com/vdmeer/skb/wiki/HowTo-UTF-8-Support-in-Java-and-Console[updated SKB Wiki]
 
 |===
-
