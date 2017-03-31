@@ -186,16 +186,16 @@ public class AsciiParagraph implements IsParagraph {
 		return ret;
 	}
 
-	/**
-	 * Applies the theme by setting parameters in the given context.
-	 * @param theme the theme to apply
-	 * @return this to allow chaining
-	 */
-	public AsciiParagraph applyTheme(AsciiParagraphTheme theme) {
-		if(theme!=null){
-			theme.apply(this.ctx);
-		}
-		return this;
-	}
+//	/**
+//	 * Applies the theme by setting parameters in the given context.
+//	 * @param theme the theme to apply
+//	 * @return this to allow chaining
+//	 */
+//	public AsciiParagraph applyTheme(AsciiParagraphTheme theme) {
+//		if(theme!=null){
+//			theme.apply(this.ctx);
+//		}
+//		return this;
+//	}
 
 }

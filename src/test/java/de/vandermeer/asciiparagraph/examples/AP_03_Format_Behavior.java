@@ -19,10 +19,10 @@ import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
-import de.vandermeer.asciiparagraph.AP_Format;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.asciithemes.a7.dropcaps.FigletOldBanner_6L;
 import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextFormat;
 
 /**
  * AsciiParagraph example demonstrating different paragraph formats.
@@ -42,16 +42,16 @@ public class AP_03_Format_Behavior implements StandardExample {
 
 		System.out.println(ap.render(35));
 
-		ctx.setFormat(AP_Format.FIRST_LINE);
+		ctx.setFormat(TextFormat.FIRST_LINE);
 		System.out.println(ap.render(35));
 
-		ctx.setFormat(AP_Format.HANGING);
+		ctx.setFormat(TextFormat.HANGING);
 		System.out.println(ap.render(35));
 
-		ctx.setFormat(AP_Format.DROPCAP);
+		ctx.setFormat(TextFormat.DROPCAP);
 		System.out.println(ap.render(35));
 
-		ctx.setFormat(AP_Format.DROPCAP_WITH_PADDING);
+		ctx.setFormat(TextFormat.DROPCAP_WITH_PADDING);
 		ctx.setDropCapLib(new FigletOldBanner_6L());
 		System.out.println(ap.render(35));
 

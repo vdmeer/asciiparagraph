@@ -23,6 +23,7 @@ import de.vandermeer.asciithemes.TA_FrameOptions;
 import de.vandermeer.asciithemes.a7.dropcaps.FigletRoman;
 import de.vandermeer.skb.interfaces.document.IsParagraphContext;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
+import de.vandermeer.skb.interfaces.transformers.textformat.TextFormat;
 import de.vandermeer.skb.interfaces.translators.CharacterTranslator;
 import de.vandermeer.skb.interfaces.translators.HtmlElementTranslator;
 import de.vandermeer.skb.interfaces.translators.TargetTranslator;
@@ -114,11 +115,11 @@ public class AP_Context implements IsParagraphContext {
 	/** End string for each line of a paragraph. */
 	protected String endString = null;
 
-	/** Paragraph alignment, default is {@link AP_Alignment#JUSTIFIED_LEFT}. */
+	/** Paragraph alignment, default is {@link TextAlignment#JUSTIFIED_LEFT}. */
 	protected TextAlignment alignment = TextAlignment.JUSTIFIED_LEFT;
 
-	/** Paragraph format, default is {@link AP_Format#NONE}. */
-	protected AP_Format format = AP_Format.NONE;
+	/** Paragraph format, default is {@link TextFormat#NONE}. */
+	protected TextFormat format = TextFormat.NONE;
 
 	/** The width of the paragraph, actual width depends on padding settings, default is `80`. */
 	protected int width = 80;
@@ -196,7 +197,7 @@ public class AP_Context implements IsParagraphContext {
 	 * Returns the paragraph format.
 	 * @return paragraph format
 	 */
-	public AP_Format getFormat() {
+	public TextFormat getFormat() {
 		return this.format;
 	}
 
@@ -421,7 +422,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the paragraph alignment.
-	 * @param alignment set alignment
+	 * @param alignment new alignment
 	 * @throws NullPointerException if the argument was null
 	 * @return this to allow chaining
 	 */
@@ -449,6 +450,7 @@ public class AP_Context implements IsParagraphContext {
 	 * Sets the set dropped capital letter library.
 	 * @param dropCapLib capital letter library, only used if not null
 	 * @return this to allow chaining
+	 * @throws NullPointerException if the argument was null
 	 */
 	public AP_Context setDropCapLib(TA_DropCaps dropCapLib) {
 		Validate.notNull(dropCapLib);
@@ -468,7 +470,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the first line indentation
-	 * @param firstLine indentation
+	 * @param firstLine indentation, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFirstLineIndent(int firstLine) {
@@ -482,8 +484,9 @@ public class AP_Context implements IsParagraphContext {
 	 * Sets the paragraph format.
 	 * @param format paragraph format, ignored if null
 	 * @return this to allow chaining
+	 * @throws NullPointerException if the argument was null
 	 */
-	public AP_Context setFormat(AP_Format format) {
+	public AP_Context setFormat(TextFormat format) {
 		Validate.notNull(format);
 		this.format = format;
 		return this;
@@ -501,7 +504,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the bottom frame margin
-	 * @param frameBottom margin
+	 * @param frameBottom margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameBottomMargin(int frameBottom) {
@@ -513,7 +516,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left frame margin character.
-	 * @param frameLeft character
+	 * @param frameLeft character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameLeftChar(Character frameLeft) {
@@ -525,7 +528,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left frame margin
-	 * @param frameLeft margin
+	 * @param frameLeft margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameLeftMargin(int frameLeft) {
@@ -537,7 +540,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left and right frame margin character.
-	 * @param frameChar character
+	 * @param frameChar character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameLeftRightChar(Character frameChar){
@@ -550,8 +553,8 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left and right frame margin character.
-	 * @param frameLeft character
-	 * @param frameRight character
+	 * @param frameLeft character, ignored if null
+	 * @param frameRight character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameLeftRightChar(Character frameLeft, Character frameRight){
@@ -564,7 +567,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left and right frame margin.
-	 * @param frameMargin margin
+	 * @param frameMargin margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameLeftRightMargin(int frameMargin){
@@ -577,8 +580,8 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left and right frame margin.
-	 * @param frameLeft margin
-	 * @param frameRight margin
+	 * @param frameLeft margin, ignored if smaller than 0
+	 * @param frameRight margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameLeftRightMargin(int frameLeft, int frameRight){
@@ -603,7 +606,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the right frame margin character.
-	 * @param frameRight character
+	 * @param frameRight character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameRightChar(Character frameRight) {
@@ -615,7 +618,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the right frame margin
-	 * @param frameRight margin
+	 * @param frameRight margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameRightMargin(int frameRight) {
@@ -627,7 +630,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the top and bottom frame margin.
-	 * @param frameMargin margin
+	 * @param frameMargin margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameTopBottomMargin(int frameMargin){
@@ -640,8 +643,8 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the top and bottom frame margin.
-	 * @param frameTop margin
-	 * @param frameBottom margin
+	 * @param frameTop margin, ignored if smaller than 0
+	 * @param frameBottom margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameTopBottomMargin(int frameTop, int frameBottom){
@@ -654,7 +657,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the top frame margin
-	 * @param frameTop margin
+	 * @param frameTop margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setFrameTopMargin(int frameTop) {
@@ -666,7 +669,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the hanging paragraph indentation
-	 * @param hangingPara indentation
+	 * @param hangingPara indentation, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setHangingParaIndent(int hangingPara) {
@@ -692,7 +695,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the in-text white space character
-	 * @param innerWs in-text white space character
+	 * @param innerWs in-text white space character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setInnerWsChar(Character innerWs) {
@@ -704,7 +707,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left padding character.
-	 * @param paddingLeft character
+	 * @param paddingLeft character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setPaddingLeftChar(Character paddingLeft) {
@@ -716,7 +719,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left and right padding character.
-	 * @param paddingChar character
+	 * @param paddingChar character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setPaddingLeftRightChar(Character paddingChar){
@@ -729,8 +732,8 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left and right padding character.
-	 * @param paddingLeft character
-	 * @param paddingRight character
+	 * @param paddingLeft character, ignored if null
+	 * @param paddingRight character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setPaddingLeftRightChar(Character paddingLeft, Character paddingRight){
@@ -743,7 +746,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the right padding character.
-	 * @param paddingRight character
+	 * @param paddingRight character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setPaddingRightChar(Character paddingRight) {
@@ -777,7 +780,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left string margin character.
-	 * @param stringLeft character
+	 * @param stringLeft character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringLeftChar(Character stringLeft) {
@@ -789,7 +792,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left string margin
-	 * @param stringLeft margin
+	 * @param stringLeft margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringLeftMargin(int stringLeft) {
@@ -801,7 +804,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left and right string margin character.
-	 * @param stringChar character
+	 * @param stringChar character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringLeftRightChar(Character stringChar){
@@ -814,8 +817,8 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left and right string margin character.
-	 * @param stringLeft character
-	 * @param stringRight character
+	 * @param stringLeft character, ignored if null
+	 * @param stringRight character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringLeftRightChar(Character stringLeft, Character stringRight){
@@ -828,7 +831,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left and right string margin.
-	 * @param stringMargin margin
+	 * @param stringMargin margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringLeftRightMargin(int stringMargin){
@@ -841,8 +844,8 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left and right string margin.
-	 * @param stringLeft margin
-	 * @param stringRight margin
+	 * @param stringLeft margin, ignored if smaller than 0
+	 * @param stringRight margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringLeftRightMargin(int stringLeft, int stringRight){
@@ -855,7 +858,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the right string margin character.
-	 * @param stringRight character
+	 * @param stringRight character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringRightChar(Character stringRight) {
@@ -867,7 +870,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the right string margin
-	 * @param stringRight margin
+	 * @param stringRight margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setStringRightMargin(int stringRight) {
@@ -893,7 +896,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the bottom text margin
-	 * @param textBottom margin
+	 * @param textBottom margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextBottomMargin(int textBottom) {
@@ -905,7 +908,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left text margin character.
-	 * @param textLeft character
+	 * @param textLeft character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextLeftChar(Character textLeft) {
@@ -917,7 +920,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left text margin
-	 * @param textLeft margin
+	 * @param textLeft margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextLeftMargin(int textLeft) {
@@ -929,7 +932,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left and right text margin character.
-	 * @param textChar character
+	 * @param textChar character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextLeftRightChar(Character textChar){
@@ -942,8 +945,8 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left and right text margin character.
-	 * @param textLeft character
-	 * @param textRight character
+	 * @param textLeft character, ignored if null
+	 * @param textRight character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextLeftRightChar(Character textLeft, Character textRight){
@@ -956,7 +959,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left and right text margin.
-	 * @param textMargin margin
+	 * @param textMargin margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextLeftRightMargin(int textMargin){
@@ -969,8 +972,8 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the left and right text margin.
-	 * @param textLeft margin
-	 * @param textRight margin
+	 * @param textLeft margin, ignored if smaller than 0
+	 * @param textRight margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextLeftRightMargin(int textLeft, int textRight){
@@ -983,7 +986,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the right text margin character.
-	 * @param textRight character
+	 * @param textRight character, ignored if null
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextRightChar(Character textRight) {
@@ -995,7 +998,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the right text margin
-	 * @param textRight margin
+	 * @param textRight margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextRightMargin(int textRight) {
@@ -1007,7 +1010,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the top and bottom text margin.
-	 * @param textMargin margin
+	 * @param textMargin margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextTopBottomMargin(int textMargin){
@@ -1020,8 +1023,8 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the top and bottom text margin.
-	 * @param textTop margin
-	 * @param textBottom margin
+	 * @param textTop margin, ignored if smaller than 0
+	 * @param textBottom margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextTopBottomMargin(int textTop, int textBottom){
@@ -1034,7 +1037,7 @@ public class AP_Context implements IsParagraphContext {
 
 	/**
 	 * Sets the top text margin
-	 * @param textTop margin
+	 * @param textTop margin, ignored if smaller than 0
 	 * @return this to allow chaining
 	 */
 	public AP_Context setTextTopMargin(int textTop) {

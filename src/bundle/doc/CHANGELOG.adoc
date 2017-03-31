@@ -14,6 +14,7 @@
 * added paragraph frames
 * rewrote padding/margin/character behavior and renderer
 * added site documents
+* alignment and format moved to skb-interfaces
 
 
 === v0.0.2 - maintenance - 2016-03-01

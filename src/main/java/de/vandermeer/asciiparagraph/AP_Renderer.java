@@ -37,10 +37,11 @@ public interface AP_Renderer extends IsParagraphRenderer {
 	 * Renders an {@link AsciiParagraph}.
 	 * Each line will have text according to width.
 	 * Any padding (left or right) and start/end strings will add to the line width.
-	 * To use a calculated width for rendering use one of the other render methods.
-	 * @param text the text to render
-	 * @param ctx context of the original paragraph with relevant settings
+	 * To use a calculated width for rendering use {@link AP_Renderer#render(String, AP_Context, int)}.
+	 * @param text the text to render, cannot be null
+	 * @param ctx context of the original paragraph with relevant settings, cannot be null
 	 * @return collection of lines, each as a {@link StrBuilder}
+	 * @throws {@link NullPointerException} if text or context where null
 	 */
 	default Collection<StrBuilder> render(String text, AP_Context ctx){
 		Validate.notNull(text);
@@ -52,11 +53,11 @@ public interface AP_Renderer extends IsParagraphRenderer {
 	 * Renders an {@link AsciiParagraph}.
 	 * Each line will have text according to width.
 	 * Any padding (left or right) and start/end strings will add to the line width.
-	 * To use a calculated width for rendering use one of the other render methods.
-	 * @param text the text to render
-	 * @param ctx context of the original paragraph with relevant settings
-	 * @param width maximum line width, excluding any extra strings and paddings
+	 * @param text the text to render, cannot be null
+	 * @param ctx context of the original paragraph with relevant settings, cannot be null
+	 * @param width maximum line width, excluding any extra strings and padding
 	 * @return collection of lines, each as a {@link StrBuilder}
+	 * @throws {@link NullPointerException} if text or context where null
 	 */
 	default Collection<StrBuilder> render(String text, AP_Context ctx, int width){
 		Validate.notNull(text);
@@ -77,8 +78,8 @@ public interface AP_Renderer extends IsParagraphRenderer {
 
 		Collection<StrBuilder> ret = Text_To_FormattedText.create(
 				width,
-				ctx.getAlignment().getMappingToTransformer(),
-				ctx.getFormat().getMappingToTransformer(),
+				ctx.getAlignment().getMapping(),
+				ctx.getFormat().getMapping(),
 				ctx.getPaddingLeftChar(),
 				ctx.getPaddingRightChar(),
 				ctx.getInnerWsChar(),
