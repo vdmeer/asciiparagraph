@@ -17,6 +17,6 @@
  * ASCII paragraphs - A simple tool to format paragraphs with indentation, indentation character, alignment, padding (left, right, both), padding characters (left, right, both), and in-line whitespace characters.
  * 
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
+ * @version    v0.1.0-SNAPSHOT build 170331 (31-Mar-17) for Java 1.8
  */
 package de.vandermeer.asciiparagraph;

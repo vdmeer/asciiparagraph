@@ -1,9 +1,9 @@
-=== Translate characters for a LaTeX target
+=== Translate characters for a target
 
 
 The implementation allows to set translators for characters.
 Those tanslators will be called before the paragraph text if formatted.
-Translators can be for characters only, for HTMKl entities, or for complete targets
+Translators can be for characters only, for HTML entities, or for complete targets
 
 
 ==== Target LaTeX

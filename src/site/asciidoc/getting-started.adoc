@@ -5,7 +5,7 @@ The standard usage is:
 * create a paragraph
 * add text to the paragraph
 * change the paragraph context (to change its properties)
-* render the list
+* render the paragraph
 * use the created string, e.g. print it to a console or write it to a file
 
 

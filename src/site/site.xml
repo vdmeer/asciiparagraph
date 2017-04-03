@@ -19,7 +19,7 @@
 <project>
 
     <body>
-        <menu name="Ascii Table">
+        <menu name="Ascii Paragraph">
             <item href="features.html" name="Features" />
             <item href="concepts.html" name="Concepts">
                 <item href="concepts/01-anatomy.html" name="Anatomy of a paragraph" />

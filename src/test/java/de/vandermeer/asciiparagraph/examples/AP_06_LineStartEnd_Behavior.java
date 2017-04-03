@@ -20,17 +20,17 @@ import org.apache.commons.lang3.text.StrBuilder;
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExample;
+import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
  * AsciiParagraph example demonstrating line start/end behavior.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.3-SNAPSHOT build 160319 (19-Mar-16) for Java 1.7
+ * @version    v0.1.0-SNAPSHOT build 170331 (31-Mar-17) for Java 1.8
  * @since      v0.0.3
  */
-public class AP_06_LineStartEnd_Behavior implements StandardExample {
+public class AP_06_LineStartEnd_Behavior implements StandardExampleAsCmd {
 
 	@Override
 	public void showOutput(){
@@ -74,5 +74,15 @@ public class AP_06_LineStartEnd_Behavior implements StandardExample {
 				"System.out.println(ap.render());",
 		};
 		return new StrBuilder().appendWithSeparators(source, "\n");
+	}
+
+	@Override
+	public String getDescription() {
+		return "setting the line-end of a paragraph";
+	}
+
+	@Override
+	public String getID() {
+		return "line-end";
 	}
 }
