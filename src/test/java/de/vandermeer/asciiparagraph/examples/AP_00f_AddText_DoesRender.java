@@ -26,7 +26,7 @@ import de.vandermeer.skb.interfaces.render.DoesRender;
  * AsciiParagraph example demonstrating that {@link DoesRender} objects are automatically added as text.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.1.0-SNAPSHOT build 170404 (04-Apr-17) for Java 1.8
+ * @version    v0.1.0 build 170404 (04-Apr-17) for Java 1.8
  * @since      v0.0.3
  */
 public class AP_00f_AddText_DoesRender implements StandardExampleAsCmd {

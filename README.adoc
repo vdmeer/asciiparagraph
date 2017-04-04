@@ -1,5 +1,5 @@
 
-:release-version: 0.1.0-SNAPSHOT
+:release-version: 0.1.0
 = ASCII Paragraph
 v{release-version}
 :page-layout: base
@@ -39,7 +39,6 @@ A simple tool to format paragraphs with multi vertical/horizontal margins, diffe
 | https://github.com/vdmeer/skb/wiki/HowTo-UTF-8-Support-in-Java-and-Console[updated SKB Wiki]
 
 |===
-
 == Installation
 
 === Maven
@@ -287,7 +286,7 @@ The standard usage is:
 * create a paragraph
 * add text to the paragraph
 * change the paragraph context (to change its properties)
-* render the list
+* render the paragraph
 * use the created string, e.g. print it to a console or write it to a file
 
 
@@ -453,14 +452,13 @@ voluptua. At vero eos et accusam                      voluptua. At vero eos et a
 
 First line indentation and hanging paragraph.
 ----------------------------------------------------------------------------------------
-    Lorem  ipsum  dolor  sit  amet,        Lorem   ipsum   dolor   sit   amet,
 Lorem   ipsum   dolor   sit   amet,            Lorem  ipsum  dolor  sit  amet,
-consetetur  sadipscing  elitr,  sed            consetetur  sadipscing   elitr,
-diam nonumy eirmod tempor  invidunt            sed diam nonumy  eirmod  tempor
-ut labore et dolore magna  aliquyam            invidunt ut  labore  et  dolore
-erat, sed diam  voluptua.  At  vero            magna aliquyam erat,  sed  diam
-eos et accusam                                 voluptua.  At   vero   eos   et
-                                               accusam                        
+consetetur  sadipscing  elitr,  sed        consetetur  sadipscing  elitr,  sed
+diam nonumy eirmod tempor  invidunt        diam nonumy eirmod tempor  invidunt
+ut labore et dolore magna  aliquyam        ut labore et dolore magna  aliquyam
+erat, sed diam  voluptua.  At  vero        erat, sed diam  voluptua.  At  vero
+eos et accusam                             eos et accusam                     
+                                                                              
 ----------------------------------------------------------------------------------------
 
 Dropped capital letters.
