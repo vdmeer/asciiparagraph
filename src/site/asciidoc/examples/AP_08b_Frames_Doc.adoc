@@ -1,0 +1,100 @@
+=== Code documentation headers (using frames)
+
+
+Frames are more versatile than simply adding boxes.
+They can for instance also add any type of string.
+The following examples are using frames to realize code documentation blocks.
+
+
+The following code creates a paragraph and then uses different frames to generate code documentation blocks:
+
+- TeX/LaTeX comments (line 8)
+- HTML comment block (line 11)
+- bash scripts (line 14)
+- bash scripts with double hashmark start (line 17)
+- classic single line comment block (as found for instance in C++ and Java, line 20)
+- classic multi-line comment block (as found for instance in C++ and Java, line 23)
+- Javadoc comment block (line 26)
+
+[source, java, linenums]
+----------------------------------------------------------------------------------------
+include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_08b_Frames_Doc.java[tags=example,indent=0]
+----------------------------------------------------------------------------------------
+
+
+The resulting output for the first setting, TeX/LaTeX, is:
+----------------------------------------------------------------------------------------
+% 
+% Lorem ipsum dolor   
+% sit amet, consetetur
+% sadipscing elitr,   
+% sed                 
+% 
+----------------------------------------------------------------------------------------
+
+
+The resulting output for the second setting, HTML, is:
+----------------------------------------------------------------------------------------
+<!--                      -->
+<!-- Lorem ipsum dolor    -->
+<!-- sit amet, consetetur -->
+<!-- sadipscing elitr,    -->
+<!-- sed                  -->
+<!--                      -->
+----------------------------------------------------------------------------------------
+
+
+The resulting output for the third setting, bash, is:
+----------------------------------------------------------------------------------------
+# 
+# Lorem ipsum dolor   
+# sit amet, consetetur
+# sadipscing elitr,   
+# sed                 
+# 
+----------------------------------------------------------------------------------------
+
+
+The resulting output for the fourth setting, bash with double hashmark start, is:
+----------------------------------------------------------------------------------------
+##
+## Lorem ipsum dolor   
+## sit amet, consetetur
+## sadipscing elitr,   
+## sed                 
+##
+----------------------------------------------------------------------------------------
+
+
+The resulting output for the fifth setting, classic single line, is:
+----------------------------------------------------------------------------------------
+//
+// Lorem ipsum dolor   
+// sit amet, consetetur
+// sadipscing elitr,   
+// sed                 
+//
+----------------------------------------------------------------------------------------
+
+
+The resulting output for the sixth setting, classic multi-line is:
+----------------------------------------------------------------------------------------
+/*
+ * Lorem ipsum dolor   
+ * sit amet, consetetur
+ * sadipscing elitr,   
+ * sed                 
+ */
+----------------------------------------------------------------------------------------
+
+
+The resulting output for the seventh setting, Javadoc, is:
+----------------------------------------------------------------------------------------
+/**
+ * Lorem ipsum dolor   
+ * sit amet, consetetur
+ * sadipscing elitr,   
+ * sed                 
+ */
+----------------------------------------------------------------------------------------
+

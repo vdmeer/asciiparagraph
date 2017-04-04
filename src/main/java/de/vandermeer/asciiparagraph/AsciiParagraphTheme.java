@@ -16,27 +16,17 @@
 package de.vandermeer.asciiparagraph;
 
 /**
- * Options for the alignment of an {@link AsciiParagraph} or other text.
+ * A theme for an {@link AsciiParagraph}.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.0.2 build 160301 (01-Mar-16) for Java 1.7
- * @since      v0.0.1
+ * @version    v0.1.0-SNAPSHOT build 170404 (04-Apr-17) for Java 1.8
+ * @since      v0.1.0
  */
-public enum TextAlign {
+public interface AsciiParagraphTheme {
 
-	/** Option for a justified alignment, last line left bound. */
-	JUSTIFIED,
-
-	/** Option for a justified alignment, last line right bound. */
-	JUSTIFIED_RIGHT,
-
-	/** Option for paragraph alignment left. */
-	LEFT,
-
-	/** Option for paragraph alignment center. */
-	CENTER,
-
-	/** Option for paragraph alignment right. */
-	RIGHT,
-	;
+	/**
+	 * Applies the theme by setting parameters in the given context.
+	 * @param ctx the context of the paragraph, should not be null
+	 */
+	void apply(AP_Context ctx);
 }

@@ -1,0 +1,85 @@
+=== Paragraph Format
+
+
+Independent of the alignment, the text can be formatted in the following ways:
+
+- None - no special format being applied
+- First line - the first line of the text has an indentation (configurable)
+- Hanging paragraph - all but the first line have an indentation (configurable)
+- Dropped capital letter - the first letter of the first word in the first sentence is replaced by a dropped capital letter, the first few lines of the paragraph get an indentation. The used dropped captial letter can be configured by setting a library.
+
+The following code creates a paragraph context and then a paragraph with some demo text.
+To demonstrate the text format, we then set the format in the context to none, first line, and hanging (paragraph).
+To show different dropped capital letters we first show the render with the default library and then change the library and render the paragraph again.
+
+[source, java, linenums]
+----------------------------------------------------------------------------------------
+include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_03_Format_Behavior.java[tags=example,indent=0]
+----------------------------------------------------------------------------------------
+
+
+The output for the first format, none, is:
+----------------------------------------------------------------------------------------
+Lorem   ipsum   dolor   sit   amet,
+consetetur  sadipscing  elitr,  sed
+diam nonumy eirmod tempor  invidunt
+ut labore et dolore magna  aliquyam
+erat, sed diam  voluptua.  At  vero
+eos et accusam                     
+                                   
+----------------------------------------------------------------------------------------
+
+
+The output for the second format, first line, is:
+----------------------------------------------------------------------------------------
+    Lorem  ipsum  dolor  sit  amet,
+consetetur  sadipscing  elitr,  sed
+diam nonumy eirmod tempor  invidunt
+ut labore et dolore magna  aliquyam
+erat, sed diam  voluptua.  At  vero
+eos et accusam                     
+                                   
+----------------------------------------------------------------------------------------
+
+
+The output for the third format, hanging (paragraph), is:
+----------------------------------------------------------------------------------------
+Lorem   ipsum   dolor   sit   amet,
+    consetetur  sadipscing   elitr,
+    sed diam nonumy  eirmod  tempor
+    invidunt ut  labore  et  dolore
+    magna aliquyam erat,  sed  diam
+    voluptua.  At   vero   eos   et
+    accusam                        
+                                   
+----------------------------------------------------------------------------------------
+
+
+The output for the fourth format, dropped capital letter with default library, is:
+----------------------------------------------------------------------------------------
+ooooo          orem ipsum dolor sit
+`888'          amet,     consetetur
+ 888           sadipscing    elitr,
+ 888           sed   diam    nonumy
+ 888           eirmod        tempor
+ 888       o   invidunt  ut  labore
+o888ooooood8   et   dolore    magna
+               aliquyam  erat,  sed
+diam  voluptua.  At  vero  eos   et
+accusam                            
+                                   
+----------------------------------------------------------------------------------------
+
+
+The output for the fifth format, dropped capital letter with changed library, is:
+----------------------------------------------------------------------------------------
+#        orem ipsum dolor sit amet,
+#        consetetur      sadipscing
+#        elitr,  sed  diam   nonumy
+#        eirmod tempor invidunt  ut
+#        labore  et  dolore   magna
+######   aliquyam  erat,  sed  diam
+         voluptua. At vero  eos  et
+accusam                            
+                                   
+----------------------------------------------------------------------------------------

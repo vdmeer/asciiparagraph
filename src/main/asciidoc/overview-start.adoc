@@ -1,0 +1,2 @@
+A simple tool to format paragraphs with multi vertical/horizontal margins, different text alignment, text formatting, in-text whitespace manipulation, frames, and target converters for characters.
+

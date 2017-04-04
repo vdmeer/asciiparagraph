@@ -1,0 +1,19 @@
+== Features
+
+Text paragraph with some flexibility for alignment, format, padding, margins, frames, and additional strings per line:
+
+* add text, as often as required in many different formats (string, text provider, render provider, ST, clusters),
+* removes all excessive white spaces (tabulators, extra blanks, combinations of carriage return and line feed),
+* 6 different alignments: left, right, centered, justified, justified last line left, justified last line right,
+* 3 different formats: first line, hanging, dropped capital letter
+* flexible width, set for text and calculated in many different ways for rendering
+* padding characters for left and right padding (configurable separately)
+* character for in-text white spaces
+* additional string at the start of each line
+* additional string at the end of each line
+* a frame around the text
+* flexible left/right margins configurable individually by length and character between frame, strings and text
+* flexible top/bottom margins configurable individually by length between frame and text
+* top/bottom/left/right margins outside a frame
+* character conversion to generated text suitable for further process, e.g. for LaTeX and HTML
+

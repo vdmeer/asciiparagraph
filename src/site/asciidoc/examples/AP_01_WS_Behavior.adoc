@@ -1,0 +1,40 @@
+=== Whitespace behavior
+
+
+Excessive white spaces in the paragraph text are removed.
+Those white spaces are additional blanks (two or more), tabulators, and any new line.
+
+The following example shows text being added to a paragraph with excessive white spaces.
+The first lines add strings with extra blanks (c2, c3, and c4).
+The next four lines add strings with tabulators (t1, t2, t3, and t4), using the normal tabulator character and the escaped tabulator `\t`.
+
+Finally, a string with additional line breaks is added. The line breaks for carriage return, line feed, and escaped newline `\n` are recognized.
+
+[source, java, linenums]
+----------------------------------------------------------------------------------------
+include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_01a_WS_Behavior_Simple.java[tags=example,indent=0]
+----------------------------------------------------------------------------------------
+
+
+The resulting output has all excessive white spaces removed:
+----------------------------------------------------------------------------------------
+c2 c2 c3 c3 c4 c4 t1 t1 t2 t2 t3 t3 t4 t4 word followed by  
+followed by followed by                                     
+                                                            
+----------------------------------------------------------------------------------------
+
+
+It does not matter how many excessive white spaces are added.
+The code below uses more excessive white spaces for blanks and tabulators.
+
+[source, java, linenums]
+----------------------------------------------------------------------------------------
+include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_01b_WS_Behavior_More.java[tags=example,indent=0]
+----------------------------------------------------------------------------------------
+
+All of which will be removed accordingly:
+----------------------------------------------------------------------------------------
+c2 c2 c3 c3 c4 c4 c5 c5 c6 c6 c7 c7 t2 t2 t3 t3 t4 t4 t5 t5 
+t6 t6 t7 t7 word followed by followed by followed by        
+                                                            
+----------------------------------------------------------------------------------------

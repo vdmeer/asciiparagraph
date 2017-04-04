@@ -1,0 +1,306 @@
+== Examples
+
+The following examples are using the classic "Lorem Ipsum" text as content.
+
+
+=== Width
+
+Width of 50, 40, and 30 on the same text.
+----------------------------------------------------------------------------------------
+Lorem ipsum dolor sit amet, consetetur sadipscing 
+elitr, sed diam nonumy eirmod tempor invidunt ut  
+labore et dolore magna aliquyam                   
+
+Lorem ipsum dolor sit amet, consetetur  
+sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore     
+magna aliquyam                          
+
+Lorem ipsum dolor sit amet,   
+consetetur sadipscing elitr,  
+sed diam nonumy eirmod tempor 
+invidunt ut labore et dolore  
+magna aliquyam                
+
+----------------------------------------------------------------------------------------
+
+
+
+=== Whitespace handling
+
+The paragraph will remove all additional white spaces so that the resulting text has words separated by 1 space.
+All tabulators, line feeds, and carriage returns will be removed.
+----------------------------------------------------------------------------------------
+"c2  c2"        // string with 1 extra blank
+"c3   c3"       // string with 2 extra blanks
+"c4    c4"      // string with 3 extra blanks
+
+"t1	t1"                       // string with a tabulator
+"t2		t2"               // string with 2 tabulators
+"t3			t3"       // string with 3 tabulators
+"t4\t\t\t\tt4"                    // string with 4 escaped tabulators
+
+// a more complex construct using StringUtils to add CR and LF
+"word followed by " + StringUtils.CR + " followed by" + StringUtils.LF + " followed by \n"
+----------------------------------------------------------------------------------------
+
+Using left alignment and a width of 60 the rendered output will be:
+----------------------------------------------------------------------------------------
+c2 c2 c3 c3 c4 c4 t1 t1 t2 t2 t3 t3 t4 t4 word followed by 
+followed by followed by  
+
+----------------------------------------------------------------------------------------
+
+
+=== Conditional line breaks
+
+Use HTML entities `<br>` and `<br/>` to render text
+----------------------------------------------------------------------------------------
+"line 1<br>"
+"line 2<br/>"
+"line three \n still line three"
+----------------------------------------------------------------------------------------
+
+to
+----------------------------------------------------------------------------------------
+line 1                             
+line 2                             
+line three still line three        
+
+----------------------------------------------------------------------------------------
+
+
+=== In-text white space replacement
+
+Remaining blanks in text can be automatically replaced by other characters
+----------------------------------------------------------------------------------------
+Lorem˽ipsum˽dolor˽sit˽amet,                Lorem—ipsum—dolor—sit—amet,        
+consetetur˽sadipscing˽elitr,˽sed           consetetur—sadipscing—elitr,—sed   
+diam˽nonumy˽eirmod˽tempor˽invidunt         diam—nonumy—eirmod—tempor—invidunt 
+ut˽labore˽et˽dolore˽magna˽aliquyam         ut—labore—et—dolore—magna—aliquyam 
+
+----------------------------------------------------------------------------------------
+
+
+=== Text alignment
+
+Left and right.
+----------------------------------------------------------------------------------------
+Lorem ipsum dolor sit amet, consetetur        Lorem ipsum dolor sit amet, consetetur
+sadipscing elitr, sed diam nonumy                  sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et              eirmod tempor invidunt ut labore et
+dolore magna aliquyam erat, sed diam            dolore magna aliquyam erat, sed diam
+voluptua. At vero eos et accusam                    voluptua. At vero eos et accusam
+----------------------------------------------------------------------------------------
+
+Centered and justified.
+----------------------------------------------------------------------------------------
+Lorem ipsum dolor sit amet, consetetur        Lorem ipsum dolor sit amet,  consetetur
+   sadipscing elitr, sed diam nonumy          sadipscing  elitr,  sed   diam   nonumy
+  eirmod tempor invidunt ut labore et         eirmod tempor  invidunt  ut  labore  et
+ dolore magna aliquyam erat, sed diam         dolore magna aliquyam  erat,  sed  diam
+   voluptua. At vero eos et accusam           voluptua.  At  vero  eos   et   accusam
+----------------------------------------------------------------------------------------
+
+Justified last line left and right.
+----------------------------------------------------------------------------------------
+Lorem ipsum dolor sit amet,  consetetur        Lorem ipsum dolor sit amet,  consetetur
+sadipscing  elitr,  sed   diam   nonumy        sadipscing  elitr,  sed   diam   nonumy
+eirmod tempor  invidunt  ut  labore  et        eirmod tempor  invidunt  ut  labore  et
+dolore magna aliquyam  erat,  sed  diam        dolore magna aliquyam  erat,  sed  diam
+voluptua. At vero eos et accusam                      voluptua. At vero eos et accusam
+----------------------------------------------------------------------------------------
+
+
+=== Text format
+
+First line indentation and hanging paragraph.
+----------------------------------------------------------------------------------------
+Lorem   ipsum   dolor   sit   amet,            Lorem  ipsum  dolor  sit  amet,
+consetetur  sadipscing  elitr,  sed        consetetur  sadipscing  elitr,  sed
+diam nonumy eirmod tempor  invidunt        diam nonumy eirmod tempor  invidunt
+ut labore et dolore magna  aliquyam        ut labore et dolore magna  aliquyam
+erat, sed diam  voluptua.  At  vero        erat, sed diam  voluptua.  At  vero
+eos et accusam                             eos et accusam                     
+                                                                              
+----------------------------------------------------------------------------------------
+
+Dropped capital letters.
+----------------------------------------------------------------------------------------
+ooooo          orem ipsum dolor sit        #        orem ipsum dolor sit amet,
+`888'          amet,     consetetur        #        consetetur      sadipscing
+ 888           sadipscing    elitr,        #        elitr,  sed  diam   nonumy
+ 888           sed   diam    nonumy        #        eirmod tempor invidunt  ut
+ 888           eirmod        tempor        #        labore  et  dolore   magna
+ 888       o   invidunt  ut  labore        ######   aliquyam  erat,  sed  diam
+o888ooooood8   et   dolore    magna                 voluptua. At vero  eos  et
+               aliquyam  erat,  sed        accusam                            
+diam  voluptua.  At  vero  eos   et
+accusam                            
+----------------------------------------------------------------------------------------
+
+
+=== Left/Right text margin (width and character)
+
+----------------------------------------------------------------------------------------
+Lorem ipsum dolor sit amet,                                Lorem ipsum dolor sit amet,
+consetetur sadipscing elitr,                              consetetur sadipscing elitr,
+sed diam nonumy eirmod tempor                            sed diam nonumy eirmod tempor
+invidunt ut labore et dolore                              invidunt ut labore et dolore
+magna aliquyam erat, sed diam                            magna aliquyam erat, sed diam
+voluptua. At vero eos et                                      voluptua. At vero eos et
+accusam                                                                        accusam
+                                                                                      
+     Lorem ipsum dolor sit amet,                      Lorem ipsum dolor sit amet,     
+     consetetur sadipscing elitr,                    consetetur sadipscing elitr,     
+     sed diam nonumy eirmod tempor                  sed diam nonumy eirmod tempor     
+     invidunt ut labore et dolore                    invidunt ut labore et dolore     
+     magna aliquyam erat, sed diam                  magna aliquyam erat, sed diam     
+     voluptua. At vero eos et                            voluptua. At vero eos et     
+     accusam                                                              accusam     
+                                                                                      
+>>>>>>>>>>Lorem ipsum dolor sit amet,            Lorem ipsum dolor sit amet,<<<<<<<<<<
+>>>>>>>>>>consetetur sadipscing elitr,          consetetur sadipscing elitr,<<<<<<<<<<
+>>>>>>>>>>sed diam nonumy eirmod tempor        sed diam nonumy eirmod tempor<<<<<<<<<<
+>>>>>>>>>>invidunt ut labore et dolore          invidunt ut labore et dolore<<<<<<<<<<
+>>>>>>>>>>magna aliquyam erat, sed diam        magna aliquyam erat, sed diam<<<<<<<<<<
+>>>>>>>>>>voluptua. At vero eos et                  voluptua. At vero eos et<<<<<<<<<<
+>>>>>>>>>>accusam                                                    accusam<<<<<<<<<<
+
+----------------------------------------------------------------------------------------
+
+
+=== Extra text at each line start and line end
+
+Normal paragraph, added start string `"// "`, added end string `" -->"`
+----------------------------------------------------------------------------------------
+Lorem ipsum dolor sit amet, consetetur  sadipscing
+elitr, sed diam nonumy eirmod tempor  invidunt  ut
+labore et dolore magna  aliquyam  erat,  sed  diam
+voluptua.    At    vero     eos     et     accusam
+
+// Lorem ipsum dolor sit amet, consetetur  sadipscing
+// elitr, sed diam nonumy eirmod tempor  invidunt  ut
+// labore et dolore magna  aliquyam  erat,  sed  diam
+// voluptua.    At    vero     eos     et     accusam
+
+// Lorem ipsum dolor sit amet, consetetur  sadipscing -->
+// elitr, sed diam nonumy eirmod tempor  invidunt  ut -->
+// labore et dolore magna  aliquyam  erat,  sed  diam -->
+// voluptua.    At    vero     eos     et     accusam -->
+
+----------------------------------------------------------------------------------------
+
+
+=== Render to maximum width, calculating additional padding and strings
+
+Render to text width, text - strings, text - strings - margin
+----------------------------------------------------------------------------------------
+Lorem ipsum dolor sit amet, consetetur  sadipscing
+elitr, sed diam nonumy eirmod tempor  invidunt  ut
+labore et dolore magna  aliquyam  erat,  sed  diam
+voluptua. At vero eos et accusam                  
+
+// Lorem  ipsum   dolor   sit   amet,   consetetur
+// sadipscing elitr, sed diam nonumy eirmod tempor
+// invidunt ut labore  et  dolore  magna  aliquyam
+// erat, sed diam voluptua. At vero eos et accusam
+
+// Lorem  ipsum  dolor  sit  amet,  consetetur -->
+// sadipscing elitr, sed  diam  nonumy  eirmod -->
+// tempor invidunt ut labore et  dolore  magna -->
+// aliquyam erat, sed diam voluptua.  At  vero -->
+// eos et accusam                              -->
+
+//           Lorem  ipsum  dolor   sit   amet, -->
+//           consetetur sadipscing elitr,  sed -->
+//           diam   nonumy    eirmod    tempor -->
+//           invidunt  ut  labore  et   dolore -->
+//           magna  aliquyam  erat,  sed  diam -->
+//           voluptua. At vero eos et accusam  -->
+
+----------------------------------------------------------------------------------------
+
+
+=== Frames
+
+Examples of a few frames with different frame modes:
+----------------------------------------------------------------------------------------
+┌─────────────────────────┐        ┌                         ┐        ─────────────────────────
+│                         │           Lorem ipsum dolor sit             Lorem ipsum dolor sit  
+│  Lorem ipsum dolor sit  │             amet, consetetur                  amet, consetetur     
+│    amet, consetetur     │           sadipscing elitr, sed             sadipscing elitr, sed  
+│  sadipscing elitr, sed  │        └                         ┘        ─────────────────────────
+│                         │
+└─────────────────────────┘
+----------------------------------------------------------------------------------------
+
+
+=== Code documentation (using frames)
+
+
+Standard single line, multi-line, and doc comments using frames:
+----------------------------------------------------------------------------------------
+//                             /*                             /**                    
+// Lorem ipsum dolor            * Lorem ipsum dolor            * Lorem ipsum dolor   
+// sit amet, consetetur         * sit amet, consetetur         * sit amet, consetetur
+// sadipscing elitr,            * sadipscing elitr,            * sadipscing elitr,   
+// sed                          * sed                          * sed                 
+//                              */                             */                    
+----------------------------------------------------------------------------------------
+
+Comments for bash scripts, normal and with a double-hashmark variation
+----------------------------------------------------------------------------------------
+#                         ##                     
+# Lorem ipsum dolor       ## Lorem ipsum dolor   
+# sit amet, consetetur    ## sit amet, consetetur
+# sadipscing elitr,       ## sadipscing elitr,   
+# sed                     ## sed                 
+#                         ##                     
+----------------------------------------------------------------------------------------
+
+
+Comments for LaTeX and HTML
+----------------------------------------------------------------------------------------
+%                         <!--                      -->
+% Lorem ipsum dolor       <!-- Lorem ipsum dolor    -->
+% sit amet, consetetur    <!-- sit amet, consetetur -->
+% sadipscing elitr,       <!-- sadipscing elitr,    -->
+% sed                     <!-- sed                  -->
+%                         <!--                      -->
+----------------------------------------------------------------------------------------
+
+
+
+=== Target translator for LaTeX character conversion
+
+Left side w/o and right side with LaTeX target converter:
+----------------------------------------------------------------------------------------
+A sentence with some normal text,          A sentence with some normal text,  
+not specific to LaTeX. Now for some        not specific to LaTeX. Now for some
+characters that require conversion:        characters that require conversion:
+# % &. And some more: © § ¤. And           \# \% \&. And some more:           
+even more: È É Ê Ë. And some arrows        {\copyright} {\S} \currency. And   
+as well: ← ↑ → ↓ ↔                         even more: \`{E} \'{E} \^{E} \"{E}.
+                                           And some arrows as well:           
+                                           \(\leftarrow{}\) \(\uparrow\)      
+                                           \(\rightarrow{}\) \(\downarrow{}\) 
+                                           \(\leftrightarrow{}\)              
+----------------------------------------------------------------------------------------
+
+
+=== Target translator for HTML character conversion
+
+Left side w/o and right side with HTML target converter
+----------------------------------------------------------------------------------------
+A sentence with some normal text,           A sentence with some normal text,   
+not specific to HTML. Now for some          not specific to HTML. Now for some  
+characters that require conversion:         characters that require conversion: 
+# % & < >. And some more: © § ¤. And        &#803; &#37; &amp; &lt; &gt;. And   
+even more: Ē ē Ĕ ĕ Ė ė Ę ę Ě ě. And         some more: &copy; &sect; &curren;.  
+some arrows as well: ← ↑ → ↓ ↔ ↕            And even more: &#274; &#275; &#276; 
+                                            &#277; &#278; &#279; &#280; &#281;  
+                                            &#282; &#283;. And some arrows as   
+                                            well: &larr; &uarr; &rarr; &darr;   
+                                            &harr; &#8597;                      
+----------------------------------------------------------------------------------------

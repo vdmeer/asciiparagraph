@@ -1,0 +1,61 @@
+=== Render with inclusive width calculation
+
+
+The standard render method `render()` renders the paragraph to the given width.
+When the width is changing, the width of the overall paragraph changes.
+If anything is added to a text line (left/right margins, start/end strings, frames), the width of the text line is reduced by the length of those additions.
+
+The following example creates a paragraph with some demo text.
+Then it renders the output.
+Then, in three steps, it adds a start string, an end string, and a left text margin.
+The output is then printed for each step.
+
+Since the length to which the paragraph is rendered does not change (we are using 50 for each render call), the text width is continuously shrinking.
+
+[source, java, linenums]
+----------------------------------------------------------------------------------------
+include::{basedir}/test/java/de/vandermeer/asciiparagraph/examples/AP_07_InclusiveWidth.java[tags=example,indent=0]
+----------------------------------------------------------------------------------------
+
+
+The resulting output for the first setting, text only, is:
+----------------------------------------------------------------------------------------
+Lorem ipsum dolor sit amet, consetetur  sadipscing
+elitr, sed diam nonumy eirmod tempor  invidunt  ut
+labore et dolore magna  aliquyam  erat,  sed  diam
+voluptua. At vero eos et accusam                  
+                                                  
+----------------------------------------------------------------------------------------
+
+
+The resulting output for the second setting, added start string, is:
+----------------------------------------------------------------------------------------
+// Lorem  ipsum   dolor   sit   amet,   consetetur
+// sadipscing elitr, sed diam nonumy eirmod tempor
+// invidunt ut labore  et  dolore  magna  aliquyam
+// erat, sed diam voluptua. At vero eos et accusam
+                                                  
+----------------------------------------------------------------------------------------
+
+
+The resulting output for the third setting, added end string, is:
+----------------------------------------------------------------------------------------
+// Lorem  ipsum  dolor  sit  amet,  consetetur -->
+// sadipscing elitr, sed  diam  nonumy  eirmod -->
+// tempor invidunt ut labore et  dolore  magna -->
+// aliquyam erat, sed diam voluptua.  At  vero -->
+// eos et accusam                              -->
+                                                  
+----------------------------------------------------------------------------------------
+
+
+The resulting output for the fourth setting, added left text margin, is:
+----------------------------------------------------------------------------------------
+//           Lorem  ipsum  dolor   sit   amet, -->
+//           consetetur sadipscing elitr,  sed -->
+//           diam   nonumy    eirmod    tempor -->
+//           invidunt  ut  labore  et   dolore -->
+//           magna  aliquyam  erat,  sed  diam -->
+//           voluptua. At vero eos et accusam  -->
+                                                  
+----------------------------------------------------------------------------------------

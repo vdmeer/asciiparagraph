@@ -1,0 +1,27 @@
+=== v0.1.0 - major rewrite (existing code will break) - 2016-03-##
+
+* changed code to use Java 8
+* interfaces now have default implementations, abstract classes removed
+* using `skb-interfaces` package, some functionality changed
+* added first line formatting
+* added hanging paragraph formatting
+* added dropped capital letter formatting
+* improved documentation, now using AsciiDoctor
+* changed test behavior - added examples using `skb-interfaces`
+* changed justified alignment behavior
+  ** justified now means all lines are justified
+  ** added justified left for last line being left aligned
+* added paragraph frames
+* rewrote padding/margin/character behavior and renderer
+* added site documents
+
+
+=== v0.0.2 - maintenance - 2016-03-01
+
+* removed old module/ settings, added bundle/pm settings
+
+
+=== v0.0.1 - initial release - 2016-02-25
+
+* original release with simple paragraph class
+* bundle released on Maven Central and source in GitHub

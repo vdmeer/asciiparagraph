@@ -1,0 +1,5 @@
+= ASCII Paragraph
+v{release-version}
+:page-layout: base
+:toc: preamble
+

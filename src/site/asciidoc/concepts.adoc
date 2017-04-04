@@ -1,0 +1,4 @@
+== Concepts
+
+The main concepts are: paragraph, paragraph context, and paragraph renderer.
+
