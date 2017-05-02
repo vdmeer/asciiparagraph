@@ -1,4 +1,4 @@
-/* Copyright 2016 Sven van der Meer <vdmeer.sven@mykolab.com>
+  sso/* Copyright 2016 Sven van der Meer <vdmeer.sven@mykolab.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -124,13 +124,11 @@ public class AsciiParagraph implements IsParagraph {
 	@Override
 	public String render() {
 		return this.renderer.render(this.getRawContent(), this.ctx);
-//		return new StrBuilder().appendWithSeparators(this.renderer.renderAsCollection(this.getRawContent(), this.ctx), "\n").toString();
 	}
 
 	@Override
 	public String render(int width) {
 		return this.renderer.render(this.getRawContent(), this.ctx, this.ctx.getTextWidth(width));
-//		return new StrBuilder().appendWithSeparators(this.renderer.renderAsCollection(this.getRawContent(), this.ctx, this.ctx.getTextWidth(width)), "\n").toString();
 	}
 
 	@Override
@@ -187,17 +185,5 @@ public class AsciiParagraph implements IsParagraph {
 		;
 		return ret;
 	}
-
-//	/**
-//	 * Applies the theme by setting parameters in the given context.
-//	 * @param theme the theme to apply
-//	 * @return this to allow chaining
-//	 */
-//	public AsciiParagraph applyTheme(AsciiParagraphTheme theme) {
-//		if(theme!=null){
-//			theme.apply(this.ctx);
-//		}
-//		return this;
-//	}
 
 }
