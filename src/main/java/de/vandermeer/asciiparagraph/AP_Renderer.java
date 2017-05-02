@@ -18,6 +18,7 @@ package de.vandermeer.asciiparagraph;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.text.StrBuilder;
 
@@ -34,16 +35,29 @@ import de.vandermeer.skb.interfaces.transformers.textformat.Text_To_FormattedTex
 public interface AP_Renderer extends IsParagraphRenderer {
 
 	/**
+	 * Sets a new line separator for the renderer, overwriting any separator a paragraph defines.
+	 * @param separator the new separator, ignored if blank
+	 * @return self to allow chaining
+	 */
+	AP_Renderer setLineSeparator(String separator);
+
+	/**
+	 * Returns the current set line separator.
+	 * @return the line separator, null if none set
+	 */
+	String getLineSeparator();
+
+	/**
 	 * Renders an {@link AsciiParagraph}.
 	 * Each line will have text according to width.
 	 * Any padding (left or right) and start/end strings will add to the line width.
-	 * To use a calculated width for rendering use {@link AP_Renderer#render(String, AP_Context, int)}.
+	 * To use a calculated width for rendering use {@link AP_Renderer#renderAsCollection(String, AP_Context, int)}.
 	 * @param text the text to render, cannot be null
 	 * @param ctx context of the original paragraph with relevant settings, cannot be null
-	 * @return collection of lines, each as a {@link StrBuilder}
+	 * @return a single string with the rendered paragraph
 	 * @throws {@link NullPointerException} if text or context where null
 	 */
-	default Collection<StrBuilder> render(String text, AP_Context ctx){
+	default String render(String text, AP_Context ctx){
 		Validate.notNull(text);
 		Validate.notNull(ctx);
 		return this.render(text, ctx, ctx.getWidth());
@@ -56,10 +70,51 @@ public interface AP_Renderer extends IsParagraphRenderer {
 	 * @param text the text to render, cannot be null
 	 * @param ctx context of the original paragraph with relevant settings, cannot be null
 	 * @param width maximum line width, excluding any extra strings and padding
+	 * @return a single string with the rendered paragraph
+	 * @throws {@link NullPointerException} if text or context where null
+	 */
+	default String render(String text, AP_Context ctx, int width){
+		Validate.notNull(text);
+		Validate.notNull(ctx);
+
+		Collection<StrBuilder> coll = this.renderAsCollection(text, ctx, width);
+		String fileSeparator = this.getLineSeparator();
+		if(fileSeparator==null){
+			fileSeparator = ctx.getLineSeparator();
+		}
+		if(fileSeparator==null){
+			fileSeparator = System.lineSeparator();
+		}
+		return new StrBuilder().appendWithSeparators(coll, fileSeparator).build();
+	}
+
+	/**
+	 * Renders an {@link AsciiParagraph}.
+	 * Each line will have text according to width.
+	 * Any padding (left or right) and start/end strings will add to the line width.
+	 * To use a calculated width for rendering use {@link AP_Renderer#renderAsCollection(String, AP_Context, int)}.
+	 * @param text the text to render, cannot be null
+	 * @param ctx context of the original paragraph with relevant settings, cannot be null
 	 * @return collection of lines, each as a {@link StrBuilder}
 	 * @throws {@link NullPointerException} if text or context where null
 	 */
-	default Collection<StrBuilder> render(String text, AP_Context ctx, int width){
+	default Collection<StrBuilder> renderAsCollection(String text, AP_Context ctx){
+		Validate.notNull(text);
+		Validate.notNull(ctx);
+		return this.renderAsCollection(text, ctx, ctx.getWidth());
+	}
+
+	/**
+	 * Renders an {@link AsciiParagraph}.
+	 * Each line will have text according to width.
+	 * Any padding (left or right) and start/end strings will add to the line width.
+	 * @param text the text to render, cannot be null
+	 * @param ctx context of the original paragraph with relevant settings, cannot be null
+	 * @param width maximum line width, excluding any extra strings and padding
+	 * @return collection of lines, each as a {@link StrBuilder}
+	 * @throws {@link NullPointerException} if text or context where null
+	 */
+	default Collection<StrBuilder> renderAsCollection(String text, AP_Context ctx, int width){
 		Validate.notNull(text);
 		Validate.notNull(ctx);
 
@@ -146,6 +201,21 @@ public interface AP_Renderer extends IsParagraphRenderer {
 	 * @return new renderer
 	 */
 	static AP_Renderer create(){
-		return new AP_Renderer() {};
+		return new AP_Renderer() {
+			String lineSeparator = null;
+
+			@Override
+			public AP_Renderer setLineSeparator(String separator) {
+				if(!StringUtils.isBlank(separator)){
+					this.lineSeparator = separator;
+				}
+				return this;
+			}
+
+			@Override
+			public String getLineSeparator() {
+				return this.lineSeparator;
+			}
+		};
 	}
 }

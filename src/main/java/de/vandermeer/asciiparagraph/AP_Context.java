@@ -15,6 +15,7 @@
 
 package de.vandermeer.asciiparagraph;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import de.vandermeer.asciithemes.TA_DropCaps;
@@ -36,6 +37,9 @@ import de.vandermeer.skb.interfaces.translators.TargetTranslator;
  * @since      v0.0.1
  */
 public class AP_Context implements IsParagraphContext {
+
+	/** A line separator for generating text output. */
+	protected String lineSeparator;
 
 	/** A simple character translator. */
 	protected CharacterTranslator charTranslator;
@@ -1057,4 +1061,23 @@ public class AP_Context implements IsParagraphContext {
 		return this;
 	}
 
+	/**
+	 * Sets a new line separator for the renderer.
+	 * @param separator the new separator, ignored if blank
+	 * @return self to allow chaining
+	 */
+	public AP_Context setLineSeparator(String separator){
+		if(!StringUtils.isBlank(separator)){
+			this.lineSeparator = separator;
+		}
+		return this;
+	}
+
+	/**
+	 * Returns the current set line separator.
+	 * @return the line separator, null if none set
+	 */
+	public String getLineSeparator(){
+		return this.lineSeparator;
+	}
 }

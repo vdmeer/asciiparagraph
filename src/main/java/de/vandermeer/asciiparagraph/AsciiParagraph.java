@@ -123,18 +123,20 @@ public class AsciiParagraph implements IsParagraph {
 
 	@Override
 	public String render() {
-		return new StrBuilder().appendWithSeparators(this.renderer.render(this.getRawContent(), this.ctx), "\n").toString();
+		return this.renderer.render(this.getRawContent(), this.ctx);
+//		return new StrBuilder().appendWithSeparators(this.renderer.renderAsCollection(this.getRawContent(), this.ctx), "\n").toString();
 	}
 
 	@Override
 	public String render(int width) {
-		return new StrBuilder().appendWithSeparators(this.renderer.render(this.getRawContent(), this.ctx, this.ctx.getTextWidth(width)), "\n").toString();
+		return this.renderer.render(this.getRawContent(), this.ctx, this.ctx.getTextWidth(width));
+//		return new StrBuilder().appendWithSeparators(this.renderer.renderAsCollection(this.getRawContent(), this.ctx, this.ctx.getTextWidth(width)), "\n").toString();
 	}
 
 	@Override
 	public Collection<String> renderAsCollection() {
 		return ClusterElementTransformer.create().transform(
-				this.renderer.render(this.getRawContent(), this.ctx),
+				this.renderer.renderAsCollection(this.getRawContent(), this.ctx),
 				StrBuilder_To_String.create(),
 				ArrayListStrategy.create()
 		);
@@ -143,7 +145,7 @@ public class AsciiParagraph implements IsParagraph {
 	@Override
 	public Collection<String> renderAsCollection(int width) {
 		return ClusterElementTransformer.create().transform(
-				this.renderer.render(this.getRawContent(), this.ctx, this.ctx.getTextWidth(width)),
+				this.renderer.renderAsCollection(this.getRawContent(), this.ctx, this.ctx.getTextWidth(width)),
 				StrBuilder_To_String.create(),
 				ArrayListStrategy.create()
 		);
