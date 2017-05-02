@@ -25,7 +25,7 @@ import de.vandermeer.translation.targets.Text2Latex;
  * Simply use the {@link AsciiParagraph#applyTheme(AsciiParagraphTheme)} method of a paragraph and render it.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
- * @version    v0.1.0 build 170404 (04-Apr-17) for Java 1.8
+ * @version    v0.1.1 build 170502 (02-May-17) for Java 1.8
  * @since      v0.1.0
  */
 public interface AP_Themes {
