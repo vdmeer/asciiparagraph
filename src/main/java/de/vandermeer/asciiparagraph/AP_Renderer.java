@@ -35,11 +35,27 @@ import de.vandermeer.skb.interfaces.transformers.textformat.Text_To_FormattedTex
 public interface AP_Renderer extends IsParagraphRenderer {
 
 	/**
-	 * Sets a new line separator for the renderer, overwriting any separator a paragraph defines.
-	 * @param separator the new separator, ignored if blank
-	 * @return self to allow chaining
+	 * Creates a new renderer.
+	 * @return new renderer
 	 */
-	AP_Renderer setLineSeparator(String separator);
+	static AP_Renderer create(){
+		return new AP_Renderer() {
+			String lineSeparator = null;
+
+			@Override
+			public String getLineSeparator() {
+				return this.lineSeparator;
+			}
+
+			@Override
+			public AP_Renderer setLineSeparator(String separator) {
+				if(!StringUtils.isBlank(separator)){
+					this.lineSeparator = separator;
+				}
+				return this;
+			}
+		};
+	}
 
 	/**
 	 * Returns the current set line separator.
@@ -55,7 +71,7 @@ public interface AP_Renderer extends IsParagraphRenderer {
 	 * @param text the text to render, cannot be null
 	 * @param ctx context of the original paragraph with relevant settings, cannot be null
 	 * @return a single string with the rendered paragraph
-	 * @throws {@link NullPointerException} if text or context where null
+	 * @throws NullPointerException if text or context where null
 	 */
 	default String render(String text, AP_Context ctx){
 		Validate.notNull(text);
@@ -71,7 +87,7 @@ public interface AP_Renderer extends IsParagraphRenderer {
 	 * @param ctx context of the original paragraph with relevant settings, cannot be null
 	 * @param width maximum line width, excluding any extra strings and padding
 	 * @return a single string with the rendered paragraph
-	 * @throws {@link NullPointerException} if text or context where null
+	 * @throws NullPointerException if text or context where null
 	 */
 	default String render(String text, AP_Context ctx, int width){
 		Validate.notNull(text);
@@ -96,7 +112,7 @@ public interface AP_Renderer extends IsParagraphRenderer {
 	 * @param text the text to render, cannot be null
 	 * @param ctx context of the original paragraph with relevant settings, cannot be null
 	 * @return collection of lines, each as a {@link StrBuilder}
-	 * @throws {@link NullPointerException} if text or context where null
+	 * @throws NullPointerException if text or context where null
 	 */
 	default Collection<StrBuilder> renderAsCollection(String text, AP_Context ctx){
 		Validate.notNull(text);
@@ -112,7 +128,7 @@ public interface AP_Renderer extends IsParagraphRenderer {
 	 * @param ctx context of the original paragraph with relevant settings, cannot be null
 	 * @param width maximum line width, excluding any extra strings and padding
 	 * @return collection of lines, each as a {@link StrBuilder}
-	 * @throws {@link NullPointerException} if text or context where null
+	 * @throws NullPointerException if text or context where null
 	 */
 	default Collection<StrBuilder> renderAsCollection(String text, AP_Context ctx, int width){
 		Validate.notNull(text);
@@ -197,25 +213,9 @@ public interface AP_Renderer extends IsParagraphRenderer {
 	}
 
 	/**
-	 * Creates a new renderer.
-	 * @return new renderer
+	 * Sets a new line separator for the renderer, overwriting any separator a paragraph defines.
+	 * @param separator the new separator, ignored if blank
+	 * @return self to allow chaining
 	 */
-	static AP_Renderer create(){
-		return new AP_Renderer() {
-			String lineSeparator = null;
-
-			@Override
-			public AP_Renderer setLineSeparator(String separator) {
-				if(!StringUtils.isBlank(separator)){
-					this.lineSeparator = separator;
-				}
-				return this;
-			}
-
-			@Override
-			public String getLineSeparator() {
-				return this.lineSeparator;
-			}
-		};
-	}
+	AP_Renderer setLineSeparator(String separator);
 }

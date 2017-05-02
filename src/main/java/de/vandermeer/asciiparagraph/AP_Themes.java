@@ -22,26 +22,12 @@ import de.vandermeer.translation.targets.Text2Latex;
 
 /**
  * Collection of themes for an {@link AsciiParagraph}.
- * Simply use the {@link AsciiParagraph#applyTheme(AsciiParagraphTheme)} method of a paragraph and render it.
  *
  * @author     Sven van der Meer &lt;vdmeer.sven@mykolab.com&gt;
  * @version    v0.1.1 build 170502 (02-May-17) for Java 1.8
  * @since      v0.1.0
  */
 public interface AP_Themes {
-
-	/**
-	 * A theme for LaTeX target, setting the translator.
-	 * @return the theme
-	 */
-	static AsciiParagraphTheme latex(){
-		return new AsciiParagraphTheme() {
-			@Override
-			public void apply(AP_Context ctx) {
-				ctx.setTargetTranslator(new Text2Latex());
-			}
-		};
-	}
 
 	/**
 	 * A theme for HTML target, setting the translator.
@@ -57,17 +43,30 @@ public interface AP_Themes {
 	}
 
 	/**
-	 * A theme formatting the paragraph like a single line documentation block (as used for instance in Java and C++).
+	 * A theme formatting the paragraph like a JavaDoc documentation block.
 	 * @return the theme
 	 */
-	static AsciiParagraphTheme singleLineDoc(){
+	static AsciiParagraphTheme javaDoc(){
 		return new AsciiParagraphTheme() {
 			@Override
 			public void apply(AP_Context ctx) {
 				ctx.setAlignment(TextAlignment.LEFT);
 				ctx.setFrameTopBottomMargin(1);
 				ctx.setTextTopBottomMargin(0);
-				ctx.setFrame(A7_Frames_Doc.singleLine());
+				ctx.setFrame(A7_Frames_Doc.multiLineJavaDoc());
+			}
+		};
+	}
+
+	/**
+	 * A theme for LaTeX target, setting the translator.
+	 * @return the theme
+	 */
+	static AsciiParagraphTheme latex(){
+		return new AsciiParagraphTheme() {
+			@Override
+			public void apply(AP_Context ctx) {
+				ctx.setTargetTranslator(new Text2Latex());
 			}
 		};
 	}
@@ -89,17 +88,17 @@ public interface AP_Themes {
 	}
 
 	/**
-	 * A theme formatting the paragraph like a JavaDoc documentation block.
+	 * A theme formatting the paragraph like a single line documentation block (as used for instance in Java and C++).
 	 * @return the theme
 	 */
-	static AsciiParagraphTheme javaDoc(){
+	static AsciiParagraphTheme singleLineDoc(){
 		return new AsciiParagraphTheme() {
 			@Override
 			public void apply(AP_Context ctx) {
 				ctx.setAlignment(TextAlignment.LEFT);
 				ctx.setFrameTopBottomMargin(1);
 				ctx.setTextTopBottomMargin(0);
-				ctx.setFrame(A7_Frames_Doc.multiLineJavaDoc());
+				ctx.setFrame(A7_Frames_Doc.singleLine());
 			}
 		};
 	}

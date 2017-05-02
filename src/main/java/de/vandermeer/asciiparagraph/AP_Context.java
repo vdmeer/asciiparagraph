@@ -294,6 +294,14 @@ public class AP_Context implements IsParagraphContext {
 	}
 
 	/**
+	 * Returns the current set line separator.
+	 * @return the line separator, null if none set
+	 */
+	public String getLineSeparator(){
+		return this.lineSeparator;
+	}
+
+	/**
 	 * Returns the left padding character.
 	 * @return left padding character
 	 */
@@ -406,11 +414,6 @@ public class AP_Context implements IsParagraphContext {
 	}
 
 	@Override
-	public int getWidth() {
-		return this.width;
-	}
-
-	@Override
 	public int getTextWidth(int width) {
 		int ret = width - this.getTextLeftMargin() - this.getTextRightMargin();
 		ret = ret - this.getStringLeftMargin() - this.getStringRightMargin();
@@ -422,6 +425,11 @@ public class AP_Context implements IsParagraphContext {
 		}
 		ret = ret - this.getFrameLeftMargin() - this.getFrameRightMargin();
 		return ret;
+	}
+
+	@Override
+	public int getWidth() {
+		return this.width;
 	}
 
 	/**
@@ -705,6 +713,18 @@ public class AP_Context implements IsParagraphContext {
 	public AP_Context setInnerWsChar(Character innerWs) {
 		if(innerWs!=null){
 			this.innerWsChar = innerWs;
+		}
+		return this;
+	}
+
+	/**
+	 * Sets a new line separator for the renderer.
+	 * @param separator the new separator, ignored if blank
+	 * @return self to allow chaining
+	 */
+	public AP_Context setLineSeparator(String separator){
+		if(!StringUtils.isBlank(separator)){
+			this.lineSeparator = separator;
 		}
 		return this;
 	}
@@ -1059,25 +1079,5 @@ public class AP_Context implements IsParagraphContext {
 	public AP_Context setWidth(int width) {
 		this.width = width;
 		return this;
-	}
-
-	/**
-	 * Sets a new line separator for the renderer.
-	 * @param separator the new separator, ignored if blank
-	 * @return self to allow chaining
-	 */
-	public AP_Context setLineSeparator(String separator){
-		if(!StringUtils.isBlank(separator)){
-			this.lineSeparator = separator;
-		}
-		return this;
-	}
-
-	/**
-	 * Returns the current set line separator.
-	 * @return the line separator, null if none set
-	 */
-	public String getLineSeparator(){
-		return this.lineSeparator;
 	}
 }
