@@ -19,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.StrBuilder;
 
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
@@ -32,24 +32,13 @@ import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 public class AP_01a_WS_Behavior_Simple implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AsciiParagraph ap = new AsciiParagraph();
+	public String getDescription() {
+		return "simple whitespace behavior";
+	}
 
-		ap.addText("c2  c2");
-		ap.addText("c3   c3");
-		ap.addText("c4    c4");
-
-		ap.addText("t1	t1");
-		ap.addText("t2		t2");
-		ap.addText("t3			t3");
-		ap.addText("t4\t\t\t\tt4");
-
-		ap.addText("word followed by " + StringUtils.CR + " followed by" + StringUtils.LF + " followed by \n");
-
-		ap.getContext().setWidth(60).setAlignment(TextAlignment.LEFT);
-		System.out.println(ap.render());
-		// end::example[]
+	@Override
+	public String getName() {
+		return "ws-simple";
 	}
 
 	@Override
@@ -75,12 +64,23 @@ public class AP_01a_WS_Behavior_Simple implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		return "simple whitespace behavior";
-	}
+	public void showOutput(){
+		// tag::example[]
+		AsciiParagraph ap = new AsciiParagraph();
 
-	@Override
-	public String getID() {
-		return "ws-simple";
+		ap.addText("c2  c2");
+		ap.addText("c3   c3");
+		ap.addText("c4    c4");
+
+		ap.addText("t1	t1");
+		ap.addText("t2		t2");
+		ap.addText("t3			t3");
+		ap.addText("t4\t\t\t\tt4");
+
+		ap.addText("word followed by " + StringUtils.CR + " followed by" + StringUtils.LF + " followed by \n");
+
+		ap.getContext().setWidth(60).setAlignment(TextAlignment.LEFT);
+		System.out.println(ap.render());
+		// end::example[]
 	}
 }

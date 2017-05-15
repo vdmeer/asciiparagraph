@@ -21,7 +21,7 @@ import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.asciithemes.a7.dropcaps.FigletOldBanner_6L;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextFormat;
 
 /**
@@ -34,30 +34,13 @@ import de.vandermeer.skb.interfaces.transformers.textformat.TextFormat;
 public class AP_03_Format_Behavior implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AP_Context ctx = new AP_Context();
-		AsciiParagraph ap = new AsciiParagraph(ctx);
-		ap.addText(new LoremIpsum().getWords(29));
+	public String getDescription() {
+		return "format behavior";
+	}
 
-		System.out.println(ap.render(35));
-
-		ctx.setFormat(TextFormat.FIRST_LINE);
-		System.out.println(ap.render(35));
-
-		ctx.setFormat(TextFormat.HANGING);
-		System.out.println(ap.render(35));
-
-		ctx.setFormat(TextFormat.DROPCAP);
-		System.out.println(ap.render(35));
-
-		ctx.setFormat(TextFormat.DROPCAP_WITH_PADDING);
-		ctx.setDropCapLib(new FigletOldBanner_6L());
-		System.out.println(ap.render(35));
-
-//		ctx.setDropCapLib(new FigletOldBanner_6L());
-//		System.out.println(ap.render(35));
-		// end::example[]
+	@Override
+	public String getName() {
+		return "format";
 	}
 
 	@Override
@@ -85,12 +68,29 @@ public class AP_03_Format_Behavior implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		return "format behavior";
-	}
+	public void showOutput(){
+		// tag::example[]
+		AP_Context ctx = new AP_Context();
+		AsciiParagraph ap = new AsciiParagraph(ctx);
+		ap.addText(new LoremIpsum().getWords(29));
 
-	@Override
-	public String getID() {
-		return "format";
+		System.out.println(ap.render(35));
+
+		ctx.setFormat(TextFormat.FIRST_LINE);
+		System.out.println(ap.render(35));
+
+		ctx.setFormat(TextFormat.HANGING);
+		System.out.println(ap.render(35));
+
+		ctx.setFormat(TextFormat.DROPCAP);
+		System.out.println(ap.render(35));
+
+		ctx.setFormat(TextFormat.DROPCAP_WITH_PADDING);
+		ctx.setDropCapLib(new FigletOldBanner_6L());
+		System.out.println(ap.render(35));
+
+//		ctx.setDropCapLib(new FigletOldBanner_6L());
+//		System.out.println(ap.render(35));
+		// end::example[]
 	}
 }

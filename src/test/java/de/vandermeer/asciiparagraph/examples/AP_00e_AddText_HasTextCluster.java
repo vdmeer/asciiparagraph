@@ -22,7 +22,7 @@ import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.render.HasTextCluster;
 
 /**
@@ -35,23 +35,13 @@ import de.vandermeer.skb.interfaces.render.HasTextCluster;
 public class AP_00e_AddText_HasTextCluster implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AsciiParagraph ap = new AsciiParagraph();
-		class ObjectHasTextCluster implements HasTextCluster{
-			@Override
-			public Collection<String> getTextAsCollection() {
-				ArrayList<String> text = new ArrayList<>();
-				text.add(new LoremIpsum().getWords(10));
-				text.add(new LoremIpsum().getWords(10));
-				text.add(new LoremIpsum().getWords(10));
-				return text;
-			}
-		}
+	public String getDescription() {
+		return "add text from cluster";
+	}
 
-		ap.addText(new ObjectHasTextCluster());
-		System.out.println(ap.render());
-		// end::example[]
+	@Override
+	public String getName() {
+		return "text-cluster";
 	}
 
 	@Override
@@ -76,14 +66,22 @@ public class AP_00e_AddText_HasTextCluster implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public void showOutput(){
+		// tag::example[]
+		AsciiParagraph ap = new AsciiParagraph();
+		class ObjectHasTextCluster implements HasTextCluster{
+			@Override
+			public Collection<String> getTextAsCollection() {
+				ArrayList<String> text = new ArrayList<>();
+				text.add(new LoremIpsum().getWords(10));
+				text.add(new LoremIpsum().getWords(10));
+				text.add(new LoremIpsum().getWords(10));
+				return text;
+			}
+		}
 
-	@Override
-	public String getID() {
-		// TODO Auto-generated method stub
-		return null;
+		ap.addText(new ObjectHasTextCluster());
+		System.out.println(ap.render());
+		// end::example[]
 	}
 }

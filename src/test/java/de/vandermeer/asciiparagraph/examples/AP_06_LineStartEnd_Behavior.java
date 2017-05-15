@@ -20,7 +20,7 @@ import org.apache.commons.lang3.text.StrBuilder;
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
@@ -33,26 +33,13 @@ import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 public class AP_06_LineStartEnd_Behavior implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AP_Context ctx = new AP_Context();
-		ctx.setAlignment(TextAlignment.JUSTIFIED);
-		ctx.setWidth(50);
+	public String getDescription() {
+		return "setting the line-end of a paragraph";
+	}
 
-		AsciiParagraph ap = new AsciiParagraph(ctx);
-		ap.addText(new LoremIpsum().getWords(29));
-
-		System.out.println(ap.render());
-
-		ctx.setStartString("// ");
-		System.out.println(ap.render());
-
-		ctx.setEndString(" -->");
-		System.out.println(ap.render());
-
-		ctx.setStartString(null);
-		System.out.println(ap.render());
-		// end::example[]
+	@Override
+	public String getName() {
+		return "line-end";
 	}
 
 	@Override
@@ -77,12 +64,25 @@ public class AP_06_LineStartEnd_Behavior implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		return "setting the line-end of a paragraph";
-	}
+	public void showOutput(){
+		// tag::example[]
+		AP_Context ctx = new AP_Context();
+		ctx.setAlignment(TextAlignment.JUSTIFIED);
+		ctx.setWidth(50);
 
-	@Override
-	public String getID() {
-		return "line-end";
+		AsciiParagraph ap = new AsciiParagraph(ctx);
+		ap.addText(new LoremIpsum().getWords(29));
+
+		System.out.println(ap.render());
+
+		ctx.setStartString("// ");
+		System.out.println(ap.render());
+
+		ctx.setEndString(" -->");
+		System.out.println(ap.render());
+
+		ctx.setStartString(null);
+		System.out.println(ap.render());
+		// end::example[]
 	}
 }

@@ -19,7 +19,7 @@ import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.render.HasText;
 
 /**
@@ -32,19 +32,13 @@ import de.vandermeer.skb.interfaces.render.HasText;
 public class AP_00d_AddText_HasText implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AsciiParagraph ap = new AsciiParagraph();
-		class ObjectHasText implements HasText{
-			@Override
-			public String getText() {
-				return new LoremIpsum().getWords(10);
-			}
-		}
+	public String getDescription() {
+		return "ad text from has text";
+	}
 
-		ap.addText(new ObjectHasText());
-		System.out.println(ap.render());
-		// end::example[]
+	@Override
+	public String getName() {
+		return "text-has-text";
 	}
 
 	@Override
@@ -65,14 +59,18 @@ public class AP_00d_AddText_HasText implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public void showOutput(){
+		// tag::example[]
+		AsciiParagraph ap = new AsciiParagraph();
+		class ObjectHasText implements HasText{
+			@Override
+			public String getText() {
+				return new LoremIpsum().getWords(10);
+			}
+		}
 
-	@Override
-	public String getID() {
-		// TODO Auto-generated method stub
-		return null;
+		ap.addText(new ObjectHasText());
+		System.out.println(ap.render());
+		// end::example[]
 	}
 }

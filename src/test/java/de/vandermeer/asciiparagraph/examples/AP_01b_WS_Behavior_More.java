@@ -19,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.StrBuilder;
 
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
@@ -32,30 +32,13 @@ import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 public class AP_01b_WS_Behavior_More implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AsciiParagraph ap = new AsciiParagraph();
+	public String getDescription() {
+		return "more complex whitespace behavior";
+	}
 
-		ap.addText("c2  c2");
-		ap.addText("c3   c3");
-		ap.addText("c4    c4");
-		ap.addText("c5     c5");
-		ap.addText("c6      c6");
-		ap.addText("c7       c7");
-
-		ap.addText("t2		t2");
-		ap.addText("t3			t3");
-		ap.addText("t4				t4");
-		ap.addText("t5					t5");
-		ap.addText("t6						t6");
-		ap.addText("t7							t7");
-
-		ap.addText("word followed by " + StringUtils.CR + " followed by" + StringUtils.LF + " followed by \n");
-
-		ap.getContext().setWidth(60);
-		ap.getContext().setAlignment(TextAlignment.LEFT);
-		System.out.println(ap.render());
-		// end::example[]
+	@Override
+	public String getName() {
+		return "ws-more";
 	}
 
 	@Override
@@ -87,12 +70,29 @@ public class AP_01b_WS_Behavior_More implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		return "more complex whitespace behavior";
-	}
+	public void showOutput(){
+		// tag::example[]
+		AsciiParagraph ap = new AsciiParagraph();
 
-	@Override
-	public String getID() {
-		return "ws-more";
+		ap.addText("c2  c2");
+		ap.addText("c3   c3");
+		ap.addText("c4    c4");
+		ap.addText("c5     c5");
+		ap.addText("c6      c6");
+		ap.addText("c7       c7");
+
+		ap.addText("t2		t2");
+		ap.addText("t3			t3");
+		ap.addText("t4				t4");
+		ap.addText("t5					t5");
+		ap.addText("t6						t6");
+		ap.addText("t7							t7");
+
+		ap.addText("word followed by " + StringUtils.CR + " followed by" + StringUtils.LF + " followed by \n");
+
+		ap.getContext().setWidth(60);
+		ap.getContext().setAlignment(TextAlignment.LEFT);
+		System.out.println(ap.render());
+		// end::example[]
 	}
 }

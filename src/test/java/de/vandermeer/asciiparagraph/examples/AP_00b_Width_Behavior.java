@@ -19,7 +19,7 @@ import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
@@ -32,21 +32,13 @@ import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 public class AP_00b_Width_Behavior implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AsciiParagraph ap = new AsciiParagraph();
-		ap.addText(new LoremIpsum().getWords(20));
-		ap.getContext().setAlignment(TextAlignment.LEFT);
+	public String getDescription() {
+		return "paragraph width behavior";
+	}
 
-		ap.getContext().setWidth(50);
-		System.out.println(ap.render());
-
-		ap.getContext().setWidth(40);
-		System.out.println(ap.render());
-
-		ap.getContext().setWidth(30);
-		System.out.println(ap.render());
-		// end::example[]
+	@Override
+	public String getName() {
+		return "width";
 	}
 
 	@Override
@@ -69,12 +61,20 @@ public class AP_00b_Width_Behavior implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		return "paragraph width behavior";
-	}
+	public void showOutput(){
+		// tag::example[]
+		AsciiParagraph ap = new AsciiParagraph();
+		ap.addText(new LoremIpsum().getWords(20));
+		ap.getContext().setAlignment(TextAlignment.LEFT);
 
-	@Override
-	public String getID() {
-		return "width";
+		ap.getContext().setWidth(50);
+		System.out.println(ap.render());
+
+		ap.getContext().setWidth(40);
+		System.out.println(ap.render());
+
+		ap.getContext().setWidth(30);
+		System.out.println(ap.render());
+		// end::example[]
 	}
 }

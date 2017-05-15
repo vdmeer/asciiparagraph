@@ -19,7 +19,7 @@ import org.apache.commons.lang3.text.StrBuilder;
 
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 import de.vandermeer.translation.targets.Text2Html;
 
@@ -33,22 +33,13 @@ import de.vandermeer.translation.targets.Text2Html;
 public class AP_09b_TargetTranslators_HTML implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AP_Context ctx = new AP_Context();
-		ctx.setAlignment(TextAlignment.LEFT);
+	public String getDescription() {
+		return "text translation for HTML target";
+	}
 
-		AsciiParagraph ap = new AsciiParagraph(ctx);
-		ap.addText("A sentence with some normal text, not specific to HTML.");
-		ap.addText("Now for some characters that require conversion: # % & < >.");
-		ap.addText("And some more: © § ¤.");
-		ap.addText("And even more: Ē ē Ĕ ĕ Ė ė Ę ę Ě ě.");
-		ap.addText("And some arrows as well: ← ↑ → ↓ ↔ ↕");
-		System.out.println(ap.render(36));
-
-		ctx.setTargetTranslator(new Text2Html());
-		System.out.println(ap.render(36));
-		// end::example[]
+	@Override
+	public String getName() {
+		return "target-html";
 	}
 
 	@Override
@@ -73,12 +64,21 @@ public class AP_09b_TargetTranslators_HTML implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		return "text translation for HTML target";
-	}
+	public void showOutput(){
+		// tag::example[]
+		AP_Context ctx = new AP_Context();
+		ctx.setAlignment(TextAlignment.LEFT);
 
-	@Override
-	public String getID() {
-		return "target-html";
+		AsciiParagraph ap = new AsciiParagraph(ctx);
+		ap.addText("A sentence with some normal text, not specific to HTML.");
+		ap.addText("Now for some characters that require conversion: # % & < >.");
+		ap.addText("And some more: © § ¤.");
+		ap.addText("And even more: Ē ē Ĕ ĕ Ė ė Ę ę Ě ě.");
+		ap.addText("And some arrows as well: ← ↑ → ↓ ↔ ↕");
+		System.out.println(ap.render(36));
+
+		ctx.setTargetTranslator(new Text2Html());
+		System.out.println(ap.render(36));
+		// end::example[]
 	}
 }

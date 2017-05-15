@@ -20,7 +20,7 @@ import org.apache.commons.lang3.text.StrBuilder;
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
@@ -33,24 +33,13 @@ import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 public class AP_05_Right_Text_Margin implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AP_Context ctx = new AP_Context();
-		ctx.setAlignment(TextAlignment.RIGHT);
-		ctx.setWidth(29);
-		ctx.setEndString("|");
+	public String getDescription() {
+		return "behavior of right margin";
+	}
 
-		AsciiParagraph ap = new AsciiParagraph(ctx);
-		ap.addText(new LoremIpsum().getWords(29));
-		System.out.println(ap.render());
-
-		ctx.setTextRightMargin(5);
-		System.out.println(ap.render());
-
-		ctx.setTextRightMargin(10);
-		ctx.setTextRightChar('<');
-		System.out.println(ap.render());
-		// end::example[]
+	@Override
+	public String getName() {
+		return "margin-right";
 	}
 
 	@Override
@@ -76,12 +65,23 @@ public class AP_05_Right_Text_Margin implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		return "behavior of right margin";
-	}
+	public void showOutput(){
+		// tag::example[]
+		AP_Context ctx = new AP_Context();
+		ctx.setAlignment(TextAlignment.RIGHT);
+		ctx.setWidth(29);
+		ctx.setEndString("|");
 
-	@Override
-	public String getID() {
-		return "margin-right";
+		AsciiParagraph ap = new AsciiParagraph(ctx);
+		ap.addText(new LoremIpsum().getWords(29));
+		System.out.println(ap.render());
+
+		ctx.setTextRightMargin(5);
+		System.out.println(ap.render());
+
+		ctx.setTextRightMargin(10);
+		ctx.setTextRightChar('<');
+		System.out.println(ap.render());
+		// end::example[]
 	}
 }

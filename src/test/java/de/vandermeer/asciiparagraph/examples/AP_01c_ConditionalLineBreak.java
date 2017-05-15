@@ -18,7 +18,7 @@ package de.vandermeer.asciiparagraph.examples;
 import org.apache.commons.lang3.text.StrBuilder;
 
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
@@ -31,16 +31,13 @@ import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 public class AP_01c_ConditionalLineBreak implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AsciiParagraph ap = new AsciiParagraph();
-		ap.getContext().setAlignment(TextAlignment.LEFT).setWidth(35);
+	public String getDescription() {
+		return "behavior with conditional linebreaks";
+	}
 
-		ap.addText("line 1<br>");
-		ap.addText("line 2<br/>");
-		ap.addText("line three \n still line three");
-		System.out.println(ap.render());
-		// end::example[]
+	@Override
+	public String getName() {
+		return "cond-linebreak";
 	}
 
 	@Override
@@ -58,12 +55,15 @@ public class AP_01c_ConditionalLineBreak implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		return "behavior with conditional linebreaks";
-	}
+	public void showOutput(){
+		// tag::example[]
+		AsciiParagraph ap = new AsciiParagraph();
+		ap.getContext().setAlignment(TextAlignment.LEFT).setWidth(35);
 
-	@Override
-	public String getID() {
-		return "cond-linebreak";
+		ap.addText("line 1<br>");
+		ap.addText("line 2<br/>");
+		ap.addText("line three \n still line three");
+		System.out.println(ap.render());
+		// end::example[]
 	}
 }

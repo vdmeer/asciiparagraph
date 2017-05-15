@@ -20,7 +20,7 @@ import org.apache.commons.lang3.text.StrBuilder;
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
@@ -33,24 +33,13 @@ import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 public class AP_04_Left_Text_Margin implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AP_Context ctx = new AP_Context();
-		ctx.setAlignment(TextAlignment.LEFT);
-		ctx.setWidth(29);
+	public String getDescription() {
+		return "behavior of left margin";
+	}
 
-		AsciiParagraph ap = new AsciiParagraph(ctx);
-		ap.addText(new LoremIpsum().getWords(29));
-
-		System.out.println(ap.render());
-
-		ctx.setTextLeftMargin(5);
-		System.out.println(ap.render());
-
-		ctx.setTextLeftMargin(10);
-		ctx.setTextLeftChar('>');
-		System.out.println(ap.render());
-		// end::example[]
+	@Override
+	public String getName() {
+		return "margin-left";
 	}
 
 	@Override
@@ -76,12 +65,23 @@ public class AP_04_Left_Text_Margin implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		return "behavior of left margin";
-	}
+	public void showOutput(){
+		// tag::example[]
+		AP_Context ctx = new AP_Context();
+		ctx.setAlignment(TextAlignment.LEFT);
+		ctx.setWidth(29);
 
-	@Override
-	public String getID() {
-		return "margin-left";
+		AsciiParagraph ap = new AsciiParagraph(ctx);
+		ap.addText(new LoremIpsum().getWords(29));
+
+		System.out.println(ap.render());
+
+		ctx.setTextLeftMargin(5);
+		System.out.println(ap.render());
+
+		ctx.setTextLeftMargin(10);
+		ctx.setTextLeftChar('>');
+		System.out.println(ap.render());
+		// end::example[]
 	}
 }

@@ -20,7 +20,7 @@ import org.stringtemplate.v4.ST;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 
 /**
  * AsciiParagraph example demonstrating that {@link ST} objects are automatically added as text.
@@ -32,13 +32,13 @@ import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
 public class AP_00c_AddText_ST implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		ST st = new ST(new LoremIpsum().getWords(10));
-		AsciiParagraph ap = new AsciiParagraph();
-		ap.addText(st);
-		System.out.println(ap.render());
-		// end::example[]
+	public String getDescription() {
+		return "add text from StringTemplate";
+	}
+
+	@Override
+	public String getName() {
+		return "text-st";
 	}
 
 	@Override
@@ -53,14 +53,12 @@ public class AP_00c_AddText_ST implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getID() {
-		// TODO Auto-generated method stub
-		return null;
+	public void showOutput(){
+		// tag::example[]
+		ST st = new ST(new LoremIpsum().getWords(10));
+		AsciiParagraph ap = new AsciiParagraph();
+		ap.addText(st);
+		System.out.println(ap.render());
+		// end::example[]
 	}
 }

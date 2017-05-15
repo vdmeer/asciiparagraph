@@ -20,7 +20,7 @@ import org.apache.commons.lang3.text.StrBuilder;
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 
 /**
  * AsciiParagraph example demonstrating inclusive width.
@@ -32,23 +32,13 @@ import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
 public class AP_07_InclusiveWidth implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AP_Context ctx = new AP_Context();
-		AsciiParagraph ap = new AsciiParagraph(ctx);
-		ap.addText(new LoremIpsum().getWords(29));
+	public String getDescription() {
+		return "setting paragraph width inclusive";
+	}
 
-		System.out.println(ap.render(50));
-
-		ctx.setStartString("// ");
-		System.out.println(ap.render(50));
-
-		ctx.setEndString(" -->");
-		System.out.println(ap.render(50));
-
-		ctx.setTextLeftMargin(10);
-		System.out.println(ap.render(50));
-		// end::example[]
+	@Override
+	public String getName() {
+		return "width-inclusive";
 	}
 
 	@Override
@@ -73,12 +63,22 @@ public class AP_07_InclusiveWidth implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		return "setting paragraph width inclusive";
-	}
+	public void showOutput(){
+		// tag::example[]
+		AP_Context ctx = new AP_Context();
+		AsciiParagraph ap = new AsciiParagraph(ctx);
+		ap.addText(new LoremIpsum().getWords(29));
 
-	@Override
-	public String getID() {
-		return "width-inclusive";
+		System.out.println(ap.render(50));
+
+		ctx.setStartString("// ");
+		System.out.println(ap.render(50));
+
+		ctx.setEndString(" -->");
+		System.out.println(ap.render(50));
+
+		ctx.setTextLeftMargin(10);
+		System.out.println(ap.render(50));
+		// end::example[]
 	}
 }

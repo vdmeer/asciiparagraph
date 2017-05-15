@@ -18,7 +18,7 @@ package de.vandermeer.asciiparagraph.examples;
 import org.apache.commons.lang3.text.StrBuilder;
 
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 
 /**
  * AsciiParagraph example for a simple paragraph as getting started example.
@@ -30,16 +30,13 @@ import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
 public class AP_00_Getting_Started implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AsciiParagraph ap = new AsciiParagraph();
-		ap.addText("line	1");
-		ap.addText("2  2");
-		ap.addText("more text with	tab and \n newline");
-		ap.addText("some more text to get it over the 80 character default width");
-		String rend = ap.render();
-		System.out.println(rend);
-		// end::example[]
+	public String getDescription() {
+		return "a simple paragraph";
+	}
+
+	@Override
+	public String getName() {
+		return "simple";
 	}
 
 	@Override
@@ -57,12 +54,15 @@ public class AP_00_Getting_Started implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		return "a simple paragraph";
-	}
-
-	@Override
-	public String getID() {
-		return "simple";
+	public void showOutput(){
+		// tag::example[]
+		AsciiParagraph ap = new AsciiParagraph();
+		ap.addText("line	1");
+		ap.addText("2  2");
+		ap.addText("more text with	tab and \n newline");
+		ap.addText("some more text to get it over the 80 character default width");
+		String rend = ap.render();
+		System.out.println(rend);
+		// end::example[]
 	}
 }

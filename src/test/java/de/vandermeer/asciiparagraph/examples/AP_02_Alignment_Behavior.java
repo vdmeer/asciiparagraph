@@ -20,7 +20,7 @@ import org.apache.commons.lang3.text.StrBuilder;
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
@@ -33,31 +33,13 @@ import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 public class AP_02_Alignment_Behavior implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AP_Context ctx = new AP_Context().setWidth(39);
+	public String getDescription() {
+		return "text alignment behavior";
+	}
 
-		AsciiParagraph ap = new AsciiParagraph(ctx);
-		ap.addText(new LoremIpsum().getWords(29));
-
-		ctx.setAlignment(TextAlignment.JUSTIFIED);
-		System.out.println(ap.render());
-
-		ctx.setAlignment(TextAlignment.JUSTIFIED_LEFT);
-		System.out.println(ap.render());
-
-		ctx.setAlignment(TextAlignment.JUSTIFIED_RIGHT);
-		System.out.println(ap.render());
-
-		ctx.setAlignment(TextAlignment.CENTER);
-		System.out.println(ap.render());
-
-		ctx.setAlignment(TextAlignment.LEFT);
-		System.out.println(ap.render());
-
-		ctx.setAlignment(TextAlignment.RIGHT);
-		System.out.println(ap.render());
-		// end::example[]
+	@Override
+	public String getName() {
+		return "alignment";
 	}
 
 	@Override
@@ -90,12 +72,30 @@ public class AP_02_Alignment_Behavior implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		return "text alignment behavior";
-	}
+	public void showOutput(){
+		// tag::example[]
+		AP_Context ctx = new AP_Context().setWidth(39);
 
-	@Override
-	public String getID() {
-		return "alignment";
+		AsciiParagraph ap = new AsciiParagraph(ctx);
+		ap.addText(new LoremIpsum().getWords(29));
+
+		ctx.setAlignment(TextAlignment.JUSTIFIED);
+		System.out.println(ap.render());
+
+		ctx.setAlignment(TextAlignment.JUSTIFIED_LEFT);
+		System.out.println(ap.render());
+
+		ctx.setAlignment(TextAlignment.JUSTIFIED_RIGHT);
+		System.out.println(ap.render());
+
+		ctx.setAlignment(TextAlignment.CENTER);
+		System.out.println(ap.render());
+
+		ctx.setAlignment(TextAlignment.LEFT);
+		System.out.println(ap.render());
+
+		ctx.setAlignment(TextAlignment.RIGHT);
+		System.out.println(ap.render());
+		// end::example[]
 	}
 }

@@ -21,7 +21,7 @@ import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.asciithemes.a7.A7_Frames_Doc;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 
 /**
@@ -34,36 +34,13 @@ import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 public class AP_08b_Frames_Doc implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AP_Context ctx = new AP_Context();
-		ctx.setAlignment(TextAlignment.LEFT);
-		ctx.setFrameTopBottomMargin(1);
-		ctx.setTextTopBottomMargin(0);
-		AsciiParagraph ap = new AsciiParagraph(ctx);
-		ap.addText(new LoremIpsum().getWords(9));
+	public String getDescription() {
+		return "frames ressembling several documentation formats";
+	}
 
-		ctx.setFrame(A7_Frames_Doc.latexTB());
-		System.out.println(ap.render(20));
-
-		ctx.setFrame(A7_Frames_Doc.htmlTB());
-		System.out.println(ap.render(20));
-
-		ctx.setFrame(A7_Frames_Doc.bashTB());
-		System.out.println(ap.render(20));
-
-		ctx.setFrame(A7_Frames_Doc.bashStart2HashTB());
-		System.out.println(ap.render(20));
-
-		ctx.setFrame(A7_Frames_Doc.singleLine());
-		System.out.println(ap.render(20));
-
-		ctx.setFrame(A7_Frames_Doc.multiLine());
-		System.out.println(ap.render(20));
-
-		ctx.setFrame(A7_Frames_Doc.multiLineJavaDoc());
-		System.out.println(ap.render(20));
-		// end::example[]
+	@Override
+	public String getName() {
+		return "frames-doc";
 	}
 
 	@Override
@@ -101,12 +78,35 @@ public class AP_08b_Frames_Doc implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		return "frames ressembling several documentation formats";
-	}
+	public void showOutput(){
+		// tag::example[]
+		AP_Context ctx = new AP_Context();
+		ctx.setAlignment(TextAlignment.LEFT);
+		ctx.setFrameTopBottomMargin(1);
+		ctx.setTextTopBottomMargin(0);
+		AsciiParagraph ap = new AsciiParagraph(ctx);
+		ap.addText(new LoremIpsum().getWords(9));
 
-	@Override
-	public String getID() {
-		return "frames-doc";
+		ctx.setFrame(A7_Frames_Doc.latexTB());
+		System.out.println(ap.render(20));
+
+		ctx.setFrame(A7_Frames_Doc.htmlTB());
+		System.out.println(ap.render(20));
+
+		ctx.setFrame(A7_Frames_Doc.bashTB());
+		System.out.println(ap.render(20));
+
+		ctx.setFrame(A7_Frames_Doc.bashStart2HashTB());
+		System.out.println(ap.render(20));
+
+		ctx.setFrame(A7_Frames_Doc.singleLine());
+		System.out.println(ap.render(20));
+
+		ctx.setFrame(A7_Frames_Doc.multiLine());
+		System.out.println(ap.render(20));
+
+		ctx.setFrame(A7_Frames_Doc.multiLineJavaDoc());
+		System.out.println(ap.render(20));
+		// end::example[]
 	}
 }

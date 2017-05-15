@@ -1,3 +1,7 @@
+=== v0.1.2 - minor edits - 2017-##-##
+* changed examples to new base API for command sets
+
+
 === v0.1.1 - feature add - 2017-05-02
 * added file separator setting for paragraph context
   ** moved render functions to renderer

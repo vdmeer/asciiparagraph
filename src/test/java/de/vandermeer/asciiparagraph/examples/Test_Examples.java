@@ -17,7 +17,7 @@ package de.vandermeer.asciiparagraph.examples;
 
 import org.junit.Test;
 
-import de.vandermeer.skb.interfaces.StandardExampleRunner;
+import de.vandermeer.skb.interfaces.examples.StandardExampleRunner;
 
 /**
  * Tests for ASCII Paragraph for code used in documentation.

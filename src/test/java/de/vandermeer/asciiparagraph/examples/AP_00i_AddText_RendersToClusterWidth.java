@@ -20,7 +20,7 @@ import org.stringtemplate.v4.ST;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.render.RendersToClusterWidth;
 
 /**
@@ -33,16 +33,13 @@ import de.vandermeer.skb.interfaces.render.RendersToClusterWidth;
 public class AP_00i_AddText_RendersToClusterWidth implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AsciiParagraph renderToClusterWidth = new AsciiParagraph();
-		renderToClusterWidth.addText(new LoremIpsum().getWords(30));
+	public String getDescription() {
+		return "render to a culster with width";
+	}
 
-		AsciiParagraph ap = new AsciiParagraph();
-		ap.getContext().setWidth(40);
-		ap.addText((RendersToClusterWidth)renderToClusterWidth);
-		System.out.println(ap.render());
-		// end::example[]
+	@Override
+	public String getName() {
+		return "render-cluster-width";
 	}
 
 	@Override
@@ -63,14 +60,15 @@ public class AP_00i_AddText_RendersToClusterWidth implements StandardExampleAsCm
 	}
 
 	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public void showOutput(){
+		// tag::example[]
+		AsciiParagraph renderToClusterWidth = new AsciiParagraph();
+		renderToClusterWidth.addText(new LoremIpsum().getWords(30));
 
-	@Override
-	public String getID() {
-		// TODO Auto-generated method stub
-		return null;
+		AsciiParagraph ap = new AsciiParagraph();
+		ap.getContext().setWidth(40);
+		ap.addText((RendersToClusterWidth)renderToClusterWidth);
+		System.out.println(ap.render());
+		// end::example[]
 	}
 }

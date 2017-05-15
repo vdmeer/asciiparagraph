@@ -19,7 +19,7 @@ import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.render.DoesRenderToWidth;
 
 /**
@@ -32,16 +32,13 @@ import de.vandermeer.skb.interfaces.render.DoesRenderToWidth;
 public class AP_00g_AddText_DoesRenderToWidth implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AsciiParagraph renderToWidth = new AsciiParagraph();
-		renderToWidth.addText(new LoremIpsum().getWords(30));
+	public String getDescription() {
+		return "render to width";
+	}
 
-		AsciiParagraph ap = new AsciiParagraph();
-		ap.getContext().setWidth(40);
-		ap.addText((DoesRenderToWidth)renderToWidth);
-		System.out.println(ap.render());
-		// end::example[]
+	@Override
+	public String getName() {
+		return "render-width";
 	}
 
 	@Override
@@ -59,14 +56,15 @@ public class AP_00g_AddText_DoesRenderToWidth implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public void showOutput(){
+		// tag::example[]
+		AsciiParagraph renderToWidth = new AsciiParagraph();
+		renderToWidth.addText(new LoremIpsum().getWords(30));
 
-	@Override
-	public String getID() {
-		// TODO Auto-generated method stub
-		return null;
+		AsciiParagraph ap = new AsciiParagraph();
+		ap.getContext().setWidth(40);
+		ap.addText((DoesRenderToWidth)renderToWidth);
+		System.out.println(ap.render());
+		// end::example[]
 	}
 }

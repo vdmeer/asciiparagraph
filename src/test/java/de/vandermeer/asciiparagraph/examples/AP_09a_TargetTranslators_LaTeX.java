@@ -19,7 +19,7 @@ import org.apache.commons.lang3.text.StrBuilder;
 
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 import de.vandermeer.translation.targets.Text2Latex;
 
@@ -33,22 +33,13 @@ import de.vandermeer.translation.targets.Text2Latex;
 public class AP_09a_TargetTranslators_LaTeX implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AP_Context ctx = new AP_Context();
-		ctx.setAlignment(TextAlignment.LEFT);
+	public String getDescription() {
+		return "text translation for LaTeX target";
+	}
 
-		AsciiParagraph ap = new AsciiParagraph(ctx);
-		ap.addText("A sentence with some normal text, not specific to LaTeX.");
-		ap.addText("Now for some characters that require conversion: # % &.");
-		ap.addText("And some more: © § ¤.");
-		ap.addText("And even more: È É Ê Ë.");
-		ap.addText("And some arrows as well: ← ↑ → ↓ ↔");
-		System.out.println(ap.render(35));
-
-		ctx.setTargetTranslator(new Text2Latex());
-		System.out.println(ap.render(35));
-		// end::example[]
+	@Override
+	public String getName() {
+		return "target-latex";
 	}
 
 	@Override
@@ -72,12 +63,21 @@ public class AP_09a_TargetTranslators_LaTeX implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		return "text translation for LaTeX target";
-	}
+	public void showOutput(){
+		// tag::example[]
+		AP_Context ctx = new AP_Context();
+		ctx.setAlignment(TextAlignment.LEFT);
 
-	@Override
-	public String getID() {
-		return "target-latex";
+		AsciiParagraph ap = new AsciiParagraph(ctx);
+		ap.addText("A sentence with some normal text, not specific to LaTeX.");
+		ap.addText("Now for some characters that require conversion: # % &.");
+		ap.addText("And some more: © § ¤.");
+		ap.addText("And even more: È É Ê Ë.");
+		ap.addText("And some arrows as well: ← ↑ → ↓ ↔");
+		System.out.println(ap.render(35));
+
+		ctx.setTargetTranslator(new Text2Latex());
+		System.out.println(ap.render(35));
+		// end::example[]
 	}
 }

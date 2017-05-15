@@ -22,7 +22,7 @@ import org.apache.commons.lang3.text.StrBuilder;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
-import de.vandermeer.skb.interfaces.StandardExampleAsCmd;
+import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.render.RendersToCluster;
 
 /**
@@ -35,23 +35,13 @@ import de.vandermeer.skb.interfaces.render.RendersToCluster;
 public class AP_00h_AddText_RendersToCluster implements StandardExampleAsCmd {
 
 	@Override
-	public void showOutput(){
-		// tag::example[]
-		AsciiParagraph ap = new AsciiParagraph();
-		class ObjectRendersToCluster implements RendersToCluster{
-			@Override
-			public Collection<String> renderAsCollection() {
-				ArrayList<String> text = new ArrayList<>();
-				text.add(new LoremIpsum().getWords(10));
-				text.add(new LoremIpsum().getWords(10));
-				text.add(new LoremIpsum().getWords(10));
-				return text;
-			}
-		}
+	public String getDescription() {
+		return "render to a cluster";
+	}
 
-		ap.addText(new ObjectRendersToCluster());
-		System.out.println(ap.render());
-		// end::example[]
+	@Override
+	public String getName() {
+		return "render-cluster";
 	}
 
 	@Override
@@ -72,14 +62,22 @@ public class AP_00h_AddText_RendersToCluster implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public void showOutput(){
+		// tag::example[]
+		AsciiParagraph ap = new AsciiParagraph();
+		class ObjectRendersToCluster implements RendersToCluster{
+			@Override
+			public Collection<String> renderAsCollection() {
+				ArrayList<String> text = new ArrayList<>();
+				text.add(new LoremIpsum().getWords(10));
+				text.add(new LoremIpsum().getWords(10));
+				text.add(new LoremIpsum().getWords(10));
+				return text;
+			}
+		}
 
-	@Override
-	public String getID() {
-		// TODO Auto-generated method stub
-		return null;
+		ap.addText(new ObjectRendersToCluster());
+		System.out.println(ap.render());
+		// end::example[]
 	}
 }
