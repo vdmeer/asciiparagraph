@@ -5,7 +5,7 @@ The standard render method `render()` renders the paragraph to the given width.
 When the width is changing, the width of the overall paragraph changes.
 If anything is added to a text line (left/right margins, start/end strings, frames), the width of the text line is reduced by the length of those additions.
 
-The following example creates a paragraph with some demo text.
+This example creates a paragraph with some demo text.
 Then it renders the output.
 Then, in three steps, it adds a start string, an end string, and a left text margin.
 The output is then printed for each step.

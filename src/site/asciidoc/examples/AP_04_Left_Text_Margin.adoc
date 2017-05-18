@@ -5,7 +5,7 @@ The implementation allows to change the left text margin (padding before - to th
 The number of characters as well as the used character can be changed.
 The default values are 0 and blank ` `.
 
-The following code creates a paragraph context and then a paragraph with some demo text.
+This example creates a paragraph context and then a paragraph with some demo text.
 It then prints the default settings (no left margin).
 This is followed by setting the left text margin to 5, printing the output.
 This is followed by setting the left text margin to 10 and the character to `>`, printing the output.

@@ -4,7 +4,7 @@
 Excessive white spaces in the paragraph text are removed.
 Those white spaces are additional blanks (two or more), tabulators, and any new line.
 
-The following example shows text being added to a paragraph with excessive white spaces.
+This example shows text being added to a paragraph with excessive white spaces.
 The first lines add strings with extra blanks (c2, c3, and c4).
 The next four lines add strings with tabulators (t1, t2, t3, and t4), using the normal tabulator character and the escaped tabulator `\t`.
 

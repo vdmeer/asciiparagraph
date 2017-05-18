@@ -8,7 +8,7 @@ The default is no added text.
 
 Start and end strings can be set any time, they are only considered when the paragraph is rendered.
 
-The following code creates a paragraph context and then a paragraph with some demo text.
+This example creates a paragraph context and then a paragraph with some demo text.
 It then prints the default settings (no added string).
 This is followed by setting the start string to "// ", printing the output.
 This is followed by setting the end string to " -->", printing the output.

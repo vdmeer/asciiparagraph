@@ -5,7 +5,7 @@ The implementation allows to change the default character for white spaces in te
 The default is of course a blank ` `.
 It can be changed to any other character.
 
-The example below sets the in-text white space (called inner white space) to the UTF-8 character `˽` and then to the UTF-8 character `—`.
+This example below sets the in-text white space (called inner white space) to the UTF-8 character `˽` and then to the UTF-8 character `—`.
 
 [source, java, linenums]
 ----------------------------------------------------------------------------------------

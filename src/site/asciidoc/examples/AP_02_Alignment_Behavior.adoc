@@ -13,7 +13,7 @@ Justified alignment has two further specialized options:
 - Justified left - the last line of justified text will be aligned left
 - Justified right - the last line of justified text will be aligned right, with added blanks left of the text to create the right alignment impression
 
-The following code creates a paragraph context and then a paragraph with some demo text.
+This example creates a paragraph context and then a paragraph with some demo text.
 To demonstrate the text alignment, we then set the alignment in the context to justified, justified left, justified right, centered, left, and right
 and print the rendered text.
 

@@ -8,7 +8,7 @@ Independent of the alignment, the text can be formatted in the following ways:
 - Hanging paragraph - all but the first line have an indentation (configurable)
 - Dropped capital letter - the first letter of the first word in the first sentence is replaced by a dropped capital letter, the first few lines of the paragraph get an indentation. The used dropped captial letter can be configured by setting a library.
 
-The following code creates a paragraph context and then a paragraph with some demo text.
+This example creates a paragraph context and then a paragraph with some demo text.
 To demonstrate the text format, we then set the format in the context to none, first line, and hanging (paragraph).
 To show different dropped capital letters we first show the render with the default library and then change the library and render the paragraph again.
 
