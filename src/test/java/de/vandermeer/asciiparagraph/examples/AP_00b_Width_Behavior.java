@@ -15,8 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
@@ -37,27 +35,35 @@ public class AP_00b_Width_Behavior implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"The width of a paragraph can be set via its context.\n" + 
+				"This example creates a paragraph and then sets the width and shows the output.\n" + 
+				"The first width is 50 (line 5), the second 40 (line 8), and the third 30 characters (line 11)."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "width";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AsciiParagraph ap = new AsciiParagraph();",
-				"ap.addText(new LoremIpsum().getWords(20));",
-				"ap.getContext().setAlignment(AP_Alignment.LEFT);",
-				"",
-				"ap.getContext().setWidth(50);",
-				"System.out.println(ap.render());",
-				"",
-				"ap.getContext().setWidth(40);",
-				"System.out.println(ap.render());",
-				"",
-				"ap.getContext().setWidth(30);",
+	public String getSource(){
+		return
+				"AsciiParagraph ap = new AsciiParagraph();\n" + 
+				"ap.addText(new LoremIpsum().getWords(20));\n" + 
+				"ap.getContext().setAlignment(TextAlignment.LEFT);\n" + 
+				"\n" + 
+				"ap.getContext().setWidth(50);\n" + 
+				"System.out.println(ap.render());\n" + 
+				"\n" + 
+				"ap.getContext().setWidth(40);\n" + 
+				"System.out.println(ap.render());\n" + 
+				"\n" + 
+				"ap.getContext().setWidth(30);\n" + 
 				"System.out.println(ap.render());"
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+		;
 	}
 
 	@Override

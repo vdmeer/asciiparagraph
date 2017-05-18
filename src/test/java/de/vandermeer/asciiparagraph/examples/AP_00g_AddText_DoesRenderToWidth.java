@@ -15,8 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
@@ -37,22 +35,28 @@ public class AP_00g_AddText_DoesRenderToWidth implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"This example uses an `AsciiParagraph` itself as a DoesRenderToWidth object with some text, and adds it to a paragraph."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "render-width";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AsciiParagraph renderToWidth = new AsciiParagraph();",
-				"renderToWidth.addText(new LoremIpsum().getWords(30));",
-				"",
-				"AsciiParagraph ap = new AsciiParagraph();",
-				"ap.getContext().setWidth(40);",
-				"ap.addText((DoesRenderToWidth)renderToWidth);",
-				"System.out.println(ap.render());",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public String getSource(){
+		return
+				"AsciiParagraph renderToWidth = new AsciiParagraph();\r\n" + 
+				"renderToWidth.addText(new LoremIpsum().getWords(30));\r\n" + 
+				"\r\n" + 
+				"AsciiParagraph ap = new AsciiParagraph();\r\n" + 
+				"ap.getContext().setWidth(40);\r\n" + 
+				"ap.addText((DoesRenderToWidth)renderToWidth);\r\n" + 
+				"System.out.println(ap.render());"
+		;
 	}
 
 	@Override

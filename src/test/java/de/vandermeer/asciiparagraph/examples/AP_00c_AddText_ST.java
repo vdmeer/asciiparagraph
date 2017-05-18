@@ -15,7 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
 import org.stringtemplate.v4.ST;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
@@ -37,19 +36,25 @@ public class AP_00c_AddText_ST implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"This example creates a simple ST object with some text, and adds it to a paragraph."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "text-st";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"ST st = new ST(new LoremIpsum().getWords(10));",
-				"AsciiParagraph ap = new AsciiParagraph();",
-				"ap.addText(st);",
+	public String getSource(){
+		return
+				"ST st = new ST(new LoremIpsum().getWords(10));\r\n" + 
+				"AsciiParagraph ap = new AsciiParagraph();\r\n" + 
+				"ap.addText(st);\r\n" + 
 				"System.out.println(ap.render());"
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+		;
 	}
 
 	@Override

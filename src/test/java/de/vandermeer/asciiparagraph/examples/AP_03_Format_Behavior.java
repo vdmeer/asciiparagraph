@@ -15,8 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
@@ -39,32 +37,41 @@ public class AP_03_Format_Behavior implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"This example creates a paragraph context and then a paragraph with some demo text.\r\n" + 
+				"To demonstrate the text format, we then set the format in the context to none, first line, and hanging (paragraph).\r\n" + 
+				"To show different dropped capital letters we first show the render with the default library and then change the library and render the paragraph again."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "format";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AP_Context ctx = new AP_Context();",
-				"AsciiParagraph ap = new AsciiParagraph(ctx);",
-				"ap.addText(new LoremIpsum().getWords(29));",
-				"",
-				"System.out.println(ap.render(35));",
-				"",
-				"ctx.setFormat(AP_Format.FIRST_LINE);",
-				"System.out.println(ap.render(35));",
-				"",
-				"ctx.setFormat(AP_Format.HANGING);",
-				"System.out.println(ap.render(35));",
-				"",
-				"ctx.setFormat(AP_Format.DROPCAP);",
-				"System.out.println(ap.render(35));",
-				"",
-				"ctx.setDropCapLib(new FigletOldBanner_6L());",
-				"System.out.println(ap.render(35));",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public String getSource(){
+		return
+				"AP_Context ctx = new AP_Context();\r\n" + 
+				"AsciiParagraph ap = new AsciiParagraph(ctx);\r\n" + 
+				"ap.addText(new LoremIpsum().getWords(29));\r\n" + 
+				"\r\n" + 
+				"System.out.println(ap.render(35));\r\n" + 
+				"\r\n" + 
+				"ctx.setFormat(TextFormat.FIRST_LINE);\r\n" + 
+				"System.out.println(ap.render(35));\r\n" + 
+				"\r\n" + 
+				"ctx.setFormat(TextFormat.HANGING);\r\n" + 
+				"System.out.println(ap.render(35));\r\n" + 
+				"\r\n" + 
+				"ctx.setFormat(TextFormat.DROPCAP);\r\n" + 
+				"System.out.println(ap.render(35));\r\n" + 
+				"\r\n" + 
+				"ctx.setFormat(TextFormat.DROPCAP_WITH_PADDING);\r\n" + 
+				"ctx.setDropCapLib(new FigletOldBanner_6L());\r\n" + 
+				"System.out.println(ap.render(35));"
+		;
 	}
 
 	@Override

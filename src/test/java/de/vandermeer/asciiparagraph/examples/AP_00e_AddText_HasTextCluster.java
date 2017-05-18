@@ -18,8 +18,6 @@ package de.vandermeer.asciiparagraph.examples;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
@@ -40,29 +38,35 @@ public class AP_00e_AddText_HasTextCluster implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"This example creates a simple HasTextCluster object with some text, and adds it to a paragraph."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "text-cluster";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AsciiParagraph ap = new AsciiParagraph();",
-				"class ObjectHasTextCluster implements HasTextCluster{",
-				"	@Override",
-				"	public Collection<String> getTextAsCollection() {",
-						"ArrayList<String> text = new ArrayList<>();",
-						"text.add(new LoremIpsum().getWords(10));",
-						"text.add(new LoremIpsum().getWords(10));",
-						"text.add(new LoremIpsum().getWords(10));",
-						"return text;",
-				"	}",
-				"}",
-				"",
-				"ap.addText(new ObjectHasTextCluster());",
-				"System.out.println(ap.render());",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public String getSource(){
+		return
+				"AsciiParagraph ap = new AsciiParagraph();\r\n" + 
+				"class ObjectHasTextCluster implements HasTextCluster{\r\n" + 
+				"	@Override\r\n" + 
+				"	public Collection<String> getTextAsCollection() {\r\n" + 
+				"		ArrayList<String> text = new ArrayList<>();\r\n" + 
+				"		text.add(new LoremIpsum().getWords(10));\r\n" + 
+				"		text.add(new LoremIpsum().getWords(10));\r\n" + 
+				"		text.add(new LoremIpsum().getWords(10));\r\n" + 
+				"		return text;\r\n" + 
+				"	}\r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				"ap.addText(new ObjectHasTextCluster());\r\n" + 
+				"System.out.println(ap.render());"
+		;
 	}
 
 	@Override

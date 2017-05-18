@@ -15,8 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
@@ -38,29 +36,38 @@ public class AP_09b_TargetTranslators_HTML implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"This example uses a translator for the target HTML.\n" + 
+				"This means that all characters in the text that require special translation for being used in a HTML document will be translated into that representation (depending on the capabilities of the translator of course).\n" + 
+				"<br /><br />" + 
+				"The code below creates a paragraph with some text that is not suitable to be used in LaTeX documents.\n" + 
+				"It then prints the default output (no translation), followed by setting the HTML target translator, printing the output again."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "target-html";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AP_Context ctx = new AP_Context();",
-				"ctx.setAlignment(AP_Alignment.LEFT);",
-				"ctx.setTargetTranslator(new Text2Html());",
-				"",
-				"AsciiParagraph ap = new AsciiParagraph(ctx);",
-				"ap.addText(\"A sentence with some normal text, not specific to HTML.\");",
-				"ap.addText(\"Now for some characters that require conversion: # % & < >.\");",
-				"ap.addText(\"And some more: © § ¤.\");",
-				"ap.addText(\"And even more: Ē ē Ĕ ĕ Ė ė Ę ę Ě ě.\");",
-				"ap.addText(\"And some arrows as well: ← ↑ → ↓ ↔ ↕\");",
-				"System.out.println(ap.render(36));",
-				"",
-				"ctx.setTargetTranslator(new Text2Html());",
-				"System.out.println(ap.render(36));",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public String getSource(){
+		return
+				"AP_Context ctx = new AP_Context();\n" + 
+				"ctx.setAlignment(TextAlignment.LEFT);\n" + 
+				"\n" + 
+				"AsciiParagraph ap = new AsciiParagraph(ctx);\n" + 
+				"ap.addText(\"A sentence with some normal text, not specific to HTML.\");\n" + 
+				"ap.addText(\"Now for some characters that require conversion: # % & < >.\");\n" + 
+				"ap.addText(\"And some more: © § ¤.\");\n" + 
+				"ap.addText(\"And even more: Ē ē Ĕ ĕ Ė ė Ę ę Ě ě.\");\n" + 
+				"ap.addText(\"And some arrows as well: ← ↑ → ↓ ↔ ↕\");\n" + 
+				"System.out.println(ap.render(36));\n" + 
+				"\n" + 
+				"ctx.setTargetTranslator(new Text2Html());\n" + 
+				"System.out.println(ap.render(36));"
+		;
 	}
 
 	@Override

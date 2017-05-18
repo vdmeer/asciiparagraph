@@ -16,7 +16,6 @@
 package de.vandermeer.asciiparagraph.examples;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.StrBuilder;
 
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
@@ -37,36 +36,43 @@ public class AP_01b_WS_Behavior_More implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"It does not matter how many excessive white spaces are added.\n" + 
+				"This example uses more excessive white spaces for blanks and tabulators."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "ws-more";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AsciiParagraph ap = new AsciiParagraph();",
-				"",
-				"ap.addText(\"c2  c2\");",
-				"ap.addText(\"c3   c3\");",
-				"ap.addText(\"c4    c4\");",
-				"ap.addText(\"c5     c5\");",
-				"ap.addText(\"c6      c6\");",
-				"ap.addText(\"c7       c7\");",
-				"",
-				"ap.addText(\"t2		t2\");",
-				"ap.addText(\"t3			t3\");",
-				"ap.addText(\"t4				t4\");",
-				"ap.addText(\"t5					t5\");",
-				"ap.addText(\"t6						t6\");",
-				"ap.addText(\"t7							t7\");",
-				"",
-				"ap.addText(\"word followed by \" + StringUtils.CR + \" followed by\" + StringUtils.LF + \" followed by \\n\");",
-				"",
-				"ap.getContext().setWidth(60);",
-				"ap.getContext().setAlignment(AP_Alignment.LEFT);",
+	public String getSource(){
+		return
+				"AsciiParagraph ap = new AsciiParagraph();\n" + 
+				"\n" + 
+				"ap.addText(\"c2  c2\");\n" + 
+				"ap.addText(\"c3   c3\");\n" + 
+				"ap.addText(\"c4    c4\");\n" + 
+				"ap.addText(\"c5     c5\");\n" + 
+				"ap.addText(\"c6      c6\");\n" + 
+				"ap.addText(\"c7       c7\");\n" + 
+				"\n" + 
+				"ap.addText(\"t2		t2\");\n" + 
+				"ap.addText(\"t3			t3\");\n" + 
+				"ap.addText(\"t4				t4\");\n" + 
+				"ap.addText(\"t5					t5\");\n" + 
+				"ap.addText(\"t6						t6\");\n" + 
+				"ap.addText(\"t7							t7\");\n" + 
+				"\n" + 
+				"ap.addText(\"word followed by \" + StringUtils.CR + \" followed by\" + StringUtils.LF + \" followed by \\n\");\n" + 
+				"\n" + 
+				"ap.getContext().setWidth(60);\n" + 
+				"ap.getContext().setAlignment(TextAlignment.LEFT);\n" + 
 				"System.out.println(ap.render());"
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+		;
 	}
 
 	@Override

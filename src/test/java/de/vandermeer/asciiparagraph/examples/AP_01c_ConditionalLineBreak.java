@@ -15,8 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
@@ -36,22 +34,28 @@ public class AP_01c_ConditionalLineBreak implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"This example shows the use of HTML entities for conditional line breaks."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "cond-linebreak";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AsciiParagraph ap = new AsciiParagraph();",
-				"ap.getContext().setAlignment(AP_Alignment.LEFT).setWidth(35);",
-				"",
-				"ap.addText(\"line 1<br>\");",
-				"ap.addText(\"line 2<br/>\");",
-				"ap.addText(\"line three \n still line three\");",
-				"System.out.println(ap.render());",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public String getSource(){
+		return
+		"AsciiParagraph ap = new AsciiParagraph();\n" + 
+		"ap.getContext().setAlignment(TextAlignment.LEFT).setWidth(35);\n" + 
+		"\n" + 
+		"ap.addText(\"line 1<br>\");\n" + 
+		"ap.addText(\"line 2<br/>\");\n" + 
+		"ap.addText(\"line three \\n still line three\");\n" + 
+		"System.out.println(ap.render());"
+		;
 	}
 
 	@Override

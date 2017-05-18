@@ -15,8 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
@@ -40,34 +38,46 @@ public class AP_08a_Frames implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return "The implementation allows to add frames to a paragraph.\n" + 
+				"Frame borders will be added to the left and right of each line.\n" + 
+				"Top and bottom lines will be added to the top and the bottom of the paragraph.\n" + 
+				"Additional margins can be set to separate the frame from any text (string margins) and to add margins around the frame.\n" + 
+				"<br /><br/>\n" + 
+				"The example creates a paragraph and then adds frames to it.\n" + 
+				"The first setting uses a frame constructed of UTF-8 light border characters, with frame and text margins set to `1`.\n" + 
+				"The second setting removes all added margins and uses the same frame in a different mode.\n" + 
+				"The third setting uses the frame in yet another mode.";
+	}
+
+	@Override
 	public String getName() {
 		return "frames";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AP_Context ctx = new AP_Context();",
-				"ctx.setAlignment(AP_Alignment.CENTER);",
-				"ctx.setFrame(UTF_Frames.borderLight());",
-				"ctx.setFrameTopBottomMargin(1);",
-				"ctx.setTextTopBottomMargin(1);",
-				"ctx.setTextLeftRightMargin(1);",
-				"",
-				"AsciiParagraph ap = new AsciiParagraph(ctx);",
-				"ap.addText(new LoremIpsum().getWords(9));",
-				"System.out.println(ap.render(25));",
-				"",
-				"ctx.setFrameMode(TA_FrameOptions.THEME_CORNERS_ONLY);",
-				"ctx.setFrameTopBottomMargin(0);",
-				"ctx.setTextTopBottomMargin(0);",
-				"ctx.setTextLeftRightMargin(0);",
-				"System.out.println(ap.render(25));",
-				"",
-				"ctx.setFrameMode(TA_FrameOptions.THEME_LINE_TOPBOTTOM);",
-				"System.out.println(ap.render(25));",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public String getSource(){
+		return
+				"AP_Context ctx = new AP_Context();\n" + 
+				"ctx.setAlignment(TextAlignment.CENTER);\n" + 
+				"ctx.setFrame(U8_Frames.borderLight());\n" + 
+				"ctx.setFrameTopBottomMargin(1);\n" + 
+				"ctx.setTextTopBottomMargin(1);\n" + 
+				"ctx.setTextLeftRightMargin(1);\n" + 
+				"\n" + 
+				"AsciiParagraph ap = new AsciiParagraph(ctx);\n" + 
+				"ap.addText(new LoremIpsum().getWords(9));\n" + 
+				"System.out.println(ap.render(25));\n" + 
+				"\n" + 
+				"ctx.setFrameMode(TA_FrameOptions.THEME_CORNERS_ONLY);\n" + 
+				"ctx.setFrameTopBottomMargin(0);\n" + 
+				"ctx.setTextTopBottomMargin(0);\n" + 
+				"ctx.setTextLeftRightMargin(0);\n" + 
+				"System.out.println(ap.render(25));\n" + 
+				"\n" + 
+				"ctx.setFrameMode(TA_FrameOptions.THEME_LINE_TOPBOTTOM);\n" + 
+				"System.out.println(ap.render(25));"
+		;
 	}
 
 	@Override

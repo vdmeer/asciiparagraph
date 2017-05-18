@@ -15,7 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
 import org.stringtemplate.v4.ST;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
@@ -38,25 +37,28 @@ public class AP_00i_AddText_RendersToClusterWidth implements StandardExampleAsCm
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"This example uses an `AsciiParagraph` itself as a RendersToClusterWidth object with some text, and adds it to a paragraph."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "render-cluster-width";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AsciiParagraph ap = new AsciiParagraph();",
-				"class ObjectWHasText implements HasText{",
-				"	@Override",
-				"	public String getText() {",
-				"		return new LoremIpsum().getWords(10);",
-				"	}",
-				"}",
-				"",
-				"ap.addText(new ObjectWHasText());",
-				"System.out.println(ap.render());",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public String getSource(){
+		return
+				"AsciiParagraph renderToClusterWidth = new AsciiParagraph();\r\n" + 
+				"renderToClusterWidth.addText(new LoremIpsum().getWords(30));\r\n" + 
+				"\r\n" + 
+				"AsciiParagraph ap = new AsciiParagraph();\r\n" + 
+				"ap.getContext().setWidth(40);\r\n" + 
+				"ap.addText((RendersToClusterWidth)renderToClusterWidth);\r\n" + 
+				"System.out.println(ap.render());"
+		;
 	}
 
 	@Override

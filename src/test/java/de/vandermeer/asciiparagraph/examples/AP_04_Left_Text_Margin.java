@@ -15,8 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
@@ -38,30 +36,43 @@ public class AP_04_Left_Text_Margin implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"The implementation allows to change the left text margin (padding before - to the left of - each line, independent to any padding for alignment).\n" + 
+				"The number of characters as well as the used character can be changed.\n" + 
+				"The default values are 0 and blank ` `.\n" + 
+				"<br /><br />" + 
+				"This example creates a paragraph context and then a paragraph with some demo text.\n" + 
+				"It then prints the default settings (no left margin).\n" + 
+				"This is followed by setting the left text margin to 5, printing the output.\n" + 
+				"This is followed by setting the left text margin to 10 and the character to `>`, printing the output."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "margin-left";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AP_Context ctx = new AP_Context();",
-				"ctx.setAlignment(AP_Alignment.LEFT);",
-				"ctx.setWidth(60);",
-				"",
-				"AsciiParagraph ap = new AsciiParagraph(ctx);",
-				"ap.addText(new LoremIpsum().getWords(29));",
-				"",
-				"System.out.println(ap.render());",
-				"",
-				"ctx.setTextLeftMargin(5);",
-				"System.out.println(ap.render());",
-				"",
-				"ctx.setTextLeftMargin(10);",
-				"ctx.setTextLeftChar('>');",
-				"System.out.println(ap.render());",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public String getSource(){
+		return
+				"AP_Context ctx = new AP_Context();\n" + 
+				"ctx.setAlignment(TextAlignment.LEFT);\n" + 
+				"ctx.setWidth(29);\n" + 
+				"\n" + 
+				"AsciiParagraph ap = new AsciiParagraph(ctx);\n" + 
+				"ap.addText(new LoremIpsum().getWords(29));\n" + 
+				"\n" + 
+				"System.out.println(ap.render());\n" + 
+				"\n" + 
+				"ctx.setTextLeftMargin(5);\n" + 
+				"System.out.println(ap.render());\n" + 
+				"\n" + 
+				"ctx.setTextLeftMargin(10);\n" + 
+				"ctx.setTextLeftChar('>');\n" + 
+				"System.out.println(ap.render());"
+		;
 	}
 
 	@Override

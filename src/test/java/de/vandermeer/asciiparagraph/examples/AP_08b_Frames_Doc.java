@@ -15,8 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
@@ -39,42 +37,59 @@ public class AP_08b_Frames_Doc implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return "Frames are more versatile than simply adding boxes.\n" + 
+				"They can for instance also add any type of string.\n" + 
+				"The following examples are using frames to realize code documentation blocks.\n" + 
+				"<br /><br />" + 
+				"<br /><br />" + 
+				"The following code creates a paragraph and then uses different frames to generate code documentation blocks:\n" + 
+				"<br /><br />" +
+				"- TeX/LaTeX comments (line 8)<br />\n" + 
+				"- HTML comment block (line 11)<br />\n" + 
+				"- bash scripts (line 14)<br />\n" + 
+				"- bash scripts with double hashmark start (line 17)<br />\n" + 
+				"- classic single line comment block (as found for instance in C++ and Java, line 20)<br />\n" + 
+				"- classic multi-line comment block (as found for instance in C++ and Java, line 23)<br />\n" + 
+				"- Javadoc comment block (line 26)<br />";
+	}
+
+	@Override
 	public String getName() {
 		return "frames-doc";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AP_Context ctx = new AP_Context();",
-				"ctx.setAlignment(AP_Alignment.LEFT);",
-				"ctx.setFrameTopBottomMargin(1);",
-				"ctx.setTextTopBottomMargin(0);",
-				"AsciiParagraph ap = new AsciiParagraph(ctx);",
-				"ap.addText(new LoremIpsum().getWords(9));",
-				"",
-				"ctx.setFrame(A7_Frames_Doc.latexTB());",
-				"System.out.println(ap.render(20));",
-				"",
-				"ctx.setFrame(A7_Frames_Doc.htmlTB());",
-				"System.out.println(ap.render(20));",
-				"",
-				"ctx.setFrame(A7_Frames_Doc.bashTB());",
-				"System.out.println(ap.render(20));",
-				"",
-				"ctx.setFrame(A7_Frames_Doc.bashStart2HashTB());",
-				"System.out.println(ap.render(20));",
-				"",
-				"ctx.setFrame(A7_Frames_Doc.singleLine());",
-				"System.out.println(ap.render(20));",
-				"",
-				"ctx.setFrame(A7_Frames_Doc.multiLine());",
-				"System.out.println(ap.render(20));",
-				"",
-				"ctx.setFrame(A7_Frames_Doc.multiLineJavaDoc());",
-				"System.out.println(ap.render(20));",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public String getSource(){
+		return
+				"AP_Context ctx = new AP_Context();\n" + 
+				"ctx.setAlignment(TextAlignment.LEFT);\n" + 
+				"ctx.setFrameTopBottomMargin(1);\n" + 
+				"ctx.setTextTopBottomMargin(0);\n" + 
+				"AsciiParagraph ap = new AsciiParagraph(ctx);\n" + 
+				"ap.addText(new LoremIpsum().getWords(9));\n" + 
+				"\n" + 
+				"ctx.setFrame(A7_Frames_Doc.latexTB());\n" + 
+				"System.out.println(ap.render(20));\n" + 
+				"\n" + 
+				"ctx.setFrame(A7_Frames_Doc.htmlTB());\n" + 
+				"System.out.println(ap.render(20));\n" + 
+				"\n" + 
+				"ctx.setFrame(A7_Frames_Doc.bashTB());\n" + 
+				"System.out.println(ap.render(20));\n" + 
+				"\n" + 
+				"ctx.setFrame(A7_Frames_Doc.bashStart2HashTB());\n" + 
+				"System.out.println(ap.render(20));\n" + 
+				"\n" + 
+				"ctx.setFrame(A7_Frames_Doc.singleLine());\n" + 
+				"System.out.println(ap.render(20));\n" + 
+				"\n" + 
+				"ctx.setFrame(A7_Frames_Doc.multiLine());\n" + 
+				"System.out.println(ap.render(20));\n" + 
+				"\n" + 
+				"ctx.setFrame(A7_Frames_Doc.multiLineJavaDoc());\n" + 
+				"System.out.println(ap.render(20));"
+		;
 	}
 
 	@Override

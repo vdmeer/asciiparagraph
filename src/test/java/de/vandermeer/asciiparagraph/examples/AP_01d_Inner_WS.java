@@ -15,8 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
@@ -37,21 +35,34 @@ public class AP_01d_Inner_WS implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"The implementation allows to change the default character for white spaces in text.\n" + 
+				"The default is of course a blank ` `.\n" + 
+				"It can be changed to any other character.\n" + 
+				"<br /><br />" + 
+				"This example below sets the in-text white space (called inner white space) to the UTF-8 character `˽` and then to the UTF-8 character `—`."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "ws-inner";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AsciiParagraph ap = new AsciiParagraph();",
-				"ap.getContext().setAlignment(AP_Alignment.LEFT).setWidth(35);",
-				"ap.getContext().setInnerWsChar('˽');",
-				"",
-				"ap.addText(new LoremIpsum().getWords(20));",
-				"System.out.println(ap.render());",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public String getSource(){
+		return
+				"AsciiParagraph ap = new AsciiParagraph();\n" + 
+				"ap.getContext().setAlignment(TextAlignment.LEFT).setWidth(35);\n" + 
+				"ap.addText(new LoremIpsum().getWords(20));\n" + 
+				"\n" + 
+				"ap.getContext().setInnerWsChar('˽');\n" + 
+				"System.out.println(ap.render());\n" + 
+				"\n" + 
+				"ap.getContext().setInnerWsChar('—');\n" + 
+				"System.out.println(ap.render());"
+		;
 	}
 
 	@Override

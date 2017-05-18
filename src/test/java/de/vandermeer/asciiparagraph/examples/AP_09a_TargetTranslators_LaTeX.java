@@ -15,8 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
@@ -43,23 +41,33 @@ public class AP_09a_TargetTranslators_LaTeX implements StandardExampleAsCmd {
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AP_Context ctx = new AP_Context();",
-				"ctx.setAlignment(AP_Alignment.LEFT);",
-				"",
-				"AsciiParagraph ap = new AsciiParagraph(ctx);",
-				"ap.addText(\"A sentence with some normal text, not specific to LaTeX.\");",
-				"ap.addText(\"Now for some characters that require conversion: # % &.\");",
-				"ap.addText(\"And some more: © § ¤.\");",
-				"ap.addText(\"And even more: È É Ê Ë.\");",
-				"ap.addText(\"And some arrows as well: ← ↑ → ↓ ↔\");",
-				"System.out.println(ap.render(35));",
-				"",
-				"ctx.setTargetTranslator(new Text2Latex());",
-				"System.out.println(ap.render(35));",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public Object getLongDescription() {
+		return
+				"This example uses a translator for the target LaTeX.\n" + 
+				"This means that all characters in the text that require special translation for being used in a LaTeX document will be translated into that representation (depending on the capabilities of the translator of course).\n" + 
+				"<br /><br >" + 
+				"The code below creates a paragraph with some text that is not suitable to be used in LaTeX documents.\n" + 
+				"It then prints the default output (no translation), followed by setting the LaTeX target translator, printing the output again."
+		;
+	}
+
+	@Override
+	public String getSource(){
+		return
+				"AP_Context ctx = new AP_Context();\n" + 
+				"ctx.setAlignment(TextAlignment.LEFT);\n" + 
+				"\n" + 
+				"AsciiParagraph ap = new AsciiParagraph(ctx);\n" + 
+				"ap.addText(\"A sentence with some normal text, not specific to LaTeX.\");\n" + 
+				"ap.addText(\"Now for some characters that require conversion: # % &.\");\n" + 
+				"ap.addText(\"And some more: © § ¤.\");\n" + 
+				"ap.addText(\"And even more: È É Ê Ë.\");\n" + 
+				"ap.addText(\"And some arrows as well: ← ↑ → ↓ ↔\");\n" + 
+				"System.out.println(ap.render(35));\n" + 
+				"\n" + 
+				"ctx.setTargetTranslator(new Text2Latex());\n" + 
+				"System.out.println(ap.render(35));"
+		;
 	}
 
 	@Override

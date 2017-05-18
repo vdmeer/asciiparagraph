@@ -15,8 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
@@ -37,29 +35,44 @@ public class AP_07_InclusiveWidth implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"The standard render method `render()` renders the paragraph to the given width.\n" + 
+				"When the width is changing, the width of the overall paragraph changes.\n" + 
+				"If anything is added to a text line (left/right margins, start/end strings, frames), the width of the text line is reduced by the length of those additions.\n" + 
+				"<br /><br />" + 
+				"This example creates a paragraph with some demo text.\n" + 
+				"Then it renders the output.\n" + 
+				"Then, in three steps, it adds a start string, an end string, and a left text margin.\n" + 
+				"The output is then printed for each step.\n" + 
+				"<br /><br />" + 
+				"Since the length to which the paragraph is rendered does not change (we are using 50 for each render call), the text width is continuously shrinking."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "width-inclusive";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AP_Context ctx = new AP_Context();",
-				"AsciiParagraph ap = new AsciiParagraph(ctx);",
-				"ap.addText(new LoremIpsum().getWords(29));",
-				"",
-				"System.out.println(ap.render(50));",
-				"",
-				"ctx.getStrings().setStartString(\"// \");",
-				"System.out.println(ap.render(50));",
-				"",
-				"ctx.getStrings().setEndString(\" -->\");",
-				"System.out.println(ap.render(50));",
-				"",
-				"ctx.getMargins().setTextLeftMargin(10);",
-				"System.out.println(ap.render(50));",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public String getSource(){
+		return
+				"AP_Context ctx = new AP_Context();\n" + 
+				"AsciiParagraph ap = new AsciiParagraph(ctx);\n" + 
+				"ap.addText(new LoremIpsum().getWords(29));\n" + 
+				"\n" + 
+				"System.out.println(ap.render(50));\n" + 
+				"\n" + 
+				"ctx.setStartString(\"// \");\n" + 
+				"System.out.println(ap.render(50));\n" + 
+				"\n" + 
+				"ctx.setEndString(\" -->\");\n" + 
+				"System.out.println(ap.render(50));\n" + 
+				"\n" + 
+				"ctx.setTextLeftMargin(10);\n" + 
+				"System.out.println(ap.render(50));"
+		;
 	}
 
 	@Override

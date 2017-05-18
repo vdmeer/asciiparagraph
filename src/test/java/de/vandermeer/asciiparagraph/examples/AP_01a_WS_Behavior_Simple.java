@@ -16,7 +16,6 @@
 package de.vandermeer.asciiparagraph.examples;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.StrBuilder;
 
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
@@ -37,30 +36,43 @@ public class AP_01a_WS_Behavior_Simple implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"Excessive white spaces in the paragraph text are removed.\n" + 
+				"Those white spaces are additional blanks (two or more), tabulators, and any new line.\n" + 
+				"<br /><br />" +
+				"This example shows text being added to a paragraph with excessive white spaces.\n" + 
+				"The first lines add strings with extra blanks (c2, c3, and c4).\n" + 
+				"The next four lines add strings with tabulators (t1, t2, t3, and t4), using the normal tabulator character and the escaped tabulator `\\t`.\n" + 
+				"<br /><br />" + 
+				"Finally, a string with additional line breaks is added. The line breaks for carriage return, line feed, and escaped newline `\\n` are recognized."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "ws-simple";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AsciiParagraph ap = new AsciiParagraph();",
-				"",
-				"ap.addText(\"c2  c2\");",
-				"ap.addText(\"c3   c3\");",
-				"ap.addText(\"c4    c4\");",
-				"",
-				"ap.addText(\"t1	t1\");",
-				"ap.addText(\"t2		t2\");",
-				"ap.addText(\"t3			t3\");",
-				"ap.addText(\"t4\t\t\t\tt4\");",
-				"",
-				"ap.addText(\"word followed by \" + StringUtils.CR + \" followed by\" + StringUtils.LF + \" followed by \\n\");",
-				"",
-				"ap.getContext().setWidth(60).setAlignment(AP_Alignment.LEFT);",
+	public String getSource(){
+		return
+				"AsciiParagraph ap = new AsciiParagraph();\n" + 
+				"\n" + 
+				"ap.addText(\"c2  c2\");\n" + 
+				"ap.addText(\"c3   c3\");\n" + 
+				"ap.addText(\"c4    c4\");\n" + 
+				"\n" + 
+				"ap.addText(\"t1	t1\");\n" + 
+				"ap.addText(\"t2		t2\");\n" + 
+				"ap.addText(\"t3			t3\");\n" + 
+				"ap.addText(\"t4\\t\\t\\t\\tt4\");\n" + 
+				"\n" + 
+				"ap.addText(\"word followed by \" + StringUtils.CR + \" followed by\" + StringUtils.LF + \" followed by \\n\");\n" + 
+				"\n" + 
+				"ap.getContext().setWidth(60).setAlignment(TextAlignment.LEFT);\n" + 
 				"System.out.println(ap.render());"
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+		;
 	}
 
 	@Override

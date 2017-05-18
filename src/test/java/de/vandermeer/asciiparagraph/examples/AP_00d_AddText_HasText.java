@@ -15,8 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
@@ -37,25 +35,31 @@ public class AP_00d_AddText_HasText implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"This example creates a simple HasText object with some text, and adds it to a paragraph."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "text-has-text";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AsciiParagraph ap = new AsciiParagraph();",
-				"class ObjectHasText implements HasText{",
-				"	@Override",
-				"	public String getText() {",
-				"		return new LoremIpsum().getWords(10);",
-				"	}",
-				"}",
-				"",
-				"ap.addText(new ObjectHasText());",
-				"System.out.println(ap.render());",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public String getSource(){
+		return
+				"AsciiParagraph ap = new AsciiParagraph();\r\n" + 
+				"class ObjectHasText implements HasText{\r\n" + 
+				"	@Override\r\n" + 
+				"	public String getText() {\r\n" + 
+				"		return new LoremIpsum().getWords(10);\r\n" + 
+				"	}\r\n" + 
+				"}\r\n" + 
+				"\r\n" + 
+				"ap.addText(new ObjectHasText());\r\n" + 
+				"System.out.println(ap.render());"
+		;
 	}
 
 	@Override

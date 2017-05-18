@@ -15,8 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
@@ -38,37 +36,45 @@ public class AP_02_Alignment_Behavior implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"This example creates a paragraph context and then a paragraph with some demo text.\n" + 
+				"To demonstrate the text alignment, we then set the alignment in the context to justified, justified left, justified right, centered, left, and right\n" + 
+				"and print the rendered text."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "alignment";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AP_Context ctx = new AP_Context().setWidth(39);",
-				"",
-				"AsciiParagraph ap = new AsciiParagraph(ctx);",
-				"ap.addText(new LoremIpsum().getWords(29));",
-				"",
-				"ctx.setAlignment(AP_Alignment.JUSTIFIED);",
-				"System.out.println(ap.render());",
-				"",
-				"ctx.setAlignment(AP_Alignment.JUSTIFIED_LEFT);",
-				"System.out.println(ap.render());",
-				"",
-				"ctx.setAlignment(AP_Alignment.JUSTIFIED_RIGHT);",
-				"System.out.println(ap.render());",
-				"",
-				"ctx.setAlignment(AP_Alignment.CENTER);",
-				"System.out.println(ap.render());",
-				"",
-				"ctx.setAlignment(AP_Alignment.LEFT);",
-				"System.out.println(ap.render());",
-				"",
-				"ctx.setAlignment(AP_Alignment.RIGHT);",
-				"System.out.println(ap.render());",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public String getSource(){
+		return
+				"AP_Context ctx = new AP_Context().setWidth(39);\n" + 
+				"\n" + 
+				"AsciiParagraph ap = new AsciiParagraph(ctx);\n" + 
+				"ap.addText(new LoremIpsum().getWords(29));\n" + 
+				"\n" + 
+				"ctx.setAlignment(TextAlignment.JUSTIFIED);\n" + 
+				"System.out.println(ap.render());\n" + 
+				"\n" + 
+				"ctx.setAlignment(TextAlignment.JUSTIFIED_LEFT);\n" + 
+				"System.out.println(ap.render());\n" + 
+				"\n" + 
+				"ctx.setAlignment(TextAlignment.JUSTIFIED_RIGHT);\n" + 
+				"System.out.println(ap.render());\n" + 
+				"\n" + 
+				"ctx.setAlignment(TextAlignment.CENTER);\n" + 
+				"System.out.println(ap.render());\n" + 
+				"\n" + 
+				"ctx.setAlignment(TextAlignment.LEFT);\n" + 
+				"System.out.println(ap.render());\n" + 
+				"\n" + 
+				"ctx.setAlignment(TextAlignment.RIGHT);\n" + 
+				"System.out.println(ap.render());"
+		;
 	}
 
 	@Override

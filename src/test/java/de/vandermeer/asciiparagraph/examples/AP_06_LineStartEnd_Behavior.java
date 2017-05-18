@@ -15,8 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.svenjacobs.loremipsum.LoremIpsum;
 import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
@@ -38,29 +36,49 @@ public class AP_06_LineStartEnd_Behavior implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"The implementation allows to add a start and/or end string to each text line.\n" + 
+				"The start string is added before the text and any left text margin.\n" + 
+				"The end string is added after the text and any right text margin.\n" + 
+				"The default is no added text.\n" + 
+				"<br /><br/>" + 
+				"Start and end strings can be set any time, they are only considered when the paragraph is rendered.\n" + 
+				"<br /><br/>" + 
+				"This example creates a paragraph context and then a paragraph with some demo text.\n" + 
+				"It then prints the default settings (no added string).\n" + 
+				"This is followed by setting the start string to \"// \", printing the output.\n" + 
+				"This is followed by setting the end string to \" -->\", printing the output.\n" + 
+				"This is followed by setting the start string to `null`, which effectively removes the start string, printing the output."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "line-end";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AP_Context ctx = new AP_Context();",
-				"ctx.setAlignment(AP_Alignment.JUSTIFIED);",
-				"ctx.setWidth(50);",
-				"",
-				"AsciiParagraph ap = new AsciiParagraph(ctx);",
-				"ap.addText(new LoremIpsum().getWords(29));",
-				"",
-				"System.out.println(ap.render());",
-				"",
-				"ctx.setStartString(\"// \");",
-				"System.out.println(ap.render());",
-				"",
-				"ctx.setEndString(\" -->\");",
-				"System.out.println(ap.render());",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public String getSource(){
+		return
+				"AP_Context ctx = new AP_Context();\n" + 
+				"ctx.setAlignment(TextAlignment.JUSTIFIED);\n" + 
+				"ctx.setWidth(50);\n" + 
+				"\n" + 
+				"AsciiParagraph ap = new AsciiParagraph(ctx);\n" + 
+				"ap.addText(new LoremIpsum().getWords(29));\n" + 
+				"\n" + 
+				"System.out.println(ap.render());\n" + 
+				"\n" + 
+				"ctx.setStartString(\"// \");\n" + 
+				"System.out.println(ap.render());\n" + 
+				"\n" + 
+				"ctx.setEndString(\" -->\");\n" + 
+				"System.out.println(ap.render());\n" + 
+				"\n" + 
+				"ctx.setStartString(null);\n" + 
+				"System.out.println(ap.render());"
+		;
 	}
 
 	@Override

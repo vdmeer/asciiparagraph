@@ -15,8 +15,6 @@
 
 package de.vandermeer.asciiparagraph.examples;
 
-import org.apache.commons.lang3.text.StrBuilder;
-
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 
@@ -35,22 +33,31 @@ public class AP_00_Getting_Started implements StandardExampleAsCmd {
 	}
 
 	@Override
+	public Object getLongDescription() {
+		return
+				"This example shows how to create a paragraph, add text, and render the paragraph.\n" + 
+				"It also demonstrates that all excessive white spaces (extra blanks, tabulators, new lines) will be removed automatically.\n" + 
+				"Furthermore, the paragraph will break lines automatically to the set width (in the example the default width of 80 characters).\n" + 
+				"This automatic line break uses words (not characters)."
+		;
+	}
+
+	@Override
 	public String getName() {
 		return "simple";
 	}
 
 	@Override
-	public StrBuilder getSource(){
-		String[] source = new String[]{
-				"AsciiParagraph ap = new AsciiParagraph();",
-				"ap.addText(\"line\t1\");",
-				"ap.addText(\"2  2\");",
-				"ap.addText(\"more text with\ttab and \\n newline\");",
-				"ap.addText(\"some more text to get it over the 80 character default width\");",
-				"String rend = ap.render();",
-				"System.out.println(rend);",
-		};
-		return new StrBuilder().appendWithSeparators(source, "\n");
+	public String getSource(){
+		return
+				"AsciiParagraph ap = new AsciiParagraph();\n" + 
+				"ap.addText(\"line	1\");\n" + 
+				"ap.addText(\"2  2\");\n" + 
+				"ap.addText(\"more text with	tab and \\n newline\");\n" + 
+				"ap.addText(\"some more text to get it over the 80 character default width\");\n" + 
+				"String rend = ap.render();\n" + 
+				"System.out.println(rend);"
+		;
 	}
 
 	@Override
