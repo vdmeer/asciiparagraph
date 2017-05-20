@@ -17,8 +17,8 @@ package de.vandermeer.asciiparagraph;
 
 import de.vandermeer.asciithemes.a7.A7_Frames_Doc;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
-import de.vandermeer.translation.targets.Text2Html;
-import de.vandermeer.translation.targets.Text2Latex;
+import de.vandermeer.skb.interfaces.translators.target.Text2Html;
+import de.vandermeer.skb.interfaces.translators.target.Text2Latex;
 
 /**
  * Collection of themes for an {@link AsciiParagraph}.
@@ -37,7 +37,7 @@ public interface AP_Themes {
 		return new AsciiParagraphTheme() {
 			@Override
 			public void apply(AP_Context ctx) {
-				ctx.setTargetTranslator(new Text2Html());
+				ctx.setTargetTranslator(Text2Html.create());
 			}
 		};
 	}
@@ -66,7 +66,7 @@ public interface AP_Themes {
 		return new AsciiParagraphTheme() {
 			@Override
 			public void apply(AP_Context ctx) {
-				ctx.setTargetTranslator(new Text2Latex());
+				ctx.setTargetTranslator(Text2Latex.create());
 			}
 		};
 	}

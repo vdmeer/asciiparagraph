@@ -19,7 +19,7 @@ import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
-import de.vandermeer.translation.targets.Text2Latex;
+import de.vandermeer.skb.interfaces.translators.target.Text2Latex;
 
 /**
  * AsciiParagraph example demonstrating a LaTeX target translator.
@@ -65,7 +65,7 @@ public class AP_09a_TargetTranslators_LaTeX implements StandardExampleAsCmd {
 				"ap.addText(\"And some arrows as well: ← ↑ → ↓ ↔\");\n" + 
 				"System.out.println(ap.render(35));\n" + 
 				"\n" + 
-				"ctx.setTargetTranslator(new Text2Latex());\n" + 
+				"ctx.setTargetTranslator(Text2Latex.create());\n" + 
 				"System.out.println(ap.render(35));"
 		;
 	}
@@ -84,7 +84,7 @@ public class AP_09a_TargetTranslators_LaTeX implements StandardExampleAsCmd {
 		ap.addText("And some arrows as well: ← ↑ → ↓ ↔");
 		System.out.println(ap.render(35));
 
-		ctx.setTargetTranslator(new Text2Latex());
+		ctx.setTargetTranslator(Text2Latex.create());
 		System.out.println(ap.render(35));
 		// end::example[]
 	}

@@ -19,7 +19,7 @@ import de.vandermeer.asciiparagraph.AP_Context;
 import de.vandermeer.asciiparagraph.AsciiParagraph;
 import de.vandermeer.skb.interfaces.examples.StandardExampleAsCmd;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
-import de.vandermeer.translation.targets.Text2Html;
+import de.vandermeer.skb.interfaces.translators.target.Text2Html;
 
 /**
  * AsciiParagraph example demonstrating a HTML target translator.
@@ -65,7 +65,7 @@ public class AP_09b_TargetTranslators_HTML implements StandardExampleAsCmd {
 				"ap.addText(\"And some arrows as well: ← ↑ → ↓ ↔ ↕\");\n" + 
 				"System.out.println(ap.render(36));\n" + 
 				"\n" + 
-				"ctx.setTargetTranslator(new Text2Html());\n" + 
+				"ctx.setTargetTranslator(Text2Html.create());\n" + 
 				"System.out.println(ap.render(36));"
 		;
 	}
@@ -84,7 +84,7 @@ public class AP_09b_TargetTranslators_HTML implements StandardExampleAsCmd {
 		ap.addText("And some arrows as well: ← ↑ → ↓ ↔ ↕");
 		System.out.println(ap.render(36));
 
-		ctx.setTargetTranslator(new Text2Html());
+		ctx.setTargetTranslator(Text2Html.create());
 		System.out.println(ap.render(36));
 		// end::example[]
 	}
